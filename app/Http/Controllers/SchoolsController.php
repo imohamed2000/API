@@ -19,7 +19,7 @@ class SchoolsController extends Controller
     {
         $schools = School::latest()->get();
 
-        return $this->responses->ok($schools)->respond();
+        return $this->response->ok($schools)->respond();
     }
 
     /**
@@ -40,7 +40,7 @@ class SchoolsController extends Controller
      */
     public function store(Request $request)
     {
-         $validate = $this->validate(request()->all(),[
+         $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
                 'code'              => 'required|max:255',
                 'contact_no'        => 'required|max:42',
@@ -52,9 +52,9 @@ class SchoolsController extends Controller
                 'logo'              => 'required|image'
             ]);
 
-        if($validate)
+        if(!$is_valid)
         {
-            return $this->responses->badRequest($validate->errors()->all())->respond();
+            return $this->response->badRequest($this->errors)->respond();
         }
 
         $path = 'uploads/schools/logo'; // upload path
@@ -85,7 +85,7 @@ class SchoolsController extends Controller
         $school->save();
 
 
-        return $this->responses->created($school)->respond();
+        return $this->response->created($school)->respond();
 
 
     }

@@ -11,21 +11,22 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $responses;
-
+    protected $response;
+    public $errors;
+    
     public function __construct(){
-        $this->responses = new \App\Beak\Response;
+        $this->response = new \App\Beak\Response;
     }
-
-
 
     public function validate($request, array $rules, array $messages = [], array $customAttributes = [])
     {
         $validator = Validator::make($request, $rules, $messages, $customAttributes);
         if($validator->fails())
         {
-            return $validator;
+            $this->errors = $validator->errors();
+            return false;
         }
 
+        return true;
     }
 }
