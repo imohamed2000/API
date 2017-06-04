@@ -24,6 +24,8 @@ class CreateSchoolsTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('zip');
+            $table->timestamps();
+            $table->softDeletes();
 
         });
     }
