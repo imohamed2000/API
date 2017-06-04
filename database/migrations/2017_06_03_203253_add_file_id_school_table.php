@@ -27,6 +27,9 @@ class AddFileIdSchoolTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('schools', function(Blueprint $table){
+            $table->dropForeign('schools_logo_id_foreign');
+            $table->dropColumn('logo_id');
+        });
     }
 }
