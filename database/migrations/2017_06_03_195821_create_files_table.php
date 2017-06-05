@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('original_name');
             $table->string('type');
             $table->integer('size');
-            $table->integer('extension');
+            $table->string('extension');
             $table->timestamps();
             $table->softDeletes();
 
@@ -34,10 +34,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('schools', function(Blueprint $table){
-            $table->dropForeign('schools_logo_id_foreign');
-            $table->dropColumn('logo_id');
-        });
         Schema::dropIfExists('files');
     }
 }
