@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\School;
 use App\File;
-
+use App\Helpers\Upload;
 
 class SchoolsController extends Controller
 {
@@ -58,19 +58,7 @@ class SchoolsController extends Controller
         }
 
         $path = 'uploads/schools/logo'; // upload path
-        $extension = $request->file('logo')->getClientOriginalExtension(); // getting image extension
-        $filename = 'logo'.time().rand(0000000,9999999999).'-'.rand(0000000000000,99999999999).time().'.'.$extension; // renaming image
-        $type = $request->file('logo')->getMimeType();
-        $size = $request->file('logo')->getClientSize();
-        $original = $request->file('logo')->getClientOriginalName();
-        $request->file('logo')->move($path, $filename); // uploading file
-
-        $saveFile = new File();
-        $saveFile->filename = $filename;
-        $saveFile->original_name = $original;
-        $saveFile->type = $type;
-        $saveFile->size = $size;
-        $saveFile->save();
+        $upload = new Upload('logo',$path,'add');
 
         $school = new School();
         $school->name = $request->name;
@@ -81,7 +69,7 @@ class SchoolsController extends Controller
         $school->address = $request->address;
         $school->city = $request->city;
         $school->zip = $request->zip;
-        $school->logo_id = $saveFile->id;
+        $school->logo_id = $upload->savedFile->id;
         $school->save();
 
 
@@ -149,29 +137,9 @@ class SchoolsController extends Controller
         $logo_id = $school->logo_id;
         if($request->hasFile('logo'))
         {
-            $path = 'uploads/schools/logo';
-            $extension = $request->file('logo')->getClientOriginalExtension(); // getting image extension
-            $filename = 'logo'.time().rand(0000000,9999999999).'-'.rand(0000000000000,99999999999).time().'.'.$extension; // renaming image
-            $type = $request->file('logo')->getMimeType();
-            $size = $request->file('logo')->getClientSize();
-            $original = $request->file('logo')->getClientOriginalName();
-            $request->file('logo')->move($path, $filename); // uploading file
-
-            $saveFile = new File();
-            $saveFile->filename = $filename;
-            $saveFile->original_name = $original;
-            $saveFile->type = $type;
-            $saveFile->size = $size;
-            $saveFile->save();
-
-            // Find old logo
-            $oldLogo = File::find($logo_id);
-            // Delete from server
-            Storage::delete($path.'/'.$oldLogo->filename);
-            // Delete From database
-            $oldLogo->forceDelete();
-
-            $logo_id = $saveFile->id;
+            $path = 'uploads/schools/logo'; // upload path
+            $upload = new Upload('logo',$path,'edit',$school->logo_id);
+            $logo_id = $upload->savedFile->id;
         }
         $school->update([
             'name'              => $request->name,
