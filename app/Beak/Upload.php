@@ -15,6 +15,7 @@ class Upload{
     private $type;
 
     private $extension;
+
     private $size;
     public $savedFile;
 
