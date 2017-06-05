@@ -13,11 +13,10 @@ class Upload{
     private $filename;
     private $originalFilename;
     private $type;
+
     private $extension;
     private $size;
     public $savedFile;
-
-
 
     public function __construct($requestName,$path,$operation,$id = Null)
     {
