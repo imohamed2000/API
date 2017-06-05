@@ -19,7 +19,7 @@ class SchoolsController extends Controller
     {   
         $data = School::latest();
         // datatables request
-        if($request->has('datatables') && $request->input('datatables') == 'true')
+        if( $request->exists('datatables') )
         {
             return $this->response
                         ->dataTables( $data->get() )
