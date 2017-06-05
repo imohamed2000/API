@@ -208,9 +208,16 @@ Class Response{
 	 *
 	 * Page not found error 404!
 	 */
-	public function notFound(){
-		$this->data = '404 Not found!';
+	public function notFound($data = '404 Not found!'){
+		$this->data = $data;
 		$this->code = 404;
+		return $this;
+	}
+
+	public function serverError($data = 'Inernal Server Error')
+	{
+		$this->data = $data;
+		$this->code = 500;
 		return $this;
 	}
 
