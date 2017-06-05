@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'v1'], function () {
+	//Auth routes
+	Route::post('login', 'Auth\LoginController@login');
+	Route::post('logout', 'Auth\LoginController@logout');
+	//TODO implement password reset flow.
+	Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+	Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     Route::resource('schools','SchoolsController');
 

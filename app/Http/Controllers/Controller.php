@@ -12,7 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $response;
-    public $errors;
+    protected $errors;
     
     public function __construct(){
         $this->response = new \App\Beak\Response;
