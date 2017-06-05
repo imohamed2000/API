@@ -13,10 +13,7 @@ class Upload{
     private $filename;
     private $originalFilename;
     private $type;
-
     private $extension;
-    private $tests;
-
     private $size;
     public $savedFile;
 
