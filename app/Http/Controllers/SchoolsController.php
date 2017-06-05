@@ -15,11 +15,28 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $schools = School::latest()->get();
+    public function index(Request $request)
+    {   
+        $data = School::latest();
+        // datatables request
+        if($request->has('datatables') && $request->input('datatables') == 'true')
+        {
+            return $this->response
+                        ->dataTables( $data->get() )
+                        ->respond();
+        }
 
-        return $this->response->ok($schools)->respond();
+        //pagination request
+        if( $request->has('per_page') )
+        {
+            $data = $data->paginate( $request->input('per_page') );
+        }
+        else
+        {
+            $data = $data->get();
+        }
+
+        return $this->response->ok($data)->respond();
     }
 
     /**
