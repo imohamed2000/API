@@ -6,6 +6,8 @@
 * Implements HTTP status reponses with status codes
 **/
 namespace App\Beak;
+
+use Yajra\Datatables\Datatables;
 Class Response{
 
 	private $headers;
@@ -119,6 +121,18 @@ Class Response{
 	}	
 
 	/**
+	 * handles the servers side Ajax request for datatables usign the yajra/laravel-datatables package
+	 * @param  collection $data 
+	 * @return response
+	 */
+	public function dataTables($data){
+		$this->code = 200;
+		$this->data = Datatables::of($data)->make(true);
+		return $this;
+	}
+
+
+	/**
 	| -----------------------------------------------
 	| Successful HTTP requests
 	| -----------------------------------------------
@@ -199,4 +213,5 @@ Class Response{
 		$this->code = 404;
 		return $this;
 	}
+
 }
