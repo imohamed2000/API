@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Beak;
 
 use App\File;
 use Illuminate\Support\Facades\Storage;
 class Upload{
 
-    protected $requestName;
-    protected $path;
-    protected $operation;
-    protected $fileId;
-    protected $filename;
-    protected $originalFilename;
-    protected $type;
-    protected $size;
+    private $requestName;
+    private $path;
+    private $operation;
+    private $fileId;
+    private $filename;
+    private $originalFilename;
+    private $type;
+    private $size;
     public $savedFile;
 
 
 
-    public function __construct($requestName,$path,$operation,$id = Null)
+    public  function __construct($requestName,$path,$operation,$id = Null)
     {
         $this->requestName = $requestName;
         $this->path = $path;
@@ -34,7 +34,7 @@ class Upload{
         }
     }
 
-    public function addFile()
+    private function addFile()
     {
         $this->uploadFile();
         $saveFile = new File();
@@ -47,7 +47,7 @@ class Upload{
         return $this->savedFile;
     }
 
-    public function editFile()
+    private function editFile()
     {
         $this->uploadFile();
         $saveFile = File::findOrFail($this->fileId); // Find old File
@@ -61,7 +61,7 @@ class Upload{
         return $this->savedFile;
     }
 
-    protected function uploadFile()
+    private function uploadFile()
     {
         $extension = request()->file($this->requestName)->getClientOriginalExtension(); // getting image extension
         $this->filename = $this->requestName.time().rand(0000000,9999999999).'-'.rand(0000000000000,99999999999).time().'.'.$extension; // renaming image

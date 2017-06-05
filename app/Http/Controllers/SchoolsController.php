@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\School;
-use App\File;
-use App\Helpers\Upload;
+use App\Beak\Upload;
 
 class SchoolsController extends Controller
 {
