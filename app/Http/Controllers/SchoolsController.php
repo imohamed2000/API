@@ -8,6 +8,8 @@ use App\Beak\Upload;
 
 class SchoolsController extends Controller
 {
+    private $list = ['name','email','city'];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,7 @@ class SchoolsController extends Controller
      */
     public function index(Request $request)
     {   
-        $data = School::latest();
+        $data = School::select($this->list)->latest();
         // datatables request
         if( $request->exists('datatables') )
         {

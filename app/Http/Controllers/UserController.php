@@ -10,6 +10,9 @@ use App\Beak\Upload;
 
 class UserController extends Controller
 {
+    private $list = ['id','title','first_name','last_name','email'];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,9 @@ class UserController extends Controller
      */
     public function index(Request $request,School $school)
     {
-        $data = SchoolUser::where('school_id',$school->id)->with('users');
+        $data = SchoolUser::where('school_id',$school->id)->with(['users' => function($query){
+            $query->select($this->list);
+        }]);
         if( $request->exists('datatables') )
         {
             return $this->response
