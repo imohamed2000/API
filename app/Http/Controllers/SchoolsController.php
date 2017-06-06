@@ -104,11 +104,11 @@ class SchoolsController extends Controller
         $school = School::where('id',$id)->with('logo')->first();
         if($school)
         {
-            return $this->responses->ok($school)->respond();
+            return $this->response->ok($school)->respond();
         }
         else
         {
-            return $this->responses->notFound()->respond();
+            return $this->response->notFound()->respond();
         }
     }
 
@@ -147,7 +147,7 @@ class SchoolsController extends Controller
 
         if($validate)
         {
-            return $this->responses->badRequest($validate->errors()->all())->respond();
+            return $this->response->badRequest($validate->errors()->all())->respond();
         }
         $logo_id = $school->logo_id;
         if($request->hasFile('logo'))
@@ -168,7 +168,7 @@ class SchoolsController extends Controller
             'logo_id'           => $logo_id
         ]);
 
-        return $this->responses->ok($school)->respond();
+        return $this->response->ok($school)->respond();
     }
 
     /**
@@ -184,11 +184,11 @@ class SchoolsController extends Controller
         {
             $school->delete();
 
-            return $this->responses->ok(['Deleted'])->respond();
+            return $this->response->ok(['Deleted'])->respond();
         }
         else
         {
-            return $this->responses->notFound()->respond();
+            return $this->response->notFound()->respond();
         }
 
     }

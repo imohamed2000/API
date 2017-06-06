@@ -194,15 +194,14 @@ class UserController extends Controller
     {
         $user = SchoolUser::where('school_id',$school->id)->where('user_id',$id)->first()->users()->first();
 
-        if($user)
+        if($user->delete())
         {
-            $user->delete();
 
-            return $this->responses->ok(['Deleted'])->respond();
+            return $this->response->ok(['Deleted'])->respond();
         }
         else
         {
-            return $this->responses->notFound()->respond();
+            return $this->response->notFound()->respond();
         }
     }
 }
