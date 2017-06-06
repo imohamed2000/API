@@ -59,10 +59,8 @@ class SchoolsController extends Controller
     {
          $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
-                'code'              => 'required|max:255',
                 'contact_no'        => 'required|max:42',
                 'email'             => 'required|email',
-                'alternate_email'   => 'required|email|different:email',
                 'address'           => 'required|max:255',
                 'city'              => 'required|max:255',
                 'zip'               => 'required|max:255',
@@ -79,10 +77,8 @@ class SchoolsController extends Controller
 
         $school = new School();
         $school->name = $request->name;
-        $school->code = $request->code;
         $school->contact_no = $request->contact_no;
         $school->email = $request->email;
-        $school->alternate_email = $request->alternate_email;
         $school->address = $request->address;
         $school->city = $request->city;
         $school->zip = $request->zip;
@@ -137,10 +133,8 @@ class SchoolsController extends Controller
 
         $validate = $this->validate(request()->all(),[
             'name'              => 'required|max:255',
-            'code'              => 'required|max:255',
             'contact_no'        => 'required|max:42',
             'email'             => 'required|email',
-            'alternate_email'   => 'required|email|different:email',
             'address'           => 'required|max:255',
             'city'              => 'required|max:255',
             'zip'               => 'required|max:255',
@@ -163,7 +157,6 @@ class SchoolsController extends Controller
             'code'              => $request->code,
             'contact_no'        => $request->contact_no,
             'email'             => $request->email,
-            'alternate_email'   => $request->alternate_email,
             'address'           => $request->address,
             'city'              => $request->city,
             'zip'               => $request->zip,
