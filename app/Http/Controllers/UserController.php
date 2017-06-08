@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\School;
-use App\SchoolUser;
 use App\Beak\Upload;
 
 class UserController extends Controller
 {
-    private $list = ['id','title','first_name','last_name','email'];
+    private $list = ['title','first_name','last_name','email'];
 
 
     /**
@@ -20,9 +19,7 @@ class UserController extends Controller
      */
     public function index(Request $request,School $school)
     {
-        $data = SchoolUser::where('school_id',$school->id)->with(['users' => function($query){
-            $query->select($this->list);
-        }]);
+        $data = $school->users()->select($this->list);
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -78,30 +75,21 @@ class UserController extends Controller
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-
-        $user = new User();
-
-        $user->title        = $request->title;
-        $user->first_name   = $request->first_name;
-        $user->last_name    = $request->last_name;
-        $user->birthday     = $request->birthday;
-        $user->contact_no   = $request->contact_no;
-        $user->address      = $request->address;
-        $user->gender       = $request->gender;
-        $user->email        = $request->email;
-        $user->password     = bcrypt($request->password);
-
         $path = 'uploads/users/avatar';
         $upload = new Upload('avatar',$path,'add');
-
-        $user->avatar = $upload->savedFile->id;
-
-        $user->save();
-
-        $schoolUser = new SchoolUser();
-        $schoolUser->user_id = $user->id;
-        $schoolUser->school_id = $school->id;
-        $schoolUser->save();
+        $arr = [
+            'title'             => $request->title,
+            'first_name'        => $request->first_name,
+            'last_name'         => $request->last_name,
+            'birthday'          => $request->birthday,
+            'contact_no'        => $request->contact_no,
+            'address'           => $request->address,
+            'gender'            => $request->gender,
+            'email'             => $request->email,
+            'password'          => bcrypt($request->password),
+            'avatar'            => $upload->savedFile->id
+        ];
+        $user = $school->users()->create($arr);
 
         return $this->response->created($user)->respond();
 
@@ -115,7 +103,7 @@ class UserController extends Controller
      */
     public function show(School $school,$id)
     {
-        $data = SchoolUser::where('school_id',$school->id)->where('user_id',$id)->with('users')->first();
+        $data = $school->users()->findOrFail($id);
 
         return $this->response->ok($data)->respond();
     }
@@ -157,8 +145,7 @@ class UserController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $user = SchoolUser::where('school_id',$school->id)->where('user_id',$id)->first()->users()->first();
-
+        $user = $school->users()->findOrFail($id);
         $user->title        = $request->title;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
@@ -182,7 +169,6 @@ class UserController extends Controller
             $errorMsg = ['email'=>'The email is already taken.'];
             return $this->response->badRequest($errorMsg)->respond();
         }
-
         $user->save();
 
         return $this->response->created($user)->respond();
@@ -197,7 +183,7 @@ class UserController extends Controller
      */
     public function destroy(School $school,$id)
     {
-        $user = SchoolUser::where('school_id',$school->id)->where('user_id',$id)->first()->users()->first();
+        $user = $school->users()->findOrFail($id);
 
         if($user->delete())
         {
