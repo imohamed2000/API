@@ -77,7 +77,7 @@ class UserController extends Controller
         }
         $path = 'uploads/users/avatar';
         $upload = new Upload('avatar',$path,'add');
-        $arr = [
+        $attr = [
             'title'             => $request->title,
             'first_name'        => $request->first_name,
             'last_name'         => $request->last_name,
@@ -89,7 +89,7 @@ class UserController extends Controller
             'password'          => bcrypt($request->password),
             'avatar'            => $upload->savedFile->id
         ];
-        $user = $school->users()->create($arr);
+        $user = $school->users()->create($attr);
 
         return $this->response->created($user)->respond();
 
