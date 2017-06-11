@@ -17,10 +17,8 @@ class CreateSchoolsTable extends Migration
 
             $table->increments('id');
             $table->string('name');
-            $table->string('code');
             $table->string('contact_no',42);
             $table->string('email');
-            $table->string('alternate_email');
             $table->string('address');
             $table->string('city');
             $table->string('zip');
@@ -37,7 +35,7 @@ class CreateSchoolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schools');
+        Schema::drop('schools');
 
     }
 }

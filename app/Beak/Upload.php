@@ -17,8 +17,6 @@ class Upload{
     private $size;
     public $savedFile;
 
-
-
     public function __construct($requestName,$path,$operation,$id = Null)
     {
         $this->requestName = $requestName;

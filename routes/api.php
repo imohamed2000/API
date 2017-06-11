@@ -26,6 +26,6 @@ Route::group(['prefix' => 'v1'], function () {
 	Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     Route::resource('schools','SchoolsController');
-
+    Route::resource('school.users', 'UserController');
 });
 

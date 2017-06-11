@@ -8,6 +8,8 @@ use App\Beak\Upload;
 
 class SchoolsController extends Controller
 {
+    private $list = ['name','email','city'];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,7 @@ class SchoolsController extends Controller
      */
     public function index(Request $request)
     {   
-        $data = School::latest();
+        $data = School::select($this->list)->latest();
         // datatables request
         if( $request->exists('datatables') )
         {
@@ -57,10 +59,8 @@ class SchoolsController extends Controller
     {
          $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
-                'code'              => 'required|max:255',
                 'contact_no'        => 'required|max:42',
                 'email'             => 'required|email',
-                'alternate_email'   => 'required|email|different:email',
                 'address'           => 'required|max:255',
                 'city'              => 'required|max:255',
                 'zip'               => 'required|max:255',
@@ -77,10 +77,8 @@ class SchoolsController extends Controller
 
         $school = new School();
         $school->name = $request->name;
-        $school->code = $request->code;
         $school->contact_no = $request->contact_no;
         $school->email = $request->email;
-        $school->alternate_email = $request->alternate_email;
         $school->address = $request->address;
         $school->city = $request->city;
         $school->zip = $request->zip;
@@ -104,11 +102,11 @@ class SchoolsController extends Controller
         $school = School::where('id',$id)->with('logo')->first();
         if($school)
         {
-            return $this->responses->ok($school)->respond();
+            return $this->response->ok($school)->respond();
         }
         else
         {
-            return $this->responses->notFound()->respond();
+            return $this->response->notFound()->respond();
         }
     }
 
@@ -135,10 +133,8 @@ class SchoolsController extends Controller
 
         $validate = $this->validate(request()->all(),[
             'name'              => 'required|max:255',
-            'code'              => 'required|max:255',
             'contact_no'        => 'required|max:42',
             'email'             => 'required|email',
-            'alternate_email'   => 'required|email|different:email',
             'address'           => 'required|max:255',
             'city'              => 'required|max:255',
             'zip'               => 'required|max:255',
@@ -147,7 +143,7 @@ class SchoolsController extends Controller
 
         if($validate)
         {
-            return $this->responses->badRequest($validate->errors()->all())->respond();
+            return $this->response->badRequest($validate->errors()->all())->respond();
         }
         $logo_id = $school->logo_id;
         if($request->hasFile('logo'))
@@ -161,14 +157,13 @@ class SchoolsController extends Controller
             'code'              => $request->code,
             'contact_no'        => $request->contact_no,
             'email'             => $request->email,
-            'alternate_email'   => $request->alternate_email,
             'address'           => $request->address,
             'city'              => $request->city,
             'zip'               => $request->zip,
             'logo_id'           => $logo_id
         ]);
 
-        return $this->responses->ok($school)->respond();
+        return $this->response->ok($school)->respond();
     }
 
     /**
@@ -184,11 +179,11 @@ class SchoolsController extends Controller
         {
             $school->delete();
 
-            return $this->responses->ok(['Deleted'])->respond();
+            return $this->response->ok(['Deleted'])->respond();
         }
         else
         {
-            return $this->responses->notFound()->respond();
+            return $this->response->notFound()->respond();
         }
 
     }

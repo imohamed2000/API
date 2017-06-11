@@ -16,4 +16,9 @@ class School extends Model
     {
         return $this->belongsTo('App\File','logo_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User','school_users');
+    }
 }
