@@ -27,5 +27,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::resource('schools','SchoolsController');
     Route::resource('school.users', 'UserController');
+    Route::resource('school.classes', 'ClassesController');
+    Route::resource('school.classes.sections', 'SectionsController');
 });
 
