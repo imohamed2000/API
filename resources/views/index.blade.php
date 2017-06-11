@@ -69,6 +69,8 @@
 	                <div class="links">
                         <router-link to="/">Home</router-link>
                         <router-link to="/docs">Documentation</router-link>
+                        <router-link to="/docs/1">User</router-link>
+                        <router-link to="/docs/1/ex">Nested Ex</router-link>
 	                </div>
 	            </div>
     </div>

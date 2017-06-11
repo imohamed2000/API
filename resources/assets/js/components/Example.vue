@@ -1,6 +1,5 @@
 <template>
-	<div class="title m-b-md">
-        {{ header }}
+	<div class="title m-b-md" v-text="header">
     </div>
 </template>
 

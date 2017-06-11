@@ -70,6 +70,40 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(6),
+  /* template */
+  __webpack_require__(16),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\Documentation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Documentation.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c4b734f0", Component.options)
+  } else {
+    hotAPI.reload("data-v-c4b734f0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.3.3
@@ -9765,40 +9799,6 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(6),
-  /* template */
-  __webpack_require__(16),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\Documentation.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Documentation.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c4b734f0", Component.options)
-  } else {
-    hotAPI.reload("data-v-c4b734f0", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10708,7 +10708,7 @@ var index_esm = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(12);
@@ -10720,7 +10720,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * Required component
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example', __webpack_require__(2));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('docs', __webpack_require__(1));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('docs', __webpack_require__(0));
 
 const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	el: '#app',
@@ -10734,6 +10734,7 @@ const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -10756,7 +10757,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -10774,7 +10774,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(17);
 /* harmony export (immutable) */ __webpack_exports__["a"] = createRouter;
@@ -10795,7 +10795,7 @@ function createRouter() {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = [{ path: '/', component: __webpack_require__(2), name: 'example' }, { path: '/docs', component: __webpack_require__(1), name: 'docs' }];
+module.exports = [{ path: '/', component: __webpack_require__(2), name: 'example' }, { path: '/docs', component: __webpack_require__(0), name: 'docs' }, { path: '/docs/:id', component: __webpack_require__(0), name: 'doc', children: [{ path: 'ex', component: __webpack_require__(2) }] }];
 
 /***/ }),
 /* 10 */
@@ -10814,7 +10814,7 @@ module.exports = [{ path: '/', component: __webpack_require__(2), name: 'example
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(10);
@@ -10881,8 +10881,11 @@ const mutations = {};
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "title m-b-md"
-  }, [_vm._v("\n        " + _vm._s(_vm.header) + "\n    ")])
+    staticClass: "title m-b-md",
+    domProps: {
+      "textContent": _vm._s(_vm.header)
+    }
+  })
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -10899,7 +10902,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "title m-b-md"
-  }, [_vm._v("\n        Documentation\n    ")])
+  }, [_vm._v("\n        Documentation\n        "), _c('router-view')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
