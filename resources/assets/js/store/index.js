@@ -5,7 +5,7 @@ import * as actions from './actions';
 import * as getters from './getters';
 
 // import module from './modules/module';
-import example from './modules/example';
+import login from './modules/login';
 
 
 Vue.use(Vuex);
@@ -18,7 +18,7 @@ const store = new Vuex.Store({
   actions,
   getters,
   modules: {
-  	example
+  	login
   }
 });
 
