@@ -119,7 +119,7 @@ class ClassesController extends Controller
 
         $class->save();
 
-        return $this->response->created($class)->respond();
+        return $this->response->ok($class)->respond();
     }
 
     /**

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Section;
 use Illuminate\Http\Request;
-use App\School;
-use App\Classes;
+use App\Permission;
 
-class SectionsController extends Controller
+class PermissionsController extends Controller
 {
     private $list = ['name','created_at'];
     /**
@@ -15,10 +13,9 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,School $school,$class_id)
+    public function index(Request $request)
     {
-        $data = $school->classes()->findOrFail($class_id);
-        $data = $data->sections()->select($this->list);
+        $data = Permission::select($this->list);
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -54,7 +51,7 @@ class SectionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,School $school,$class_id)
+    public function store(Request $request)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
@@ -69,32 +66,33 @@ class SectionsController extends Controller
             'name'             => $request->name,
         ];
 
-        $class = $school->classes()->findOrFail($class_id);
+        $permission = Permission::create($attr);
 
 
-        $section = $class->sections()->create($attr);
+        return $this->response->created($permission)->respond();
 
-        return $this->response->created($section)->respond();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show($id)
     {
+        $permission = Permission::findOrFail($id);
 
+        return $this->response->ok($permission)->respond();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit($id)
     {
         //
     }
@@ -103,10 +101,10 @@ class SectionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,School $school,$class_id,$section_id)
+    public function update(Request $request, $id)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
@@ -120,31 +118,24 @@ class SectionsController extends Controller
         $attr = [
             'name'             => $request->name,
         ];
+        $permission = Permission::findOrFail($id);
+        $permission->update($attr);
 
-        $class = $school->classes()->findOrFail($class_id);
 
-
-        $section = $class->sections()->findOrFail($section_id);
-
-        $section->update($attr);
-
-        return $this->response->ok($section)->respond();
+        return $this->response->ok($permission)->respond();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school,$class_id,Section $section)
+    public function destroy($id)
     {
-        $class = $school->classes()->findOrFail($class_id);
+        $permission = Permission::findOrFail($id);
 
-
-        $section = $class->sections()->findOrFail($section->id);
-
-        if($section->delete())
+        if($permission->delete())
         {
 
             return $this->response->ok(['Deleted'])->respond();

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Section;
 use Illuminate\Http\Request;
 use App\School;
-use App\Classes;
 
-class SectionsController extends Controller
+class RolesController extends Controller
 {
     private $list = ['name','created_at'];
     /**
@@ -15,10 +13,9 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,School $school,$class_id)
+    public function index(Request $request,School $school)
     {
-        $data = $school->classes()->findOrFail($class_id);
-        $data = $data->sections()->select($this->list);
+        $data = $school->roles()->select($this->list);
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -54,7 +51,7 @@ class SectionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,School $school,$class_id)
+    public function store(Request $request,School $school)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
@@ -68,33 +65,31 @@ class SectionsController extends Controller
         $attr = [
             'name'             => $request->name,
         ];
+        $role = $school->roles()->create($attr);
 
-        $class = $school->classes()->findOrFail($class_id);
-
-
-        $section = $class->sections()->create($attr);
-
-        return $this->response->created($section)->respond();
+        return $this->response->created($role)->respond();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show(School $school,$id)
     {
+        $role = $school->roles()->findOrFail($id);
 
+        return $this->response->ok($role)->respond();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit($id)
     {
         //
     }
@@ -103,10 +98,10 @@ class SectionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,School $school,$class_id,$section_id)
+    public function update(Request $request,School $school, $id)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
@@ -120,31 +115,24 @@ class SectionsController extends Controller
         $attr = [
             'name'             => $request->name,
         ];
+        $role = $school->roles()->findOrFail($id);
 
-        $class = $school->classes()->findOrFail($class_id);
+        $role->update($attr);
 
-
-        $section = $class->sections()->findOrFail($section_id);
-
-        $section->update($attr);
-
-        return $this->response->ok($section)->respond();
+        return $this->response->ok($role)->respond();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school,$class_id,Section $section)
+    public function destroy(School $school,$id)
     {
-        $class = $school->classes()->findOrFail($class_id);
+        $role = $school->roles()->findOrFail($id);
 
-
-        $section = $class->sections()->findOrFail($section->id);
-
-        if($section->delete())
+        if($role->delete())
         {
 
             return $this->response->ok(['Deleted'])->respond();

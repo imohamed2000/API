@@ -26,4 +26,9 @@ class School extends Model
     {
         return $this->hasMany('App\Classes','school_id');
     }
+
+    public function roles()
+    {
+        return $this->hasMany('App\Role');
+    }
 }
