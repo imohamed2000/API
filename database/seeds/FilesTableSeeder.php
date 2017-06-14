@@ -23,6 +23,8 @@ class FilesTableSeeder extends Seeder
         $male->extension = '.png';
         $male->save();
 
+
+
         DB::table('users')->insert([
             'first_name' => str_random(10),
             'last_name' => str_random(10),
