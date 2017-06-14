@@ -30,9 +30,6 @@ class CreateClassesTable extends Migration
      */
     public function down()
     {
-        Schema::table('classes', function(Blueprint $table){
-            $table->dropForeign('classes_school_id_foreign');
-            $table->dropColumn('school_id');
-        });
+        Schema::drop('classes');
     }
 }
