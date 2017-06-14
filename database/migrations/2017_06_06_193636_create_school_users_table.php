@@ -28,12 +28,7 @@ class CreateSchoolUsersTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::table('school_users', function(Blueprint $table){
-            $table->dropForeign('school_users_user_id_foreign');
-            $table->dropColumn('user_id');
-            $table->dropForeign('school_users_school_id_foreign');
-            $table->dropColumn('school_id');
-        });
+    {   
+        Schema::drop('school_users');
     }
 }

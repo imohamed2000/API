@@ -30,11 +30,6 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('sections', function(Blueprint $table){
-            $table->dropForeign('sections_class_id_foreign');
-            $table->dropColumn('class_id');
-            $table->drop('sections');
-        });
-
+        Schema::drop('sections');
     }
 }
