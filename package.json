@@ -23,6 +23,8 @@
     "vuex": "^2.3.1"
   },
   "dependencies": {
+    "js-cookie": "^2.1.4",
+    "moment": "^2.18.1",
     "vuex-i18n": "^1.3.4"
   }
 }
