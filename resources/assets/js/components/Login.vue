@@ -1,89 +1,84 @@
 <template>
-	<div class="user-login-5">
-            <div class="row bs-reset">
-                <div class="col-md-6 bs-reset mt-login-5-bsfix">
-                    <div class="login-bg" style="background-image:url(pages/img/login/bg1.jpg)">
-                        <img class="login-logo" src="pages/img/login/logo.png" /> </div>
-                </div>
-                <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
-                    <div class="login-content">
-                        <h1 v-text="$t('site.name')"></h1>
-                        <p v-text="$t('site.description')"></p>
-                        <form action="javascript:;" class="login-form" method="post">
-                            <div class="alert alert-danger display-hide">
-                                <button class="close" data-close="alert"></button>
-                                <span>Enter any username and password. </span>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="email" autocomplete="off" :placeholder="this.$t('forms.email')" name="username"/> </div>
-                                <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" :placeholder="this.$t('forms.password')" name="password"/> </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="rem-password">
-                                        <label class="rememberme mt-checkbox mt-checkbox-outline">
-                                            <input type="checkbox" name="remember" value="1" /> {{ $t('login.rememberMe') }}
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-8 text-right">
-                                    <div class="forgot-password">
-                                        <a href="javascript:;" id="forget-password" class="forget-password">{{ $t('login.forgotPassword') }}</a>
-                                    </div>
-                                    <button class="btn green" type="submit">{{ $t('login.signIn') }}</button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- BEGIN FORGOT PASSWORD FORM -->
-                        <form class="forget-form" action="javascript:;" method="post">
-                            <h3 class="font-green">Forgot Password ?</h3>
-                            <p> Enter your e-mail address below to reset your password. </p>
-                            <div class="form-group">
-                                <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
-                            <div class="form-actions">
-                                <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
-                                <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
-                            </div>
-                        </form>
-                        <!-- END FORGOT PASSWORD FORM -->
-                    </div>
-                    <div class="login-footer">
-                        <div class="row bs-reset">
-                            <div class="col-xs-5 bs-reset">
-                                <ul class="login-social">
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-dribbble"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-7 bs-reset">
-                                <div class="login-copyright text-right">
-                                    <p>Copyright &copy; Keenthemes 2015</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	<form class="login-form" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+        <div class="row">
+            <div class="col-xs-6">
+                <input :class="{
+                	'form-control form-control-solid placeholder-no-fix form-group': !errors.has('email'),
+                	'form-control form-control-solid placeholder-no-fix form-group has-error': errors.has('email')
+                	}" type="email" autocomplete="off" placeholder="Email" name="email" 
+                	v-model="email" />
+
+               	 <div class="alert alert-danger" v-show="errors.has('email')">
+		            <button class="close" data-close="alert"></button>
+		            <span v-text="errors.get('email')"></span>
+		        </div>
+            </div>
+            <div class="col-xs-6">
+                <input :class="{
+                'form-control form-control-solid placeholder-no-fix form-group': !errors.has('password'),
+                'form-control form-control-solid placeholder-no-fix form-group has-error': errors.has('password')
+                }" type="password" autocomplete="off" placeholder="Password" name="password" 
+                v-model="password" />
+				<div class="alert alert-danger" v-show="errors.has('password')">
+		            <button class="close" data-close="alert"></button>
+		            <span v-text="errors.get('password')"></span>
+		        </div>
+
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="rem-password">
+                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="remember" value="1" v-model="remember"/> Remember me
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-8 text-right">
+                <div class="forgot-password">
+                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                </div>
+                <button class="btn green" type="submit" :disabled="errors.any()">Sign In</button>
+            </div>
+        </div>
+    </form>
 </template>
 <script>
+	import axios from 'axios';
+	import Errors from '../helpers/errors';
+	import Cookie from 'js-cookie';
+	let moment = require('moment');
+
 	export default{
-		
+		data(){
+			return{
+				email: '',
+				password: '',
+				remember: false,
+				errors: new Errors()
+			}
+		},
+		methods:{
+			onSubmit: function(e){
+				axios.post('api/v1/login', this.$data)
+					.then(response => {
+						Cookie.set('isGuest', 'false', {
+							expires: this.expires(),
+							secure: true
+						});
+						this.$store.dispatch('toAuth');
+					})
+					.catch(errors => this.errors.record( errors.response.data ) );
+			},
+			expires: function(){
+				let now = this.remember ? moment().add(14, 'days') : moment().add(1, 'hours');
+				return now.toDate();
+			}
+
+		},
+		mounted(){
+			document.title = "Odigita LMS| Login";
+		}
 	}
 </script>

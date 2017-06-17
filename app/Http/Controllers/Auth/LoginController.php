@@ -114,10 +114,10 @@ class LoginController extends Controller
         $email_exists = \App\User::where('email', $request->email)->first();
         if(!$email_exists)
         {
-            $errors->put('email', "We couldn't find your email");
+            $errors->put('email', ["We couldn't find your email"]);
         }else
         {
-            $errors->put('password', 'You entered a wrong password');
+            $errors->put('password', ['You entered a wrong password']);
         }
 
         return $this->response->badRequest($errors)->respond();

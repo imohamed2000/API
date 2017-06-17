@@ -111,10 +111,10 @@ Class Response{
 	 */
 	
 	public function respond(){
-		$this->putCode();
-		$this->putData();
+		// $this->putCode();
+		// $this->putData();
 		return response()->json(
-				$this->response, 
+				$this->data, 
 				$this->code, 
 				$this->headers, 
 				JSON_PRETTY_PRINT)->withHeaders($this->headers);
