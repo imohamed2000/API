@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Permission;
+use App\Role;
 use Illuminate\Http\Request;
 
-
-class PermissionsController extends Controller
+class RolesPermissionsController extends Controller
 {
-    private $list = ['name','created_at'];
-
-
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +14,7 @@ class PermissionsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Permission::select($this->list);
+        $data = Role::with('permissions');
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -55,23 +50,22 @@ class PermissionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Role $role)
     {
         $is_valid = $this->validate($request->all(),[
-            'name'             => 'required|max:255',
+            'permissions'             => 'required|exists:permissions,id',
         ]);
 
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
-        }
+        }  
 
-        $attr = [
-            'name'             => $request->name,
-        ];
-        $permission = Permission::create($attr);
+        $permissions = $request->permissions;
 
-        return $this->response->created($permission)->respond();
+        $role->permissions()->sync($permissions);
+
+        return $this->response->created($role->permissions()->get())->respond();
     }
 
     /**
@@ -80,11 +74,11 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        $permission = Permission::findOrFail($id);
+        $role = $role->permissions()->get();
 
-        return $this->response->ok($permission)->respond();
+        return $this->response->ok($role)->respond();
     }
 
     /**
@@ -95,8 +89,7 @@ class PermissionsController extends Controller
      */
     public function edit($id)
     {
-
-
+        //
     }
 
     /**
@@ -106,10 +99,10 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
         $is_valid = $this->validate($request->all(),[
-            'name'             => 'required|max:255',
+            'permissions'             => 'required|exists:permissions,id',
         ]);
 
         if(!$is_valid)
@@ -117,14 +110,11 @@ class PermissionsController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $attr = [
-            'name'             => $request->name,
-        ];
-        $permission = Permission::findOrFail($id);
+        $permissions = $request->permissions;
 
-        $permission->update($attr);
+        $role->permissions()->sync($permissions);
 
-        return $this->response->ok($permission)->respond();
+        return $this->response->ok($role->permissions()->get())->respond();
     }
 
     /**
@@ -135,15 +125,6 @@ class PermissionsController extends Controller
      */
     public function destroy($id)
     {
-        $permission = Permission::findOrFail($id);
-
-        if($permission->delete())
-        {
-            return $this->response->ok(['Deleted'])->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        //
     }
 }
