@@ -7,8 +7,9 @@
             </div>
             <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
                 <div class="login-content">
-                    <h1>Metronic Admin Login</h1>
-                    <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                    <h1 v-text="$t('Odigita LMS')"></h1>
+                    <p v-text="$t(`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`)"></p>
 
                     <!-- Components start  -->
                     <login />
@@ -53,6 +54,9 @@
     import ResetPassword from './ResetPassword';
     import jsBackstretch from '../scripts/backstretch';
     import jsLogin from '../scripts/login';
+    import $Assets from '../helpers/assets.js';
+
+    let Assets = new $Assets();
 
 	export default{
 		components:{
@@ -60,8 +64,12 @@
             'reset-password': ResetPassword
         },
         beforeCreate: function(){
-            jsBackstretch();
-            jsLogin();
+           Assets.addScript("plugins/backstretch/jquery.backstretch.min.js");
+           Assets.addScript("pages/scripts/login-5.js");
         },
+        destroyed(){
+            Assets.removeScript("plugins/backstretch/jquery.backstretch.min.js");
+            Assets.removeScript("pages/scripts/login-5.js");
+        }
 	}
 </script>
