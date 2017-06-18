@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Permission;
+=======
+use App\Permission;
+use Illuminate\Http\Request;
+>>>>>>> roles&permission
 
 class PermissionsController extends Controller
 {
     private $list = ['name','created_at'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> roles&permission
     /**
      * Display a listing of the resource.
      *
@@ -65,12 +74,18 @@ class PermissionsController extends Controller
         $attr = [
             'name'             => $request->name,
         ];
+<<<<<<< HEAD
 
         $permission = Permission::create($attr);
 
 
         return $this->response->created($permission)->respond();
 
+=======
+        $permission = Permission::create($attr);
+
+        return $this->response->created($permission)->respond();
+>>>>>>> roles&permission
     }
 
     /**
@@ -94,7 +109,11 @@ class PermissionsController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         //
+=======
+
+>>>>>>> roles&permission
     }
 
     /**
@@ -119,8 +138,13 @@ class PermissionsController extends Controller
             'name'             => $request->name,
         ];
         $permission = Permission::findOrFail($id);
+<<<<<<< HEAD
         $permission->update($attr);
 
+=======
+
+        $permission->update($attr);
+>>>>>>> roles&permission
 
         return $this->response->ok($permission)->respond();
     }
@@ -134,10 +158,15 @@ class PermissionsController extends Controller
     public function destroy($id)
     {
         $permission = Permission::findOrFail($id);
+<<<<<<< HEAD
 
         if($permission->delete())
         {
 
+=======
+        if($permission->delete())
+        {
+>>>>>>> roles&permission
             return $this->response->ok(['Deleted'])->respond();
         }
         else
