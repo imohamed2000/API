@@ -19,7 +19,9 @@ export default class{
 	 * @param  {string} fileName [description]
 	 */
 	removeStyle(fileName){
-		
+		var style= document.querySelector('link[href="'+fileName+'"]');
+		var head = document.head;
+			head.removeChild(style);
 	}
 
 	/**
@@ -41,6 +43,8 @@ export default class{
 	 * @return {[type]}          [description]
 	 */
 	removeScript(fileName){
-
+		var head = document.getElementById('_appendScript');
+		var script = document.querySelector('script[src="'+fileName+'"]');
+		head.removeChild(script);
 	}
 }
