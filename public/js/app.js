@@ -27964,7 +27964,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.$store.dispatch('toGuest');
 			}).catch(errors => {});
 		}
-	}
+	},
+	mounted() {
+		document.title = this.$t("Odigita LMS ") + " | " + this.$t("Dashboard");
+	},
+	destroyed() {}
 });
 
 /***/ }),
@@ -28164,7 +28168,7 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_3__helpers_assets_js__["a" /* default
 
 	},
 	beforeCreate: function () {
-		document.title = "Odigita LMS| Login";
+		document.title = this.$t("Odigita LMS ") + " | " + this.$t("Welcome");
 		Assets.addStyle('plugins/ladda/ladda-themeless.min.css');
 	},
 	destroyed() {

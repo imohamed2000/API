@@ -15,6 +15,12 @@
 						})
 						.catch( errors => {} );
 			}
+		},
+		mounted(){
+			document.title = this.$t("Odigita LMS ") + " | " + this.$t("Dashboard") ;
+		},
+		destroyed(){
+
 		}
 	}
 </script>
