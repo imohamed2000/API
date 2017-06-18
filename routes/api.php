@@ -29,5 +29,15 @@ Route::group(['prefix' => 'v1'], function () {
     Route::resource('school.users', 'UserController');
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.classes.sections', 'SectionsController');
+    Route::resource('school.roles', 'RolesController');
+    Route::resource('permissions', 'PermissionsController');
+    //Route::resource('roles.permissions','RolesPermissionsController');
+
+    // Relation between Roles and permission
+    Route::post('roles/{role}/permissions','RolesPermissionsController@store');
+    Route::put('roles/{role}/permissions','RolesPermissionsController@update');
+    Route::get('roles/{role}/permissions','RolesPermissionsController@show');
+    Route::get('roles/permissions','RolesPermissionsController@index');
+
 });
 

@@ -58,25 +58,39 @@ class UserController extends Controller
     public function store(Request $request,School $school)
     {
         $is_valid = $this->validate($request->all(),[
-            'title'             => 'required|max:4',
+            'role'              => 'required|exists:roles,id',
+            'title'             => 'max:4',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birthday'          => 'required|date',
-            'contact_no'        => 'required|max:42',
-            'address'           => 'required|max:255',
-            'gender'            => 'required|max:6',
-            'email'             => 'required|unique:users,email',
+            'birthday'          => 'date',
+            'contact_no'        => 'max:42',
+            'address'           => 'max:255',
+            'gender'            => 'required|in:male,female',
+            'email'             => 'required|email|unique:users,email',
             'password'          => 'required|min:6',
-            'confirm_password'  => 'required|same:password',
-            'avatar'            => 'required|image'
+            'avatar'            => 'image'
         ]);
 
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-        $path = 'uploads/users/avatar';
-        $upload = new Upload('avatar',$path,'add');
+        if($request->hasFile('avatar'))
+        {
+            $path = 'uploads/users/avatar';
+            $upload = new Upload('avatar',$path,'add');
+            $avatar = $upload->savedFile->id;
+        }
+        else
+        {
+            if($request->gender === 'male'){
+                $avatar = 1;
+            }
+            else
+            {
+                $avatar = 2;
+            }
+        }
         $attr = [
             'title'             => $request->title,
             'first_name'        => $request->first_name,
@@ -87,9 +101,13 @@ class UserController extends Controller
             'gender'            => $request->gender,
             'email'             => $request->email,
             'password'          => bcrypt($request->password),
-            'avatar'            => $upload->savedFile->id
+            'avatar'            => $avatar
         ];
         $user = $school->users()->create($attr);
+
+        // save User Role
+        $role = $request->role;
+        $user->roles()->sync($role);
 
         return $this->response->created($user)->respond();
 
@@ -103,7 +121,7 @@ class UserController extends Controller
      */
     public function show(School $school,$id)
     {
-        $data = $school->users()->findOrFail($id);
+        $data = $school->users()->with('roles')->findOrFail($id);
 
         return $this->response->ok($data)->respond();
     }
@@ -129,13 +147,14 @@ class UserController extends Controller
     public function update(Request $request,School $school, $id)
     {
         $is_valid = $this->validate($request->all(),[
-            'title'             => 'required|max:4',
+            'role'              => 'required|exists:roles,id',
+            'title'             => 'max:4',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birthday'          => 'required|date',
-            'contact_no'        => 'required|max:42',
-            'address'           => 'required|max:255',
-            'gender'            => 'required|max:6',
+            'birthday'          => 'date',
+            'contact_no'        => 'max:42',
+            'address'           => 'max:255',
+            'gender'            => 'required|in:male,female',
             'email'             => 'required|email',
             'avatar'            => 'image'
         ]);
@@ -146,6 +165,7 @@ class UserController extends Controller
         }
 
         $user = $school->users()->findOrFail($id);
+
         $user->title        = $request->title;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
@@ -169,9 +189,14 @@ class UserController extends Controller
             $errorMsg = ['email'=>'The email is already taken.'];
             return $this->response->badRequest($errorMsg)->respond();
         }
-        $user->save();
 
-        return $this->response->created($user)->respond();
+
+        // Update User Role
+        $role = $request->role;
+        $user->roles()->sync($role);
+
+        $user->save();
+        return $this->response->ok($user)->respond();
 
     }
 

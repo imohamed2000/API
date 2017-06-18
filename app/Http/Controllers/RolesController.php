@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\School;
+
+
 
 class RolesController extends Controller
 {
@@ -13,7 +16,8 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,School $school)
+    public function index(Request $request, School $school)
+
     {
         $data = $school->roles()->select($this->list);
         if( $request->exists('datatables') )
@@ -65,6 +69,7 @@ class RolesController extends Controller
         $attr = [
             'name'             => $request->name,
         ];
+
         $role = $school->roles()->create($attr);
 
         return $this->response->created($role)->respond();
@@ -76,7 +81,8 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(School $school,$id)
+
+    public function show(School $school, $id)
     {
         $role = $school->roles()->findOrFail($id);
 
@@ -101,7 +107,7 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,School $school, $id)
+    public function update(Request $request, School $school, $id)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
@@ -117,6 +123,10 @@ class RolesController extends Controller
         ];
         $role = $school->roles()->findOrFail($id);
 
+
+        $role->update($attr);
+
+
         $role->update($attr);
 
         return $this->response->ok($role)->respond();
@@ -128,10 +138,10 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school,$id)
+
+    public function destroy(School $school, $id)
     {
         $role = $school->roles()->findOrFail($id);
-
         if($role->delete())
         {
 
