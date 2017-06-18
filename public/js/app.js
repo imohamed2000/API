@@ -27966,12 +27966,1519 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__ = __webpack_require__(195);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 
 
 
+
+
+let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	methods: {
@@ -27983,8 +29490,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	mounted() {
 		document.title = this.$t("Odigita LMS ") + " | " + this.$t("Dashboard");
+		document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
+
+		Assets.addStyle('layouts/layout5/css/layout.min.css');
+		Assets.addStyle('layouts/layout5/css/custom.min.css');
+		Assets.addScript('layouts/layout5/scripts/layout.min.js');
+		Assets.addScript('layouts/global/scripts/quick-sidebar.min.js');
+		Assets.addScript('layouts/global/scripts/quick-nav.min.js');
 	},
-	destroyed() {}
+	destroyed() {
+		Assets.removeStyle('layouts/layout5/css/layout.min.css');
+		Assets.removeStyle('layouts/layout5/css/custom.min.css');
+		Assets.removeScript('layouts/layout5/scripts/layout.min.js');
+		Assets.removeScript('layouts/global/scripts/quick-sidebar.min.js');
+		Assets.removeScript('layouts/global/scripts/quick-nav.min.js');
+	}
 });
 
 /***/ }),
@@ -28185,6 +29705,7 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_3__helpers_assets_js__["a" /* default
 	},
 	beforeCreate: function () {
 		document.title = this.$t("Odigita LMS ") + " | " + this.$t("Welcome");
+		document.getElementsByTagName("body")[0].setAttribute('class', "login");
 		Assets.addStyle('plugins/ladda/ladda-themeless.min.css');
 	},
 	destroyed() {
@@ -29616,7 +31137,31 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('h1', [_c('a', {
+  return _c('div', [_c('div', {
+    staticClass: "wrapper"
+  }, [_c('header', {
+    staticClass: "page-header"
+  }, [_c('nav', {
+    staticClass: "navbar mega-menu",
+    attrs: {
+      "role": "navigation"
+    }
+  }, [_c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "clearfix navbar-fixed-top"
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "topbar-actions"
+  }, [_vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "btn-group-img btn-group"
+  }, [_vm._m(5), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu-v2",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm._m(9), _vm._v(" "), _c('li', {
+    staticClass: "divider"
+  }), _vm._v(" "), _vm._m(10), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": "#"
     },
@@ -29626,8 +31171,2258 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.logout($event)
       }
     }
-  }, [_vm._v("Log Out")])])
-},staticRenderFns: []}
+  }, [_c('i', {
+    staticClass: "icon-key"
+  }), _vm._v(" Log Out ")])])])]), _vm._v(" "), _vm._m(11)])]), _vm._v(" "), _vm._m(12)])])]), _vm._v(" "), _vm._m(13)]), _vm._v(" "), _vm._m(14), _vm._v(" "), _vm._m(15), _vm._v(" "), _vm._m(16), _vm._v(" "), _c('div', {
+    staticClass: "quick-nav-overlay"
+  })])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "navbar-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "collapse",
+      "data-target": ".navbar-responsive-collapse"
+    }
+  }, [_c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Toggle navigation")]), _vm._v(" "), _c('span', {
+    staticClass: "toggle-icon"
+  }, [_c('span', {
+    staticClass: "icon-bar"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "icon-bar"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "icon-bar"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "page-logo",
+    attrs: {
+      "id": "index",
+      "href": "index.html"
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": "/layouts/layout5/img/logo.png",
+      "alt": "Logo"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('form', {
+    staticClass: "search",
+    attrs: {
+      "action": "extra_search.html",
+      "method": "GET"
+    }
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "name",
+      "name": "query",
+      "placeholder": "Search..."
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "btn submit md-skip",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-search"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "btn-group-notification btn-group",
+    attrs: {
+      "id": "header_notification_bar"
+    }
+  }, [_c('button', {
+    staticClass: "btn btn-sm md-skip dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown",
+      "data-hover": "dropdown",
+      "data-close-others": "true"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bell"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "badge"
+  }, [_vm._v("7")])]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu-v2"
+  }, [_c('li', {
+    staticClass: "external"
+  }, [_c('h3', [_c('span', {
+    staticClass: "bold"
+  }, [_vm._v("12 pending")]), _vm._v(" notifications")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("view all")])]), _vm._v(" "), _c('li', [_c('ul', {
+    staticClass: "dropdown-menu-list scroller",
+    staticStyle: {
+      "height": "250px",
+      "padding": "0"
+    },
+    attrs: {
+      "data-handle-color": "#637283"
+    }
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-success md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })]), _vm._v(" New user registered. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("just now")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-danger md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bolt"
+  })]), _vm._v(" Server #12 overloaded. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("3 mins")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-warning md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bell-o"
+  })]), _vm._v(" Server #2 not responding. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("10 mins")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-info md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bullhorn"
+  })]), _vm._v(" Application error. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("14 hrs")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-danger md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bolt"
+  })]), _vm._v(" Database overloaded 68%. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("2 days")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-danger md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bolt"
+  })]), _vm._v(" A user IP blocked. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("3 days")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-warning md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bell-o"
+  })]), _vm._v(" Storage Server #4 not responding dfdfdfd. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("4 days")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-info md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bullhorn"
+  })]), _vm._v(" System Error. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("5 days")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('span', {
+    staticClass: "details"
+  }, [_c('span', {
+    staticClass: "label label-sm label-icon label-danger md-skip"
+  }, [_c('i', {
+    staticClass: "fa fa-bolt"
+  })]), _vm._v(" Storage server failed. ")]), _vm._v(" "), _c('span', {
+    staticClass: "time"
+  }, [_vm._v("9 days")])])])])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "btn-group-red btn-group"
+  }, [_c('button', {
+    staticClass: "btn btn-sm md-skip dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown",
+      "data-hover": "dropdown",
+      "data-close-others": "true"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu-v2",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_c('li', {
+    staticClass: "active"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("New Post")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("New Comment")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Share")])]), _vm._v(" "), _c('li', {
+    staticClass: "divider"
+  }), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Comments\n                                                "), _c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v("4")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Feedbacks\n                                                "), _c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v("2")])])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "btn btn-sm md-skip dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown",
+      "data-hover": "dropdown",
+      "data-close-others": "true"
+    }
+  }, [_c('span', [_vm._v("Hi, Marcus")]), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": ""
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-user"
+  }), _vm._v(" My Profile\n                                                "), _c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v("1")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "app_calendar.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-calendar"
+  }), _vm._v(" My Calendar ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "app_inbox.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-envelope-open"
+  }), _vm._v(" My Inbox\n                                                "), _c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v(" 3 ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "app_todo_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-rocket"
+  }), _vm._v(" My Tasks\n                                                "), _c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v(" 7 ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_lock_1.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-lock"
+  }), _vm._v(" Lock Screen ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "quick-sidebar-toggler md-skip",
+    attrs: {
+      "type": "button",
+      "data-toggle": "collapse"
+    }
+  }, [_c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Toggle Quick Sidebar")]), _vm._v(" "), _c('i', {
+    staticClass: "icon-logout"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "nav-collapse collapse navbar-collapse navbar-responsive-collapse"
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav"
+  }, [_c('li', {
+    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
+  }, [_c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-home"
+  }), _vm._v(" Dashboard ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "index.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bar-chart"
+  }), _vm._v(" Default ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "dashboard_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bulb"
+  }), _vm._v(" Dashboard 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "dashboard_3.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Dashboard 3 ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
+  }, [_c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-puzzle"
+  }), _vm._v(" Features ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-diamond"
+  }), _vm._v(" UI Features ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "ui_colors.html"
+    }
+  }, [_vm._v(" Color Library ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_metronic_grid.html"
+    }
+  }, [_vm._v(" Metronic Grid System ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_general.html"
+    }
+  }, [_vm._v(" General Components ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_buttons.html"
+    }
+  }, [_vm._v(" Buttons ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_buttons_spinner.html"
+    }
+  }, [_vm._v(" Spinner Buttons ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_confirmations.html"
+    }
+  }, [_vm._v(" Popover Confirmations ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_sweetalert.html"
+    }
+  }, [_vm._v(" Bootstrap Sweet Alerts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_icons.html"
+    }
+  }, [_vm._v(" Font Icons ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_socicons.html"
+    }
+  }, [_vm._v(" Social Icons ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_typography.html"
+    }
+  }, [_vm._v(" Typography ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_tabs_accordions_navs.html"
+    }
+  }, [_vm._v(" Tabs, Accordions & Navs ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_tree.html"
+    }
+  }, [_vm._v(" Tree View ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_timeline.html"
+    }
+  }, [_vm._v(" Timeline 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_timeline_2.html"
+    }
+  }, [_vm._v(" Timeline 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_timeline_horizontal.html"
+    }
+  }, [_vm._v(" Horizontal Timeline ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_page_progress_style_1.html"
+    }
+  }, [_vm._v(" Page Progress Bar - Flash ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_page_progress_style_2.html"
+    }
+  }, [_vm._v(" Page Progress Bar - Big Counter ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_blockui.html"
+    }
+  }, [_vm._v(" Block UI ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_bootstrap_growl.html"
+    }
+  }, [_vm._v(" Bootstrap Growl Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_notific8.html"
+    }
+  }, [_vm._v(" Notific8 Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_toastr.html"
+    }
+  }, [_vm._v(" Toastr Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_bootbox.html"
+    }
+  }, [_vm._v(" Bootbox Dialogs ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_alerts_api.html"
+    }
+  }, [_vm._v(" Metronic Alerts API ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_session_timeout.html"
+    }
+  }, [_vm._v(" Session Timeout ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_idle_timeout.html"
+    }
+  }, [_vm._v(" User Idle Timeout ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_modals.html"
+    }
+  }, [_vm._v(" Modals ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_extended_modals.html"
+    }
+  }, [_vm._v(" Extended Modals ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_tiles.html"
+    }
+  }, [_vm._v(" Tiles ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_timeline.html"
+    }
+  }, [_vm._v(" Timeline ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_datepaginator.html"
+    }
+  }, [_vm._v(" Date Paginator ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ui_nestable.html"
+    }
+  }, [_vm._v(" Nestable List ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-puzzle"
+  }), _vm._v(" Components ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "components_date_time_pickers.html"
+    }
+  }, [_vm._v(" Date & Time Pickers ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_color_pickers.html"
+    }
+  }, [_vm._v(" Color Pickers ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_select2.html"
+    }
+  }, [_vm._v(" Select2 Dropdowns ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_multiselect_dropdown.html"
+    }
+  }, [_vm._v(" Bootstrap Multiselect Dropdowns ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_select.html"
+    }
+  }, [_vm._v(" Bootstrap Select ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_multi_select.html"
+    }
+  }, [_vm._v(" Bootstrap Multiple Select ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_select_splitter.html"
+    }
+  }, [_vm._v(" Select Splitter ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_clipboard.html"
+    }
+  }, [_vm._v(" Clipboard ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_typeahead.html"
+    }
+  }, [_vm._v(" Typeahead Autocomplete ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_tagsinput.html"
+    }
+  }, [_vm._v(" Bootstrap Tagsinput ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_switch.html"
+    }
+  }, [_vm._v(" Bootstrap Switch ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_maxlength.html"
+    }
+  }, [_vm._v(" Bootstrap Maxlength ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_fileinput.html"
+    }
+  }, [_vm._v(" Bootstrap File Input ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_bootstrap_touchspin.html"
+    }
+  }, [_vm._v(" Bootstrap Touchspin ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_form_tools.html"
+    }
+  }, [_vm._v(" Form Widgets & Tools ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_context_menu.html"
+    }
+  }, [_vm._v(" Context Menu ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_editors.html"
+    }
+  }, [_vm._v(" Markdown & WYSIWYG Editors ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_code_editors.html"
+    }
+  }, [_vm._v(" Code Editors ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_ion_sliders.html"
+    }
+  }, [_vm._v(" Ion Range Sliders ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_noui_sliders.html"
+    }
+  }, [_vm._v(" NoUI Range Sliders ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "components_knob_dials.html"
+    }
+  }, [_vm._v(" Knob Circle Dials ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-settings"
+  }), _vm._v(" Form Stuff ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "form_controls.html"
+    }
+  }, [_vm._v(" Bootstrap Form\n                                                        "), _c('br'), _vm._v("Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_controls_md.html"
+    }
+  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_validation.html"
+    }
+  }, [_vm._v(" Form Validation ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_validation_states_md.html"
+    }
+  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Validation States ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_validation_md.html"
+    }
+  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Validation ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_layouts.html"
+    }
+  }, [_vm._v(" Form Layouts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_repeater.html"
+    }
+  }, [_vm._v(" Form Repeater ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_input_mask.html"
+    }
+  }, [_vm._v(" Form Input Mask ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_editable.html"
+    }
+  }, [_vm._v(" Form X-editable ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_wizard.html"
+    }
+  }, [_vm._v(" Form Wizard ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_icheck.html"
+    }
+  }, [_vm._v(" iCheck Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_image_crop.html"
+    }
+  }, [_vm._v(" Image Cropping ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_fileupload.html"
+    }
+  }, [_vm._v(" Multiple File Upload ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "form_dropzone.html"
+    }
+  }, [_vm._v(" Dropzone File Upload ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "?p="
+    }
+  }, [_c('i', {
+    staticClass: "icon-wallet"
+  }), _vm._v(" Portlets ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "portlet_boxed.html"
+    }
+  }, [_vm._v(" Boxed Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "portlet_light.html"
+    }
+  }, [_vm._v(" Light Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "portlet_solid.html"
+    }
+  }, [_vm._v(" Solid Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "portlet_ajax.html"
+    }
+  }, [_vm._v(" Ajax Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "portlet_draggable.html"
+    }
+  }, [_vm._v(" Draggable Portlets ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bar-chart"
+  }), _vm._v(" Charts ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "charts_amcharts.html"
+    }
+  }, [_vm._v(" amChart ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "charts_flotcharts.html"
+    }
+  }, [_vm._v(" Flot Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "charts_flowchart.html"
+    }
+  }, [_vm._v(" Flow Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "charts_google.html"
+    }
+  }, [_vm._v(" Google Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "charts_echarts.html"
+    }
+  }, [_vm._v(" eCharts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "charts_morris.html"
+    }
+  }, [_vm._v(" Morris Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v(" HighCharts ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-cloud-upload"
+  }), _vm._v(" Elements ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "elements_steps.html"
+    }
+  }, [_vm._v(" Steps ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "elements_lists.html"
+    }
+  }, [_vm._v(" Lists ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "elements_ribbons.html"
+    }
+  }, [_vm._v(" Ribbons ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "elements_overlay.html"
+    }
+  }, [_vm._v(" Overlays ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "elements_cards.html"
+    }
+  }, [_vm._v(" User Cards ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-pointer"
+  }), _vm._v(" Maps ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "maps_google.html"
+    }
+  }, [_vm._v(" Google Maps ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "maps_vector.html"
+    }
+  }, [_vm._v(" Vector Maps ")])])])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
+  }, [_c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-briefcase"
+  }), _vm._v(" Tables ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "table_static_basic.html"
+    }
+  }, [_vm._v(" Basic Tables ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_static_responsive.html"
+    }
+  }, [_vm._v(" Responsive Tables ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_bootstrap.html"
+    }
+  }, [_vm._v(" Bootstrap Tables ")])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v(" Datatables ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_managed.html"
+    }
+  }, [_vm._v(" Managed Datatables ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_buttons.html"
+    }
+  }, [_vm._v(" Buttons Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_colreorder.html"
+    }
+  }, [_vm._v(" Colreorder Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_rowreorder.html"
+    }
+  }, [_vm._v(" Rowreorder Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_scroller.html"
+    }
+  }, [_vm._v(" Scroller Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_fixedheader.html"
+    }
+  }, [_vm._v(" FixedHeader Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_responsive.html"
+    }
+  }, [_vm._v(" Responsive Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_editable.html"
+    }
+  }, [_vm._v(" Editable Datatables ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "table_datatables_ajax.html"
+    }
+  }, [_vm._v(" Ajax Datatables ")])])])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  active open selected"
+  }, [_c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-layers"
+  }), _vm._v(" Pages ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-basket"
+  }), _vm._v(" eCommerce ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_index.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-home"
+  }), _vm._v(" Dashboard ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_orders.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-basket"
+  }), _vm._v(" Orders ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_orders_view.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-tag"
+  }), _vm._v(" Order View ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_products.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Products ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_products_edit.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Product Edit ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-docs"
+  }), _vm._v(" Apps ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "app_todo.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-clock"
+  }), _vm._v(" Todo 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_todo_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-check"
+  }), _vm._v(" Todo 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_inbox.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-envelope"
+  }), _vm._v(" Inbox ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_calendar.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-calendar"
+  }), _vm._v(" Calendar ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_ticket.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-notebook"
+  }), _vm._v(" Support ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-user"
+  }), _vm._v(" User ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1.html"
+    }
+  }, [_vm._v(" Profile 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1_account.html"
+    }
+  }, [_vm._v(" Profile 1 Account ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1_help.html"
+    }
+  }, [_vm._v(" Profile 1 Help ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_2.html"
+    }
+  }, [_vm._v(" Profile 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_1.html"
+    }
+  }, [_vm._v(" Login Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_2.html"
+    }
+  }, [_vm._v(" Login Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_3.html"
+    }
+  }, [_vm._v(" Login Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_4.html"
+    }
+  }, [_vm._v(" Login Page 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_5.html"
+    }
+  }, [_vm._v(" Login Page 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_6.html"
+    }
+  }, [_vm._v(" Login Page 6 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_lock_1.html"
+    }
+  }, [_vm._v(" Lock Screen 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_lock_2.html"
+    }
+  }, [_vm._v(" Lock Screen 2 ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-social-dribbble"
+  }), _vm._v(" General ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_about.html"
+    }
+  }, [_vm._v(" About ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_contact.html"
+    }
+  }, [_vm._v(" Contact ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_1.html"
+    }
+  }, [_vm._v(" Portfolio 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_2.html"
+    }
+  }, [_vm._v(" Portfolio 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_3.html"
+    }
+  }, [_vm._v(" Portfolio 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_4.html"
+    }
+  }, [_vm._v(" Portfolio 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search.html"
+    }
+  }, [_vm._v(" Search 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_2.html"
+    }
+  }, [_vm._v(" Search 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_3.html"
+    }
+  }, [_vm._v(" Search 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_4.html"
+    }
+  }, [_vm._v(" Search 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_5.html"
+    }
+  }, [_vm._v(" Search 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_pricing.html"
+    }
+  }, [_vm._v(" Pricing ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_pricing_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-tag"
+  }), _vm._v(" Pricing 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_faq.html"
+    }
+  }, [_vm._v(" FAQ ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_blog.html"
+    }
+  }, [_vm._v(" Blog ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_blog_post.html"
+    }
+  }, [_vm._v(" Blog Post ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_invoice.html"
+    }
+  }, [_vm._v(" Invoice ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_invoice_2.html"
+    }
+  }, [_vm._v(" Invoice 2 ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub active"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-settings"
+  }), _vm._v(" System ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', {
+    staticClass: "active"
+  }, [_c('a', {
+    attrs: {
+      "href": "layout_blank_page.html"
+    }
+  }, [_vm._v(" Blank Page ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_coming_soon.html"
+    }
+  }, [_vm._v(" Coming Soon ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_1.html"
+    }
+  }, [_vm._v(" 404 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_2.html"
+    }
+  }, [_vm._v(" 404 Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_3.html"
+    }
+  }, [_vm._v(" 404 Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_500_1.html"
+    }
+  }, [_vm._v(" 500 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_500_2.html"
+    }
+  }, [_vm._v(" 500 Page 2 ")])])])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown"
+  }, [_c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v(" More ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 1")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 2")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 3")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 4")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 5")])])])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "page-content"
+  }, [_c('div', {
+    staticClass: "breadcrumbs"
+  }, [_c('h1', [_vm._v("Blank Page Layout")]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Home")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Pages")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("System")])]), _vm._v(" "), _c('button', {
+    staticClass: "navbar-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "collapse",
+      "data-target": ".page-sidebar"
+    }
+  }, [_c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Toggle navigation")]), _vm._v(" "), _c('span', {
+    staticClass: "toggle-icon"
+  }, [_c('span', {
+    staticClass: "icon-bar"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "icon-bar"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "icon-bar"
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "page-content-container"
+  }, [_c('div', {
+    staticClass: "page-content-row"
+  }, [_c('div', {
+    staticClass: "page-sidebar"
+  }, [_c('nav', {
+    staticClass: "navbar",
+    attrs: {
+      "role": "navigation"
+    }
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav margin-bottom-35"
+  }, [_c('li', {
+    staticClass: "active"
+  }, [_c('a', {
+    attrs: {
+      "href": "index.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-home"
+  }), _vm._v(" Home ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-note "
+  }), _vm._v(" Reports ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-user"
+  }), _vm._v(" User Activity ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-basket "
+  }), _vm._v(" Marketplace ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bell"
+  }), _vm._v(" Templates ")])])]), _vm._v(" "), _c('h3', [_vm._v("Quick Actions")]), _vm._v(" "), _c('ul', {
+    staticClass: "nav navbar-nav"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-envelope "
+  }), _vm._v(" Inbox\n                                                "), _c('label', {
+    staticClass: "label label-danger"
+  }, [_vm._v("New")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-paper-clip "
+  }), _vm._v(" Task ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-star"
+  }), _vm._v(" Projects ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "icon-pin"
+  }), _vm._v(" Events\n                                                "), _c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v("2")])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "page-content-col"
+  }, [_c('div', {
+    staticClass: "note note-info"
+  }, [_c('p', [_vm._v(" A black page template with a minimal dependency assets to use as a base for any custom page you create ")])])])])])]), _vm._v(" "), _c('p', {
+    staticClass: "copyright"
+  }, [_vm._v(" 2016 © Metronic Theme By\n                    "), _c('a', {
+    attrs: {
+      "target": "_blank",
+      "href": "http://keenthemes.com"
+    }
+  }, [_vm._v("Keenthemes")]), _vm._v("  | \n                    "), _c('a', {
+    attrs: {
+      "href": "http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes",
+      "title": "Purchase Metronic just for 27$ and get lifetime updates for free",
+      "target": "_blank"
+    }
+  }, [_vm._v("Purchase Metronic!")])]), _vm._v(" "), _c('a', {
+    staticClass: "go2top",
+    attrs: {
+      "href": "#index"
+    }
+  }, [_c('i', {
+    staticClass: "icon-arrow-up"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "page-quick-sidebar-toggler",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-login"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "page-quick-sidebar-wrapper",
+    attrs: {
+      "data-close-on-body-click": "false"
+    }
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar"
+  }, [_c('ul', {
+    staticClass: "nav nav-tabs"
+  }, [_c('li', {
+    staticClass: "active"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_1",
+      "data-toggle": "tab"
+    }
+  }, [_vm._v(" Users\n                            "), _c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v("2")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_2",
+      "data-toggle": "tab"
+    }
+  }, [_vm._v(" Alerts\n                            "), _c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v("7")])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown"
+  }, [_c('a', {
+    staticClass: "dropdown-toggle",
+    attrs: {
+      "href": "javascript:;",
+      "data-toggle": "dropdown"
+    }
+  }, [_vm._v(" More\n                            "), _c('i', {
+    staticClass: "fa fa-angle-down"
+  })]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu pull-right"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_3",
+      "data-toggle": "tab"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bell"
+  }), _vm._v(" Alerts ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_3",
+      "data-toggle": "tab"
+    }
+  }, [_c('i', {
+    staticClass: "icon-info"
+  }), _vm._v(" Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_3",
+      "data-toggle": "tab"
+    }
+  }, [_c('i', {
+    staticClass: "icon-speech"
+  }), _vm._v(" Activities ")])]), _vm._v(" "), _c('li', {
+    staticClass: "divider"
+  }), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;",
+      "data-target": "#quick_sidebar_tab_3",
+      "data-toggle": "tab"
+    }
+  }, [_c('i', {
+    staticClass: "icon-settings"
+  }), _vm._v(" Settings ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "tab-content"
+  }, [_c('div', {
+    staticClass: "tab-pane active page-quick-sidebar-chat",
+    attrs: {
+      "id": "quick_sidebar_tab_1"
+    }
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar-chat-users",
+    attrs: {
+      "data-rail-color": "#ddd",
+      "data-wrapper-class": "page-quick-sidebar-list"
+    }
+  }, [_c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("Staff")]), _vm._v(" "), _c('ul', {
+    staticClass: "media-list list-items"
+  }, [_c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v("8")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" Project Manager ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Nick Larson")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" Art Director ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v("3")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Deon Hubert")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CTO ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Ella Wong")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CEO ")])])])]), _vm._v(" "), _c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("Customers")]), _vm._v(" "), _c('ul', {
+    staticClass: "media-list list-items"
+  }, [_c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "badge badge-warning"
+  }, [_vm._v("2")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Lara Kunis")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CEO, Loop Inc ")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-small"
+  }, [_vm._v(" Last seen 03:10 AM ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "label label-sm label-success"
+  }, [_vm._v("new")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Ernie Kyllonen")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" Project Manager,\n                                            "), _c('br'), _vm._v(" SmartBizz PTL ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Lisa Stone")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CTO, Keort Inc ")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-small"
+  }, [_vm._v(" Last seen 13:10 PM ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "badge badge-success"
+  }, [_vm._v("7")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Deon Portalatin")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CFO, H&D LTD ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Irina Savikova")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" CEO, Tizda Motors Inc ")])])]), _vm._v(" "), _c('li', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-status"
+  }, [_c('span', {
+    staticClass: "badge badge-danger"
+  }, [_vm._v("4")])]), _vm._v(" "), _c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": "/layouts/layout5/img/avatar1.jpg",
+      "alt": "..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_vm._v("Maria Gomez")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-sub"
+  }, [_vm._v(" Manager, Infomatic Inc ")]), _vm._v(" "), _c('div', {
+    staticClass: "media-heading-small"
+  }, [_vm._v(" Last seen 03:10 AM ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "page-quick-sidebar-item"
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar-chat-user"
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar-nav"
+  }, [_c('a', {
+    staticClass: "page-quick-sidebar-back-to-list",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-arrow-left"
+  }), _vm._v("Back")])]), _vm._v(" "), _c('div', {
+    staticClass: "page-quick-sidebar-chat-user-messages"
+  }, [_c('div', {
+    staticClass: "post out"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:15")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" When could you send me the report ? ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post in"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Ella Wong")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:15")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Its almost done. I will be sending it shortly ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post out"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:15")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Alright. Thanks! :) ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post in"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Ella Wong")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:16")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" You are most welcome. Sorry for the delay. ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post out"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:17")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" No probs. Just take your time :) ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post in"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Ella Wong")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:40")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Alright. I just emailed it to you. ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post out"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:17")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Great! Thanks. Will check it right away. ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post in"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Ella Wong")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:40")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Please let me know if you have any comment. ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "post out"
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "alt": "",
+      "src": "/layouts/layout5/img/avatar1.jpg"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('span', {
+    staticClass: "arrow"
+  }), _vm._v(" "), _c('a', {
+    staticClass: "name",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v("Bob Nilson")]), _vm._v(" "), _c('span', {
+    staticClass: "datetime"
+  }, [_vm._v("20:17")]), _vm._v(" "), _c('span', {
+    staticClass: "body"
+  }, [_vm._v(" Sure. I will check and buzz you if anything needs to be corrected. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "page-quick-sidebar-chat-user-form"
+  }, [_c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Type a message here..."
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "input-group-btn"
+  }, [_c('button', {
+    staticClass: "btn green",
+    attrs: {
+      "type": "button"
+    }
+  }, [_c('i', {
+    staticClass: "icon-paper-clip"
+  })])])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "tab-pane page-quick-sidebar-alerts",
+    attrs: {
+      "id": "quick_sidebar_tab_2"
+    }
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar-alerts-list"
+  }, [_c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("General")]), _vm._v(" "), _c('ul', {
+    staticClass: "feeds list-items"
+  }, [_c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-check"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 4 pending tasks.\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-warning "
+  }, [_vm._v(" Take action\n                                                        "), _c('i', {
+    staticClass: "fa fa-share"
+  })])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" Just now ")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-success"
+  }, [_c('i', {
+    staticClass: "fa fa-bar-chart-o"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" Finance Report for year 2013 has been released. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 20 mins ")])])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-danger"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 5 pending membership that requires a quick review. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 24 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-shopping-cart"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" New order received with\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-success"
+  }, [_vm._v(" Reference Number: DR23923 ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 30 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-success"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 5 pending membership that requires a quick review. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 24 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-bell-o"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" Web server hardware needs to be upgraded.\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-warning"
+  }, [_vm._v(" Overdue ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 2 hours ")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-default"
+  }, [_c('i', {
+    staticClass: "fa fa-briefcase"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" IPO Report for year 2013 has been released. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 20 mins ")])])])])]), _vm._v(" "), _c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("System")]), _vm._v(" "), _c('ul', {
+    staticClass: "feeds list-items"
+  }, [_c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-check"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 4 pending tasks.\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-warning "
+  }, [_vm._v(" Take action\n                                                        "), _c('i', {
+    staticClass: "fa fa-share"
+  })])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" Just now ")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-danger"
+  }, [_c('i', {
+    staticClass: "fa fa-bar-chart-o"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" Finance Report for year 2013 has been released. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 20 mins ")])])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-default"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 5 pending membership that requires a quick review. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 24 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-shopping-cart"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" New order received with\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-success"
+  }, [_vm._v(" Reference Number: DR23923 ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 30 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-success"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" You have 5 pending membership that requires a quick review. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 24 mins ")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-warning"
+  }, [_c('i', {
+    staticClass: "fa fa-bell-o"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" Web server hardware needs to be upgraded.\n                                                    "), _c('span', {
+    staticClass: "label label-sm label-default "
+  }, [_vm._v(" Overdue ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 2 hours ")])])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('div', {
+    staticClass: "col1"
+  }, [_c('div', {
+    staticClass: "cont"
+  }, [_c('div', {
+    staticClass: "cont-col1"
+  }, [_c('div', {
+    staticClass: "label label-sm label-info"
+  }, [_c('i', {
+    staticClass: "fa fa-briefcase"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "cont-col2"
+  }, [_c('div', {
+    staticClass: "desc"
+  }, [_vm._v(" IPO Report for year 2013 has been released. ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col2"
+  }, [_c('div', {
+    staticClass: "date"
+  }, [_vm._v(" 20 mins ")])])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "tab-pane page-quick-sidebar-settings",
+    attrs: {
+      "id": "quick_sidebar_tab_3"
+    }
+  }, [_c('div', {
+    staticClass: "page-quick-sidebar-settings-list"
+  }, [_c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("General Settings")]), _vm._v(" "), _c('ul', {
+    staticClass: "list-items borderless"
+  }, [_c('li', [_vm._v(" Enable Notifications\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "checked": "",
+      "data-size": "small",
+      "data-on-color": "success",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Allow Tracking\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "data-size": "small",
+      "data-on-color": "info",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Log Errors\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "checked": "",
+      "data-size": "small",
+      "data-on-color": "danger",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Auto Sumbit Issues\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "data-size": "small",
+      "data-on-color": "warning",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Enable SMS Alerts\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "checked": "",
+      "data-size": "small",
+      "data-on-color": "success",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })])]), _vm._v(" "), _c('h3', {
+    staticClass: "list-heading"
+  }, [_vm._v("System Settings")]), _vm._v(" "), _c('ul', {
+    staticClass: "list-items borderless"
+  }, [_c('li', [_vm._v(" Security Level\n                                    "), _c('select', {
+    staticClass: "form-control input-inline input-sm input-small"
+  }, [_c('option', {
+    attrs: {
+      "value": "1"
+    }
+  }, [_vm._v("Normal")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "2",
+      "selected": ""
+    }
+  }, [_vm._v("Medium")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "e"
+    }
+  }, [_vm._v("High")])])]), _vm._v(" "), _c('li', [_vm._v(" Failed Email Attempts\n                                    "), _c('input', {
+    staticClass: "form-control input-inline input-sm input-small",
+    attrs: {
+      "value": "5"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Secondary SMTP Port\n                                    "), _c('input', {
+    staticClass: "form-control input-inline input-sm input-small",
+    attrs: {
+      "value": "3560"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Notify On System Error\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "checked": "",
+      "data-size": "small",
+      "data-on-color": "danger",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })]), _vm._v(" "), _c('li', [_vm._v(" Notify On SMTP Error\n                                    "), _c('input', {
+    staticClass: "make-switch",
+    attrs: {
+      "type": "checkbox",
+      "checked": "",
+      "data-size": "small",
+      "data-on-color": "warning",
+      "data-on-text": "ON",
+      "data-off-color": "default",
+      "data-off-text": "OFF"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "inner-content"
+  }, [_c('button', {
+    staticClass: "btn btn-success"
+  }, [_c('i', {
+    staticClass: "icon-settings"
+  }), _vm._v(" Save Changes")])])])])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "quick-nav"
+  }, [_c('a', {
+    staticClass: "quick-nav-trigger",
+    attrs: {
+      "href": "#0"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('ul', [_c('li', [_c('a', {
+    staticClass: "active",
+    attrs: {
+      "href": "https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes",
+      "target": "_blank"
+    }
+  }, [_c('span', [_vm._v("Purchase Metronic")]), _vm._v(" "), _c('i', {
+    staticClass: "icon-basket"
+  })])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "https://themeforest.net/item/metronic-responsive-admin-dashboard-template/reviews/4021469?ref=keenthemes",
+      "target": "_blank"
+    }
+  }, [_c('span', [_vm._v("Customer Reviews")]), _vm._v(" "), _c('i', {
+    staticClass: "icon-users"
+  })])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "http://keenthemes.com/showcast/",
+      "target": "_blank"
+    }
+  }, [_c('span', [_vm._v("Showcase")]), _vm._v(" "), _c('i', {
+    staticClass: "icon-user"
+  })])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "http://keenthemes.com/metronic-theme/changelog/",
+      "target": "_blank"
+    }
+  }, [_c('span', [_vm._v("Changelog")]), _vm._v(" "), _c('i', {
+    staticClass: "icon-graph"
+  })])])]), _vm._v(" "), _c('span', {
+    staticClass: "quick-nav-bg",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -32908,7 +36703,11 @@ module.exports = __webpack_require__(128);
   * Removes style sheet from head
   * @param  {string} fileName [description]
   */
-	removeStyle(fileName) {}
+	removeStyle(fileName) {
+		var style = document.querySelector('link[href="' + fileName + '"]');
+		var head = document.head;
+		head.removeChild(style);
+	}
 
 	/**
   * [addScript description]
@@ -32928,7 +36727,11 @@ module.exports = __webpack_require__(128);
   * @param  {[type]} fileName [description]
   * @return {[type]}          [description]
   */
-	removeScript(fileName) {}
+	removeScript(fileName) {
+		var head = document.getElementById('_appendScript');
+		var script = document.querySelector('script[src="' + fileName + '"]');
+		head.removeChild(script);
+	}
 });
 
 /***/ }),
