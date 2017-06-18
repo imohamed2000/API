@@ -27,6 +27,7 @@ const mutations = {
   	state.isGuest = false;
   },
   toGuest(state){
+    Cookie.remove('isGuest');
   	state.isGuest = true;
   }
 }
