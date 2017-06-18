@@ -27904,13 +27904,15 @@ module.exports = function spread(callback) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Guest__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Guest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Guest__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Dashboard__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Dashboard__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_cookie__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_js_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Guest__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Guest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Guest__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Dashboard__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Dashboard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_js_cookie__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_js_cookie__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -27925,17 +27927,32 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapState */])({
+	computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapState */])({
 		isGuest: state => state.login.isGuest
 	})),
-	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])({
-		toAuth: 'toAuth'
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])({
+		toAuth: 'toAuth',
+		toGuest: 'toGuest'
 	})),
-	mounted() {},
+	mounted() {
+		let oThis = this;
+		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.response.use(function (response) {
+			// Do something with response data
+			return response;
+		}, function (error) {
+			// Do something with response error
+			// Token Expired
+			if (error.response.status === 401) {
+				oThis.$store.dispatch('toGuest');
+			}
+			return Promise.reject(error);
+		});
+	},
 	components: {
-		'guest': __WEBPACK_IMPORTED_MODULE_0__Guest___default.a,
-		'dashboard': __WEBPACK_IMPORTED_MODULE_1__Dashboard___default.a
+		'guest': __WEBPACK_IMPORTED_MODULE_1__Guest___default.a,
+		'dashboard': __WEBPACK_IMPORTED_MODULE_2__Dashboard___default.a
 	}
 });
 
@@ -27960,7 +27977,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		logout: function () {
 			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('api/v1/logout').then(response => {
-				__WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.remove('isGuest');
 				this.$store.dispatch('toGuest');
 			}).catch(errors => {});
 		}
@@ -28915,6 +28931,7 @@ const mutations = {
     state.isGuest = false;
   },
   toGuest(state) {
+    __WEBPACK_IMPORTED_MODULE_1_js_cookie___default.a.remove('isGuest');
     state.isGuest = true;
   }
 };
@@ -29626,7 +29643,14 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('form', {
     staticClass: "login-form",
+    attrs: {
+      "novalidate": ""
+    },
     on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.onSubmit($event)
+      },
       "submit": function($event) {
         $event.preventDefault();
         _vm.onSubmit($event)
@@ -29787,9 +29811,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('Forgot Password?')))])]), _vm._v(" "), _c('button', {
     staticClass: "btn green mt-ladda-btn ladda-button",
     attrs: {
-      "id": "#submit",
-      "data-style": "zoom-in",
       "type": "submit",
+      "data-style": "zoom-in",
       "disabled": _vm.errors.any()
     }
   }, [_vm._v(_vm._s(_vm.$t('Sign In')))])])])])

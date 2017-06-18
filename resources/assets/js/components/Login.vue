@@ -1,5 +1,5 @@
 <template>
-	<form class="login-form" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+	<form novalidate @keyup.enter="onSubmit" class="login-form" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
 		<div class="row">
 			<div class="col-xs-6">
 				<div class="alert alert-danger" v-show="errors.has('email')">
@@ -44,7 +44,7 @@
                 <div class="forgot-password">
                     <a href="javascript:;" id="forget-password" class="forget-password">{{$t('Forgot Password?')}}</a>
                 </div>
-                <button id="#submit" class="btn green mt-ladda-btn ladda-button" data-style="zoom-in" type="submit" :disabled="errors.any()">{{$t('Sign In')}}</button>
+                <button type="submit" class="btn green mt-ladda-btn ladda-button" data-style="zoom-in" :disabled="errors.any()">{{$t('Sign In')}}</button>
             </div>
         </div>
     </form>

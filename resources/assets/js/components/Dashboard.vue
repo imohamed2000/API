@@ -10,7 +10,6 @@
 			logout: function(){
 				axios.post('api/v1/logout')
 						.then(response => {
-							Cookie.remove('isGuest');
 							this.$store.dispatch('toGuest');
 						})
 						.catch( errors => {} );
