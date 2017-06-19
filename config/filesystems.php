@@ -61,6 +61,12 @@ return [
             'url' => env('APP_URL').'/storage/schools/logo',
             'visibility' => 'public',
         ],
+        'userAvatar' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/users/avatar'),
+            'url' => env('APP_URL').'/storage/users/avatar',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',
