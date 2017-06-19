@@ -33350,591 +33350,8 @@ module.exports = __webpack_require__(129);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderMenu__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderMenu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeaderMenu__);
 //
 //
 //
@@ -34145,7 +33562,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		'header-menu': __WEBPACK_IMPORTED_MODULE_0__HeaderMenu___default.a
+	}
+});
 
 /***/ }),
 /* 185 */
@@ -34197,18 +33619,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "clearfix navbar-fixed-top"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('router-link', {
+    staticClass: "page-logo",
+    attrs: {
+      "id": "index",
+      "to": "/"
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": "/layouts/layout5/img/logo.png",
+      "alt": "Logo"
+    }
+  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "topbar-actions"
-  }, [_vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "btn-group-img btn-group"
-  }, [_vm._m(5), _vm._v(" "), _c('ul', {
+  }, [_vm._m(4), _vm._v(" "), _c('ul', {
     staticClass: "dropdown-menu-v2",
     attrs: {
       "role": "menu"
     }
-  }, [_vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm._m(9), _vm._v(" "), _c('li', {
+  }, [_vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('li', {
     staticClass: "divider"
-  }), _vm._v(" "), _vm._m(10), _vm._v(" "), _c('li', [_c('a', {
+  }), _vm._v(" "), _vm._m(9), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": "#"
     },
@@ -34220,7 +33653,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon-key"
-  }), _vm._v(" Log Out ")])])])])])]), _vm._v(" "), _vm._m(11)])])])
+  }), _vm._v(" Log Out ")])])])])])], 1), _vm._v(" "), _c('header-menu')], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('button', {
     staticClass: "navbar-toggle",
@@ -34240,19 +33673,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('span', {
     staticClass: "icon-bar"
   })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "page-logo",
-    attrs: {
-      "id": "index",
-      "href": "index.html"
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": "/layouts/layout5/img/logo.png",
-      "alt": "Logo"
-    }
-  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('form', {
     staticClass: "search",
@@ -34529,831 +33949,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "icon-lock"
   }), _vm._v(" Lock Screen ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "nav-collapse collapse navbar-collapse navbar-responsive-collapse"
-  }, [_c('ul', {
-    staticClass: "nav navbar-nav"
-  }, [_c('li', {
-    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-home"
-  }), _vm._v(" Dashboard ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu dropdown-menu-fw"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "index.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-bar-chart"
-  }), _vm._v(" Default ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "dashboard_2.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-bulb"
-  }), _vm._v(" Dashboard 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "dashboard_3.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-graph"
-  }), _vm._v(" Dashboard 3 ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-puzzle"
-  }), _vm._v(" Features ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu dropdown-menu-fw"
-  }, [_c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-diamond"
-  }), _vm._v(" UI Features ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "ui_colors.html"
-    }
-  }, [_vm._v(" Color Library ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_metronic_grid.html"
-    }
-  }, [_vm._v(" Metronic Grid System ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_general.html"
-    }
-  }, [_vm._v(" General Components ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_buttons.html"
-    }
-  }, [_vm._v(" Buttons ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_buttons_spinner.html"
-    }
-  }, [_vm._v(" Spinner Buttons ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_confirmations.html"
-    }
-  }, [_vm._v(" Popover Confirmations ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_sweetalert.html"
-    }
-  }, [_vm._v(" Bootstrap Sweet Alerts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_icons.html"
-    }
-  }, [_vm._v(" Font Icons ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_socicons.html"
-    }
-  }, [_vm._v(" Social Icons ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_typography.html"
-    }
-  }, [_vm._v(" Typography ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_tabs_accordions_navs.html"
-    }
-  }, [_vm._v(" Tabs, Accordions & Navs ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_tree.html"
-    }
-  }, [_vm._v(" Tree View ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_timeline.html"
-    }
-  }, [_vm._v(" Timeline 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_timeline_2.html"
-    }
-  }, [_vm._v(" Timeline 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_timeline_horizontal.html"
-    }
-  }, [_vm._v(" Horizontal Timeline ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_page_progress_style_1.html"
-    }
-  }, [_vm._v(" Page Progress Bar - Flash ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_page_progress_style_2.html"
-    }
-  }, [_vm._v(" Page Progress Bar - Big Counter ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_blockui.html"
-    }
-  }, [_vm._v(" Block UI ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_bootstrap_growl.html"
-    }
-  }, [_vm._v(" Bootstrap Growl Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_notific8.html"
-    }
-  }, [_vm._v(" Notific8 Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_toastr.html"
-    }
-  }, [_vm._v(" Toastr Notifications ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_bootbox.html"
-    }
-  }, [_vm._v(" Bootbox Dialogs ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_alerts_api.html"
-    }
-  }, [_vm._v(" Metronic Alerts API ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_session_timeout.html"
-    }
-  }, [_vm._v(" Session Timeout ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_idle_timeout.html"
-    }
-  }, [_vm._v(" User Idle Timeout ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_modals.html"
-    }
-  }, [_vm._v(" Modals ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_extended_modals.html"
-    }
-  }, [_vm._v(" Extended Modals ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_tiles.html"
-    }
-  }, [_vm._v(" Tiles ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_timeline.html"
-    }
-  }, [_vm._v(" Timeline ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_datepaginator.html"
-    }
-  }, [_vm._v(" Date Paginator ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ui_nestable.html"
-    }
-  }, [_vm._v(" Nestable List ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-puzzle"
-  }), _vm._v(" Components ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "components_date_time_pickers.html"
-    }
-  }, [_vm._v(" Date & Time Pickers ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_color_pickers.html"
-    }
-  }, [_vm._v(" Color Pickers ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_select2.html"
-    }
-  }, [_vm._v(" Select2 Dropdowns ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_multiselect_dropdown.html"
-    }
-  }, [_vm._v(" Bootstrap Multiselect Dropdowns ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_select.html"
-    }
-  }, [_vm._v(" Bootstrap Select ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_multi_select.html"
-    }
-  }, [_vm._v(" Bootstrap Multiple Select ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_select_splitter.html"
-    }
-  }, [_vm._v(" Select Splitter ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_clipboard.html"
-    }
-  }, [_vm._v(" Clipboard ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_typeahead.html"
-    }
-  }, [_vm._v(" Typeahead Autocomplete ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_tagsinput.html"
-    }
-  }, [_vm._v(" Bootstrap Tagsinput ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_switch.html"
-    }
-  }, [_vm._v(" Bootstrap Switch ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_maxlength.html"
-    }
-  }, [_vm._v(" Bootstrap Maxlength ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_fileinput.html"
-    }
-  }, [_vm._v(" Bootstrap File Input ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_bootstrap_touchspin.html"
-    }
-  }, [_vm._v(" Bootstrap Touchspin ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_form_tools.html"
-    }
-  }, [_vm._v(" Form Widgets & Tools ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_context_menu.html"
-    }
-  }, [_vm._v(" Context Menu ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_editors.html"
-    }
-  }, [_vm._v(" Markdown & WYSIWYG Editors ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_code_editors.html"
-    }
-  }, [_vm._v(" Code Editors ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_ion_sliders.html"
-    }
-  }, [_vm._v(" Ion Range Sliders ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_noui_sliders.html"
-    }
-  }, [_vm._v(" NoUI Range Sliders ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "components_knob_dials.html"
-    }
-  }, [_vm._v(" Knob Circle Dials ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-settings"
-  }), _vm._v(" Form Stuff ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "form_controls.html"
-    }
-  }, [_vm._v(" Bootstrap Form\n                                                        "), _c('br'), _vm._v("Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_controls_md.html"
-    }
-  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_validation.html"
-    }
-  }, [_vm._v(" Form Validation ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_validation_states_md.html"
-    }
-  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Validation States ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_validation_md.html"
-    }
-  }, [_vm._v(" Material Design\n                                                        "), _c('br'), _vm._v("Form Validation ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_layouts.html"
-    }
-  }, [_vm._v(" Form Layouts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_repeater.html"
-    }
-  }, [_vm._v(" Form Repeater ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_input_mask.html"
-    }
-  }, [_vm._v(" Form Input Mask ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_editable.html"
-    }
-  }, [_vm._v(" Form X-editable ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_wizard.html"
-    }
-  }, [_vm._v(" Form Wizard ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_icheck.html"
-    }
-  }, [_vm._v(" iCheck Controls ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_image_crop.html"
-    }
-  }, [_vm._v(" Image Cropping ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_fileupload.html"
-    }
-  }, [_vm._v(" Multiple File Upload ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "form_dropzone.html"
-    }
-  }, [_vm._v(" Dropzone File Upload ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "?p="
-    }
-  }, [_c('i', {
-    staticClass: "icon-wallet"
-  }), _vm._v(" Portlets ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "portlet_boxed.html"
-    }
-  }, [_vm._v(" Boxed Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "portlet_light.html"
-    }
-  }, [_vm._v(" Light Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "portlet_solid.html"
-    }
-  }, [_vm._v(" Solid Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "portlet_ajax.html"
-    }
-  }, [_vm._v(" Ajax Portlets ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "portlet_draggable.html"
-    }
-  }, [_vm._v(" Draggable Portlets ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-bar-chart"
-  }), _vm._v(" Charts ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "charts_amcharts.html"
-    }
-  }, [_vm._v(" amChart ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "charts_flotcharts.html"
-    }
-  }, [_vm._v(" Flot Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "charts_flowchart.html"
-    }
-  }, [_vm._v(" Flow Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "charts_google.html"
-    }
-  }, [_vm._v(" Google Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "charts_echarts.html"
-    }
-  }, [_vm._v(" eCharts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "charts_morris.html"
-    }
-  }, [_vm._v(" Morris Charts ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_vm._v(" HighCharts ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-cloud-upload"
-  }), _vm._v(" Elements ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "elements_steps.html"
-    }
-  }, [_vm._v(" Steps ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "elements_lists.html"
-    }
-  }, [_vm._v(" Lists ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "elements_ribbons.html"
-    }
-  }, [_vm._v(" Ribbons ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "elements_overlay.html"
-    }
-  }, [_vm._v(" Overlays ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "elements_cards.html"
-    }
-  }, [_vm._v(" User Cards ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-pointer"
-  }), _vm._v(" Maps ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "maps_google.html"
-    }
-  }, [_vm._v(" Google Maps ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "maps_vector.html"
-    }
-  }, [_vm._v(" Vector Maps ")])])])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  "
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-briefcase"
-  }), _vm._v(" Tables ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu dropdown-menu-fw"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "table_static_basic.html"
-    }
-  }, [_vm._v(" Basic Tables ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_static_responsive.html"
-    }
-  }, [_vm._v(" Responsive Tables ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_bootstrap.html"
-    }
-  }, [_vm._v(" Bootstrap Tables ")])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_vm._v(" Datatables ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_managed.html"
-    }
-  }, [_vm._v(" Managed Datatables ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_buttons.html"
-    }
-  }, [_vm._v(" Buttons Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_colreorder.html"
-    }
-  }, [_vm._v(" Colreorder Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_rowreorder.html"
-    }
-  }, [_vm._v(" Rowreorder Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_scroller.html"
-    }
-  }, [_vm._v(" Scroller Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_fixedheader.html"
-    }
-  }, [_vm._v(" FixedHeader Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_responsive.html"
-    }
-  }, [_vm._v(" Responsive Extension ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_editable.html"
-    }
-  }, [_vm._v(" Editable Datatables ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "table_datatables_ajax.html"
-    }
-  }, [_vm._v(" Ajax Datatables ")])])])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown dropdown-fw dropdown-fw-disabled  active open selected"
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-layers"
-  }), _vm._v(" Pages ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu dropdown-menu-fw"
-  }, [_c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-basket"
-  }), _vm._v(" eCommerce ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "ecommerce_index.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-home"
-  }), _vm._v(" Dashboard ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ecommerce_orders.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-basket"
-  }), _vm._v(" Orders ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ecommerce_orders_view.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-tag"
-  }), _vm._v(" Order View ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ecommerce_products.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-graph"
-  }), _vm._v(" Products ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "ecommerce_products_edit.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-graph"
-  }), _vm._v(" Product Edit ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-docs"
-  }), _vm._v(" Apps ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "app_todo.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-clock"
-  }), _vm._v(" Todo 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "app_todo_2.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-check"
-  }), _vm._v(" Todo 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "app_inbox.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-envelope"
-  }), _vm._v(" Inbox ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "app_calendar.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-calendar"
-  }), _vm._v(" Calendar ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "app_ticket.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-notebook"
-  }), _vm._v(" Support ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-user"
-  }), _vm._v(" User ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_profile_1.html"
-    }
-  }, [_vm._v(" Profile 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_profile_1_account.html"
-    }
-  }, [_vm._v(" Profile 1 Account ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_profile_1_help.html"
-    }
-  }, [_vm._v(" Profile 1 Help ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_profile_2.html"
-    }
-  }, [_vm._v(" Profile 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_1.html"
-    }
-  }, [_vm._v(" Login Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_2.html"
-    }
-  }, [_vm._v(" Login Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_3.html"
-    }
-  }, [_vm._v(" Login Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_4.html"
-    }
-  }, [_vm._v(" Login Page 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_5.html"
-    }
-  }, [_vm._v(" Login Page 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_login_6.html"
-    }
-  }, [_vm._v(" Login Page 6 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_lock_1.html"
-    }
-  }, [_vm._v(" Lock Screen 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_user_lock_2.html"
-    }
-  }, [_vm._v(" Lock Screen 2 ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-social-dribbble"
-  }), _vm._v(" General ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_about.html"
-    }
-  }, [_vm._v(" About ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_contact.html"
-    }
-  }, [_vm._v(" Contact ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_portfolio_1.html"
-    }
-  }, [_vm._v(" Portfolio 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_portfolio_2.html"
-    }
-  }, [_vm._v(" Portfolio 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_portfolio_3.html"
-    }
-  }, [_vm._v(" Portfolio 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_portfolio_4.html"
-    }
-  }, [_vm._v(" Portfolio 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_search.html"
-    }
-  }, [_vm._v(" Search 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_search_2.html"
-    }
-  }, [_vm._v(" Search 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_search_3.html"
-    }
-  }, [_vm._v(" Search 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_search_4.html"
-    }
-  }, [_vm._v(" Search 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_search_5.html"
-    }
-  }, [_vm._v(" Search 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_pricing.html"
-    }
-  }, [_vm._v(" Pricing ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_pricing_2.html"
-    }
-  }, [_c('i', {
-    staticClass: "icon-tag"
-  }), _vm._v(" Pricing 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_faq.html"
-    }
-  }, [_vm._v(" FAQ ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_blog.html"
-    }
-  }, [_vm._v(" Blog ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_blog_post.html"
-    }
-  }, [_vm._v(" Blog Post ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_invoice.html"
-    }
-  }, [_vm._v(" Invoice ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_general_invoice_2.html"
-    }
-  }, [_vm._v(" Invoice 2 ")])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown-sub active"
-  }, [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_c('i', {
-    staticClass: "icon-settings"
-  }), _vm._v(" System ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', {
-    staticClass: "active"
-  }, [_c('a', {
-    attrs: {
-      "href": "layout_blank_page.html"
-    }
-  }, [_vm._v(" Blank Page ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_coming_soon.html"
-    }
-  }, [_vm._v(" Coming Soon ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_404_1.html"
-    }
-  }, [_vm._v(" 404 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_404_2.html"
-    }
-  }, [_vm._v(" 404 Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_404_3.html"
-    }
-  }, [_vm._v(" 404 Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_500_1.html"
-    }
-  }, [_vm._v(" 500 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "page_system_500_2.html"
-    }
-  }, [_vm._v(" 500 Page 2 ")])])])])])]), _vm._v(" "), _c('li', {
-    staticClass: "dropdown more-dropdown"
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_vm._v(" More ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 1")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 2")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 3")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 4")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 5")])])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -36040,6 +34635,618 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-a7ddf6de", module.exports)
+  }
+}
+
+/***/ }),
+/* 199 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data() {
+		return {
+			matched: this.$route.matched.map(component => component.name)
+		};
+	},
+	methods: {
+		inMatched: function (name) {
+			return this.matched.indexOf(name) > -1;
+		}
+	},
+	mounted() {}
+});
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(199),
+  /* template */
+  __webpack_require__(201),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\HeaderMenu.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] HeaderMenu.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-266aa8ae", Component.options)
+  } else {
+    hotAPI.reload("data-v-266aa8ae", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "nav-collapse collapse navbar-collapse navbar-responsive-collapse"
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav"
+  }, [_c('li', {
+    class: {
+      'dropdown dropdown-fw dropdown-fw-disabled': !_vm.inMatched('stats'),
+        'dropdown dropdown-fw dropdown-fw-disabled active open selected': _vm.inMatched('stats')
+    }
+  }, [_vm._m(0), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', [_c('router-link', {
+    attrs: {
+      "to": "/"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bar-chart"
+  }), _vm._v(" Default ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])]), _vm._v(" "), _c('li', {
+    class: {
+      'dropdown dropdown-fw dropdown-fw-disabled': !_vm.inMatched('404'),
+        'dropdown dropdown-fw dropdown-fw-disabled active open selected': _vm.inMatched('404')
+    }
+  }, [_vm._m(3), _vm._v(" "), _vm._m(4)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-home"
+  }), _vm._v(" Dashboard ")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "dashboard_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-bulb"
+  }), _vm._v(" Dashboard 2 ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "dashboard_3.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Dashboard 3 ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "text-uppercase",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-layers"
+  }), _vm._v(" Pages ")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "dropdown-menu dropdown-menu-fw"
+  }, [_c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-basket"
+  }), _vm._v(" eCommerce ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_index.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-home"
+  }), _vm._v(" Dashboard ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_orders.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-basket"
+  }), _vm._v(" Orders ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_orders_view.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-tag"
+  }), _vm._v(" Order View ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_products.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Products ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "ecommerce_products_edit.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-graph"
+  }), _vm._v(" Product Edit ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-docs"
+  }), _vm._v(" Apps ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "app_todo.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-clock"
+  }), _vm._v(" Todo 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_todo_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-check"
+  }), _vm._v(" Todo 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_inbox.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-envelope"
+  }), _vm._v(" Inbox ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_calendar.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-calendar"
+  }), _vm._v(" Calendar ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "app_ticket.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-notebook"
+  }), _vm._v(" Support ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-user"
+  }), _vm._v(" User ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1.html"
+    }
+  }, [_vm._v(" Profile 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1_account.html"
+    }
+  }, [_vm._v(" Profile 1 Account ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_1_help.html"
+    }
+  }, [_vm._v(" Profile 1 Help ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_profile_2.html"
+    }
+  }, [_vm._v(" Profile 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_1.html"
+    }
+  }, [_vm._v(" Login Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_2.html"
+    }
+  }, [_vm._v(" Login Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_3.html"
+    }
+  }, [_vm._v(" Login Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_4.html"
+    }
+  }, [_vm._v(" Login Page 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_5.html"
+    }
+  }, [_vm._v(" Login Page 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_login_6.html"
+    }
+  }, [_vm._v(" Login Page 6 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_lock_1.html"
+    }
+  }, [_vm._v(" Lock Screen 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_user_lock_2.html"
+    }
+  }, [_vm._v(" Lock Screen 2 ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-social-dribbble"
+  }), _vm._v(" General ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_about.html"
+    }
+  }, [_vm._v(" About ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_contact.html"
+    }
+  }, [_vm._v(" Contact ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_1.html"
+    }
+  }, [_vm._v(" Portfolio 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_2.html"
+    }
+  }, [_vm._v(" Portfolio 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_3.html"
+    }
+  }, [_vm._v(" Portfolio 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_portfolio_4.html"
+    }
+  }, [_vm._v(" Portfolio 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search.html"
+    }
+  }, [_vm._v(" Search 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_2.html"
+    }
+  }, [_vm._v(" Search 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_3.html"
+    }
+  }, [_vm._v(" Search 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_4.html"
+    }
+  }, [_vm._v(" Search 4 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_search_5.html"
+    }
+  }, [_vm._v(" Search 5 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_pricing.html"
+    }
+  }, [_vm._v(" Pricing ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_pricing_2.html"
+    }
+  }, [_c('i', {
+    staticClass: "icon-tag"
+  }), _vm._v(" Pricing 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_faq.html"
+    }
+  }, [_vm._v(" FAQ ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_blog.html"
+    }
+  }, [_vm._v(" Blog ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_blog_post.html"
+    }
+  }, [_vm._v(" Blog Post ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_invoice.html"
+    }
+  }, [_vm._v(" Invoice ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_general_invoice_2.html"
+    }
+  }, [_vm._v(" Invoice 2 ")])])])]), _vm._v(" "), _c('li', {
+    staticClass: "dropdown more-dropdown-sub active"
+  }, [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_c('i', {
+    staticClass: "icon-settings"
+  }), _vm._v(" System ")]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, [_c('li', {
+    staticClass: "active"
+  }, [_c('a', {
+    attrs: {
+      "href": "layout_blank_page.html"
+    }
+  }, [_vm._v(" Blank Page ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_coming_soon.html"
+    }
+  }, [_vm._v(" Coming Soon ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_1.html"
+    }
+  }, [_vm._v(" 404 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_2.html"
+    }
+  }, [_vm._v(" 404 Page 2 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_404_3.html"
+    }
+  }, [_vm._v(" 404 Page 3 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_500_1.html"
+    }
+  }, [_vm._v(" 500 Page 1 ")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "page_system_500_2.html"
+    }
+  }, [_vm._v(" 500 Page 2 ")])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-266aa8ae", module.exports)
   }
 }
 
