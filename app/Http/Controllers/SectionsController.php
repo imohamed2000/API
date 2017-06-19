@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Section;
 use Illuminate\Http\Request;
 use App\School;
-use App\Classes;
 
 class SectionsController extends Controller
 {

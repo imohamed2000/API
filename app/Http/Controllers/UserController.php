@@ -77,8 +77,7 @@ class UserController extends Controller
         }
         if($request->hasFile('avatar'))
         {
-            $path = 'uploads/users/avatar';
-            $upload = new Upload('avatar',$path,'add');
+            $upload = new Upload('avatar','userAvatar','add');
             $avatar = $upload->savedFile->id;
         }
         else
@@ -176,9 +175,7 @@ class UserController extends Controller
         $avatar = $user->avatar;
         if($request->exists('avatar'))
         {
-            $path = 'uploads/users/avatar';
-            $upload = new Upload('avatar',$path,'edit',$user->avatar);
-
+            $upload = new Upload('avatar','userAvatar','edit',$user->avatar);
             $avatar = $upload->savedFile->id;
         }
         $user->avatar = $avatar;

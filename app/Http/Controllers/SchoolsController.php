@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\School;
 use App\Beak\Upload;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolsController extends Controller
 {
@@ -73,8 +74,7 @@ class SchoolsController extends Controller
         $logo = 3;
         if($request->hasFile('logo'))
         {
-            $path = 'uploads/schools/logo'; // upload path
-            $upload = new Upload('logo',$path,'add');
+            $upload = new Upload('logo','schoolLogo','add');
             $logo = $upload->savedFile->id;
         }
 
@@ -102,7 +102,7 @@ class SchoolsController extends Controller
     public function show($id)
     {
         $school = School::findOrFail($id);
-        $school->logoURL = asset('uploads/schools/logo/'.$school->logo()->first()->filename);
+        $school->logoURL = Storage::disk('schoolLogo')->url($school->logo()->first()->filename);
         return $this->response->ok($school)->respond();
     }
 
@@ -143,14 +143,12 @@ class SchoolsController extends Controller
         $logo_id = $school->logo_id;
         if($request->hasFile('logo'))
         {
-            $path = 'uploads/schools/logo'; // upload path
-            $upload = new Upload('logo',$path,'edit',$school->logo_id);
+            $upload = new Upload('logo','schoolLogo','edit',$school->logo_id);
             $logo_id = $upload->savedFile->id;
         }
+
         $school->update([
             'name'              => $request->name,
-            'code'              => $request->code,
-            'contact_no'        => $request->contact_no,
             'email'             => $request->email,
             'address'           => $request->address,
             'city'              => $request->city,

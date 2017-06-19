@@ -4,10 +4,11 @@ namespace App\Beak;
 
 use App\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File as FI;
 class Upload{
 
     private $requestName;
-    private $path;
+    private $storageDriver;
     private $operation;
     private $fileId;
     private $filename;
@@ -17,11 +18,11 @@ class Upload{
     private $size;
     public $savedFile;
 
-    public function __construct($requestName,$path,$operation,$id = Null)
+    public function __construct($requestName,$storageDriver,$operation,$id = Null)
     {
         $this->requestName = $requestName;
-        $this->path = $path;
         $this->operation = $operation;
+        $this->storageDriver = $storageDriver;
         if($this->operation == 'add')
         {
             return $this->addFile();
@@ -51,7 +52,7 @@ class Upload{
     {
         $this->uploadFile();
         $saveFile = File::findOrFail($this->fileId); // Find old File
-        Storage::delete($this->path.'/'.$saveFile->filename); // Delete Old File from server
+        Storage::disk($this->storageDriver)->delete($saveFile->filename); // Delete Old File from server
         $saveFile->filename = $this->filename;
         $saveFile->original_name = $this->originalFilename;
         $saveFile->type = $this->type;
@@ -65,11 +66,12 @@ class Upload{
     private function uploadFile()
     {
         $this->extension = request()->file($this->requestName)->getClientOriginalExtension(); // getting image extension
+        $file = request()->file($this->requestName);
         $this->filename = $this->requestName.time().rand(0000000,9999999999).'-'.rand(0000000000000,99999999999).time().'.'.$this->extension; // renaming image
         $this->type = request()->file($this->requestName)->getMimeType();
         $this->size = request()->file($this->requestName)->getClientSize();
         $this->originalFilename = request()->file($this->requestName)->getClientOriginalName();
-        request()->file($this->requestName)->move($this->path, $this->filename); // uploading file
+        Storage::disk($this->storageDriver)->put($this->filename,  FI::get($file));
     }
 
 }
