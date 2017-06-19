@@ -15,7 +15,7 @@ class AddFileIdSchoolTable extends Migration
     {
         //
         Schema::table('schools',function(Blueprint $table){
-            $table->integer('logo_id')->unsigned()->after('zip');
+            $table->integer('logo_id')->unsigned()->default('3')->after('zip');
             $table->foreign('logo_id')->references('id')->on('files')->onDelete('cascade');
         });
     }

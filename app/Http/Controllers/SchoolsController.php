@@ -59,30 +59,32 @@ class SchoolsController extends Controller
     {
          $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
-                'contact_no'        => 'required|max:42',
-                'email'             => 'required|email',
-                'address'           => 'required|max:255',
-                'city'              => 'required|max:255',
-                'zip'               => 'required|max:255',
-                'logo'              => 'required|image'
+                'email'             => 'email',
+                'address'           => 'max:255',
+                'city'              => 'max:255',
+                'zip'               => 'max:255',
+                'logo'              => 'image'
             ]);
 
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-
-        $path = 'uploads/schools/logo'; // upload path
-        $upload = new Upload('logo',$path,'add');
+        $logo = 3;
+        if($request->hasFile('logo'))
+        {
+            $path = 'uploads/schools/logo'; // upload path
+            $upload = new Upload('logo',$path,'add');
+            $logo = $upload->savedFile->id;
+        }
 
         $school = new School();
         $school->name = $request->name;
-        $school->contact_no = $request->contact_no;
         $school->email = $request->email;
         $school->address = $request->address;
         $school->city = $request->city;
         $school->zip = $request->zip;
-        $school->logo_id = $upload->savedFile->id;
+        $school->logo_id = $logo;
         $school->save();
 
 
@@ -99,15 +101,9 @@ class SchoolsController extends Controller
      */
     public function show($id)
     {
-        $school = School::where('id',$id)->with('logo')->first();
-        if($school)
-        {
-            return $this->response->ok($school)->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        $school = School::findOrFail($id);
+        $school->logoURL = asset('uploads/schools/logo/'.$school->logo()->first()->filename);
+        return $this->response->ok($school)->respond();
     }
 
     /**
@@ -133,11 +129,10 @@ class SchoolsController extends Controller
 
         $validate = $this->validate(request()->all(),[
             'name'              => 'required|max:255',
-            'contact_no'        => 'required|max:42',
-            'email'             => 'required|email',
-            'address'           => 'required|max:255',
-            'city'              => 'required|max:255',
-            'zip'               => 'required|max:255',
+            'email'             => 'email',
+            'address'           => 'max:255',
+            'city'              => 'max:255',
+            'zip'               => 'max:255',
             'logo'              => 'image'
         ]);
 
@@ -174,7 +169,7 @@ class SchoolsController extends Controller
      */
     public function destroy($id)
     {
-        $school = School::where('id',$id)->first();
+        $school = School::findOrFail($id);
         if($school)
         {
             $school->delete();

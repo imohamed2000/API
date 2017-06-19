@@ -17,11 +17,10 @@ class CreateSchoolsTable extends Migration
 
             $table->increments('id');
             $table->string('name');
-            $table->string('contact_no',42);
-            $table->string('email');
-            $table->string('address');
-            $table->string('city');
-            $table->string('zip');
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
