@@ -209,9 +209,19 @@
 </template>
 <script>
 	import HeaderMenu from './HeaderMenu';
+    import {mapActions} from 'vuex';
+
 	export default{
 		components: {
 			'header-menu': HeaderMenu
 		},
+        methods: {
+            ...mapActions({
+                toGuest: 'toGuest'
+            }),
+            logout: function(){
+                this.toGuest();
+            }
+        }
 	}
 </script>

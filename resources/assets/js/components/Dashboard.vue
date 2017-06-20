@@ -21,6 +21,7 @@
 	import Cookie from 'js-cookie';
 	import axios from 'axios';
 	import $Assets from '../helpers/assets.js';
+	import {mapActions} from 'vuex';
 
     // Child components
     import Header from './Header';
@@ -37,6 +38,9 @@
             'app-footer': Footer
         },
 		methods:{
+			...mapActions({
+				setTitle: 'setTitle'
+			}),
 			logout: function(){
 				axios.post('api/v1/logout')
 						.then(response => {
@@ -46,15 +50,12 @@
 			}
 		},
 		mounted(){
-			document.title = this.$t("Odigita LMS ") + " | " + this.$t("Dashboard") ;
 			document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
-
 			Assets.addStyle('/layouts/layout5/css/layout.min.css');
 			Assets.addStyle('/layouts/layout5/css/custom.min.css');
 			Assets.addScript('/layouts/layout5/scripts/layout.min.js');
 			Assets.addScript('/layouts/global/scripts/quick-sidebar.min.js');
 			Assets.addScript('/layouts/global/scripts/quick-nav.min.js');
-			
 		},
 		destroyed(){
 			Assets.removeStyle('/layouts/layout5/css/layout.min.css');

@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import Cookie from 'js-cookie';
+import axios from 'axios';
 // initial state
 
 const state = {
@@ -27,8 +28,15 @@ const mutations = {
   	state.isGuest = false;
   },
   toGuest(state){
-    Cookie.remove('isGuest');
-  	state.isGuest = true;
+    axios.post("/api/v1/logout")
+      .then(response=>{
+          Cookie.remove('isGuest');
+          state.isGuest = true;
+        })
+      .catch(error=> {
+        console.log(error.response.data)
+      });
+    
   }
 }
 
