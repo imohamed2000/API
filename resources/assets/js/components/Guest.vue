@@ -63,7 +63,7 @@
             login: Login,
             'reset-password': ResetPassword
         },
-        mounted(){
+        mounted: function(){
            Assets.addScript("/plugins/backstretch/jquery.backstretch.min.js");
            Assets.addScript("/pages/scripts/login-5.js");
         },

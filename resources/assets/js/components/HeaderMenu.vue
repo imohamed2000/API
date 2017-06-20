@@ -24,37 +24,16 @@
                 </ul>
             </li>
             <li :class="{
-            	'dropdown dropdown-fw dropdown-fw-disabled': !inMatched('404'),
-            	'dropdown dropdown-fw dropdown-fw-disabled active open selected': inMatched('404')
+            	'dropdown dropdown-fw dropdown-fw-disabled': !inMatched('schools'),
+            	'dropdown dropdown-fw dropdown-fw-disabled active open selected': inMatched('schools')
             	}">
                 <a href="javascript:;" class="text-uppercase">
-                    <i class="icon-layers"></i> Pages </a>
+                    <i class="icon-layers"></i> Schools </a>
                 <ul class="dropdown-menu dropdown-menu-fw">
-                    <li class="dropdown more-dropdown-sub">
-                        <a href="javascript:;">
-                            <i class="icon-basket"></i> eCommerce </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="ecommerce_index.html">
-                                    <i class="icon-home"></i> Dashboard </a>
-                            </li>
-                            <li>
-                                <a href="ecommerce_orders.html">
-                                    <i class="icon-basket"></i> Orders </a>
-                            </li>
-                            <li>
-                                <a href="ecommerce_orders_view.html">
-                                    <i class="icon-tag"></i> Order View </a>
-                            </li>
-                            <li>
-                                <a href="ecommerce_products.html">
-                                    <i class="icon-graph"></i> Products </a>
-                            </li>
-                            <li>
-                                <a href="ecommerce_products_edit.html">
-                                    <i class="icon-graph"></i> Product Edit </a>
-                            </li>
-                        </ul>
+                    <li>
+                        <router-link to="/schools">
+                            <i class="icon-graduation"></i> All Schools 
+                        </router-link>
                     </li>
                     <li class="dropdown more-dropdown-sub">
                         <a href="javascript:;">

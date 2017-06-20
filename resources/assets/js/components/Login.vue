@@ -95,8 +95,7 @@
 			}
 
 		},
-		beforeCreate: function(){
-			document.title = this.$t("Odigita LMS ") + " | " + this.$t("Welcome") ;
+		mounted: function(){
 			document.getElementsByTagName("body")[0].setAttribute('class', "login");
 			Assets.addStyle('plugins/ladda/ladda-themeless.min.css');
 		},

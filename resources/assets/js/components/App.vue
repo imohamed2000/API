@@ -20,11 +20,11 @@
 		methods:{
 			...mapActions({
 				toAuth: 'toAuth',
-				toGuest: 'toGuest'
+				toGuest: 'toGuest',
+				setTitle: 'setTitle'
 			})
 		},
 		mounted(){
-			let oThis = this;
 			axios.interceptors.response.use(function (response) {
 			    // Do something with response data
 			    return response;

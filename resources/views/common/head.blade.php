@@ -7,7 +7,7 @@
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>Odigita LMS</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #5 for " name="description" />
@@ -22,6 +22,9 @@
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
         <link href="/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="/plugins/pace/pace.min.js"></script>
+        <link rel="stylesheet" href="/plugins/pace/themes/pace-theme-flash.css" type="text/css">
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
