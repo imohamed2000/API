@@ -29,7 +29,7 @@ class FilesTableSeeder extends Seeder
             'first_name' => str_random(10),
             'last_name' => str_random(10),
             'gender' => 'male',
-            'email' => str_random(10).'@gmail.com',
+            'email' => "male@site.com",
             'password' => bcrypt('secret'),
             'avatar'  => $male->id
         ]);
@@ -46,7 +46,7 @@ class FilesTableSeeder extends Seeder
             'first_name' => str_random(10),
             'last_name' => str_random(10),
             'gender' => 'female',
-            'email' => str_random(10).'@gmail.com',
+            'email' => "female@site.com",
             'password' => bcrypt('secret'),
             'avatar'  => $female->id
         ]);
