@@ -29051,6 +29051,9 @@ const actions = {
   toGuest({ commit }) {
     commit('toGuest');
   },
+  logout({ commit }) {
+    commit('logout');
+  },
   getUserData({ commit }) {
     commit('getUserData');
   }
@@ -29061,13 +29064,16 @@ const mutations = {
   toAuth(state) {
     state.isGuest = false;
   },
-  toGuest(state) {
+  logout(state) {
     __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post("/api/v1/logout").then(response => {
-      __WEBPACK_IMPORTED_MODULE_1_js_cookie___default.a.remove('isGuest');
-      state.isGuest = true;
+      mutations.toGuest(state);
     }).catch(error => {
       console.log(error.response.data);
     });
+  },
+  toGuest(state) {
+    __WEBPACK_IMPORTED_MODULE_1_js_cookie___default.a.remove('isGuest');
+    state.isGuest = true;
   },
   getUserData(state) {
     let userData = {};
@@ -35256,9 +35262,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
-		user: state => state.login.user
-	}))
+    computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+        user: state => state.login.user
+    })),
+    methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+        toGuest: 'toGuest',
+        logout: 'logout'
+    }))
 });
 
 /***/ }),

@@ -21,6 +21,9 @@ const actions = {
  	toGuest({commit}){
  		commit('toGuest');
  	},
+  logout({commit}){
+    commit('logout');
+  },
   getUserData({commit}){
     commit('getUserData');
   }
@@ -31,16 +34,19 @@ const mutations = {
   toAuth(state){
   	state.isGuest = false;
   },
-  toGuest(state){
+  logout(state){
     axios.post("/api/v1/logout")
       .then(response=>{
-          Cookie.remove('isGuest');
-          state.isGuest = true;
+          mutations.toGuest(state);
         })
       .catch(error=> {
         console.log(error.response.data)
       });
     
+  },
+  toGuest(state){
+    Cookie.remove('isGuest');
+    state.isGuest = true;
   },
   getUserData(state){
     let userData = {};

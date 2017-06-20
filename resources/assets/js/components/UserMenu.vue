@@ -41,12 +41,18 @@
     <!-- END USER PROFILE -->
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 export default{
 	computed:{
 		...mapState({
 			user: state => state.login.user
 		}),
 	},
+    methods:{
+        ...mapActions({
+            toGuest: 'toGuest',
+            logout: 'logout'
+        }),
+    }
 }
 </script>
