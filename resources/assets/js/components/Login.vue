@@ -95,7 +95,7 @@
 			}
 
 		},
-		beforeCreate: function(){
+		mounted: function(){
 			document.getElementsByTagName("body")[0].setAttribute('class', "login");
 			Assets.addStyle('plugins/ladda/ladda-themeless.min.css');
 		},

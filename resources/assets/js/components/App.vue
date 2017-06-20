@@ -25,9 +25,6 @@
 			})
 		},
 		mounted(){
-			let title = this.$route.meta.title;
-			document.title = this.$t("Odigita LMS ") + " | " + this.$t(title) ;
-			
 			axios.interceptors.response.use(function (response) {
 			    // Do something with response data
 			    return response;

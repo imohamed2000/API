@@ -22,6 +22,9 @@
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
         <link href="/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="/plugins/pace/pace.min.js"></script>
+        <link rel="stylesheet" href="/plugins/pace/themes/pace-theme-flash.css" type="text/css">
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />

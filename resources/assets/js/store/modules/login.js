@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const state = {
 	 isGuest : typeof( Cookie.get('isGuest') ) == "undefined",
+   user: {}
 }
 
 // getters
@@ -19,7 +20,10 @@ const actions = {
  	},
  	toGuest({commit}){
  		commit('toGuest');
- 	}
+ 	},
+  getUserData({commit}){
+    commit('getUserData');
+  }
 }
 
 // mutations
@@ -37,6 +41,21 @@ const mutations = {
         console.log(error.response.data)
       });
     
+  },
+  getUserData(state){
+    let userData = {};
+    axios.get("https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1")
+      .then(response => {
+
+        let userName = response.data[0].split(" ").filter((v, i)=>{
+          return i < 2;
+        }).join(" ");
+
+        userData.first_name = userName;
+        userData.avatar= "/layouts/layout5/img/avatar1.jpg";
+        state.user = userData;
+
+      });
   }
 }
 

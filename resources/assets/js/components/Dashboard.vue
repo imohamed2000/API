@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="page-content">
                    <breadcrumbs />
-                   <router-view></router-view>
+                   	<router-view></router-view>
                 </div>
                 <app-footer />
             </div>
@@ -39,7 +39,8 @@
         },
 		methods:{
 			...mapActions({
-				setTitle: 'setTitle'
+				setTitle: 'setTitle',
+				getUserData: 'getUserData'
 			}),
 			logout: function(){
 				axios.post('api/v1/logout')
@@ -56,6 +57,8 @@
 			Assets.addScript('/layouts/layout5/scripts/layout.min.js');
 			Assets.addScript('/layouts/global/scripts/quick-sidebar.min.js');
 			Assets.addScript('/layouts/global/scripts/quick-nav.min.js');
+
+			this.getUserData();
 		},
 		destroyed(){
 			Assets.removeStyle('/layouts/layout5/css/layout.min.css');
