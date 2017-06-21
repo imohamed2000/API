@@ -28084,6 +28084,7 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default
 	},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])({
 		setTitle: 'setTitle',
+		setPageTitle: 'setPageTitle',
 		getUserData: 'getUserData'
 	}), {
 		logout: function () {
@@ -28190,11 +28191,9 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_4__helpers_assets_js__["a" /* default
         'reset-password': __WEBPACK_IMPORTED_MODULE_1__ResetPassword___default.a
     },
     mounted: function () {
-        Assets.addScript("/plugins/backstretch/jquery.backstretch.min.js");
         Assets.addScript("/pages/scripts/login-5.js");
     },
     destroyed() {
-        Assets.removeScript("/plugins/backstretch/jquery.backstretch.min.js");
         Assets.removeScript("/pages/scripts/login-5.js");
     }
 });
@@ -28971,8 +28970,9 @@ module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__getters__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_login__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lang_en_js__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lang_ar_js__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_breadcrumbs__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lang_en_js__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lang_ar_js__ = __webpack_require__(161);
 
 
 
@@ -28980,6 +28980,7 @@ module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats
 
 
 // import module from './modules/module';
+
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
@@ -28992,13 +28993,14 @@ const store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   actions: __WEBPACK_IMPORTED_MODULE_3__actions__,
   getters: __WEBPACK_IMPORTED_MODULE_4__getters__,
   modules: {
-    login: __WEBPACK_IMPORTED_MODULE_5__modules_login__["a" /* default */]
+    login: __WEBPACK_IMPORTED_MODULE_5__modules_login__["a" /* default */],
+    breadcrumbs: __WEBPACK_IMPORTED_MODULE_6__modules_breadcrumbs__["a" /* default */]
   }
 });
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuex_i18n___default.a.plugin, store);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('en', __WEBPACK_IMPORTED_MODULE_6__lang_en_js__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('ar', __WEBPACK_IMPORTED_MODULE_7__lang_ar_js__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('en', __WEBPACK_IMPORTED_MODULE_7__lang_en_js__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('ar', __WEBPACK_IMPORTED_MODULE_8__lang_ar_js__["a" /* default */]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.fallback('en');
 
@@ -33939,7 +33941,12 @@ module.exports = Component.exports
 
 /***/ }),
 /* 188 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
 //
@@ -33967,17 +33974,28 @@ module.exports = Component.exports
 //
 //
 //
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+        pageTitle: state => state.breadcrumbs.pageTitle
+    }))
+});
 
 /***/ }),
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "breadcrumbs"
-  }, [_c('h1', [_vm._v("Blank Page Layout")]), _vm._v(" "), _c('ol', {
+  }, [_c('h1', {
+    domProps: {
+      "textContent": _vm._s(_vm.pageTitle)
+    }
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ol', {
     staticClass: "breadcrumb"
   }, [_c('li', [_c('a', {
     attrs: {
@@ -33989,7 +34007,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Pages")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("System")])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("System")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
     staticClass: "navbar-toggle",
     attrs: {
       "type": "button",
@@ -34006,7 +34026,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "icon-bar"
   }), _vm._v(" "), _c('span', {
     staticClass: "icon-bar"
-  })])])])
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -34179,7 +34199,12 @@ module.exports = Component.exports
 
 /***/ }),
 /* 195 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
 //
@@ -34249,6 +34274,16 @@ module.exports = Component.exports
 //
 //
 //
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+        setPageTitle: 'setPageTitle'
+    })),
+    mounted() {
+        this.setPageTitle(this.$t("Dashboard"));
+    }
+});
 
 /***/ }),
 /* 196 */
@@ -35152,11 +35187,24 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+		setPageTitle: 'setPageTitle'
+	})),
+
+	mounted() {
+		this.setPageTitle(this.$t('All Schools'));
+	}
+
+});
 
 /***/ }),
 /* 203 */
@@ -35399,6 +35447,43 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-4798ae6c", module.exports)
   }
 }
+
+/***/ }),
+/* 209 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mutation_types__);
+
+
+// initial state
+
+const state = {
+  pageTitle: ''
+
+  // getters
+};const getters = {};
+
+// actions
+const actions = {
+  setPageTitle: ({ commit }, newTitle) => {
+    commit('setPageTitle', newTitle);
+  }
+
+  // mutations
+};const mutations = {
+  setPageTitle: (state, newTitle) => {
+    state.pageTitle = newTitle;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  state,
+  getters,
+  actions,
+  mutations
+});
 
 /***/ })
 /******/ ]);

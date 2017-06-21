@@ -67,7 +67,6 @@
            Assets.addScript("/pages/scripts/login-5.js");
         },
         destroyed(){
-            Assets.removeScript("/plugins/backstretch/jquery.backstretch.min.js");
             Assets.removeScript("/pages/scripts/login-5.js");
         }
 	}

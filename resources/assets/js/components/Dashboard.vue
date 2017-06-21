@@ -40,6 +40,7 @@
 		methods:{
 			...mapActions({
 				setTitle: 'setTitle',
+				setPageTitle: 'setPageTitle',
 				getUserData: 'getUserData'
 			}),
 			logout: function(){
