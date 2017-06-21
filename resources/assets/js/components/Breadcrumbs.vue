@@ -29,7 +29,7 @@
 	export default{
         computed:{
             ...mapState({
-                pageTitle: state=> state.breadcrumbs.pageTitle
+                pageTitle: state=> state.misc.pageTitle
             }),
         }
     }

@@ -3,7 +3,8 @@ import * as types from '../mutation-types'
 // initial state
 
 const state = {
-	pageTitle: ''
+	pageTitle: '',
+	loading: true
 }
 
 // getters
@@ -15,13 +16,19 @@ const getters = {
 const actions = {
  	setPageTitle: ({commit}, newTitle) =>{
  		commit('setPageTitle', newTitle);
- 	}
+ 	},
+ 	isLoading:({ commit }, status) => {
+ 		commit('isLoading', status);
+ 	},
 }
 
 // mutations
 const mutations = {
   setPageTitle: (state, newTitle)=>{
   	state.pageTitle = newTitle;
+  },
+  isLoading: (state, status) =>{
+  	state.loading = status;
   }
 }
 

@@ -3,17 +3,21 @@
 </template>
 <script>
 import {mapActions} from 'vuex';
+
 export default{
+	created(){
+		this.fetchData();
+	},
 	methods: {
 		...mapActions({
-			setPageTitle: 'setPageTitle'
+			isLoading: 'isLoading'
 		}),
+		fetchData(){
+			this.isLoading(false);
+		},
+		watch:{
+			'$route': 'fetchData'
+		}
 	},
-
-	mounted(){
-		
-	},
-
-
 }
 </script>

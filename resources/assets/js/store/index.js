@@ -6,7 +6,7 @@ import * as getters from './getters';
 
 // import module from './modules/module';
 import login from './modules/login';
-import breadcrumbs from './modules/breadcrumbs';
+import misc from './modules/misc';
 
 
 Vue.use(Vuex);
@@ -20,7 +20,7 @@ const store = new Vuex.Store({
   getters,
   modules: {
   	login,
-  	breadcrumbs
+  	misc
   }
 });
 

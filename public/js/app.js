@@ -27120,6 +27120,10 @@ function setTitle(app, documentTitle, pageTitle) {
 	app.$store.commit("setPageTitle", app.$t(pageTitle));
 }
 
+function loadingState(app) {
+	app.$store.commit('isLoading', true);
+}
+
 const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	el: '#app',
 	router,
@@ -27128,6 +27132,7 @@ const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 		let title = this.$route.meta.title;
 		let pageTitle = this.$route.meta.pageTitle;
 		setTitle(this, title, pageTitle);
+		loadingState(this);
 	}
 });
 
@@ -27135,6 +27140,7 @@ router.beforeEach((to, from, next) => {
 	let title = to.meta.title;
 	let pageTitle = to.meta.pageTitle;
 	setTitle(app, title, pageTitle);
+	loadingState(app);
 	next();
 });
 
@@ -28070,6 +28076,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -28084,6 +28093,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapState */])({
+		loading: state => state.misc.loading
+	})),
 	components: {
 		'app-header': __WEBPACK_IMPORTED_MODULE_4__Header___default.a,
 		'breadcrumbs': __WEBPACK_IMPORTED_MODULE_5__Breadcrumbs___default.a,
@@ -28092,14 +28104,9 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])({
 		setTitle: 'setTitle',
 		setPageTitle: 'setPageTitle',
-		getUserData: 'getUserData'
-	}), {
-		logout: function () {
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('api/v1/logout').then(response => {
-				this.$store.dispatch('toGuest');
-			}).catch(errors => {});
-		}
-	}),
+		getUserData: 'getUserData',
+		isLoading: 'isLoading'
+	})),
 	mounted() {
 		document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
 		Assets.addStyle('/layouts/layout5/css/layout.min.css');
@@ -28985,7 +28992,7 @@ module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__getters__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_login__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_breadcrumbs__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_misc__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lang_en_js__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lang_ar_js__ = __webpack_require__(161);
 
@@ -29009,7 +29016,7 @@ const store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   getters: __WEBPACK_IMPORTED_MODULE_4__getters__,
   modules: {
     login: __WEBPACK_IMPORTED_MODULE_5__modules_login__["a" /* default */],
-    breadcrumbs: __WEBPACK_IMPORTED_MODULE_6__modules_breadcrumbs__["a" /* default */]
+    misc: __WEBPACK_IMPORTED_MODULE_6__modules_misc__["a" /* default */]
   }
 });
 
@@ -30164,7 +30171,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "page-content"
-  }, [_c('breadcrumbs'), _vm._v(" "), _c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)])
+  }, [_c('breadcrumbs'), _vm._v(" "), (_vm.loading) ? _c('div', {
+    staticClass: "loading"
+  }, [_vm._v("\n\t\t\t\t      Loading...\n\t\t\t\t    ")]) : _vm._e(), _vm._v(" "), _c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -33993,7 +34002,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
-        pageTitle: state => state.breadcrumbs.pageTitle
+        pageTitle: state => state.misc.pageTitle
     }))
 });
 
@@ -34218,9 +34227,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 //
 //
 //
@@ -34290,13 +34296,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
-        setPageTitle: 'setPageTitle'
-    })),
-    mounted() {}
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 196 */
@@ -34358,7 +34358,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon-envelope "
-  }), _vm._v(" Inbox\n                                                "), _c('label', {
+  }), _vm._v(" Inbox\n                                "), _c('label', {
     staticClass: "label label-danger"
   }, [_vm._v("New")])])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
@@ -34378,7 +34378,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon-pin"
-  }), _vm._v(" Events\n                                                "), _c('span', {
+  }), _vm._v(" Events\n                                "), _c('span', {
     staticClass: "badge badge-success"
   }, [_vm._v("2")])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "page-content-col"
@@ -35208,13 +35208,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+	created() {
+		this.fetchData();
+	},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
-		setPageTitle: 'setPageTitle'
-	})),
-
-	mounted() {}
-
+		isLoading: 'isLoading'
+	}), {
+		fetchData() {
+			this.isLoading(false);
+		},
+		watch: {
+			'$route': 'fetchData'
+		}
+	})
 });
 
 /***/ }),
@@ -35460,7 +35468,8 @@ if (false) {
 }
 
 /***/ }),
-/* 209 */
+/* 209 */,
+/* 210 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35471,7 +35480,8 @@ if (false) {
 // initial state
 
 const state = {
-  pageTitle: ''
+  pageTitle: '',
+  loading: true
 
   // getters
 };const getters = {};
@@ -35480,12 +35490,18 @@ const state = {
 const actions = {
   setPageTitle: ({ commit }, newTitle) => {
     commit('setPageTitle', newTitle);
+  },
+  isLoading: ({ commit }, status) => {
+    commit('isLoading', status);
   }
 
   // mutations
 };const mutations = {
   setPageTitle: (state, newTitle) => {
     state.pageTitle = newTitle;
+  },
+  isLoading: (state, status) => {
+    state.loading = status;
   }
 };
 

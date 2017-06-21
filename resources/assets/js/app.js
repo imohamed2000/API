@@ -15,6 +15,10 @@ function setTitle(app, documentTitle, pageTitle){
 	app.$store.commit("setPageTitle", app.$t( pageTitle) );
 }
 
+function loadingState(app){
+	app.$store.commit('isLoading', true);
+}
+
 const app = new Vue({
 	el: '#app',
 	router,
@@ -23,6 +27,7 @@ const app = new Vue({
 		let title = this.$route.meta.title;
 		let pageTitle = this.$route.meta.pageTitle;
 		setTitle(this, title, pageTitle);
+		loadingState(this);
 	}
 });
 
@@ -30,5 +35,6 @@ router.beforeEach((to, from, next)=>{
 	let title = to.meta.title;
 	let pageTitle = to.meta.pageTitle;
 	setTitle(app, title, pageTitle);
+	loadingState(app);
 	next();
 });
