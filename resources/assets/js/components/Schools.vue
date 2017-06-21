@@ -11,9 +11,9 @@ export default{
 	},
 
 	mounted(){
-		this.setPageTitle(this.$t('All Schools'));
+		
 	},
 
-	
+
 }
 </script>

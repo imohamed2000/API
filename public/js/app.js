@@ -27115,19 +27115,26 @@ let router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* 
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(169));
 
+function setTitle(app, documentTitle, pageTitle) {
+	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
+	app.$store.commit("setPageTitle", app.$t(pageTitle));
+}
+
 const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	el: '#app',
 	router,
 	store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */],
 	created: function () {
 		let title = this.$route.meta.title;
-		document.title = this.$t("Odigita LMS ") + " | " + this.$t(title);
+		let pageTitle = this.$route.meta.pageTitle;
+		setTitle(this, title, pageTitle);
 	}
 });
 
 router.beforeEach((to, from, next) => {
 	let title = to.meta.title;
-	document.title = app.$t("Odigita LMS ") + " | " + app.$t(title);
+	let pageTitle = to.meta.pageTitle;
+	setTitle(app, title, pageTitle);
 	next();
 });
 
@@ -28429,7 +28436,15 @@ function createRouter() {
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats', meta: { title: "Home" } }, { path: '/schools', component: __webpack_require__(203), name: 'schools', meta: { title: "All Schools" } }, { path: '*', component: __webpack_require__(193), name: '404', meta: { title: 'Error 404' } }];
+module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats',
+	meta: {
+		title: "Home",
+		pageTitle: "Dashboard"
+	} }, { path: '/schools', component: __webpack_require__(203), name: 'schools',
+	meta: {
+		title: "All Schools",
+		pageTitle: "All Schools"
+	} }, { path: '*', component: __webpack_require__(193), name: '404', meta: { title: 'Error 404' } }];
 
 /***/ }),
 /* 155 */
@@ -34280,9 +34295,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
         setPageTitle: 'setPageTitle'
     })),
-    mounted() {
-        this.setPageTitle(this.$t("Dashboard"));
-    }
+    mounted() {}
 });
 
 /***/ }),
@@ -35200,9 +35213,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		setPageTitle: 'setPageTitle'
 	})),
 
-	mounted() {
-		this.setPageTitle(this.$t('All Schools'));
-	}
+	mounted() {}
 
 });
 

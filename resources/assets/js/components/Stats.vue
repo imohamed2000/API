@@ -75,7 +75,7 @@
             }),
         },
         mounted(){
-            this.setPageTitle(this.$t("Dashboard"));
+            
         }
     }
 </script>
