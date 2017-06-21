@@ -10,18 +10,31 @@ let router = createRouter();
  */
 Vue.component('app', require('./components/App') );
 
+function setTitle(app, documentTitle, pageTitle){
+	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
+	app.$store.commit("setPageTitle", app.$t( pageTitle) );
+}
+
+function loadingState(app){
+	app.$store.commit('isLoading', true);
+}
+
 const app = new Vue({
 	el: '#app',
 	router,
 	store,
 	created: function(){
 		let title = this.$route.meta.title;
-		document.title = this.$t("Odigita LMS ") + " | " + this.$t(title) ;
+		let pageTitle = this.$route.meta.pageTitle;
+		setTitle(this, title, pageTitle);
+		loadingState(this);
 	}
 });
 
 router.beforeEach((to, from, next)=>{
 	let title = to.meta.title;
-	document.title = app.$t("Odigita LMS ") + " | " + app.$t(title) ;
+	let pageTitle = to.meta.pageTitle;
+	setTitle(app, title, pageTitle);
+	loadingState(app);
 	next();
 });

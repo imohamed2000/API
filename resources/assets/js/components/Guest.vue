@@ -64,11 +64,9 @@
             'reset-password': ResetPassword
         },
         mounted: function(){
-           Assets.addScript("/plugins/backstretch/jquery.backstretch.min.js");
            Assets.addScript("/pages/scripts/login-5.js");
         },
         destroyed(){
-            Assets.removeScript("/plugins/backstretch/jquery.backstretch.min.js");
             Assets.removeScript("/pages/scripts/login-5.js");
         }
 	}

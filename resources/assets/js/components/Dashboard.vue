@@ -6,7 +6,10 @@
 
             <div class="container-fluid">
                 <div class="page-content">
-                   <breadcrumbs />
+                    <breadcrumbs />
+                    <div class="loading" v-if="loading">
+				      Loading...
+				    </div>
                    	<router-view></router-view>
                 </div>
                 <app-footer />
@@ -21,7 +24,7 @@
 	import Cookie from 'js-cookie';
 	import axios from 'axios';
 	import $Assets from '../helpers/assets.js';
-	import {mapActions} from 'vuex';
+	import {mapActions, mapState} from 'vuex';
 
     // Child components
     import Header from './Header';
@@ -32,6 +35,11 @@
 	let Assets = new $Assets();
 
 	export default{
+		computed:{
+			...mapState({
+				loading: state=>state.misc.loading
+			}),
+		},
         components:{
             'app-header': Header,
             'breadcrumbs': Breadcrumbs,
@@ -40,15 +48,11 @@
 		methods:{
 			...mapActions({
 				setTitle: 'setTitle',
-				getUserData: 'getUserData'
+				setPageTitle: 'setPageTitle',
+				getUserData: 'getUserData',
+				isLoading: 'isLoading'
 			}),
-			logout: function(){
-				axios.post('api/v1/logout')
-						.then(response => {
-							this.$store.dispatch('toGuest');
-						})
-						.catch( errors => {} );
-			}
+			
 		},
 		mounted(){
 			document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");

@@ -10,6 +10,7 @@
         <script src="/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="/plugins/backstretch/jquery.backstretch.js" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         
         <!-- BEGIN PAGE LEVEL SCRIPTS -->

@@ -27115,19 +27115,32 @@ let router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* 
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(169));
 
+function setTitle(app, documentTitle, pageTitle) {
+	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
+	app.$store.commit("setPageTitle", app.$t(pageTitle));
+}
+
+function loadingState(app) {
+	app.$store.commit('isLoading', true);
+}
+
 const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	el: '#app',
 	router,
 	store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */],
 	created: function () {
 		let title = this.$route.meta.title;
-		document.title = this.$t("Odigita LMS ") + " | " + this.$t(title);
+		let pageTitle = this.$route.meta.pageTitle;
+		setTitle(this, title, pageTitle);
+		loadingState(this);
 	}
 });
 
 router.beforeEach((to, from, next) => {
 	let title = to.meta.title;
-	document.title = app.$t("Odigita LMS ") + " | " + app.$t(title);
+	let pageTitle = to.meta.pageTitle;
+	setTitle(app, title, pageTitle);
+	loadingState(app);
 	next();
 });
 
@@ -28063,6 +28076,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -28077,6 +28093,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapState */])({
+		loading: state => state.misc.loading
+	})),
 	components: {
 		'app-header': __WEBPACK_IMPORTED_MODULE_4__Header___default.a,
 		'breadcrumbs': __WEBPACK_IMPORTED_MODULE_5__Breadcrumbs___default.a,
@@ -28084,14 +28103,10 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_2__helpers_assets_js__["a" /* default
 	},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])({
 		setTitle: 'setTitle',
-		getUserData: 'getUserData'
-	}), {
-		logout: function () {
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('api/v1/logout').then(response => {
-				this.$store.dispatch('toGuest');
-			}).catch(errors => {});
-		}
-	}),
+		setPageTitle: 'setPageTitle',
+		getUserData: 'getUserData',
+		isLoading: 'isLoading'
+	})),
 	mounted() {
 		document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
 		Assets.addStyle('/layouts/layout5/css/layout.min.css');
@@ -28190,11 +28205,9 @@ let Assets = new __WEBPACK_IMPORTED_MODULE_4__helpers_assets_js__["a" /* default
         'reset-password': __WEBPACK_IMPORTED_MODULE_1__ResetPassword___default.a
     },
     mounted: function () {
-        Assets.addScript("/plugins/backstretch/jquery.backstretch.min.js");
         Assets.addScript("/pages/scripts/login-5.js");
     },
     destroyed() {
-        Assets.removeScript("/plugins/backstretch/jquery.backstretch.min.js");
         Assets.removeScript("/pages/scripts/login-5.js");
     }
 });
@@ -28430,7 +28443,15 @@ function createRouter() {
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats', meta: { title: "Home" } }, { path: '/schools', component: __webpack_require__(203), name: 'schools', meta: { title: "All Schools" } }, { path: '*', component: __webpack_require__(193), name: '404', meta: { title: 'Error 404' } }];
+module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats',
+	meta: {
+		title: "Home",
+		pageTitle: "Dashboard"
+	} }, { path: '/schools', component: __webpack_require__(203), name: 'schools',
+	meta: {
+		title: "All Schools",
+		pageTitle: "All Schools"
+	} }, { path: '*', component: __webpack_require__(193), name: '404', meta: { title: 'Error 404' } }];
 
 /***/ }),
 /* 155 */
@@ -28971,8 +28992,9 @@ module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__getters__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_login__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lang_en_js__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lang_ar_js__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_misc__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lang_en_js__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lang_ar_js__ = __webpack_require__(161);
 
 
 
@@ -28980,6 +29002,7 @@ module.exports = [{ path: '/', component: __webpack_require__(194), name: 'stats
 
 
 // import module from './modules/module';
+
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
@@ -28992,13 +29015,14 @@ const store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   actions: __WEBPACK_IMPORTED_MODULE_3__actions__,
   getters: __WEBPACK_IMPORTED_MODULE_4__getters__,
   modules: {
-    login: __WEBPACK_IMPORTED_MODULE_5__modules_login__["a" /* default */]
+    login: __WEBPACK_IMPORTED_MODULE_5__modules_login__["a" /* default */],
+    misc: __WEBPACK_IMPORTED_MODULE_6__modules_misc__["a" /* default */]
   }
 });
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuex_i18n___default.a.plugin, store);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('en', __WEBPACK_IMPORTED_MODULE_6__lang_en_js__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('ar', __WEBPACK_IMPORTED_MODULE_7__lang_ar_js__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('en', __WEBPACK_IMPORTED_MODULE_7__lang_en_js__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.add('ar', __WEBPACK_IMPORTED_MODULE_8__lang_ar_js__["a" /* default */]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.i18n.fallback('en');
 
@@ -30147,7 +30171,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "page-content"
-  }, [_c('breadcrumbs'), _vm._v(" "), _c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)])
+  }, [_c('breadcrumbs'), _vm._v(" "), (_vm.loading) ? _c('div', {
+    staticClass: "loading"
+  }, [_vm._v("\n\t\t\t\t      Loading...\n\t\t\t\t    ")]) : _vm._e(), _vm._v(" "), _c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -33939,7 +33965,12 @@ module.exports = Component.exports
 
 /***/ }),
 /* 188 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
 //
@@ -33967,17 +33998,28 @@ module.exports = Component.exports
 //
 //
 //
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+        pageTitle: state => state.misc.pageTitle
+    }))
+});
 
 /***/ }),
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "breadcrumbs"
-  }, [_c('h1', [_vm._v("Blank Page Layout")]), _vm._v(" "), _c('ol', {
+  }, [_c('h1', {
+    domProps: {
+      "textContent": _vm._s(_vm.pageTitle)
+    }
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ol', {
     staticClass: "breadcrumb"
   }, [_c('li', [_c('a', {
     attrs: {
@@ -33989,7 +34031,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Pages")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("System")])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("System")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
     staticClass: "navbar-toggle",
     attrs: {
       "type": "button",
@@ -34006,7 +34050,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "icon-bar"
   }), _vm._v(" "), _c('span', {
     staticClass: "icon-bar"
-  })])])])
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -34179,8 +34223,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 195 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -34249,6 +34295,8 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 196 */
@@ -34310,7 +34358,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon-envelope "
-  }), _vm._v(" Inbox\n                                                "), _c('label', {
+  }), _vm._v(" Inbox\n                                "), _c('label', {
     staticClass: "label label-danger"
   }, [_vm._v("New")])])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
@@ -34330,7 +34378,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon-pin"
-  }), _vm._v(" Events\n                                                "), _c('span', {
+  }), _vm._v(" Events\n                                "), _c('span', {
     staticClass: "badge badge-success"
   }, [_vm._v("2")])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "page-content-col"
@@ -35152,11 +35200,30 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(128);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	created() {
+		this.fetchData();
+	},
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+		isLoading: 'isLoading'
+	}), {
+		fetchData() {
+			this.isLoading(false);
+		},
+		watch: {
+			'$route': 'fetchData'
+		}
+	})
+});
 
 /***/ }),
 /* 203 */
@@ -35399,6 +35466,51 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-4798ae6c", module.exports)
   }
 }
+
+/***/ }),
+/* 209 */,
+/* 210 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mutation_types__);
+
+
+// initial state
+
+const state = {
+  pageTitle: '',
+  loading: true
+
+  // getters
+};const getters = {};
+
+// actions
+const actions = {
+  setPageTitle: ({ commit }, newTitle) => {
+    commit('setPageTitle', newTitle);
+  },
+  isLoading: ({ commit }, status) => {
+    commit('isLoading', status);
+  }
+
+  // mutations
+};const mutations = {
+  setPageTitle: (state, newTitle) => {
+    state.pageTitle = newTitle;
+  },
+  isLoading: (state, status) => {
+    state.loading = status;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  state,
+  getters,
+  actions,
+  mutations
+});
 
 /***/ })
 /******/ ]);

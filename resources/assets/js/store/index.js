@@ -6,6 +6,7 @@ import * as getters from './getters';
 
 // import module from './modules/module';
 import login from './modules/login';
+import misc from './modules/misc';
 
 
 Vue.use(Vuex);
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
   getters,
   modules: {
   	login,
+  	misc
   }
 });
 
