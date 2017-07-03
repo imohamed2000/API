@@ -18,6 +18,9 @@
         </div>
         <!-- END CONTAINER -->
         
+        <script2 src='/layouts/layout5/scripts/layout.min.js' unload="true"></script2>
+		<script2 src='/layouts/global/scripts/quick-sidebar.min.js' unload="true"></script2>
+		<script2 src='/layouts/global/scripts/quick-nav.min.js' unload="true"></script2>
 	</div>
 </template>
 <script>
@@ -58,18 +61,11 @@
 			document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
 			style.pushStyle('/layouts/layout5/css/layout.min.css');
 			style.pushStyle('/layouts/layout5/css/custom.min.css');
-			// Assets.addScript('/layouts/layout5/scripts/layout.min.js');
-			// Assets.addScript('/layouts/global/scripts/quick-sidebar.min.js');
-			// Assets.addScript('/layouts/global/scripts/quick-nav.min.js');
-
 			this.getUserData();
 		},
 		destroyed(){
 			style.popStyle('/layouts/layout5/css/layout.min.css');
 			style.popStyle('/layouts/layout5/css/custom.min.css');
-			// Assets.removeScript('/layouts/layout5/scripts/layout.min.js');
-			// Assets.removeScript('/layouts/global/scripts/quick-sidebar.min.js');
-			// Assets.removeScript('/layouts/global/scripts/quick-nav.min.js');
 		}
 	}
 </script>
