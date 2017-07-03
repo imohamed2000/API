@@ -19,6 +19,9 @@ function loadingState(app){
 	app.$store.commit('isLoading', true);
 }
 
+// Vue script2
+Vue.use(require('vue-script2'));
+
 const app = new Vue({
 	el: '#app',
 	router,
