@@ -87,15 +87,15 @@
                     <!-- END SIDEBAR CONTENT LAYOUT -->
 </template>
 <script>
-	import $Assets from '../helpers/assets.js';
-	let Assets = new $Assets();
+	import $style from '../helpers/style.js';
+	let style = new $style();
 
 	export default{
 		mounted(){
-			Assets.addStyle('/pages/css/error.min.css');
+			style.pushStyle('/pages/css/error.min.css');
 		},
 		destroyed(){
-			Assets.removeClass('/pages/css/error.min.css');
+			style.popStyle('/pages/css/error.min.css');
 		}
 	}
 </script>
