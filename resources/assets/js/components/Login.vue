@@ -53,11 +53,11 @@
 	import axios from 'axios';
 	import Errors from '../helpers/errors';
 	import Cookie from 'js-cookie';
-	import $Assets from '../helpers/assets.js';
+	import $style from '../helpers/style.js';
 	import ladda from 'ladda';
 
 	let moment = require('moment');
-	let Assets = new $Assets();
+	let style = new $style();
 
 	export default{
 		data(){
@@ -97,10 +97,10 @@
 		},
 		mounted: function(){
 			document.getElementsByTagName("body")[0].setAttribute('class', "login");
-			Assets.addStyle('plugins/ladda/ladda-themeless.min.css');
+			style.pushStyle('plugins/ladda/ladda-themeless.min.css');
 		},
 		destroyed(){
-			Assets.removeStyle('plugins/ladda/ladda-themeless.min.css');
+			style.popStyle('plugins/ladda/ladda-themeless.min.css');
 		}
 	}
 </script>
