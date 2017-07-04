@@ -1,0 +1,23 @@
+	div.dataTables_wrapper div.dataTables_filter {
+    	text-align: right;
+	}
+	div.dataTables_wrapper div.dataTables_filter label {
+	    font-weight: normal;
+	    white-space: nowrap;
+	    text-align: left;
+	}
+	div.dataTables_wrapper div.dataTables_filter input {
+	    margin-left: 0.5em;
+	    display: inline-block;
+	    width: auto;
+	}
+
+	div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    margin: 2px 0;
+    white-space: nowrap;
+}
