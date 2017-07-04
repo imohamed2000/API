@@ -15,12 +15,14 @@ Class Response{
 	private $data;
 	private $code;
 	private $response;
+	private $datatables;
 
 	public function __construct(){
 		$this->headers = [];
 		$this->cookies = [];
 		$this->response = collect([]);
 		$this->code = 200;
+		$this->datatables = false;
 	}
 
 	/**
@@ -111,13 +113,21 @@ Class Response{
 	 */
 	
 	public function respond(){
-		// $this->putCode();
-		// $this->putData();
-		return response()->json(
+
+		if($this->datatables)
+		{
+			$response = $this->data;
+		}else
+		{
+			$response = response()->json(
 				$this->data, 
 				$this->code, 
 				$this->headers, 
 				JSON_PRETTY_PRINT)->withHeaders($this->headers);
+		}
+
+		$this->datatables = false;
+		return $response;
 	}	
 
 	/**
@@ -128,6 +138,7 @@ Class Response{
 	public function dataTables($data){
 		$this->code = 200;
 		$this->data = Datatables::of($data)->make(true);
+		$this->datatables= true;
 		return $this;
 	}
 
