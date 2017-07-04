@@ -1,6 +1,6 @@
 <template>
 	<div>	
-		<table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
+		<table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
             <thead>
                 <tr>
                     <th class="all">First name</th>
@@ -1739,14 +1739,38 @@ import $style from "../helpers/style";
 let style = new $style();
 
 export default{
+    data(){
+        return {
+            table: null,
+            tableSelector: null
+        }
+    },
 	mounted(){
-		jQuery('#sample_1').dataTable();
+        // Initialize table
+        this.drawTable();
+        // inset locale stylesheet
 		let locale = this.$i18n.locale() === null ? 'en' : this.$i18n.locale();
 		style.pushStyle('/plugins/datatables/plugins/bootstrap/'+ locale +'.css');
 	},
 	destroyed(){
 
 	},
+    methods:{
+        drawTable: function(){
+            this.tableSelector = this.$el.querySelector('table');
+            this.table = jQuery( this.tableSelector ).DataTable();
+            console.log(this.table)
+            this.rowClickEvent();
+        },
+        rowClickEvent: function(){
+            let table = this.table;
+            let component = this;
+            jQuery(this.tableSelector).on('click', 'tr', function(event) {
+                let data = table.row( this ).data();
+                component.$emit('rowClick', event, data, this);
+            });
+        }
+    },
 }
 </script>
 

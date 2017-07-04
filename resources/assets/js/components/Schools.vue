@@ -1,5 +1,5 @@
 <template>
-	<datatable></datatable>
+	<datatable @rowClick="rowClick"></datatable>
 </template>
 <script>
 import {mapActions} from 'vuex';
@@ -21,6 +21,9 @@ export default{
 		},
 		watch:{
 			'$route': 'fetchData'
+		},
+		rowClick: function(event, data, row){
+			console.log(event, data, row)
 		}
 	},
 }
