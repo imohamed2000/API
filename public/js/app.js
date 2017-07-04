@@ -54546,11 +54546,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				class: 'table table-striped table-bordered table-hover dt-responsive',
 				width: '100%',
 				ajax: {
-					"url": "/api/v1/schools?datatables",
-					"dataSrc": "original.data"
+					"url": "/api/v1/schools?datatables"
 				},
 				columns: [{ "data": "name" }, { "data": "email" }, { "data": "city" }],
-				headers: [{ 'title': 'Name', 'class': 'all' }, { 'title': 'Email', 'class': 'min-phone-l' }, { 'title': 'City', 'class': 'min-tablet' }]
+				headers: [{ 'title': 'Name', 'class': 'all' }, { 'title': 'Email', 'class': 'min-phone-l' }, { 'title': 'City', 'class': 'min-tablet' }],
+				processing: true,
+				serverSide: true
+
 			}
 		};
 	},
@@ -54724,6 +54726,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_style__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -54760,16 +54764,14 @@ let style = new __WEBPACK_IMPORTED_MODULE_1__helpers_style__["a" /* default */](
         // inset locale stylesheet
         let locale = this.$i18n.locale() === null ? 'en' : this.$i18n.locale();
         style.pushStyle('/plugins/datatables/plugins/bootstrap/' + locale + '.css');
+        console.log(this.table);
     },
     destroyed() {},
     methods: {
         drawTable: function () {
             let component = this;
             this.tableSelector = this.$el.querySelector('table');
-            this.table = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this.tableSelector).DataTable({
-                "ajax": this.props.ajax,
-                "columns": this.props.columns
-            });
+            this.table = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this.tableSelector).DataTable(_extends({}, this.props));
             this.rowClickEvent();
         },
         rowClickEvent: function () {

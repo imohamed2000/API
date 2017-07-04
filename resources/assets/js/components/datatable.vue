@@ -34,6 +34,7 @@ export default{
         // inset locale stylesheet
 		let locale = this.$i18n.locale() === null ? 'en' : this.$i18n.locale();
 		style.pushStyle('/plugins/datatables/plugins/bootstrap/'+ locale +'.css');
+        console.log(this.table);
 	},
 	destroyed(){
 
@@ -43,8 +44,7 @@ export default{
             let component = this;
             this.tableSelector = this.$el.querySelector('table');
             this.table = jQuery( this.tableSelector ).DataTable({
-                "ajax":     this.props.ajax,
-                "columns":  this.props.columns
+                ...this.props
             });
             this.rowClickEvent();
         },

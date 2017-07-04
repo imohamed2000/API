@@ -13,7 +13,6 @@ export default{
 				width: '100%',
 				ajax: {
 					"url": "/api/v1/schools?datatables",
-                    "dataSrc": "original.data"
 				},
 				columns: [
 					{"data" : "name"},
@@ -25,6 +24,9 @@ export default{
 					{'title' : 'Email', 'class': 'min-phone-l'},
 					{'title' : 'City', 'class': 'min-tablet'},
 				],
+				processing: true,
+        		serverSide: true,
+
 			}
 		}
 	},
