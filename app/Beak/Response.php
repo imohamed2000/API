@@ -137,7 +137,7 @@ Class Response{
 	 */
 	public function dataTables($data){
 		$this->code = 200;
-		$this->data = Datatables::of($data)->make(true);
+		$this->data = Datatables::of($data)->addIndexColumn()->make(true);
 		$this->datatables= true;
 		return $this;
 	}
