@@ -4,6 +4,7 @@
 <script>
 import {mapActions} from 'vuex';
 import datatable from './datatable';
+import jQuery from 'jquery';
 
 export default{
 	data(){
@@ -15,18 +16,33 @@ export default{
 					"url": "/api/v1/schools?datatables",
 				},
 				columns: [
-					{"data" : "name"},
+					{"data": "DT_Row_Index"},
+					{"data" : "name", "fnCreatedCell": function( nTd, sData, oData, iRow, iCol ){
+						jQuery(nTd).html(`<a href="/schools/${oData.name}">${sData}</a>`);
+					}},
 					{"data" : "email"},
 					{"data" : "city"},
 				],
 				headers: [
+					{'title': 'ID', 'class': 'index'},
 					{'title' : 'Name', 'class': 'all'},
 					{'title' : 'Email', 'class': 'min-phone-l'},
 					{'title' : 'City', 'class': 'min-tablet'},
 				],
 				processing: true,
         		serverSide: true,
-
+        		index: {
+        			withIndex: true,
+        			title: 'ID',
+        			class: 'index'
+        		},
+        		columnDefs: [{
+        			"searchable": false,
+		            "orderable": false,
+		            "targets": 0
+        		}],
+        		order: [[ 1, 'asc' ]],
+        		fixedColumns: true
 			}
 		}
 	},
