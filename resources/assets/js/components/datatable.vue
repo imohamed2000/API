@@ -3,7 +3,7 @@
 		<table :class="props.class" :width="props.width">
             <thead>
                 <tr>
-                    <th :class="header.class" v-for="header in props.headers" v-text="header.title"></th>
+                    <th :class="header.class" v-for="header in computedProps.headers" v-text="header.title"></th>
                 </tr>
             </thead>
            
@@ -28,6 +28,11 @@ export default{
             tableSelector: null,
         }
     },
+    computed:{
+        computedProps: function(){
+            return this.getProps()
+        }
+    },
 	mounted(){
         // Initialize table
         this.drawTable();
@@ -42,12 +47,22 @@ export default{
         drawTable: function(){
             let component = this;
             this.tableSelector = this.$el.querySelector('table');
-            this.table = jQuery( this.tableSelector ).DataTable({
-                ...this.getProps()
-            });
+            this.table = jQuery( this.tableSelector ).DataTable(this.props);
             this.rowClickEvent();
         },
         getProps: function(){
+            // index column props
+            if(typeof(this.props.index) !== 'undefined'){
+                if(this.props.index.present){
+                    // Add index to columns
+                    this.props.columns.unshift({"data": "DT_Row_Index"});
+                    // Add index to headers
+                    this.props.headers.unshift({
+                        "title": this.props.index.title,
+                        "class": this.props.index.class
+                    });
+                }
+            }
             return this.props;
         },
         rowClickEvent: function(){

@@ -16,7 +16,6 @@ export default{
 					"url": "/api/v1/schools?datatables",
 				},
 				columns: [
-					{"data": "DT_Row_Index"},
 					{"data" : "name", "fnCreatedCell": function( nTd, sData, oData, iRow, iCol ){
 						jQuery(nTd).html(`<a href="/schools/${oData.name}">${sData}</a>`);
 					}},
@@ -24,7 +23,6 @@ export default{
 					{"data" : "city"},
 				],
 				headers: [
-					{'title': 'ID', 'class': 'index'},
 					{'title' : 'Name', 'class': 'all'},
 					{'title' : 'Email', 'class': 'min-phone-l'},
 					{'title' : 'City', 'class': 'min-tablet'},
@@ -32,7 +30,7 @@ export default{
 				processing: true,
         		serverSide: true,
         		index: {
-        			withIndex: true,
+        			present: true,
         			title: 'ID',
         			class: 'index'
         		},
@@ -41,8 +39,6 @@ export default{
 		            "orderable": false,
 		            "targets": 0
         		}],
-        		order: [[ 1, 'asc' ]],
-        		fixedColumns: true
 			}
 		}
 	},
