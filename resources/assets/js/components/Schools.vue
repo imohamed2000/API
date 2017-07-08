@@ -17,7 +17,7 @@ export default{
 				},
 				columns: [
 					{"data" : "name", "fnCreatedCell": function( nTd, sData, oData, iRow, iCol ){
-						jQuery(nTd).html(`<a href="/schools/${oData.name}" class="router">${sData}</a>`);
+						jQuery(nTd).html(`<a href="/schools/${oData.name}" class="router-link">${sData}</a>`);
 					}},
 					{"data" : "email"},
 					{"data" : "city"},
@@ -59,7 +59,11 @@ export default{
 			'$route': 'fetchData'
 		},
 		rowClick: function(event, data, row){
-			console.log(event, data, row)
+			// Dynamically created links
+			if(jQuery(event.target).is('.router-link')){
+				event.preventDefault();
+				this.$router.push(event.target.getAttribute('href'));
+			}
 		}
 	},
 }

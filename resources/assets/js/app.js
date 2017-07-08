@@ -23,16 +23,6 @@ function loadingState(app){
 	app.$store.commit('isLoading', true);
 }
 
-/**
- * Manages dynmically created links with vue-router
- */
-function routerLinks(app){
-	jQuery(document).on('click', 'a.router', function(event) {
-		event.preventDefault();
-		app.$router.push(event.target.getAttribute('href'));
-	});
-}
-
 // Vue script2
 Vue.use(require('vue-script2'));
 
@@ -45,7 +35,6 @@ const app = new Vue({
 		let pageTitle = this.$route.meta.pageTitle;
 		setTitle(this, title, pageTitle);
 		loadingState(this);
-		routerLinks(this);
 	}
 });
 
