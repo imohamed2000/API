@@ -52684,19 +52684,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 let router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* createRouter */])();
-
 /**
  * Required component
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(184));
 
+/**
+ * Sets page title [A translated page title]
+ */
 function setTitle(app, documentTitle, pageTitle) {
 	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
 	app.$store.commit("setPageTitle", app.$t(pageTitle));
 }
-
+/**
+ * Changes the loading state
+ */
 function loadingState(app) {
 	app.$store.commit('isLoading', true);
+}
+
+/**
+ * Manages dynmically created links with vue-router
+ */
+function routerLinks(app) {
+	jQuery(document).on('click', 'a.router', function (event) {
+		event.preventDefault();
+		app.$router.push(event.target.getAttribute('href'));
+	});
 }
 
 // Vue script2
@@ -52711,6 +52725,7 @@ const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 		let pageTitle = this.$route.meta.pageTitle;
 		setTitle(this, title, pageTitle);
 		loadingState(this);
+		routerLinks(this);
 	}
 });
 
@@ -54552,7 +54567,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 					"url": "/api/v1/schools?datatables"
 				},
 				columns: [{ "data": "name", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-						__WEBPACK_IMPORTED_MODULE_2_jquery___default()(nTd).html(`<a href="/schools/${oData.name}">${sData}</a>`);
+						__WEBPACK_IMPORTED_MODULE_2_jquery___default()(nTd).html(`<a href="/schools/${oData.name}" class="router">${sData}</a>`);
 					} }, { "data": "email" }, { "data": "city" }],
 				headers: [{ 'title': 'Name', 'class': 'all' }, { 'title': 'Email', 'class': 'min-phone-l' }, { 'title': 'City', 'class': 'min-tablet' }],
 				processing: true,

@@ -4,19 +4,33 @@ import store from './store';
 import supportStorage from './storage';
 
 let router = createRouter();
-
 /**
  * Required component
  */
 Vue.component('app', require('./components/App') );
 
+/**
+ * Sets page title [A translated page title]
+ */
 function setTitle(app, documentTitle, pageTitle){
 	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
 	app.$store.commit("setPageTitle", app.$t( pageTitle) );
 }
-
+/**
+ * Changes the loading state
+ */
 function loadingState(app){
 	app.$store.commit('isLoading', true);
+}
+
+/**
+ * Manages dynmically created links with vue-router
+ */
+function routerLinks(app){
+	jQuery(document).on('click', 'a.router', function(event) {
+		event.preventDefault();
+		app.$router.push(event.target.getAttribute('href'));
+	});
 }
 
 // Vue script2
@@ -31,6 +45,7 @@ const app = new Vue({
 		let pageTitle = this.$route.meta.pageTitle;
 		setTitle(this, title, pageTitle);
 		loadingState(this);
+		routerLinks(this);
 	}
 });
 
@@ -41,3 +56,5 @@ router.beforeEach((to, from, next)=>{
 	loadingState(app);
 	next();
 });
+
+

@@ -17,7 +17,7 @@ export default{
 				},
 				columns: [
 					{"data" : "name", "fnCreatedCell": function( nTd, sData, oData, iRow, iCol ){
-						jQuery(nTd).html(`<a href="/schools/${oData.name}">${sData}</a>`);
+						jQuery(nTd).html(`<a href="/schools/${oData.name}" class="router">${sData}</a>`);
 					}},
 					{"data" : "email"},
 					{"data" : "city"},
