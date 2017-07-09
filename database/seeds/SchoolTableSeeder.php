@@ -21,8 +21,6 @@ class SchoolTableSeeder extends Seeder
 
         $schoolLogo->save();
 
-
-
         DB::table('schools')->insert([
             'name' => str_random(10),
         ]);

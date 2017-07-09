@@ -38,6 +38,8 @@ const app = new Vue({
 	}
 });
 
+window.app = app;
+
 router.beforeEach((to, from, next)=>{
 	let title = to.meta.title;
 	let pageTitle = to.meta.pageTitle;
@@ -45,5 +47,3 @@ router.beforeEach((to, from, next)=>{
 	loadingState(app);
 	next();
 });
-
-
