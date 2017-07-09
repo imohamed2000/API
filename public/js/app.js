@@ -53720,6 +53720,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+let $ = jQuery = __webpack_require__(8);
 let style = new __WEBPACK_IMPORTED_MODULE_2__helpers_style_js__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -53839,7 +53840,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 let $ = jQuery = __webpack_require__(8);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         login: __WEBPACK_IMPORTED_MODULE_0__Login___default.a,
@@ -68590,17 +68590,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n\t\t\t\t      Loading...\n\t\t\t\t    ")]) : _vm._e(), _vm._v(" "), _c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1), _vm._v(" "), _c('script2', {
     attrs: {
       "src": "/layouts/layout5/scripts/layout.min.js",
-      "unload": "true"
+      "unload": "jQuery"
     }
   }), _vm._v(" "), _c('script2', {
     attrs: {
       "src": "/layouts/global/scripts/quick-sidebar.min.js",
-      "unload": "true"
+      "unload": "jQuery"
     }
   }), _vm._v(" "), _c('script2', {
     attrs: {
       "src": "/layouts/global/scripts/quick-nav.min.js",
-      "unload": "true"
+      "unload": "jQuery"
     }
   })], 1)
 },staticRenderFns: []}
@@ -68969,7 +68969,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('login'), _vm._v(" "), _c('reset-password')], 1), _vm._v(" "), _vm._m(1)])]), _vm._v(" "), _c('script2', {
     attrs: {
       "src": "/pages/scripts/login-5.js",
-      "unload": "jQuery.noConflict(true)"
+      "unload": "jQuery"
     }
   })], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

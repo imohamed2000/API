@@ -18,9 +18,9 @@
         </div>
         <!-- END CONTAINER -->
         
-        <script2 src='/layouts/layout5/scripts/layout.min.js' unload="true"></script2>
-		<script2 src='/layouts/global/scripts/quick-sidebar.min.js' unload="true"></script2>
-		<script2 src='/layouts/global/scripts/quick-nav.min.js' unload="true"></script2>
+        <script2 src='/layouts/layout5/scripts/layout.min.js' unload="jQuery"></script2>
+		<script2 src='/layouts/global/scripts/quick-sidebar.min.js' unload="jQuery"></script2>
+		<script2 src='/layouts/global/scripts/quick-nav.min.js' unload="jQuery"></script2>
 	</div>
 </template>
 <script>
@@ -34,7 +34,7 @@
     import Breadcrumbs from './Breadcrumbs';
     import Footer from './Footer';
 
-
+    let $ = jQuery = require('jquery');
 	let style = new $style();
 
 	export default{

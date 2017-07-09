@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <script2 src="/pages/scripts/login-5.js" unload="jQuery.noConflict(true)"></script2>
+        <script2 src="/pages/scripts/login-5.js" unload="jQuery"></script2>
     </div>
 </template>
 <script>
@@ -55,7 +55,6 @@
     import ResetPassword from './ResetPassword';
     import jsBackstretch from '../scripts/backstretch';
     let $ = jQuery = require('jquery');
-    
 	export default{
 		components:{
             login: Login,
