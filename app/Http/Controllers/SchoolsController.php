@@ -64,6 +64,7 @@ class SchoolsController extends Controller
     {
          $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
+                'slug'              => 'required|max:255',
                 'email'             => 'email',
                 'address'           => 'max:255',
                 'city'              => 'max:255',
@@ -84,6 +85,7 @@ class SchoolsController extends Controller
 
         $school = new School();
         $school->name = $request->name;
+        $school->slug = str_slug($request->slug);
         $school->email = $request->email;
         $school->address = $request->address;
         $school->city = $request->city;
@@ -133,6 +135,7 @@ class SchoolsController extends Controller
 
         $validate = $this->validate(request()->all(),[
             'name'              => 'required|max:255',
+            'slug'              => 'required|max:255',
             'email'             => 'email',
             'address'           => 'max:255',
             'city'              => 'max:255',
@@ -153,6 +156,7 @@ class SchoolsController extends Controller
 
         $school->update([
             'name'              => $request->name,
+            'slug'              => str_slug($request->slug),
             'email'             => $request->email,
             'address'           => $request->address,
             'city'              => $request->city,
