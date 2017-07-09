@@ -1,31 +1,81 @@
 <template>
-	<datatable @rowClick="rowClick" :props="props"></datatable>
+	<div>
+		<portlet :props="portlet">
+			<div slot="tools">
+				<button type="button" class="btn green" v-html="btns.create" @click.prevent="showCreateModal"></button>
+				<button type="button" class="btn blue" @click.prevent="showImportModal" v-html="btns.import"></button>
+			</div>
+			<datatable slot="body" @rowClick="rowClick" :props="table"></datatable>
+		</portlet>
+	</div>
 </template>
 <script>
 import {mapActions} from 'vuex';
 import datatable from './datatable';
+import portlet from './portlet';
 import jQuery from 'jquery';
+import HTTP from './../helpers/http';
 
 export default{
 	data(){
 		return{
-			props: {
+			table: {
 				class: 'table table-striped table-bordered table-hover dt-responsive',
 				width: '100%',
 				ajax: {
 					"url": "/api/v1/schools?datatables",
 				},
 				columns: [
-					{"data" : "name", "fnCreatedCell": function( nTd, sData, oData, iRow, iCol ){
-						jQuery(nTd).html(`<a href="/schools/${oData.name}">${sData}</a>`);
+					{"data": "name", "fnCreatedCell": ( nTd, sData, oData, iRow, iCol )=>{
+						jQuery(nTd).html(`<a href="/schools/${oData.id}" class="router-link">${sData}</a>`);
 					}},
 					{"data" : "email"},
 					{"data" : "city"},
+					{"data": null, "fnCreatedCell": ( nTd, sData, oData, iRow, iCol )=>{
+						let viewBtn = `
+										<li>
+											<a class="router-link" href="/schools/${oData.id}">
+	                                        <i class="icon-eye"></i>
+	                                        ${window.app.$t('View')}
+	                                        </a>
+										</li>
+									`;
+						let editBtn = `
+										<li>
+											<a class="router-link" href="/schools/${oData.id}/edit">
+	                                        <i class="icon-note"></i>
+	                                        ${window.app.$t('Edit')}
+	                                        </a>
+										</li>
+									`;
+						let deleteBtn = `
+										<li>
+											<a class="font-red delete-element">
+	                                        <i class="font-red icon-trash"></i>
+	                                        ${window.app.$t('Delete')}
+	                                        </a>
+										</li>
+										`;
+						let tools = `
+									<div class="btn-group">
+		                                <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">
+		                                	${window.app.$t('Tools')}
+		                                    <i class="fa fa-angle-down"></i>
+		                                </button>
+		                                <ul class="dropdown-menu pull-right">
+		                                	${viewBtn}
+		                                    ${editBtn}
+		                                    ${deleteBtn}
+		                                </ul>
+		                            </div>`;
+						jQuery(nTd).html(tools);
+					}}
 				],
 				headers: [
-					{'title' : 'Name', 'class': 'all'},
-					{'title' : 'Email', 'class': 'min-phone-l'},
-					{'title' : 'City', 'class': 'min-tablet'},
+					{'title' : 'Name', 'class': ''},
+					{'title' : 'Email', 'class': ''},
+					{'title' : 'City', 'class': ''},
+					{'title' : 'Actions', 'class': ''}
 				],
 				processing: true,
         		serverSide: true,
@@ -39,11 +89,22 @@ export default{
 		            "orderable": false,
 		            "targets": 0
         		}],
+        		lengthMenu: [25, 50, 75, 100 ]
+			},
+			portlet: {
+				class: 'portlet light bordered',
+				title: this.$t('All Schools'),
+				icon: 'icon-graduation'
+			},
+			btns:{
+				create: '<i class="icon-plus"></i>' + ' ' + this.$t('Create'),
+				import: '<i class="icon-cloud-upload"></i>' + ' ' + this.$t('Import'),
 			}
 		}
 	},
 	components:{
-		datatable: datatable
+		datatable: datatable,
+		portlet: portlet
 	},
 	created(){
 		this.fetchData();
@@ -59,7 +120,24 @@ export default{
 			'$route': 'fetchData'
 		},
 		rowClick: function(event, data, row){
-			console.log(event, data, row)
+			// Dynamically created links
+			if(jQuery(event.target).is('.router-link')){
+				event.preventDefault();
+				this.$router.push(event.target.getAttribute('href'));
+			}
+			// Delete Element event
+			if(jQuery(event.target).is('.delete-element')){
+				this.deleteElement(event, data, row);
+			}
+		},
+		showCreateModal: function(){
+
+		},
+		showImportModal: function(){
+
+		},
+		deleteElement: function(event, data, row){
+			
 		}
 	},
 }

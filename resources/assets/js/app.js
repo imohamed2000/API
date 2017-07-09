@@ -4,17 +4,21 @@ import store from './store';
 import supportStorage from './storage';
 
 let router = createRouter();
-
 /**
  * Required component
  */
 Vue.component('app', require('./components/App') );
 
+/**
+ * Sets page title [A translated page title]
+ */
 function setTitle(app, documentTitle, pageTitle){
 	document.title = app.$t("Odigita LMS ") + " | " + app.$t(documentTitle);
 	app.$store.commit("setPageTitle", app.$t( pageTitle) );
 }
-
+/**
+ * Changes the loading state
+ */
 function loadingState(app){
 	app.$store.commit('isLoading', true);
 }
@@ -33,6 +37,8 @@ const app = new Vue({
 		loadingState(this);
 	}
 });
+
+window.app = app;
 
 router.beforeEach((to, from, next)=>{
 	let title = to.meta.title;

@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class SchoolsController extends Controller
 {
-    private $list = ['name','email','city'];
+    private $list = ['id','name','email','city'];
 
+    public function __construct(Request $request){
+        parent::__construct();
+        $this->middleware('jwt_auth');
+    }
     /**
      * Display a listing of the resource.
      *
