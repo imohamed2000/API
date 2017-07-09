@@ -53782,8 +53782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ResetPassword__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ResetPassword___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ResetPassword__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scripts_backstretch__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scripts_login__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_assets_js__ = __webpack_require__(165);
+//
 //
 //
 //
@@ -53839,22 +53838,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-
-
-let Assets = new __WEBPACK_IMPORTED_MODULE_4__helpers_assets_js__["a" /* default */]();
+let $ = jQuery = __webpack_require__(8);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         login: __WEBPACK_IMPORTED_MODULE_0__Login___default.a,
         'reset-password': __WEBPACK_IMPORTED_MODULE_1__ResetPassword___default.a
     },
-    mounted: function () {
-        Assets.addScript("/pages/scripts/login-5.js");
-    },
-    destroyed() {
-        Assets.removeScript("/pages/scripts/login-5.js");
-    }
+    mounted: function () {},
+    destroyed() {}
 });
 
 /***/ }),
@@ -54560,7 +54552,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-__webpack_require__(236);
+// require('../helpers/bootbox');
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data() {
@@ -54953,62 +54945,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 165 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = (class {
-
-	/**
-  * Appends a style sheet file to head dynamilcally
-  * @param {string} fileName
-  */
-	addStyle(fileName) {
-		var head = document.head,
-		    link = document.createElement('link');
-
-		link.type = 'text/css';
-		link.rel = 'stylesheet';
-		link.href = fileName;
-		head.appendChild(link);
-	}
-
-	/**
-  * Removes style sheet from head
-  * @param  {string} fileName [description]
-  */
-	removeStyle(fileName) {
-		var style = document.querySelector('link[href="' + fileName + '"]');
-		var head = document.head;
-		head.removeChild(style);
-	}
-
-	/**
-  * [addScript description]
-  * @param {[type]} fileName [description]
-  */
-	addScript(fileName) {
-		var head = document.getElementById('_appendScript'),
-		    script = document.createElement('script');
-
-		script.type = 'text/javascript';
-		script.src = fileName;
-		head.appendChild(script);
-	}
-
-	/**
-  * [removeScript description]
-  * @param  {[type]} fileName [description]
-  * @return {[type]}          [description]
-  */
-	removeScript(fileName) {
-		var head = document.getElementById('_appendScript');
-		var script = document.querySelector('script[src="' + fileName + '"]');
-		head.removeChild(script);
-	}
-});
-
-/***/ }),
+/* 165 */,
 /* 166 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55505,58 +55442,7 @@ module.exports = [{ path: '/', component: __webpack_require__(197), name: 'stats
 });
 
 /***/ }),
-/* 171 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (function () {
-    var Login = function () {
-
-        var handleLogin = function () {
-            $('.forget-form input').keypress(function (e) {
-                if (e.which == 13) {
-                    if ($('.forget-form').validate().form()) {
-                        $('.forget-form').submit();
-                    }
-                    return false;
-                }
-            });
-
-            $('#forget-password').click(function () {
-                $('.login-form').hide();
-                $('.forget-form').show();
-            });
-
-            $('#back-btn').click(function () {
-                $('.login-form').show();
-                $('.forget-form').hide();
-            });
-        };
-
-        return {
-            //main function to initiate the module
-            init: function () {
-
-                handleLogin();
-
-                // init background slide images
-                $('.login-bg').backstretch(["pages/img/login/bg1.jpg", "pages/img/login/bg2.jpg", "pages/img/login/bg3.jpg"], {
-                    fade: 1000,
-                    duration: 8000
-                });
-
-                $('.forget-form').hide();
-            }
-
-        };
-    }();
-
-    jQuery(document).ready(function () {
-        Login.init();
-    });
-});
-
-/***/ }),
+/* 171 */,
 /* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69080,7 +68966,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.$t("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"))
     }
-  }), _vm._v(" "), _c('login'), _vm._v(" "), _c('reset-password')], 1), _vm._v(" "), _vm._m(1)])])])
+  }), _vm._v(" "), _c('login'), _vm._v(" "), _c('reset-password')], 1), _vm._v(" "), _vm._m(1)])]), _vm._v(" "), _c('script2', {
+    attrs: {
+      "src": "/pages/scripts/login-5.js",
+      "unload": "jQuery.noConflict(true)"
+    }
+  })], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-md-6 bs-reset mt-login-5-bsfix"
@@ -72293,34 +72184,6 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(132);
 
-
-/***/ }),
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */
-/***/ (function(module, exports) {
-
-// Adding arabic locale
-bootbox.addLocale('ar', {
-  OK: 'موافق',
-  CANCEL: 'إلغاء',
-  CONFIRM: 'استمرار'
-});
-
-// Set Defaults
-bootbox.setDefaults({});
 
 /***/ })
 /******/ ]);

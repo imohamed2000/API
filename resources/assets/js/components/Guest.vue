@@ -12,8 +12,8 @@
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`)"></p>
 
                     <!-- Components start  -->
-                    <login />
-                    <reset-password />
+                    <login></login>
+                    <reset-password></reset-password>
                     <!-- Components end  -->
 
                 </div>
@@ -47,27 +47,25 @@
                 </div>
             </div>
         </div>
+        <script2 src="/pages/scripts/login-5.js" unload="jQuery.noConflict(true)"></script2>
     </div>
 </template>
 <script>
     import Login from './Login';
     import ResetPassword from './ResetPassword';
     import jsBackstretch from '../scripts/backstretch';
-    import jsLogin from '../scripts/login';
-    import $Assets from '../helpers/assets.js';
-
-    let Assets = new $Assets();
-
+    let $ = jQuery = require('jquery');
+    
 	export default{
 		components:{
             login: Login,
             'reset-password': ResetPassword
         },
         mounted: function(){
-           Assets.addScript("/pages/scripts/login-5.js");
+          
         },
         destroyed(){
-            Assets.removeScript("/pages/scripts/login-5.js");
+            
         }
 	}
 </script>

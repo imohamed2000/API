@@ -15,7 +15,7 @@ import datatable from './datatable';
 import portlet from './portlet';
 import jQuery from 'jquery';
 import axios from './../helpers/http';
-require('../helpers/bootbox');
+// require('../helpers/bootbox');
 
 export default{
 	data(){
