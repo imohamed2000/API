@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SchoolsController extends Controller
 {
-    private $list = ['id','name','email','city'];
+    private $list = ['id','name','email','city', 'slug'];
 
     public function __construct(Request $request){
         parent::__construct();

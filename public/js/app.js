@@ -54560,6 +54560,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+__webpack_require__(236);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data() {
@@ -54571,11 +54572,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 					"url": "/api/v1/schools?datatables"
 				},
 				columns: [{ "data": "name", "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
-						__WEBPACK_IMPORTED_MODULE_3_jquery___default()(nTd).html(`<a href="/schools/${oData.id}" class="router-link">${sData}</a>`);
+						__WEBPACK_IMPORTED_MODULE_3_jquery___default()(nTd).html(`<a href="/schools/${oData.slug}" class="router-link">${sData}</a>`);
 					} }, { "data": "email" }, { "data": "city" }, { "data": null, "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
 						let viewBtn = `
 										<li>
-											<a class="router-link" href="/schools/${oData.id}">
+											<a class="router-link" href="/schools/${oData.slug}">
 	                                        <i class="icon-eye"></i>
 	                                        ${window.app.$t('View')}
 	                                        </a>
@@ -54583,7 +54584,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 									`;
 						let editBtn = `
 										<li>
-											<a class="router-link" href="/schools/${oData.id}/edit">
+											<a class="router-link" href="/schools/${oData.slug}/edit">
 	                                        <i class="icon-note"></i>
 	                                        ${window.app.$t('Edit')}
 	                                        </a>
@@ -54622,7 +54623,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				columnDefs: [{
 					"searchable": false,
 					"orderable": false,
-					"targets": 0
+					"targets": [0, 4]
 				}],
 				lengthMenu: [25, 50, 75, 100]
 			},
@@ -54666,7 +54667,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		},
 		showCreateModal: function () {},
 		showImportModal: function () {},
-		deleteElement: function (event, data, row) {}
+		deleteElement: function (event, data, row) {
+			let app = this;
+			bootbox.confirm({
+				title: app.$t('Move this school to trash?'),
+				message: app.$t('Do you watn to move this school to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: result => {
+					if (result) {
+						__WEBPACK_IMPORTED_MODULE_4__helpers_http__["a" /* default */].delete('/api/v1/schools/' + data.id).then(response => {
+							__WEBPACK_IMPORTED_MODULE_3_jquery___default()(row).fadeOut('slow');
+							bootbox.alert({
+								message: app.$t('Moved to trash!'),
+								title: app.$t('Moved to trash!'),
+								size: 'small'
+							});
+						});
+					}
+				}
+			});
+		}
 	})
 });
 
@@ -55059,8 +55084,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 const HTTP = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create();
-HTTP.interceptors.response.use(response => {}, error => {});
-/* unused harmony default export */ var _unused_webpack_default_export = (HTTP);
+HTTP.interceptors.response.use(response => {
+	return response;
+}, error => {
+	//TODO Handle errors of token, notFound, notAuthorized and etc ...
+	return error;
+});
+/* harmony default export */ __webpack_exports__["a"] = (HTTP);
 
 /***/ }),
 /* 168 */
@@ -72263,6 +72293,34 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(132);
 
+
+/***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
+/***/ (function(module, exports) {
+
+// Adding arabic locale
+bootbox.addLocale('ar', {
+  OK: 'موافق',
+  CANCEL: 'إلغاء',
+  CONFIRM: 'استمرار'
+});
+
+// Set Defaults
+bootbox.setDefaults({});
 
 /***/ })
 /******/ ]);
