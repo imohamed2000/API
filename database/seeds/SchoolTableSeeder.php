@@ -23,10 +23,12 @@ class SchoolTableSeeder extends Seeder
 
         DB::table('schools')->insert([
             'name' => str_random(10),
+            'slug' => 'schoolA',
         ]);
 
         DB::table('schools')->insert([
             'name' => str_random(10),
+            'slug' => 'schoolB',
         ]);
     }
 }
