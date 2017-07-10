@@ -11,6 +11,7 @@
 	import { mapState, mapActions } from 'vuex';
 	import Cookie from 'js-cookie';
 
+	require('bootstrap');
 	export default {
 		computed:{
 			...mapState({

@@ -5,7 +5,7 @@
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> -->
         <script src="/plugins/js.cookie.min.js" type="text/javascript"></script>
         <script src="/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="/plugins/jquery.blockui.min.js" type="text/javascript"></script>
