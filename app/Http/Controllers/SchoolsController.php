@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\School;
 use App\Beak\Upload;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class SchoolsController extends Controller
 {
-    private $list = ['id','name','email','city', 'slug'];
+
+    private $list = ['id','name','slug','email','city'];
 
     public function __construct(Request $request){
         parent::__construct();
@@ -64,7 +66,7 @@ class SchoolsController extends Controller
     {
          $is_valid = $this->validate(request()->all(),[
                 'name'              => 'required|max:255',
-                'slug'              => 'required|max:255',
+                'slug'              => 'required|max:255|unique:schools,slug',
                 'email'             => 'email',
                 'address'           => 'max:255',
                 'city'              => 'max:255',
@@ -135,7 +137,11 @@ class SchoolsController extends Controller
 
         $validate = $this->validate(request()->all(),[
             'name'              => 'required|max:255',
-            'slug'              => 'required|max:255',
+            'slug' => [
+                'required',
+                Rule::unique('schools')->ignore($school->id),
+                'max:255'
+            ],
             'email'             => 'email',
             'address'           => 'max:255',
             'city'              => 'max:255',
@@ -143,9 +149,9 @@ class SchoolsController extends Controller
             'logo'              => 'image'
         ]);
 
-        if($validate)
+        if(!$validate)
         {
-            return $this->response->badRequest($validate->errors()->all())->respond();
+            return $this->response->badRequest($this->errors)->respond();
         }
         $logo_id = $school->logo_id;
         if($request->hasFile('logo'))
@@ -176,16 +182,8 @@ class SchoolsController extends Controller
     public function destroy($id)
     {
         $school = School::findOrFail($id);
-        if($school)
-        {
-            $school->delete();
-
-            return $this->response->ok(['Deleted'])->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        $school->delete();
+        return $this->response->ok(['Deleted'])->respond();
 
     }
 }
