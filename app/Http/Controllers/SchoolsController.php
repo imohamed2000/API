@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 
 class SchoolsController extends Controller
 {
+
     private $list = ['id','name','slug','email','city'];
 
     public function __construct(Request $request){

@@ -14,7 +14,8 @@ import {mapActions} from 'vuex';
 import datatable from './datatable';
 import portlet from './portlet';
 import jQuery from 'jquery';
-import HTTP from './../helpers/http';
+import axios from './../helpers/http';
+require('../helpers/bootbox');
 
 export default{
 	data(){
@@ -27,14 +28,14 @@ export default{
 				},
 				columns: [
 					{"data": "name", "fnCreatedCell": ( nTd, sData, oData, iRow, iCol )=>{
-						jQuery(nTd).html(`<a href="/schools/${oData.id}" class="router-link">${sData}</a>`);
+						jQuery(nTd).html(`<a href="/schools/${oData.slug}" class="router-link">${sData}</a>`);
 					}},
 					{"data" : "email"},
 					{"data" : "city"},
 					{"data": null, "fnCreatedCell": ( nTd, sData, oData, iRow, iCol )=>{
 						let viewBtn = `
 										<li>
-											<a class="router-link" href="/schools/${oData.id}">
+											<a class="router-link" href="/schools/${oData.slug}">
 	                                        <i class="icon-eye"></i>
 	                                        ${window.app.$t('View')}
 	                                        </a>
@@ -42,7 +43,7 @@ export default{
 									`;
 						let editBtn = `
 										<li>
-											<a class="router-link" href="/schools/${oData.id}/edit">
+											<a class="router-link" href="/schools/${oData.slug}/edit">
 	                                        <i class="icon-note"></i>
 	                                        ${window.app.$t('Edit')}
 	                                        </a>
@@ -87,7 +88,7 @@ export default{
         		columnDefs: [{
         			"searchable": false,
 		            "orderable": false,
-		            "targets": 0
+		            "targets": [0,4]
         		}],
         		lengthMenu: [25, 50, 75, 100 ]
 			},
@@ -137,7 +138,30 @@ export default{
 
 		},
 		deleteElement: function(event, data, row){
-			
+			let app = this;
+			bootbox.confirm({
+				title: app.$t('Move this school to trash?'),
+				message: app.$t('Do you watn to move this school to trash?'),
+				buttons:{
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: (result)=>{
+					if(result){
+						axios.delete('/api/v1/schools/' + data.id)
+						.then( (response)=>{
+							jQuery(row).fadeOut('slow');
+							bootbox.alert({
+								message: app.$t('Moved to trash!'),
+								title: app.$t('Moved to trash!'),
+								size: 'small'
+							});
+						} );
+					}
+				}
+			});
 		}
 	},
 }
