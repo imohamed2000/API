@@ -54552,7 +54552,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-// require('../helpers/bootbox');
+__webpack_require__(236);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data() {
@@ -72184,6 +72184,34 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(132);
 
+
+/***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
+/***/ (function(module, exports) {
+
+// Adding arabic locale
+bootbox.addLocale('ar', {
+  OK: 'موافق',
+  CANCEL: 'إلغاء',
+  CONFIRM: 'استمرار'
+});
+
+// Set Defaults
+bootbox.setDefaults({});
 
 /***/ })
 /******/ ]);
