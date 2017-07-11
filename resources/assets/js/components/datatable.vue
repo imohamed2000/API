@@ -1,6 +1,6 @@
 <template>
 	<div>	
-		<table :class="props.class" :width="props.width">
+		<table :class="props.class" :width="props.width" @refresh="refresh">
             <thead>
                 <tr>
                     <th :class="header.class" v-for="header in computedProps.headers" v-text="header.title"></th>
@@ -72,6 +72,10 @@ export default{
                 let data = table.row( this ).data();
                 component.$emit('rowClick', event, data, this);
             });
+        },
+        refresh: function(){
+            console.log("REFRESH")
+            this.table.ajax.reload()
         }
     },
 }
