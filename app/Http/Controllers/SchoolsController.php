@@ -23,7 +23,7 @@ class SchoolsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $data = School::select($this->list)->latest();
         // datatables request
         if( $request->exists('datatables') )
