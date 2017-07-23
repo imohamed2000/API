@@ -10,7 +10,11 @@
 	import Dashboard from './Dashboard';
 	import { mapState, mapActions } from 'vuex';
 	import Cookie from 'js-cookie';
+	import $style from '../helpers/style.js';
+	
+	let style = new $style();
 
+	require('bootstrap');
 	export default {
 		computed:{
 			...mapState({
@@ -25,6 +29,7 @@
 			})
 		},
 		mounted(){
+			style.pushStyle('plugins/ladda/ladda-themeless.min.css');
 			axios.interceptors.response.use(function (response) {
 			    // Do something with response data
 			    return response;
@@ -41,5 +46,8 @@
 			'guest': Guest,
 			'dashboard': Dashboard
 		},
+		destroyed(){
+			style.popStyle('plugins/ladda/ladda-themeless.min.css');
+		}
 	}
 </script>

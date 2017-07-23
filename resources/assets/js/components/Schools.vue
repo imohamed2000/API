@@ -1,21 +1,93 @@
 <template>
 	<div>
+		<modal :props="modal">
+			<h4 class="modal-title" slot="modal-title" v-text="modal.title"></slot></h4>
+			<div slot="modal-content">
+				<form @submit.prevent="createFromSubmit" @keydown="createForm.errors.clear($event.target.name)">
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="row">
+								<!-- Fields sections start -->
+								<div class="col-md-9">
+									<div :class="{'form-group': !createForm.errors.has('name'), 'form-group has-error': createForm.errors.has('name')}">
+										<label for="name" v-text="createForm.labels.name"></label>
+										<input type="text" name="name" class="form-control" id="name" :placeholder="createForm.labels.name" v-model="createForm.data.name">
+										<p class="help-block" v-show="createForm.errors.has('name')" v-text="createForm.errors.get('name')"></p>
+									</div>
+
+									<div :class="{'form-group': !createForm.errors.has('address'), 'form-group has-error': createForm.errors.has('address')}">
+										<label for="address" v-text="createForm.labels.address"></label>
+										<textarea v-model="createForm.data.address" name="address" id="address" class="form-control" :placeholder="createForm.labels.address"></textarea>
+										<p class="help-block" v-show="createForm.errors.has('address')" v-text="createForm.errors.get('address')"></p>
+									</div>
+								</div>
+								<!-- Logo section start -->
+								<div class="col-md-3"></div>
+							</div>
+
+							<div class="row">
+								<!-- First Section -->
+								<div class="col-md-6">
+									<div :class="{'form-group': !createForm.errors.has('slug'), 'form-group has-error': createForm.errors.has('slug')}">
+										<label for="slug" v-text="createForm.labels.slug"></label>
+										<input v-model="createForm.data.slug" type="text" name="slug" id="slug" class="form-control" :placeholder="createForm.labels.slug">
+										<p class="help-block" v-show="createForm.errors.has('slug')" v-text="createForm.errors.get('slug')"></p>
+									</div>
+
+									<div :class="{'form-group': !createForm.errors.has('city'), 'form-group has-error': createForm.errors.has('city')}">
+										<label for="city" v-text="createForm.labels.city"></label>
+										<input v-model="createForm.data.city" type="text" name="city" id="city" class="form-control" :placeholder="createForm.labels.city">
+										<p class="help-block" v-show="createForm.errors.has('city')" v-text="createForm.errors.get('city')"></p>
+									</div>
+
+								</div>
+								<!-- Second Section -->
+								<div class="col-md-6">
+									<div :class="{'form-group': !createForm.errors.has('email'), 'form-group has-error': createForm.errors.has('email')}">
+										<label for="email" v-text="createForm.labels.email"></label>
+										<input v-model="createForm.data.email" type="email" name="email" id="email" class="form-control" :placeholder="createForm.labels.email">
+										<p class="help-block" v-show="createForm.errors.has('email')" v-text="createForm.errors.get('email')"></p>
+									</div>
+
+									<div :class="{'form-group': !createForm.errors.has('zip'), 'form-group has-error': createForm.errors.has('zip')}">
+										<label for="zip" v-text="createForm.labels.zip"></label>
+										<input v-model="createForm.data.zip" type="text" name="zip" id="zip" class="form-control" :placeholder="createForm.labels.zip">
+										<p class="help-block" v-show="createForm.errors.has('zip')" v-text="createForm.errors.get('zip')"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" @click="modal.show = false" v-text="createForm.btns.close"></button>
+						<button id="create-form-submit-btn" type="submit" class="btn green mt-ladda-btn ladda-button" data-style="zoom-in" :disabled="createForm.errors.any()" @click.prevent="createFromSubmit" v-text="createForm.btns.submit"></button>
+					</div>
+				</form>
+			</div>
+		</modal>
 		<portlet :props="portlet">
 			<div slot="tools">
 				<button type="button" class="btn green" v-html="btns.create" @click.prevent="showCreateModal"></button>
 				<button type="button" class="btn blue" @click.prevent="showImportModal" v-html="btns.import"></button>
 			</div>
-			<datatable slot="body" @rowClick="rowClick" :props="table"></datatable>
+			<datatable slot="body" @rowClick="rowClick" :props="table" ref="datatable"></datatable>
 		</portlet>
 	</div>
 </template>
 <script>
 import {mapActions} from 'vuex';
+import jQuery from 'jquery';
+import axios from '../helpers/http';
+import Errors from '../helpers/errors';
+import ladda from 'ladda';
+
+require('bootstrap');
+require('../helpers/bootbox');
+
+// Required Components
 import datatable from './datatable';
 import portlet from './portlet';
-import jQuery from 'jquery';
-import axios from './../helpers/http';
-require('../helpers/bootbox');
+import modal from './Modal'
 
 export default{
 	data(){
@@ -97,15 +169,48 @@ export default{
 				title: this.$t('All Schools'),
 				icon: 'icon-graduation'
 			},
+			modal:{
+				id: 'school-create-modal',
+				show: false,
+				title: this.$t('Add new school'),
+				size: 'large'
+			},
 			btns:{
 				create: '<i class="icon-plus"></i>' + ' ' + this.$t('Create'),
 				import: '<i class="icon-cloud-upload"></i>' + ' ' + this.$t('Import'),
+			},
+			createForm: {
+				errors: new Errors(),
+				data:{
+					name: null,
+					slug: null,
+					email: null,
+					address: null,
+					city: null,
+					zip: null,
+					logo: null,
+				},
+				labels:{
+					name: this.$t('School Name'),
+					slug: this.$t('Slug or sub-domain'),
+					email: this.$t('Email'),
+					address: this.$t('Address'),
+					city: this.$t('City'),
+					zip: this.$t('ZIP'),
+					logo: this.$t('Logo'),
+				},
+				btns: {
+					close: this.$t('Close'),
+					submit: this.$t('Submit'),
+					animation: null,
+				}
 			}
 		}
 	},
 	components:{
 		datatable: datatable,
-		portlet: portlet
+		portlet: portlet,
+		modal: modal
 	},
 	created(){
 		this.fetchData();
@@ -132,10 +237,7 @@ export default{
 			}
 		},
 		showCreateModal: function(){
-
-		},
-		showImportModal: function(){
-
+			this.modal.show = true;
 		},
 		deleteElement: function(event, data, row){
 			let app = this;
@@ -156,12 +258,67 @@ export default{
 							bootbox.alert({
 								message: app.$t('Moved to trash!'),
 								title: app.$t('Moved to trash!'),
-								size: 'small'
+								size: 'small',
+								buttons: {
+									ok: {
+										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
+										className: 'green'
+									}
+								}
 							});
 						} );
 					}
 				}
 			});
+		},
+		createFromSubmit: function(event){
+			// Start sumbmit button animation
+			this.submitAnimation = ladda.create( document.querySelector('#create-form-submit-btn') );
+			this.submitAnimation.start();
+
+			// remove empty data
+			let dataToSubmit = Object.keys(this.createForm.data).reduce(( obj, key )=>{
+				if(this.createForm.data[key] != null ){
+					obj[key] = this.createForm.data[key];
+				}	
+				return obj;
+			}, {});
+
+			axios.post('/api/v1/schools', dataToSubmit)
+					.then( (response)=>{
+						// Refresh the table
+						this.$refs.datatable.refresh();
+						// Reset form
+						this.createFormReset();
+						// Success Alert
+						bootbox.alert({
+								message: app.$t('A new school was added!'),
+								title: app.$t('Success!'),
+								size: 'small',
+								buttons: {
+									ok: {
+										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
+										className: 'green'
+									}
+								}
+						});
+						this.submitAnimation.stop();
+					} )
+						.catch( (err)=>{
+							this.createForm.errors.record( err.response.data );
+							this.submitAnimation.stop();
+						} );
+		},
+		createFormReset: function(){
+			this.createForm.data = {
+				name: null,
+				slug: null,
+				email: null,
+				address: null,
+				city: null,
+				zip: null,
+				logo: null,
+			};
 		}
 	},
 }
