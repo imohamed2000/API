@@ -26,7 +26,7 @@ class Controller extends BaseController
             $this->errors = $validator->errors();
             return false;
         }
-
+        
         return true;
     }
 }
