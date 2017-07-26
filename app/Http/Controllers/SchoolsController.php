@@ -12,6 +12,7 @@ class SchoolsController extends Controller
 {
 
     private $list = ['id','name','slug','email','city'];
+    private $logo = 3;
 
     public function __construct(Request $request){
         parent::__construct();
@@ -63,10 +64,15 @@ class SchoolsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-         $is_valid = $this->validate(request()->all(),[
+    {   
+        if($request->has('slug'))
+            $request->merge([
+                    'slug'  => str_slug( $request->input('slug') )
+                ]);
+
+        $is_valid = $this->validate($request->all(),[
                 'name'              => 'required|max:255',
-                'slug'              => 'required|max:255|unique:schools,slug',
+                'slug'              => 'required|max:20|unique:schools',
                 'email'             => 'email',
                 'address'           => 'max:255',
                 'city'              => 'max:255',
@@ -75,14 +81,15 @@ class SchoolsController extends Controller
             ]);
 
         if(!$is_valid)
-        {
+        {   
             return $this->response->badRequest($this->errors)->respond();
         }
-        $logo = 3;
+
         if($request->hasFile('logo'))
-        {
-            $upload = new Upload('logo','schoolLogo','add');
-            $logo = $upload->savedFile->id;
+        {   
+            $logo= new Upload;
+            $logo->put($request->file('logo'), 'schools/logo');
+            $this->logo = $logo->getFileData()->id;
         }
 
         $school = new School();
@@ -92,9 +99,8 @@ class SchoolsController extends Controller
         $school->address = $request->address;
         $school->city = $request->city;
         $school->zip = $request->zip;
-        $school->logo_id = $logo;
+        $school->logo_id = $this->logo;
         $school->save();
-
 
         return $this->response->created($school)->respond();
 
@@ -110,7 +116,6 @@ class SchoolsController extends Controller
     public function show($id)
     {
         $school = School::findOrFail($id);
-        $school->logoURL = Storage::disk('schoolLogo')->url($school->logo()->first()->filename);
         return $this->response->ok($school)->respond();
     }
 
@@ -133,14 +138,18 @@ class SchoolsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, School $school)
-    {
+    {   
+        if($request->has('slug'))
+            $request->merge([
+                    'slug'  => str_slug( $request->input('slug') )
+                ]);
 
-        $validate = $this->validate(request()->all(),[
+        $validate = $this->validate($request->all(),[
             'name'              => 'required|max:255',
             'slug' => [
                 'required',
                 Rule::unique('schools')->ignore($school->id),
-                'max:255'
+                'max:20'
             ],
             'email'             => 'email',
             'address'           => 'max:255',
@@ -153,11 +162,18 @@ class SchoolsController extends Controller
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-        $logo_id = $school->logo_id;
+
         if($request->hasFile('logo'))
-        {
-            $upload = new Upload('logo','schoolLogo','edit',$school->logo_id);
-            $logo_id = $upload->savedFile->id;
+        {   
+            $logo = new Upload;
+            if($school->logo_id == $this->logo){
+                // upload new logo
+                $logo->put($request->file('logo'), 'schools/logo');
+            }else{
+                // override old logo
+                $logo->replace( $school->logo_id, $request->file('logo') );
+            }
+            $this->logo = $logo->getFileData()->id;
         }
 
         $school->update([
@@ -167,7 +183,7 @@ class SchoolsController extends Controller
             'address'           => $request->address,
             'city'              => $request->city,
             'zip'               => $request->zip,
-            'logo_id'           => $logo_id
+            'logo_id'           => $this->logo
         ]);
 
         return $this->response->ok($school)->respond();
@@ -184,6 +200,5 @@ class SchoolsController extends Controller
         $school = School::findOrFail($id);
         $school->delete();
         return $this->response->ok(['Deleted'])->respond();
-
     }
 }

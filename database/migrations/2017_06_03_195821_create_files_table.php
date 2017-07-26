@@ -17,10 +17,10 @@ class CreateFilesTable extends Migration
 
             $table->increments('id');
             $table->string('filename');
-            $table->string('original_name');
-            $table->string('type');
-            $table->integer('size');
-            $table->string('extension');
+            $table->string('original_name')->nullable();
+            $table->string('type')->nullable();
+            $table->integer('size')->nullable();
+            $table->string('extension')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
