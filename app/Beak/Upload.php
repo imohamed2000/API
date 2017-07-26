@@ -16,12 +16,15 @@ class upload{
      * @param  string $disk   
      * @return  string  file name               
      */
-    public function put($uploaded_file, $destination = '' ,$disk = 'public'){
+    public function put($uploaded_file, $destination = '' ,$disk = 'public', $add_to_db = true){
         // Add file to storage
         $filename = \Illuminate\Support\Facades\Storage::disk( $disk )
                                                         ->putFile( $destination, $uploaded_file );
 
-        $this->addToDb($uploaded_file , $filename);
+        if($add_to_db)
+        {
+            $this->addToDb($uploaded_file , $filename);
+        }                                                      
         return $filename;
     }
 
@@ -33,12 +36,14 @@ class upload{
      * @return  string  file name                       
      */
     
-    public function putAs($uploaded_file , $destination = '', $name, $disk = 'public'){
+    public function putAs($uploaded_file , $destination = '', $name, $disk = 'public', $add_to_db = true){
         $name = $name . '.' .$uploaded_file->getClientOriginalExtension();
         $filename = \Illuminate\Support\Facades\Storage::disk( $disk )
                                                             ->putFileAs($destination, $uploaded_file, $name);
-
-        $this->addToDb($uploaded_file , $filename);
+        if($add_to_db)
+        {   
+            $this->addToDb($uploaded_file , $filename);
+        } 
         return $filename;
     }
 
@@ -49,7 +54,7 @@ class upload{
      * @param string Disk
      * @return 
      */
-    public function override($id, $uploaded_file, $disk='public'){
+    public function override($id, $uploaded_file, $disk ='public'){
         $file = \App\File::findOrFail($id);
         //Replace on disk
         \Illuminate\Support\Facades\Storage::disk($disk)->delete($file->filename);
@@ -59,10 +64,11 @@ class upload{
                 $uploaded_file ,
                 $pathinfo['dirname'], 
                 $pathinfo['filename'], 
-                $disk = 'public');
+                $disk,
+                false);
 
         //Update on DB
-        $this->addToDb($uploaded_file, $filename);
+        $this->updateOndb($file,$uploaded_file, $filename);
     }
 
     /**
@@ -72,16 +78,34 @@ class upload{
      */
     private function addToDb($uploaded_file, $filename){
 
-        $this->file = \App\File::firstOrcreate([
-                'filename'          => $filename, 
+        $this->file = \App\File::create([
+                'filename'          => $filename,
+                'original_name'     => $uploaded_file->getClientOriginalName(),
+                'type'              => $uploaded_file->getClientOriginalExtension(),
+                'size'              => $uploaded_file->getClientSize(),
+                'extension'         => $uploaded_file->getClientMimeType()
             ]);
-
-        $this->file->original_name    = $uploaded_file->getClientOriginalName(); 
-        $this->file->type             = $uploaded_file->getClientOriginalExtension(); 
-        $this->file->size             = $uploaded_file->getClientSize();
-        $this->file->extension        = $uploaded_file->getClientMimeType();
         
         $this->file->save();
+    }
+
+    /**
+     * Updates file on DB
+     * @param  App\File $file File Model Obeject
+     * @param Illuminate\Http\File OR Illuminate\Http\UploadedFile $uploaded_file $uploaded_file [description]
+     * @param string $filename  
+     */
+    private function updateOndb($file,$uploaded_file, $filename){
+
+        $file->filename = $filename;
+        $file->original_name    = $uploaded_file->getClientOriginalName(); 
+        $file->type             = $uploaded_file->getClientOriginalExtension(); 
+        $file->size             = $uploaded_file->getClientSize();
+        $file->extension        = $uploaded_file->getClientMimeType();
+        
+        $file->save();
+        $this->file = $file;
+
     }
 
     /**
