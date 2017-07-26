@@ -54,7 +54,7 @@ class upload{
      * @param string Disk
      * @return 
      */
-    public function override($id, $uploaded_file, $disk ='public'){
+    public function replace($id, $uploaded_file, $disk ='public'){
         $file = \App\File::findOrFail($id);
         //Replace on disk
         \Illuminate\Support\Facades\Storage::disk($disk)->delete($file->filename);

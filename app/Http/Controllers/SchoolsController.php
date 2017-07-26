@@ -171,7 +171,7 @@ class SchoolsController extends Controller
                 $logo->put($request->file('logo'), 'schools/logo');
             }else{
                 // override old logo
-                $logo->override( $school->logo_id, $request->file('logo') );
+                $logo->replace( $school->logo_id, $request->file('logo') );
             }
             $this->logo = $logo->getFileData()->id;
         }
