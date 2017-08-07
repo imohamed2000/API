@@ -236,9 +236,6 @@ export default{
 		fetchData(){
 			this.isLoading(false);
 		},
-		watch:{
-			'$route': 'fetchData',
-		},
 		clearUE: function(){
 			this.createForm.errors.clear('logo');
 		},
@@ -269,7 +266,7 @@ export default{
 				},
 				callback: (result)=>{
 					if(result){
-						axios.delete('/api/v1/schools/' + data.id)
+						axios.delete('schools/' + data.id)
 						.then( (response)=>{
 							jQuery(row).fadeOut('slow');
 							bootbox.alert({
@@ -294,7 +291,7 @@ export default{
 			this.submitAnimation.start();
 
 			// Sending Request
-			axios.post('/api/v1/schools', new FormData( this.$refs.createForm))
+			axios.post('schools', new FormData( this.$refs.createForm))
 					.then( (response)=>{
 						// Refresh the table
 						this.$refs.datatable.refresh();
@@ -332,5 +329,10 @@ export default{
 			this.$refs.imageUploadObj.reset();
 		}
 	},
+	beforeRouteEnter(to, from, next){
+		next(vm=>{
+			vm.fetchData();
+		});
+	}
 }
 </script>
