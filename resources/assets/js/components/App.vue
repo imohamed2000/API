@@ -29,7 +29,7 @@
 			})
 		},
 		mounted(){
-			style.pushStyle('plugins/ladda/ladda-themeless.min.css');
+			style.pushStyle('/plugins/ladda/ladda-themeless.min.css');
 			// axios.interceptors.response.use(function (response) {
 			//     // Do something with response data
 			//     return response;
@@ -47,7 +47,7 @@
 			'dashboard': Dashboard
 		},
 		destroyed(){
-			style.popStyle('plugins/ladda/ladda-themeless.min.css');
+			style.popStyle('/plugins/ladda/ladda-themeless.min.css');
 		}
 	}
 </script>

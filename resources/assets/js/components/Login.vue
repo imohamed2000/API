@@ -50,7 +50,7 @@
     </form>
 </template>
 <script>
-	import axios from 'axios';
+	import axios from '../helpers/http';
 	import Errors from '../helpers/errors';
 	import Cookie from 'js-cookie';
 	import $style from '../helpers/style.js';
@@ -74,7 +74,7 @@
 				this.submitAnimation = ladda.create( document.querySelector('button[type="submit"]') );
 				this.submitAnimation.start();
 
-				axios.post('api/v1/login', this.$data)
+				axios.post('login', this.$data)
 					.then(response => {
 						Cookie.set('isGuest', 'false', {
 							expires: this.expires(),

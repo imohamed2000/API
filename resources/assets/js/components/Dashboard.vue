@@ -10,7 +10,7 @@
                     <div class="loading" v-if="loading">
 				      Loading...
 				    </div>
-                   	<router-view></router-view>
+                   	<keep-alive><router-view></router-view></keep-alive>
                 </div>
                 <app-footer />
             </div>
