@@ -23,13 +23,12 @@
 								</div>
 								<!-- Logo section start -->
 								<div class="col-md-3">
-									<div class="form-group">
+									<div :class="{'form-group': !createForm.errors.has('logo'), 'form-group has-error': createForm.errors.has('logo')}">
 										<ImageUpload ref="imageUploadObj"
-												 @change="onChange"
-												 @clear="onClear"
-												 @reset="onReset"
+												 @clearErrors="clearUE"
 												 :props="imageUpload">
 										</ImageUpload>
+										<p class="help-block" v-show="createForm.errors.has('logo')" v-text="createForm.errors.get('logo')"></p>
 									</div>
 								</div>
 							</div>
@@ -199,7 +198,6 @@ export default{
 					city: null,
 					zip: null,
 					logo: null,
-					logo: null
 				},
 				labels:{
 					name: this.$t('School Name'),
@@ -239,7 +237,10 @@ export default{
 			this.isLoading(false);
 		},
 		watch:{
-			'$route': 'fetchData'
+			'$route': 'fetchData',
+		},
+		clearUE: function(){
+			this.createForm.errors.clear('logo');
 		},
 		rowClick: function(event, data, row){
 			// Dynamically created links
@@ -329,17 +330,6 @@ export default{
 				logo: null,
 			};
 			this.$refs.imageUploadObj.reset();
-		},
-		onChange: function(event){
-			
-		},
-		onClear: function(event){
-			this.createForm.data.logo = null;
-			this.createForm.errors.clear('logo');
-		},
-		onReset: function(event){
-			this.createForm.data.logo = null;
-			this.createForm.errors.clear('logo');
 		}
 	},
 }

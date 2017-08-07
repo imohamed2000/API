@@ -45,14 +45,17 @@ export default{
 			// This event is fired after a file is selected.
 			jQuery(fileInput).on('change.bs.fileinput', function(event) {
 				oThis.$emit('change', event);
+				oThis.$emit('clearErrors', event);
 			});
 			// This event is fired when the file input is cleared.
 			jQuery(fileInput).on('clear.bs.fileinput', function(event) {
 				oThis.$emit('clear', event);
+				oThis.$emit('clearErrors', event);
 			});
 			// This event is fired when the file input is reset.
 			jQuery(fileInput).on('reset.bs.fileinput', function(event) {
 				oThis.$emit('reset', event);
+				oThis.$emit('clearErrors', event);
 			});
 		},
 		reset: function(){
