@@ -113,9 +113,12 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $school = School::findOrFail($id);
+    public function show($slug)
+    {   
+        $school = School::where('slug', $slug)->first();
+        if(!$school){
+            return $this->response->notFound()->respond();
+        }
         return $this->response->ok($school)->respond();
     }
 
