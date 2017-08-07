@@ -3,7 +3,7 @@
 		<modal :props="modal">
 			<h4 class="modal-title" slot="modal-title" v-text="modal.title"></slot></h4>
 			<div slot="modal-content">
-				<form @submit.prevent="createFromSubmit" @keydown="createForm.errors.clear($event.target.name)">
+				<form ref="createForm" enctype="multipart/form-data" @submit.prevent="createFromSubmit" @keydown="createForm.errors.clear($event.target.name)">
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="row">
@@ -22,7 +22,16 @@
 									</div>
 								</div>
 								<!-- Logo section start -->
-								<div class="col-md-3"></div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<ImageUpload ref="imageUploadObj"
+												 @change="onChange"
+												 @clear="onClear"
+												 @reset="onReset"
+												 :props="imageUpload">
+										</ImageUpload>
+									</div>
+								</div>
 							</div>
 
 							<div class="row">
@@ -87,7 +96,8 @@ require('../helpers/bootbox');
 // Required Components
 import datatable from './datatable';
 import portlet from './portlet';
-import modal from './Modal'
+import modal from './Modal';
+import ImageUpload from './ImageUpload';
 
 export default{
 	data(){
@@ -189,6 +199,7 @@ export default{
 					city: null,
 					zip: null,
 					logo: null,
+					logo: null
 				},
 				labels:{
 					name: this.$t('School Name'),
@@ -204,13 +215,18 @@ export default{
 					submit: this.$t('Submit'),
 					animation: null,
 				}
+			},
+			imageUpload: {
+				defaultImage: '/img/school.png',
+				name: 'logo'
 			}
 		}
 	},
 	components:{
 		datatable: datatable,
 		portlet: portlet,
-		modal: modal
+		modal: modal,
+		ImageUpload: ImageUpload
 	},
 	created(){
 		this.fetchData();
@@ -276,15 +292,8 @@ export default{
 			this.submitAnimation = ladda.create( document.querySelector('#create-form-submit-btn') );
 			this.submitAnimation.start();
 
-			// remove empty data
-			let dataToSubmit = Object.keys(this.createForm.data).reduce(( obj, key )=>{
-				if(this.createForm.data[key] != null ){
-					obj[key] = this.createForm.data[key];
-				}	
-				return obj;
-			}, {});
-
-			axios.post('/api/v1/schools', dataToSubmit)
+			// Sending Request
+			axios.post('/api/v1/schools', new FormData( this.$refs.createForm))
 					.then( (response)=>{
 						// Refresh the table
 						this.$refs.datatable.refresh();
@@ -319,6 +328,18 @@ export default{
 				zip: null,
 				logo: null,
 			};
+			this.$refs.imageUploadObj.reset();
+		},
+		onChange: function(event){
+			
+		},
+		onClear: function(event){
+			this.createForm.data.logo = null;
+			this.createForm.errors.clear('logo');
+		},
+		onReset: function(event){
+			this.createForm.data.logo = null;
+			this.createForm.errors.clear('logo');
 		}
 	},
 }

@@ -73,11 +73,11 @@ class SchoolsController extends Controller
         $is_valid = $this->validate($request->all(),[
                 'name'              => 'required|max:255',
                 'slug'              => 'required|max:20|unique:schools',
-                'email'             => 'email',
+                'email'             => 'email|nullable',
                 'address'           => 'max:255',
                 'city'              => 'max:255',
                 'zip'               => 'max:255',
-                'logo'              => 'image'
+                'logo'              => 'image|nullable'
             ]);
 
         if(!$is_valid)

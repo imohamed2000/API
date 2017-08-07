@@ -74,7 +74,6 @@ export default{
             });
         },
         refresh: function(){
-            console.log("REFRESH")
             this.table.ajax.reload()
         }
     },
