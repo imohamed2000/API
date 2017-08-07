@@ -5,7 +5,7 @@ module.exports = [
 		 	pageTitle: "Dashboard"
 	 }},
 
-	{path: '/schools', component: require('../components/Schools'), name: 'schools',
+	{path: '/schools', component: require('../components/SchoolsIndex'), name: 'schools',
 		meta: {
 				title: "All Schools",
 				pageTitle: "All Schools"

@@ -54740,351 +54740,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 165 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_http__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_errors__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ladda__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ladda__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datatable__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__datatable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__portlet__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__portlet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Modal__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ImageUpload__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__ImageUpload__);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-__webpack_require__(17);
-__webpack_require__(170);
-
-// Required Components
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data() {
-		return {
-			table: {
-				class: 'table table-striped table-bordered table-hover dt-responsive',
-				width: '100%',
-				ajax: {
-					"url": "/api/v1/schools?datatables"
-				},
-				columns: [{ "data": "name", "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
-						__WEBPACK_IMPORTED_MODULE_1_jquery___default()(nTd).html(`<a href="/schools/${oData.slug}" class="router-link">${sData}</a>`);
-					} }, { "data": "email" }, { "data": "city" }, { "data": null, "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
-						let viewBtn = `
-										<li>
-											<a class="router-link" href="/schools/${oData.slug}">
-	                                        <i class="icon-eye"></i>
-	                                        ${window.app.$t('View')}
-	                                        </a>
-										</li>
-									`;
-						let editBtn = `
-										<li>
-											<a class="router-link" href="/schools/${oData.slug}/edit">
-	                                        <i class="icon-note"></i>
-	                                        ${window.app.$t('Edit')}
-	                                        </a>
-										</li>
-									`;
-						let deleteBtn = `
-										<li>
-											<a class="font-red delete-element">
-	                                        <i class="font-red icon-trash"></i>
-	                                        ${window.app.$t('Delete')}
-	                                        </a>
-										</li>
-										`;
-						let tools = `
-									<div class="btn-group">
-		                                <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">
-		                                	${window.app.$t('Tools')}
-		                                    <i class="fa fa-angle-down"></i>
-		                                </button>
-		                                <ul class="dropdown-menu pull-right">
-		                                	${viewBtn}
-		                                    ${editBtn}
-		                                    ${deleteBtn}
-		                                </ul>
-		                            </div>`;
-						__WEBPACK_IMPORTED_MODULE_1_jquery___default()(nTd).html(tools);
-					} }],
-				headers: [{ 'title': 'Name', 'class': '' }, { 'title': 'Email', 'class': '' }, { 'title': 'City', 'class': '' }, { 'title': 'Actions', 'class': '' }],
-				processing: true,
-				serverSide: true,
-				index: {
-					present: true,
-					title: 'ID',
-					class: 'index'
-				},
-				columnDefs: [{
-					"searchable": false,
-					"orderable": false,
-					"targets": [0, 4]
-				}],
-				lengthMenu: [25, 50, 75, 100]
-			},
-			portlet: {
-				class: 'portlet light bordered',
-				title: this.$t('All Schools'),
-				icon: 'icon-graduation'
-			},
-			modal: {
-				id: 'school-create-modal',
-				show: false,
-				title: this.$t('Add new school'),
-				size: 'large'
-			},
-			btns: {
-				create: '<i class="icon-plus"></i>' + ' ' + this.$t('Create'),
-				import: '<i class="icon-cloud-upload"></i>' + ' ' + this.$t('Import')
-			},
-			createForm: {
-				errors: new __WEBPACK_IMPORTED_MODULE_3__helpers_errors__["a" /* default */](),
-				data: {
-					name: null,
-					slug: null,
-					email: null,
-					address: null,
-					city: null,
-					zip: null,
-					logo: null
-				},
-				labels: {
-					name: this.$t('School Name'),
-					slug: this.$t('Slug or sub-domain'),
-					email: this.$t('Email'),
-					address: this.$t('Address'),
-					city: this.$t('City'),
-					zip: this.$t('ZIP'),
-					logo: this.$t('Logo')
-				},
-				btns: {
-					close: this.$t('Close'),
-					submit: this.$t('Submit'),
-					animation: null
-				}
-			},
-			imageUpload: {
-				defaultImage: '/img/school.png',
-				name: 'logo'
-			}
-		};
-	},
-	components: {
-		datatable: __WEBPACK_IMPORTED_MODULE_5__datatable___default.a,
-		portlet: __WEBPACK_IMPORTED_MODULE_6__portlet___default.a,
-		modal: __WEBPACK_IMPORTED_MODULE_7__Modal___default.a,
-		ImageUpload: __WEBPACK_IMPORTED_MODULE_8__ImageUpload___default.a
-	},
-	created() {
-		this.fetchData();
-	},
-	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
-		isLoading: 'isLoading'
-	}), {
-		fetchData() {
-			this.isLoading(false);
-		},
-		watch: {
-			'$route': 'fetchData'
-		},
-		clearUE: function () {
-			this.createForm.errors.clear('logo');
-		},
-		rowClick: function (event, data, row) {
-			// Dynamically created links
-			if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()(event.target).is('.router-link')) {
-				event.preventDefault();
-				this.$router.push(event.target.getAttribute('href'));
-			}
-			// Delete Element event
-			if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()(event.target).is('.delete-element')) {
-				this.deleteElement(event, data, row);
-			}
-		},
-		showCreateModal: function () {
-			this.modal.show = true;
-		},
-		deleteElement: function (event, data, row) {
-			let app = this;
-			bootbox.confirm({
-				title: app.$t('Move this school to trash?'),
-				message: app.$t('Do you watn to move this school to trash?'),
-				buttons: {
-					confirm: {
-						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
-						className: 'btn-danger'
-					}
-				},
-				callback: result => {
-					if (result) {
-						__WEBPACK_IMPORTED_MODULE_2__helpers_http__["a" /* default */].delete('/api/v1/schools/' + data.id).then(response => {
-							__WEBPACK_IMPORTED_MODULE_1_jquery___default()(row).fadeOut('slow');
-							bootbox.alert({
-								message: app.$t('Moved to trash!'),
-								title: app.$t('Moved to trash!'),
-								size: 'small',
-								buttons: {
-									ok: {
-										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
-										className: 'green'
-									}
-								}
-							});
-						});
-					}
-				}
-			});
-		},
-		createFromSubmit: function (event) {
-			// Start sumbmit button animation
-			this.submitAnimation = __WEBPACK_IMPORTED_MODULE_4_ladda___default.a.create(document.querySelector('#create-form-submit-btn'));
-			this.submitAnimation.start();
-
-			// Sending Request
-			__WEBPACK_IMPORTED_MODULE_2__helpers_http__["a" /* default */].post('/api/v1/schools', new FormData(this.$refs.createForm)).then(response => {
-				// Refresh the table
-				this.$refs.datatable.refresh();
-				// Reset form
-				this.createFormReset();
-				// Success Alert
-				bootbox.alert({
-					message: app.$t('A new school was added!'),
-					title: app.$t('Success!'),
-					size: 'small',
-					buttons: {
-						ok: {
-							label: '<i class="icon-check"></i> ' + app.$t('Ok'),
-							className: 'green'
-						}
-					}
-				});
-				this.submitAnimation.stop();
-			}).catch(err => {
-				this.createForm.errors.record(err.response.data);
-				this.submitAnimation.stop();
-			});
-		},
-		createFormReset: function () {
-			this.createForm.data = {
-				name: null,
-				slug: null,
-				email: null,
-				address: null,
-				city: null,
-				zip: null,
-				logo: null
-			};
-			this.$refs.imageUploadObj.reset();
-		}
-	})
-});
-
-/***/ }),
+/* 165 */,
 /* 166 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55399,13 +55055,14 @@ function createRouter() {
 
 /***/ }),
 /* 173 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 module.exports = [{ path: '/', component: __webpack_require__(213), name: 'stats',
 	meta: {
 		title: "Home",
 		pageTitle: "Dashboard"
-	} }, { path: '/schools', component: __webpack_require__(212), name: 'schools',
+	} }, { path: '/schools', component: __webpack_require__(248), name: 'schools',
 	meta: {
 		title: "All Schools",
 		pageTitle: "All Schools"
@@ -70248,40 +69905,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 212 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(165),
-  /* template */
-  __webpack_require__(233),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\Schools.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Schools.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f2c76766", Component.options)
-  } else {
-    hotAPI.reload("data-v-f2c76766", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 212 */,
 /* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71960,430 +71584,7 @@ if (false) {
 }
 
 /***/ }),
-/* 233 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('modal', {
-    attrs: {
-      "props": _vm.modal
-    }
-  }, [_c('h4', {
-    staticClass: "modal-title",
-    domProps: {
-      "textContent": _vm._s(_vm.modal.title)
-    },
-    slot: "modal-title"
-  }), _vm._v(" "), _c('div', {
-    slot: "modal-content"
-  }, [_c('form', {
-    ref: "createForm",
-    attrs: {
-      "enctype": "multipart/form-data"
-    },
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.createFromSubmit($event)
-      },
-      "keydown": function($event) {
-        _vm.createForm.errors.clear($event.target.name)
-      }
-    }
-  }, [_c('div', {
-    staticClass: "modal-body"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-9"
-  }, [_c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('name'), 'form-group has-error': _vm.createForm.errors.has('name')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "name"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.name)
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.name),
-      expression: "createForm.data.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "name",
-      "id": "name",
-      "placeholder": _vm.createForm.labels.name
-    },
-    domProps: {
-      "value": (_vm.createForm.data.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.name = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('name')),
-      expression: "createForm.errors.has('name')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('name'))
-    }
-  })]), _vm._v(" "), _c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('address'), 'form-group has-error': _vm.createForm.errors.has('address')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "address"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.address)
-    }
-  }), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.address),
-      expression: "createForm.data.address"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "address",
-      "id": "address",
-      "placeholder": _vm.createForm.labels.address
-    },
-    domProps: {
-      "value": (_vm.createForm.data.address)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.address = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('address')),
-      expression: "createForm.errors.has('address')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('address'))
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('logo'), 'form-group has-error': _vm.createForm.errors.has('logo')
-    }
-  }, [_c('ImageUpload', {
-    ref: "imageUploadObj",
-    attrs: {
-      "props": _vm.imageUpload
-    },
-    on: {
-      "clearErrors": _vm.clearUE
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('logo')),
-      expression: "createForm.errors.has('logo')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('logo'))
-    }
-  })], 1)])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-6"
-  }, [_c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('slug'), 'form-group has-error': _vm.createForm.errors.has('slug')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "slug"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.slug)
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.slug),
-      expression: "createForm.data.slug"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "slug",
-      "id": "slug",
-      "placeholder": _vm.createForm.labels.slug
-    },
-    domProps: {
-      "value": (_vm.createForm.data.slug)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.slug = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('slug')),
-      expression: "createForm.errors.has('slug')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('slug'))
-    }
-  })]), _vm._v(" "), _c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('city'), 'form-group has-error': _vm.createForm.errors.has('city')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "city"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.city)
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.city),
-      expression: "createForm.data.city"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "city",
-      "id": "city",
-      "placeholder": _vm.createForm.labels.city
-    },
-    domProps: {
-      "value": (_vm.createForm.data.city)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.city = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('city')),
-      expression: "createForm.errors.has('city')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('city'))
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
-  }, [_c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('email'), 'form-group has-error': _vm.createForm.errors.has('email')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "email"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.email)
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.email),
-      expression: "createForm.data.email"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "email",
-      "name": "email",
-      "id": "email",
-      "placeholder": _vm.createForm.labels.email
-    },
-    domProps: {
-      "value": (_vm.createForm.data.email)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.email = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('email')),
-      expression: "createForm.errors.has('email')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('email'))
-    }
-  })]), _vm._v(" "), _c('div', {
-    class: {
-      'form-group': !_vm.createForm.errors.has('zip'), 'form-group has-error': _vm.createForm.errors.has('zip')
-    }
-  }, [_c('label', {
-    attrs: {
-      "for": "zip"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.labels.zip)
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.createForm.data.zip),
-      expression: "createForm.data.zip"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "zip",
-      "id": "zip",
-      "placeholder": _vm.createForm.labels.zip
-    },
-    domProps: {
-      "value": (_vm.createForm.data.zip)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.createForm.data.zip = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.createForm.errors.has('zip')),
-      expression: "createForm.errors.has('zip')"
-    }],
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.errors.get('zip'))
-    }
-  })])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.btns.close)
-    },
-    on: {
-      "click": function($event) {
-        _vm.modal.show = false
-      }
-    }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "btn green mt-ladda-btn ladda-button",
-    attrs: {
-      "id": "create-form-submit-btn",
-      "type": "submit",
-      "data-style": "zoom-in",
-      "disabled": _vm.createForm.errors.any()
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.createForm.btns.submit)
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.createFromSubmit($event)
-      }
-    }
-  })])])])]), _vm._v(" "), _c('portlet', {
-    attrs: {
-      "props": _vm.portlet
-    }
-  }, [_c('div', {
-    slot: "tools"
-  }, [_c('button', {
-    staticClass: "btn green",
-    attrs: {
-      "type": "button"
-    },
-    domProps: {
-      "innerHTML": _vm._s(_vm.btns.create)
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.showCreateModal($event)
-      }
-    }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "btn blue",
-    attrs: {
-      "type": "button"
-    },
-    domProps: {
-      "innerHTML": _vm._s(_vm.btns.import)
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.showImportModal($event)
-      }
-    }
-  })]), _vm._v(" "), _c('datatable', {
-    ref: "datatable",
-    attrs: {
-      "props": _vm.table
-    },
-    on: {
-      "rowClick": _vm.rowClick
-    },
-    slot: "body"
-  })], 1)], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-f2c76766", module.exports)
-  }
-}
-
-/***/ }),
+/* 233 */,
 /* 234 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75483,6 +74684,816 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(135);
 
+
+/***/ }),
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_http__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_errors__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ladda__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ladda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datatable__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__datatable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__portlet__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__portlet__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Modal__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ImageUpload__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__ImageUpload__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+__webpack_require__(17);
+__webpack_require__(170);
+
+// Required Components
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data() {
+		return {
+			table: {
+				class: 'table table-striped table-bordered table-hover dt-responsive',
+				width: '100%',
+				ajax: {
+					"url": "/api/v1/schools?datatables"
+				},
+				columns: [{ "data": "name", "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
+						__WEBPACK_IMPORTED_MODULE_1_jquery___default()(nTd).html(`<a href="/schools/${oData.slug}" class="router-link">${sData}</a>`);
+					} }, { "data": "email" }, { "data": "city" }, { "data": null, "fnCreatedCell": (nTd, sData, oData, iRow, iCol) => {
+						let viewBtn = `
+										<li>
+											<a class="router-link" href="/schools/${oData.slug}">
+	                                        <i class="icon-eye"></i>
+	                                        ${window.app.$t('View')}
+	                                        </a>
+										</li>
+									`;
+						let editBtn = `
+										<li>
+											<a class="router-link" href="/schools/${oData.slug}/edit">
+	                                        <i class="icon-note"></i>
+	                                        ${window.app.$t('Edit')}
+	                                        </a>
+										</li>
+									`;
+						let deleteBtn = `
+										<li>
+											<a class="font-red delete-element">
+	                                        <i class="font-red icon-trash"></i>
+	                                        ${window.app.$t('Delete')}
+	                                        </a>
+										</li>
+										`;
+						let tools = `
+									<div class="btn-group">
+		                                <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">
+		                                	${window.app.$t('Tools')}
+		                                    <i class="fa fa-angle-down"></i>
+		                                </button>
+		                                <ul class="dropdown-menu pull-right">
+		                                	${viewBtn}
+		                                    ${editBtn}
+		                                    ${deleteBtn}
+		                                </ul>
+		                            </div>`;
+						__WEBPACK_IMPORTED_MODULE_1_jquery___default()(nTd).html(tools);
+					} }],
+				headers: [{ 'title': 'Name', 'class': '' }, { 'title': 'Email', 'class': '' }, { 'title': 'City', 'class': '' }, { 'title': 'Actions', 'class': '' }],
+				processing: true,
+				serverSide: true,
+				index: {
+					present: true,
+					title: 'ID',
+					class: 'index'
+				},
+				columnDefs: [{
+					"searchable": false,
+					"orderable": false,
+					"targets": [0, 4]
+				}],
+				lengthMenu: [25, 50, 75, 100]
+			},
+			portlet: {
+				class: 'portlet light bordered',
+				title: this.$t('All Schools'),
+				icon: 'icon-graduation'
+			},
+			modal: {
+				id: 'school-create-modal',
+				show: false,
+				title: this.$t('Add new school'),
+				size: 'large'
+			},
+			btns: {
+				create: '<i class="icon-plus"></i>' + ' ' + this.$t('Create'),
+				import: '<i class="icon-cloud-upload"></i>' + ' ' + this.$t('Import')
+			},
+			createForm: {
+				errors: new __WEBPACK_IMPORTED_MODULE_3__helpers_errors__["a" /* default */](),
+				data: {
+					name: null,
+					slug: null,
+					email: null,
+					address: null,
+					city: null,
+					zip: null,
+					logo: null
+				},
+				labels: {
+					name: this.$t('School Name'),
+					slug: this.$t('Slug or sub-domain'),
+					email: this.$t('Email'),
+					address: this.$t('Address'),
+					city: this.$t('City'),
+					zip: this.$t('ZIP'),
+					logo: this.$t('Logo')
+				},
+				btns: {
+					close: this.$t('Close'),
+					submit: this.$t('Submit'),
+					animation: null
+				}
+			},
+			imageUpload: {
+				defaultImage: '/img/school.png',
+				name: 'logo'
+			}
+		};
+	},
+	components: {
+		datatable: __WEBPACK_IMPORTED_MODULE_5__datatable___default.a,
+		portlet: __WEBPACK_IMPORTED_MODULE_6__portlet___default.a,
+		modal: __WEBPACK_IMPORTED_MODULE_7__Modal___default.a,
+		ImageUpload: __WEBPACK_IMPORTED_MODULE_8__ImageUpload___default.a
+	},
+	created() {
+		this.fetchData();
+	},
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+		isLoading: 'isLoading'
+	}), {
+		fetchData() {
+			this.isLoading(false);
+		},
+		watch: {
+			'$route': 'fetchData'
+		},
+		clearUE: function () {
+			this.createForm.errors.clear('logo');
+		},
+		rowClick: function (event, data, row) {
+			// Dynamically created links
+			if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()(event.target).is('.router-link')) {
+				event.preventDefault();
+				this.$router.push(event.target.getAttribute('href'));
+			}
+			// Delete Element event
+			if (__WEBPACK_IMPORTED_MODULE_1_jquery___default()(event.target).is('.delete-element')) {
+				this.deleteElement(event, data, row);
+			}
+		},
+		showCreateModal: function () {
+			this.modal.show = true;
+		},
+		deleteElement: function (event, data, row) {
+			let app = this;
+			bootbox.confirm({
+				title: app.$t('Move this school to trash?'),
+				message: app.$t('Do you watn to move this school to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: result => {
+					if (result) {
+						__WEBPACK_IMPORTED_MODULE_2__helpers_http__["a" /* default */].delete('/api/v1/schools/' + data.id).then(response => {
+							__WEBPACK_IMPORTED_MODULE_1_jquery___default()(row).fadeOut('slow');
+							bootbox.alert({
+								message: app.$t('Moved to trash!'),
+								title: app.$t('Moved to trash!'),
+								size: 'small',
+								buttons: {
+									ok: {
+										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
+										className: 'green'
+									}
+								}
+							});
+						});
+					}
+				}
+			});
+		},
+		createFromSubmit: function (event) {
+			// Start sumbmit button animation
+			this.submitAnimation = __WEBPACK_IMPORTED_MODULE_4_ladda___default.a.create(document.querySelector('#create-form-submit-btn'));
+			this.submitAnimation.start();
+
+			// Sending Request
+			__WEBPACK_IMPORTED_MODULE_2__helpers_http__["a" /* default */].post('/api/v1/schools', new FormData(this.$refs.createForm)).then(response => {
+				// Refresh the table
+				this.$refs.datatable.refresh();
+				// Reset form
+				this.createFormReset();
+				// Success Alert
+				bootbox.alert({
+					message: app.$t('A new school was added!'),
+					title: app.$t('Success!'),
+					size: 'small',
+					buttons: {
+						ok: {
+							label: '<i class="icon-check"></i> ' + app.$t('Ok'),
+							className: 'green'
+						}
+					}
+				});
+				this.submitAnimation.stop();
+			}).catch(err => {
+				this.createForm.errors.record(err.response.data);
+				this.submitAnimation.stop();
+			});
+		},
+		createFormReset: function () {
+			this.createForm.data = {
+				name: null,
+				slug: null,
+				email: null,
+				address: null,
+				city: null,
+				zip: null,
+				logo: null
+			};
+			this.$refs.imageUploadObj.reset();
+		}
+	})
+});
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(247),
+  /* template */
+  __webpack_require__(249),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\SchoolsIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SchoolsIndex.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-562e71b5", Component.options)
+  } else {
+    hotAPI.reload("data-v-562e71b5", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('modal', {
+    attrs: {
+      "props": _vm.modal
+    }
+  }, [_c('h4', {
+    staticClass: "modal-title",
+    domProps: {
+      "textContent": _vm._s(_vm.modal.title)
+    },
+    slot: "modal-title"
+  }), _vm._v(" "), _c('div', {
+    slot: "modal-content"
+  }, [_c('form', {
+    ref: "createForm",
+    attrs: {
+      "enctype": "multipart/form-data"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.createFromSubmit($event)
+      },
+      "keydown": function($event) {
+        _vm.createForm.errors.clear($event.target.name)
+      }
+    }
+  }, [_c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-9"
+  }, [_c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('name'), 'form-group has-error': _vm.createForm.errors.has('name')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "name"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.name)
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.name),
+      expression: "createForm.data.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "name",
+      "id": "name",
+      "placeholder": _vm.createForm.labels.name
+    },
+    domProps: {
+      "value": (_vm.createForm.data.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('name')),
+      expression: "createForm.errors.has('name')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('name'))
+    }
+  })]), _vm._v(" "), _c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('address'), 'form-group has-error': _vm.createForm.errors.has('address')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "address"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.address)
+    }
+  }), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.address),
+      expression: "createForm.data.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "address",
+      "id": "address",
+      "placeholder": _vm.createForm.labels.address
+    },
+    domProps: {
+      "value": (_vm.createForm.data.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.address = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('address')),
+      expression: "createForm.errors.has('address')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('address'))
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('logo'), 'form-group has-error': _vm.createForm.errors.has('logo')
+    }
+  }, [_c('ImageUpload', {
+    ref: "imageUploadObj",
+    attrs: {
+      "props": _vm.imageUpload
+    },
+    on: {
+      "clearErrors": _vm.clearUE
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('logo')),
+      expression: "createForm.errors.has('logo')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('logo'))
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-6"
+  }, [_c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('slug'), 'form-group has-error': _vm.createForm.errors.has('slug')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "slug"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.slug)
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.slug),
+      expression: "createForm.data.slug"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "slug",
+      "id": "slug",
+      "placeholder": _vm.createForm.labels.slug
+    },
+    domProps: {
+      "value": (_vm.createForm.data.slug)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.slug = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('slug')),
+      expression: "createForm.errors.has('slug')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('slug'))
+    }
+  })]), _vm._v(" "), _c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('city'), 'form-group has-error': _vm.createForm.errors.has('city')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "city"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.city)
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.city),
+      expression: "createForm.data.city"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "city",
+      "id": "city",
+      "placeholder": _vm.createForm.labels.city
+    },
+    domProps: {
+      "value": (_vm.createForm.data.city)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.city = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('city')),
+      expression: "createForm.errors.has('city')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('city'))
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('email'), 'form-group has-error': _vm.createForm.errors.has('email')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "email"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.email)
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.email),
+      expression: "createForm.data.email"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "email",
+      "name": "email",
+      "id": "email",
+      "placeholder": _vm.createForm.labels.email
+    },
+    domProps: {
+      "value": (_vm.createForm.data.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.email = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('email')),
+      expression: "createForm.errors.has('email')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('email'))
+    }
+  })]), _vm._v(" "), _c('div', {
+    class: {
+      'form-group': !_vm.createForm.errors.has('zip'), 'form-group has-error': _vm.createForm.errors.has('zip')
+    }
+  }, [_c('label', {
+    attrs: {
+      "for": "zip"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.labels.zip)
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.data.zip),
+      expression: "createForm.data.zip"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "zip",
+      "id": "zip",
+      "placeholder": _vm.createForm.labels.zip
+    },
+    domProps: {
+      "value": (_vm.createForm.data.zip)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.data.zip = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('zip')),
+      expression: "createForm.errors.has('zip')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('zip'))
+    }
+  })])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.btns.close)
+    },
+    on: {
+      "click": function($event) {
+        _vm.modal.show = false
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn green mt-ladda-btn ladda-button",
+    attrs: {
+      "id": "create-form-submit-btn",
+      "type": "submit",
+      "data-style": "zoom-in",
+      "disabled": _vm.createForm.errors.any()
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.btns.submit)
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.createFromSubmit($event)
+      }
+    }
+  })])])])]), _vm._v(" "), _c('portlet', {
+    attrs: {
+      "props": _vm.portlet
+    }
+  }, [_c('div', {
+    slot: "tools"
+  }, [_c('button', {
+    staticClass: "btn green",
+    attrs: {
+      "type": "button"
+    },
+    domProps: {
+      "innerHTML": _vm._s(_vm.btns.create)
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showCreateModal($event)
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn blue",
+    attrs: {
+      "type": "button"
+    },
+    domProps: {
+      "innerHTML": _vm._s(_vm.btns.import)
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showImportModal($event)
+      }
+    }
+  })]), _vm._v(" "), _c('datatable', {
+    ref: "datatable",
+    attrs: {
+      "props": _vm.table
+    },
+    on: {
+      "rowClick": _vm.rowClick
+    },
+    slot: "body"
+  })], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-562e71b5", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
