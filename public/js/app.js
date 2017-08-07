@@ -26272,6 +26272,9 @@ module.exports = function bind(fn, thisArg) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
 /* harmony default export */ __webpack_exports__["a"] = (class {
 
     /**
@@ -26325,7 +26328,8 @@ module.exports = function bind(fn, thisArg) {
      */
     clear(field) {
         if (field) {
-            delete this.errors[field];
+            __WEBPACK_IMPORTED_MODULE_0_vue___default.a.delete(this.errors, field);
+            // delete this.errors[field];
             return;
         }
 
@@ -54435,14 +54439,17 @@ let style = new __WEBPACK_IMPORTED_MODULE_0__helpers_style_js__["a" /* default *
 			// This event is fired after a file is selected.
 			__WEBPACK_IMPORTED_MODULE_1_jquery___default()(fileInput).on('change.bs.fileinput', function (event) {
 				oThis.$emit('change', event);
+				oThis.$emit('clearErrors', event);
 			});
 			// This event is fired when the file input is cleared.
 			__WEBPACK_IMPORTED_MODULE_1_jquery___default()(fileInput).on('clear.bs.fileinput', function (event) {
 				oThis.$emit('clear', event);
+				oThis.$emit('clearErrors', event);
 			});
 			// This event is fired when the file input is reset.
 			__WEBPACK_IMPORTED_MODULE_1_jquery___default()(fileInput).on('reset.bs.fileinput', function (event) {
 				oThis.$emit('reset', event);
+				oThis.$emit('clearErrors', event);
 			});
 		},
 		reset: function () {
@@ -54839,7 +54846,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -54945,7 +54951,6 @@ __webpack_require__(170);
 					address: null,
 					city: null,
 					zip: null,
-					logo: null,
 					logo: null
 				},
 				labels: {
@@ -54986,6 +54991,9 @@ __webpack_require__(170);
 		},
 		watch: {
 			'$route': 'fetchData'
+		},
+		clearUE: function () {
+			this.createForm.errors.clear('logo');
 		},
 		rowClick: function (event, data, row) {
 			// Dynamically created links
@@ -55072,15 +55080,6 @@ __webpack_require__(170);
 				logo: null
 			};
 			this.$refs.imageUploadObj.reset();
-		},
-		onChange: function (event) {},
-		onClear: function (event) {
-			this.createForm.data.logo = null;
-			this.createForm.errors.clear('logo');
-		},
-		onReset: function (event) {
-			this.createForm.data.logo = null;
-			this.createForm.errors.clear('logo');
 		}
 	})
 });
@@ -72091,16 +72090,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-3"
   }, [_c('div', {
-    staticClass: "form-group"
+    class: {
+      'form-group': !_vm.createForm.errors.has('logo'), 'form-group has-error': _vm.createForm.errors.has('logo')
+    }
   }, [_c('ImageUpload', {
     ref: "imageUploadObj",
     attrs: {
       "props": _vm.imageUpload
     },
     on: {
-      "change": _vm.onChange,
-      "clear": _vm.onClear,
-      "reset": _vm.onReset
+      "clearErrors": _vm.clearUE
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.createForm.errors.has('logo')),
+      expression: "createForm.errors.has('logo')"
+    }],
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.createForm.errors.get('logo'))
     }
   })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
