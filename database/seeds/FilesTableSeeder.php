@@ -16,7 +16,7 @@ class FilesTableSeeder extends Seeder
     {
 
         $male = new File();
-        $male->filename = str_random(122).'.png';
+        $male->filename = 'male.png';
         $male->original_name = 'male.png';
         $male->type = 'image/png';
         $male->size = '30105.6';
@@ -35,7 +35,7 @@ class FilesTableSeeder extends Seeder
         ]);
 
         $female = new File();
-        $female->filename = str_random(122).'.png';
+        $female->filename = 'female.png';
         $female->original_name = 'female.png';
         $female->type = 'image/png';
         $female->size = '30617.6';
@@ -51,6 +51,13 @@ class FilesTableSeeder extends Seeder
             'avatar'  => $female->id
         ]);
 
+        $school = new File();
+        $school->filename = 'schools/logo/school.png';
+        $school->original_name = 'school.png';
+        $school->type = 'image/png';
+        $school->size = '30617.6';
+        $school->extension = '.png';
+        $school->save();
 
     }
 }

@@ -12,6 +12,9 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #5 for " name="description" />
         <meta content="" name="author" />
+        <meta name="api" api="{{ url('api/v1') }}" />
+        <meta name="assets" assets="{{ url('/') }}">
+        <meta name="app-url" app-url="{{ url('/') }}">
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
         <link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />

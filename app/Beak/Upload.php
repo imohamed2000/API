@@ -81,9 +81,9 @@ class upload{
         $this->file = \App\File::create([
                 'filename'          => $filename,
                 'original_name'     => $uploaded_file->getClientOriginalName(),
-                'type'              => $uploaded_file->getClientOriginalExtension(),
+                'type'              => $uploaded_file->getClientMimeType(),
                 'size'              => $uploaded_file->getClientSize(),
-                'extension'         => $uploaded_file->getClientMimeType()
+                'extension'         => $uploaded_file->getClientOriginalExtension()
             ]);
         
         $this->file->save();

@@ -4,6 +4,7 @@ export default class {
 
 	constructor(){
 		this.head = document.head;
+		this.baseURL = document.querySelector('meta[name="assets"]').getAttribute('assets');
 	}
 	/**
 	 * Gets the stylesheet object using the filen name
@@ -11,7 +12,7 @@ export default class {
 	 * @return {object}          [stylesheet link DOM object]
 	 */
 	getStyle(fileName){
-		return document.querySelector('link[href="'+ fileName +'"]');
+		return document.querySelector('link[href="'+ this.baseURL + '/' + fileName +'"]');
 	}
 	/**
 	 * Creates a new stylesheet element using the filen name
@@ -22,7 +23,7 @@ export default class {
 		let link = document.createElement('link');
 			link.type = 'text/css';
 	    	link.rel = 'stylesheet';
-	    	link.href = fileName;
+	    	link.href = this.baseURL + '/' + fileName;
 	    return link;
 	}
 	/**
