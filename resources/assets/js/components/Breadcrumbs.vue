@@ -1,7 +1,7 @@
 <template>
 	 <!-- BEGIN BREADCRUMBS -->
     <div class="breadcrumbs">
-        <h1 v-text="pageTitle"></h1>
+        <h1 v-text="pageTitle" v-show="!loading"></h1>
         <ol class="breadcrumb">
             <li>
                 <a href="#">Home</a>
@@ -29,7 +29,8 @@
 	export default{
         computed:{
             ...mapState({
-                pageTitle: state=> state.misc.pageTitle
+                pageTitle: state=> state.misc.pageTitle,
+                loading: state=> state.misc.loading
             }),
         }
     }

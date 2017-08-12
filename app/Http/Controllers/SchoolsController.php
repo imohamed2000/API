@@ -146,7 +146,6 @@ class SchoolsController extends Controller
             $request->merge([
                     'slug'  => str_slug( $request->input('slug') )
                 ]);
-
         $validate = $this->validate($request->all(),[
             'name'              => 'required|max:255',
             'slug' => [
@@ -158,7 +157,7 @@ class SchoolsController extends Controller
             'address'           => 'max:255',
             'city'              => 'max:255',
             'zip'               => 'max:255',
-            'logo'              => 'image'
+            'logo'              => 'image|nullable'
         ]);
 
         if(!$validate)
@@ -176,7 +175,12 @@ class SchoolsController extends Controller
                 // override old logo
                 $logo->replace( $school->logo_id, $request->file('logo') );
             }
-            $this->logo = $logo->getFileData()->id;
+            $school->logo_id = $logo->getFileData()->id;
+        }
+
+        // Clearing Logo
+        if($request->has('clear_logo')){
+            $school->logo_id = $this->logo;
         }
 
         $school->update([
@@ -186,7 +190,7 @@ class SchoolsController extends Controller
             'address'           => $request->address,
             'city'              => $request->city,
             'zip'               => $request->zip,
-            'logo_id'           => $this->logo
+            'logo_id'           => $school->logo_id
         ]);
 
         return $this->response->ok($school)->respond();

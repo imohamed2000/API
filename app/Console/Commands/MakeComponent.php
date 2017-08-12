@@ -51,6 +51,6 @@ class MakeComponent extends Command
     }
 
     private function content(){
-        return "<template>\n\n</template>\n<script>\nexport default{\n\t//\n}\n</script>\n";
+        return \Illuminate\Support\Facades\Storage::get('Component.stub');
     }
 }

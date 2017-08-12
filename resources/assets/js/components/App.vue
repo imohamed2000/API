@@ -30,17 +30,6 @@
 		},
 		mounted(){
 			style.pushStyle('/plugins/ladda/ladda-themeless.min.css');
-			// axios.interceptors.response.use(function (response) {
-			//     // Do something with response data
-			//     return response;
-			//   }, function (error) {
-			//     // Do something with response error
-			//     // Token Expired
-			//     if(error.response.status === 401){
-			//     	oThis.$store.dispatch('toGuest');
-			//     }
-			//     return Promise.reject(error);
-			//   });
 		},
 		components: {
 			'guest': Guest,

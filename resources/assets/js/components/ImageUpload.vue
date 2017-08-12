@@ -16,7 +16,7 @@
                 <span class="btn default btn-file">
                     <span class="fileinput-new"> Select image </span>
                     <span class="fileinput-exists"> Change </span>
-                    <input type="file" :name="props.name"> </span>
+                    <input ref="input" type="file" :name="props.name" @change="onChange"> </span>
                 <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
             </div>
         </div>
@@ -57,6 +57,10 @@ export default{
 				oThis.$emit('reset', event);
 				oThis.$emit('clearErrors', event);
 			});
+		},
+		onChange: function(e){
+			if(!e.target.value.length)
+				this.$emit('clear')
 		},
 		reset: function(){
 			jQuery(this.$refs.fileInput).fileinput('clear');

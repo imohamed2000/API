@@ -10,7 +10,7 @@
                     <div class="loading" v-if="loading">
 				      Loading...
 				    </div>
-                   	<keep-alive><router-view></router-view></keep-alive>
+                   	<keep-alive><router-view v-show="!loading"></router-view></keep-alive>
                 </div>
                 <app-footer />
             </div>
@@ -21,6 +21,7 @@
         <script2 src='/layouts/layout5/scripts/layout.min.js' unload="jQuery"></script2>
 		<script2 src='/layouts/global/scripts/quick-sidebar.min.js' unload="jQuery"></script2>
 		<script2 src='/layouts/global/scripts/quick-nav.min.js' unload="jQuery"></script2>
+		<script2 src='/plugins/bootstrap-toastr/toastr.min.js' unload="jQuery"></script2>
 	</div>
 </template>
 <script>
@@ -61,11 +62,13 @@
 			document.getElementsByTagName("body")[0].setAttribute('class', "page-header-fixed page-sidebar-closed-hide-logo");
 			style.pushStyle('/layouts/layout5/css/layout.min.css');
 			style.pushStyle('/layouts/layout5/css/custom.min.css');
+			style.pushStyle('/plugins/bootstrap-toastr/toastr.min.css');
 			this.getUserData();
 		},
 		destroyed(){
 			style.popStyle('/layouts/layout5/css/layout.min.css');
 			style.popStyle('/layouts/layout5/css/custom.min.css');
+			style.popStyle('/plugins/bootstrap-toastr/toastr.min.css');
 		}
 	}
 </script>

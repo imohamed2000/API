@@ -12,7 +12,13 @@ module.exports = [
 				pageTitle: "All Schools"
 	}},
 	// Schools Show page
-	{path: '/schools/:slug', component: require('../components/SchoolsShow'), name: 'schoolsShow'},
+	{path: '/schools/:slug', component: require('../components/SchoolsShow'),
+		children: [
+			{path: '', component: require('../components/SchoolAbout'), name: 'schoolsShow'},
+			{path: 'users', component: require('../components/SchoolUsersIndex'), name: 'schoolUsers'},
+			{path: 'edit', component: require('../components/SchoolEdit'), name: 'schoolsEdit'}
+		]
+	},
 	// 404 Page
 	{path: '*', component: require('../components/NotFound'), name: '404', meta: {title: 'Error 404'}}
 ];

@@ -25,6 +25,9 @@ function loadingState(app){
 
 // Vue script2
 Vue.use(require('vue-script2'));
+window.setTitle = function(app, documentTitle, pageTitle){
+	setTitle(app, documentTitle, pageTitle);
+};
 
 const app = new Vue({
 	el: '#app',
@@ -37,13 +40,14 @@ const app = new Vue({
 		loadingState(this);
 	}
 });
-
 window.app = app;
 
 router.beforeEach((to, from, next)=>{
 	let title = to.meta.title;
 	let pageTitle = to.meta.pageTitle;
-	setTitle(app, title, pageTitle);
+	if( ('title' in to.meta) ){
+		setTitle(app, title, pageTitle);
+	}
 	loadingState(app);
 	next();
 });
