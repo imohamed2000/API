@@ -21,7 +21,6 @@
         <script2 src='/layouts/layout5/scripts/layout.min.js' unload="jQuery"></script2>
 		<script2 src='/layouts/global/scripts/quick-sidebar.min.js' unload="jQuery"></script2>
 		<script2 src='/layouts/global/scripts/quick-nav.min.js' unload="jQuery"></script2>
-		<script2 src='/plugins/bootstrap-toastr/toastr.min.js' unload="jQuery"></script2>
 	</div>
 </template>
 <script>

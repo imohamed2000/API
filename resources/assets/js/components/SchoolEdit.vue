@@ -85,6 +85,8 @@ import Errors from '../helpers/errors';
 import jQuery from 'jquery';
 import ladda from 'ladda';
 
+import toastr from '../helpers/toastr.js';
+
 export default{
 	props: ['school'],
 	data(){
@@ -127,9 +129,6 @@ export default{
 			let oThis = this;
 			axios.post('/schools/' + this.school.id, new FormData(this.$refs.form))
 				.then((res)=>{
-
-					let options = require('../helpers/toastr.js');
-					toastr.options = options.default;
 					toastr.success(	
 						oThis.$t("This school data is successfully updated!"), 
 						oThis.$t("Successfully updated") 

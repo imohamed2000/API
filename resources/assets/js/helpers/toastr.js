@@ -1,4 +1,4 @@
-export default {
+const options =  {
 		"closeButton": true,
 		"debug": false,
 		"positionClass": "toast-bottom-right",
@@ -12,3 +12,5 @@ export default {
 		"showMethod": "fadeIn",
 		"hideMethod": "fadeOut"
 };
+toastr.options = options;
+export default toastr;
