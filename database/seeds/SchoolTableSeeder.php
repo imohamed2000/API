@@ -12,23 +12,32 @@ class SchoolTableSeeder extends Seeder
      */
     public function run()
     {
-        $schoolLogo = new File();
-        $schoolLogo->filename = str_random(122).'.png';
-        $schoolLogo->original_name = 'school.png';
-        $schoolLogo->type = 'image/png';
-        $schoolLogo->size = '6625.28';
-        $schoolLogo->extension = '.png';
 
-        $schoolLogo->save();
+        $first_school = [
+                'name'  => 'Odigita School',
+                'slug'  => str_slug('Odigita School'),
+                'email' => 'first_school@site.com'
+            ];
 
-        DB::table('schools')->insert([
-            'name' => str_random(10),
-            'slug' => 'schoolA',
-        ]);
+        $second_school =[
+                'name'  => 'مدرسة النجاح',
+                'slug'  => str_slug('مدرسة النجاح'),
+                'email' => 'second_school@site.com'
+            ];
 
-        DB::table('schools')->insert([
-            'name' => str_random(10),
-            'slug' => 'schoolB',
-        ]);
+        $schools = [ $first_school, $second_school ];
+
+        foreach($schools as $school){
+            $school = \App\School::create( $school );
+            $default_roles = ['Student', 'Parent', 'Teacher', 'Moderator'];
+            foreach ($default_roles as $role_name) {
+                $role = \App\Role::create(['name'   => $role_name]);
+                \DB::table('role_school')->insert([
+                        'role_id'   => $role->id,
+                        'school_id' => $school->id
+                    ]);
+            }
+        }
+        
     }
 }

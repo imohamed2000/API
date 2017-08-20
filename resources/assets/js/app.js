@@ -36,7 +36,11 @@ const app = new Vue({
 	created: function(){
 		let title = this.$route.meta.title;
 		let pageTitle = this.$route.meta.pageTitle;
-		setTitle(this, title, pageTitle);
+		if(title !== undefined && pageTitle !== undefined){
+			setTitle(this, title, pageTitle);
+		}else{
+			setTitle(this, 'Home', 'Home');
+		}
 		loadingState(this);
 	}
 });

@@ -16,7 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','title','first_name','last_name','birthday','contact_no','address','gender','avatar'
+        'title', 'first_name', 'last_name',
+        'email', 'password', 'gender',
+        'address', 'phone', 'birth_date', 'avatar'
     ];
 
     /**
@@ -28,13 +30,30 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['name' , 'role'];
+
     public function schools()
     {
-        return $this->belongsToMany('App\School','school_users');
+        return $this->belongsToMany('App\School');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('App\Role','roles_users');
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function support_role(){
+        return $this->hasOne('App\Support');
+    }
+
+    public function getRoleAttribute(){
+        if($this->support_role){
+            return $this->support_role->role;
+        }
+        return $this->roles()->where('user_id', $this->id)->first()->name;
+    }
+
+    public function getNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

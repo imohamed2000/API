@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\School;
 use App\Beak\Upload;
+use App\Events\SchoolCreated;
+use App\School;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -73,7 +74,7 @@ class SchoolsController extends Controller
         $is_valid = $this->validate($request->all(),[
                 'name'              => 'required|max:255',
                 'slug'              => 'required|max:20|unique:schools',
-                'email'             => 'email|nullable',
+                'email'             => 'email|required|unique:schools',
                 'address'           => 'max:255',
                 'city'              => 'max:255',
                 'zip'               => 'max:255',
@@ -102,6 +103,11 @@ class SchoolsController extends Controller
         $school->logo_id = $this->logo;
         $school->save();
 
+        // Trigger School Created Event
+        $event_data = event( new SchoolCreated( $school ) );
+        $school->roles = $event_data[0];
+
+        //Return response
         return $this->response->created($school)->respond();
 
 
@@ -115,7 +121,7 @@ class SchoolsController extends Controller
      */
     public function show($slug)
     {   
-        $school = School::where('slug', $slug)->first();
+        $school = School::with('roles')->where('slug', $slug)->first();
         if(!$school){
             return $this->response->notFound()->respond();
         }

@@ -95,7 +95,7 @@ require('../helpers/bootbox');
 
 // Required Components
 import datatable from './datatable';
-import portlet from './portlet';
+import portlet from './Portlet';
 import modal from './Modal';
 import ImageUpload from './ImageUpload';
 
@@ -259,7 +259,7 @@ export default{
 			let app = this;
 			bootbox.confirm({
 				title: app.$t('Move this school to trash?'),
-				message: app.$t('Do you watn to move this school to trash?'),
+				message: app.$t('Are you sure you want to move this school to trash?'),
 				buttons:{
 					confirm: {
 						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
@@ -272,7 +272,7 @@ export default{
 						.then( (response)=>{
 							jQuery(row).fadeOut('slow');
 							toastr.warning(
-									this.$t('This schools was moved to trash, you can restore it at any time!'),
+									this.$t('This schools was moved to trash, you can restore data at any time!'),
 									this.$t('Trashed!')
 									);
 						} );
@@ -294,8 +294,8 @@ export default{
 						this.createFormReset();
 						// Success Alert
 						toastr.info(
-								this.$t('Success!'),
-								this.$t('A new school was added!')
+								`${this.$t('School')} ${response.data.name} ${this.$t('is created successfully!')}`,
+								this.$t('Success!')
 								);
 						this.submitAnimation.stop();
 					} )

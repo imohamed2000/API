@@ -109,6 +109,14 @@ export default{
 	},
 	mounted(){
 		this.isLoading(false);
+		let title = `${this.school.name} (${this.$t('Edit')})`;
+		setTitle(this.$root, title, title);
+	},
+	watch:{
+		'school.name': function(newVal, oldVal){
+			let title = `${newVal} (${this.$t('Edit')})`;
+			setTitle(this.$root,title, title);
+		}
 	},
 	methods: {
 		...mapActions({
@@ -129,6 +137,7 @@ export default{
 			let oThis = this;
 			axios.post('/schools/' + this.school.id, new FormData(this.$refs.form))
 				.then((res)=>{
+					this.$parent.school = res.data;
 					toastr.success(	
 						oThis.$t("This school data is successfully updated!"), 
 						oThis.$t("Successfully updated") 
@@ -146,5 +155,10 @@ export default{
 					});
 		}
 	},
+	beforeRouteEnter(to, from, next){
+		next(vm=>{
+        	vm.$parent.fetchData();
+		} );
+	}
 }
 </script>

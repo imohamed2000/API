@@ -20,7 +20,7 @@ class School extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User','school_users');
+        return $this->belongsToMany('App\User');
 
     }
     public function classes()
@@ -33,5 +33,9 @@ class School extends Model
             return Storage::disk('public')
                         ->url( $this->logo()->first()->filename );
         return null;
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
     }
 }

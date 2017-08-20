@@ -1,5 +1,5 @@
 <template>
-	<div class="modal fade in" tabindex="-1" aria-hidden="true" v-if="props.show" style="display:block">
+	<div class="modal fade in" tabindex="-1" aria-hidden="true" v-show="props.show" style="display:block">
 		<div :class="size">
 			<div class="modal-content">
 				<div class="modal-header">
