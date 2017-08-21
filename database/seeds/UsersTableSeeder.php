@@ -54,8 +54,7 @@ class UsersTableSeeder extends Seeder
         	$user = \App\User::create( $user );
             if($user->id != 1){
                 $user->schools()->sync([1]);
-                $role = \App\Role::find( $user->id - 1 );
-                $user->roles()->save( $role , ['school_id'   => 1] );
+                $user->roles()->sync( [ $user->id - 1 ] );
             }
         }
 

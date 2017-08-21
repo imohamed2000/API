@@ -107,7 +107,7 @@ class UserController extends Controller
 
         // save User Role
         $role = \App\Role::find( $request->role );
-        $user->roles()->save( $role, ['school_id' => $school->id ]);
+        $user->roles()->save( $role );
 
         return $this->response->created($user)->respond();
 
