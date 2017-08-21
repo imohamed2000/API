@@ -15,8 +15,14 @@ module.exports = [
 	{path: '/schools/:slug', component: require('../components/SchoolsShow'),
 		children: [
 			{path: '', component: require('../components/SchoolAbout'), name: 'schoolsShow'},
-			{path: 'users', component: require('../components/SchoolUsersIndex'), name: 'schoolUsers'},
-			{path: 'edit', component: require('../components/SchoolEdit'), name: 'schoolsEdit'}
+			{path: 'edit', component: require('../components/SchoolEdit'), name: 'schoolsEdit'},
+			// School users 
+			{path: 'users', component: require('../components/SchoolUsersIndex'), name: 'schoolUsersIndex'},
+			{path: 'users/:userID', component: require('../components/SchoolUserShow'),
+				children: [
+					{path: '', component: require('../components/SchoolUserProfile'), name: 'schoolUserProfile'},
+				]
+			},
 		]
 	},
 	// 404 Page

@@ -38,7 +38,7 @@ export default{
 			loading: state => state.misc.loading
 		}),
 		baseUrl: function(){
-			return `/school/${this.school.slug}/users`;
+			return `/schools/${this.school.slug}/users`;
 		},
 		table: function(){
 			let ajaxUrl = `/api/v1/school/${this.school.id}/users?datatables`;

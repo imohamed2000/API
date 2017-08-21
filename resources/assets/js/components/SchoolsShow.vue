@@ -25,7 +25,8 @@ export default{
 	data(){
 		return {
 			school: false,
-			links: [
+			links: [],
+			defLinks: [
 				{path: '', text: "About", icon: "icon-home", quick: [
 					{path: 'edit', text: 'Edit', icon: 'icon-note'},
 				]},
@@ -59,9 +60,13 @@ export default{
 				.then( (response)=>{
 					setTitle(this.$root, response.data.name , response.data.name);
 					this.school = response.data;
+					this.setLinks(this.defLinks);
 				} )
 				.catch(errors=>{});
 			this.isLoading(false);
+		},
+		setLinks(links){
+			this.links = links;
 		},
 	},
 	beforeRouteEnter(to, from, next){

@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -55,5 +56,10 @@ class User extends Authenticatable
 
     public function getNameAttribute(){
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getAvatarAttribute($value){
+       return  Storage::disk('public')
+                           ->url( \App\File::find($value)->filename );
     }
 }

@@ -120,9 +120,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(School $school,$id)
-    {
+    {   
         $data = $school->users()->with('roles')->findOrFail($id);
-
         return $this->response->ok($data)->respond();
     }
 

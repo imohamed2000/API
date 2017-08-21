@@ -121,6 +121,7 @@ class SchoolsController extends Controller
      */
     public function show($slug)
     {   
+        //TODO get school by id
         $school = School::with('roles')->where('slug', $slug)->first();
         if(!$school){
             return $this->response->notFound()->respond();
@@ -148,6 +149,7 @@ class SchoolsController extends Controller
      */
     public function update(Request $request, School $school)
     {   
+        // TODO Update school by slug
         if($request->has('slug'))
             $request->merge([
                     'slug'  => str_slug( $request->input('slug') )
@@ -209,7 +211,8 @@ class SchoolsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        // TODO destroy school by slug
         $school = School::findOrFail($id);
         $school->delete();
         return $this->response->ok(['Deleted'])->respond();
