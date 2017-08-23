@@ -25,7 +25,7 @@ export default{
 		}),
 	},
 	mounted(){
-		this.isLoading(true);
+		
 	},
 	methods: {
 		...mapActions({
@@ -33,7 +33,6 @@ export default{
 		}),
 		fetchData(){
 			this.isLoading(true);
-			this.user = false;
 			let ajaxUrl = `school/${this.$parent.school.id}/users/${this.$route.params.userID}`;
 			// Get user
 			axios.get(ajaxUrl)
@@ -57,14 +56,13 @@ export default{
 			let base = `users/${this.user.id}`;
 			let links = [
 					{path: '', text: 'School Home', icon: 'icon-home'},
-					{path: base, text: 'User Profile', icon: 'icon-user', quick: [
-						{path: `${base}/edit`, text: 'Settings', icon: 'icon-settings'},
-						{path: `${base}/enroll`, text: 'Enrollment', icon: 'icon-graduation'},
-					]},
+					{path: base, text: 'User Profile', icon: 'icon-user'},
 					{path: `${base}/exams`, text: 'Exam Performance', icon: 'icon-book-open'},
 					{path: `${base}/attendance`, text: 'Attendance Status', icon: 'icon-calendar'},
 					{path: `${base}/rank`, text: 'Class Ranking', icon: 'icon-graph'},
 					{path: `${base}/fees`, text: 'Fee status', icon: 'icon-wallet'},
+					{path: `${base}/edit`, text: 'Settings', icon: 'icon-settings'},
+					{path: `${base}/enroll`, text: 'Enrollment', icon: 'icon-graduation'},
 				]
 
 			this.links = links;
@@ -74,6 +72,6 @@ export default{
 		next(vm=>{
 			vm.fetchData();
 		});
-	}
+	},
 }
 </script>

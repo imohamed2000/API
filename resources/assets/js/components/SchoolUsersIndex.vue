@@ -64,7 +64,7 @@ export default{
 							`);
 					}},
 					{"data": "email"},
-					{"data": "role"},
+					{"data": "role.name"},
 					{"data": null, 'fnCreatedCell': (nTd, sData, oData, iRow, iCol)=>{
 						let viewBtn = `
 							<li>

@@ -31,7 +31,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $appends = ['name' , 'role'];
+    protected $appends = ['name' , 'role', 'avatar_url'];
 
     public function schools()
     {
@@ -51,15 +51,18 @@ class User extends Authenticatable
         if($this->support_role){
             return $this->support_role->role;
         }
-        return $this->roles()->where('user_id', $this->id)->first()->name;
+        return $this->roles()->where('user_id', $this->id)->first();
     }
 
     public function getNameAttribute(){
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function getAvatarAttribute($value){
+    public function getAvatarUrlAttribute(){
+       if( !$this->avatar ){
+            return null;
+       }
        return  Storage::disk('public')
-                           ->url( \App\File::find($value)->filename );
+                           ->url( \App\File::find($this->avatar)->filename );
     }
 }

@@ -13,12 +13,12 @@
                     	<div class="sale-summary">
                     		<ul class="list-unstyled">
                     			<li>
-									<img :src="user.avatar" 
+									<img :src="user.avatar_url" 
 									class="img-responsive pic-bordered pic-100 img-circle pic-center" alt="" />
 								</li>
 								<li>
 									<span class="sale-info">
-										<i class="fa fa-briefcase"></i> <span v-text="user.role"></span>
+										<i class="fa fa-briefcase"></i> <span v-text="user.role.name"></span>
 									</span>
 								</li>
 								<li>
@@ -84,6 +84,7 @@ export default{
 	},
 	mounted(){
 		this.isLoading(false);
+		setTitle(this, this.user.name, this.user.name);
 		style.pushStyle('/pages/css/profile-2.min.css');
 		style.pushStyle('/pages/css/about.min.css');
 	},
@@ -95,6 +96,11 @@ export default{
 		...mapActions({
 			isLoading: 'isLoading'
 		})
+	},
+	beforeRouteEnter(to, from, next){
+		next(vm=>{
+			// vm.$parent.fetchData();
+		});
 	}
 }
 </script>

@@ -10,6 +10,7 @@ use App\Beak\Upload;
 class UserController extends Controller
 {
     private $list = ['users.id','first_name', 'last_name','email'];
+    private $default_avatars = [1,2];
 
     /**
      * Display a listing of the resource.
@@ -61,13 +62,13 @@ class UserController extends Controller
             'title'             => 'max:10',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birth_date'        => 'date',
+            'birth_date'        => 'date|nullable',
             'phone'             => 'max:42',
             'address'           => 'max:255',
             'gender'            => 'required|in:male,female',
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required|min:6',
-            'avatar'            => 'image'
+            'avatar'            => 'image|nullable'
         ]);
 
         if(!$is_valid)
@@ -145,17 +146,18 @@ class UserController extends Controller
      */
     public function update(Request $request,School $school, $id)
     {
+        $user = $school->users()->findOrFail($id);
         $is_valid = $this->validate($request->all(),[
-            'role'              => 'required|exists:roles,id',
-            'title'             => 'max:4',
+            'role'              => 'required|exists:roles,id', // TODO validate that the role is connected to the current school
+            'title'             => 'max:10',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birthday'          => 'date',
-            'contact_no'        => 'max:42',
+            'birth_date'        => 'date|nullable',
+            'phone'             => 'max:42',
             'address'           => 'max:255',
             'gender'            => 'required|in:male,female',
-            'email'             => 'required|email',
-            'avatar'            => 'image'
+            'email'             => 'required|email|unique:users,email,' . $user->id,
+            'avatar'            => 'image|nullable'
         ]);
 
         if(!$is_valid)
@@ -163,35 +165,40 @@ class UserController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $user = $school->users()->findOrFail($id);
-
         $user->title        = $request->title;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
-        $user->birthday     = $request->birthday;
-        $user->contact_no   = $request->contact_no;
+        $user->birth_date   = $request->birth_date;
+        $user->phone        = $request->phone;
         $user->address      = $request->address;
         $user->gender       = $request->gender;
-        $avatar = $user->avatar;
-        if($request->exists('avatar'))
-        {
-            $upload = new Upload('avatar','userAvatar','edit',$user->avatar);
-            $avatar = $upload->savedFile->id;
-        }
-        $user->avatar = $avatar;
-
-        $checkEmail = User::where('email',$request->email)->where('id','!=',$user->id)->first();
-        if($checkEmail)
-        {
-            $errorMsg = ['email'=>'The email is already taken.'];
-            return $this->response->badRequest($errorMsg)->respond();
-        }
-
-
-        // Update User Role
-        $role = $request->role;
-        $user->roles()->sync($role);
-
+       
+       // Updating Password
+       if($request->has('password')){
+            $user->password = bcrypt( $request->input('password') );
+       }
+       // Updating Avatar
+       if($request->hasFile('avatar')){
+            $avatar = new Upload;
+            if( in_array($user->avatar, $this->default_avatars) ){
+                // Upload new avatar
+                $avatar->put( $request->file('avatar'), 'users/avatar' );
+            }else{
+                // Override old avatar
+                $avatar->replace( $user->avatar, $request->file('avatar') );
+            }
+            $user->avatar = $avatar->getFileData()->id;
+       }
+       // Clearing Avatar
+       if($request->has('clear_avatar')){
+            $avatar = $user->gender == 'male' ? $this->default_avatars[0] : $this->default_avatars[1];
+            $user->avatar = $avatar;
+       }
+       // Update User Role
+       if($user->role != $request->input('role')){
+        $user->roles()->sync([$request->input('role')]);
+       }
+        
         $user->save();
         return $this->response->ok($user)->respond();
 
