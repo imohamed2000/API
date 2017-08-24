@@ -16,6 +16,7 @@ module.exports = [
 		children: [
 			{path: '', component: require('../components/SchoolAbout'), name: 'schoolsShow'},
 			{path: 'edit', component: require('../components/SchoolEdit'), name: 'schoolsEdit'},
+			{path: 'grades', component: require('../components/SchoolGrades'), name: 'SchoolGrades'},
 			// School users 
 			{path: 'users', component: require('../components/SchoolUsersIndex'), name: 'schoolUsersIndex'},
 			{path: 'users/:userID', component: require('../components/SchoolUserShow'),

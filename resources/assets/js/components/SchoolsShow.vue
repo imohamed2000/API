@@ -27,14 +27,13 @@ export default{
 			school: false,
 			links: [],
 			defLinks: [
-				{path: '', text: "About", icon: "icon-home", quick: [
-					{path: 'edit', text: 'Edit', icon: 'icon-note'},
-				]},
+				{path: '', text: "About", icon: "icon-home"},
 				{path: 'users', text: "Users", icon: "icon-people", quick: [
 					{path: 'users/trash', text: "Deleted users", icon: 'icon-trash'}
 				]},
 				{path: 'grades', text: 'Grades', icon: 'icon-graduation'},
 				{path: 'roles', text: "Roles", icon: "icon-organization"},
+				{path: 'edit', text: 'Edit', icon: 'icon-note'},
 			]
 		};
 	},

@@ -9,21 +9,21 @@
 						<div class="col-md-4">
 							<div class="form-group" :class=" errors.has('title') ? 'has-error' : '' ">
 								<label for="title" v-text="$t('Title')"></label>
-								<input v-model="$parent.user.title" type="text" name="title" class="form-control" id="title" :placeholder="$t('Mr, Mrs, and etc')">
+								<input v-model="user.title" type="text" name="title" class="form-control" id="title" :placeholder="$t('Mr, Mrs, and etc')">
 								<p v-if="errors.has('title')" class="help-block" v-text="errors.get('title')"></p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group" :class=" errors.has('first_name') ? 'has-error' : '' ">
 								<label for="first-name" v-text="$t('First Name')"></label>
-								<input v-model="$parent.user.first_name" type="text" name="first_name" class="form-control" id="first-name" :placeholder="$t('First Name')">
+								<input v-model="user.first_name" type="text" name="first_name" class="form-control" id="first-name" :placeholder="$t('First Name')">
 								<p class="help-block" v-if="errors.has('first_name')" v-text="errors.get('first_name')"></p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group" :class=" errors.has('last_name') ? 'has-error' : '' ">
 								<label for="last-name" v-text="$t('Last Name')"></label>
-								<input v-model="$parent.user.last_name" type="text" name="last_name" class="form-control" id="last-name" :placeholder="$t('Last Name')">
+								<input v-model="user.last_name" type="text" name="last_name" class="form-control" id="last-name" :placeholder="$t('Last Name')">
 								<p class="help-block" v-if="errors.has('last_name')" v-text="errors.get('last_name')"></p>
 							</div>
 						</div>
@@ -33,7 +33,7 @@
 						<div class="col-md-6">
 							<div class="form-group" :class="errors.has('email') ? 'has-error' : '' ">
 								<label for="email" v-text="$t('Email')"></label>
-								<input v-model="$parent.user.email" type="email" name="email" id="email" class="form-control" :placeholder="$t('Email')">
+								<input v-model="user.email" type="email" name="email" id="email" class="form-control" :placeholder="$t('Email')">
 								<p class="help-block" v-text="errors.get('email')"></p>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 						<div class="col-md-6">
 							<div class="form-group" :class="errors.has('gender') ? 'has-error' : ''">
 								<label for="gender" v-text="$t('Gender')"></label>
-								<select  v-model="$parent.user.gender" name="gender" id="gender" class="form-control" @change="onGenderChange">
+								<select  v-model="user.gender" name="gender" id="gender" class="form-control" @change="onGenderChange">
 									<option value="0" v-text="`_` + $t('Select Gender')"></option>
 									<option value="male" v-text="$t('Male')"></option>
 									<option value="female" v-text="$t('Female')"></option>
@@ -69,7 +69,7 @@
 						<div class="col-md-6">
 							<div class="form-group" :class="errors.has('role') ? 'has-error' : ''">
 								<label for="role" v-text="$t('Role')"></label>
-								<select  v-model="$parent.user.role.id" name="role" id="role" class="form-control" @change="errors.clear('role')">
+								<select  v-model="user.role.id" name="role" id="role" class="form-control" @change="errors.clear('role')">
 									<option value="0" v-text="`_`+$t('Select Role')"></option>
 									<option v-for="role in $parent.$parent.school.roles" :value="role.id" v-text="role.name"></option>
 								</select>
@@ -82,7 +82,7 @@
 						<div class="col-md-12">
 							<div class="form-group" :class="errors.has('address') ? 'has-error' : '' ">
 								<label for="address" v-text="$t('Address')"></label>
-								<textarea v-model="$parent.user.address" name="address" id="address" class="form-control" :placeholder="$t('Address')"></textarea>
+								<textarea v-model="user.address" name="address" id="address" class="form-control" :placeholder="$t('Address')"></textarea>
 								<p class="help-block" v-text="errors.get('address')"></p>
 							</div>
 						</div>
@@ -92,14 +92,14 @@
 						<div class="col-md-6">
 							<div class="form-group" :class="errors.has('phone') ? 'has-error' : '' ">
 								<label for="phone" v-text="$t('Phone')"></label>
-								<input v-model="$parent.user.phone" type="phone" name="phone" id="phone" class="form-control" :placeholder="$t('Phone')">
+								<input v-model="user.phone" type="phone" name="phone" id="phone" class="form-control" :placeholder="$t('Phone')">
 								<p class="help-block" v-text="errors.get('phone')"></p>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group" :class="errors.has('birth_date') ? 'has-error': ''">
 								<label for="birth-date" v-text="$t('Birth Date')"></label>
-								<input v-model="$parent.user.birth_date" @change="errors.clear('birth_date')" type="date" name="birth_date" id="birth-date" class="form-control" :placeholder="$t('Birth Date')">
+								<input v-model="user.birth_date" @change="errors.clear('birth_date')" type="date" name="birth_date" id="birth-date" class="form-control" :placeholder="$t('Birth Date')">
 								<p class="help-block" v-text="errors.get('birth_date')"></p>
 							</div>
 						</div>
@@ -147,16 +147,19 @@ export default{
 	},
 	data(){
 		return {
-			portlet : {
-				title : this.$parent.user.name,
-				icon: 'icon-user'
-			},
 			clearAvatar: '',
 			errors: new Errors(),
 			submitAnimation: null,
 		};
 	},
 	computed: {
+		portlet: function(){
+			let portlet = {
+				title: this.user.name,
+				icon: 'icon-user'
+			};
+			return portlet;
+		},
 		imageUpload: function(){
 			return {
 				currentFile: this.$parent.user.avatar_url,
@@ -170,8 +173,6 @@ export default{
 	},
 	mounted(){
 		this.isLoading(false);
-		let pageTitle = `${this.portlet.title} (${this.$t("Settings")})`;
-		setTitle(this,  pageTitle, pageTitle);
 	},
 	methods: {
 		...mapActions({
@@ -222,6 +223,18 @@ export default{
 						.then(()=>{
 							this.submitAnimation.stop();
 						});
+		},
+		setPageTitle(){
+			let pageTitle = `${this.user.first_name} ${this.user.last_name} (${this.$t('Settings')})`;
+			setTitle(this, pageTitle, pageTitle);
+		}
+	},
+	watch: {
+		'user.first_name': function(newVal, oldVal){
+			this.setPageTitle();
+		},
+		'user.last_name': function(newVal, oldVal){
+			this.setPageTitle();
 		},
 	},
 	beforeRouteEnter(to, from, next){

@@ -12,8 +12,8 @@
         <script src="/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
         <script src="/plugins/backstretch/jquery.backstretch.js" type="text/javascript"></script>
         <script src="/plugins/backstretch/jquery.backstretch.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="/plugins/bootbox/bootbox.min.js"></script>
+        <script src="/plugins/toastr/toastr.min.js"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="/js/app.min.js" type="text/javascript"></script>

@@ -23,9 +23,9 @@ class School extends Model
         return $this->belongsToMany('App\User');
 
     }
-    public function classes()
-    {
-        return $this->hasMany('App\Classes','school_id');
+    
+    public function grades(){
+        return $this->hasMany('App\Grade');
     }
 
     public function getLogoAttribute(){
