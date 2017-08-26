@@ -217,4 +217,34 @@ class SchoolsController extends Controller
         $school->delete();
         return $this->response->ok(['Deleted'])->respond();
     }
+
+    /**
+     * Display Trashed
+     *
+     * @return \App\Beak\Response
+     */
+    public function trashed()
+    {
+        $trashed = School::onlyTrashed()->get();
+
+        return $this->response->ok($trashed)->respond();
+    }
+
+    /**
+     * Restore  specific trashed
+     * @param  \App\School  $school
+     * @return \App\Beak\Response
+     */
+    public function restore(School $school)
+    {
+        if ($school->trashed())
+        {
+            $school->restore();
+            return $this->response->ok($school)->respond();
+        }
+
+        return $this->response->badRequest(['Error request'])->respond();
+    }
+
+
 }

@@ -216,4 +216,31 @@ class UserController extends Controller
         $user->delete();
         return $this->response->ok(['Deleted'])->respond();
     }
+
+    /**
+     * Display Trashed
+     * @param \App\School $school
+     * @return \App\Beak\Response
+     */
+    public function trashed(School $school)
+    {
+        $trashed = $school->users()->onlyTrashed()->get();
+        return $this->response->ok($trashed)->respond();
+    }
+    /**
+     * Restore  specific trashed
+     * @param  \App\School  $school
+     * @param int $id
+     * @return \App\Beak\Response
+     */
+    public function restore(School $school,$id)
+    {
+        $user = $school->users()->findOrFail($id);
+        if ($user->trashed())
+        {
+            $user->restore();
+            return $this->response->ok($user)->respond();
+        }
+        return $this->response->badRequest(['Error request'])->respond();
+    }
 }

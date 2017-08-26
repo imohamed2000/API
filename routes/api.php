@@ -26,12 +26,18 @@ Route::group(['prefix' => 'v1'], function () {
 	Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     Route::resource('schools','SchoolsController');
+    Route::get('schools/trashed','SchoolsController@trashed');
+    Route::post('schools/restore/{id}','SchoolsController@restore');
     Route::resource('school.users', 'UserController');
+    Route::get('school/{School}/users/trashed','UserController@trashed');
+    Route::post('school/{school}/users/{user}/restore','UserController@restore');
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.classes.sections', 'SectionsController');
     Route::resource('school.roles', 'RolesController');
     Route::apiResource('school.grades', 'GradeController');
     Route::post('school/{school}/grades/sort', 'GradeController@sort');
+    Route::get('school/{School}/grades/trashed','GradeController@trashed');
+    Route::post('school/{school}/grades/{grade}/restore','GradeController@restore');
     Route::resource('permissions', 'PermissionsController');
     //Route::resource('roles.permissions','RolesPermissionsController');
 
