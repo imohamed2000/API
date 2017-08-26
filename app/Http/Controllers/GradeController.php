@@ -106,13 +106,8 @@ class GradeController extends Controller
     public function destroy(School $school, $id)
     {
         $grade = $school->grades()->findOrFail($id);
-        if($grade->delete())
-        {
-            return $this->response->ok(['Deleted'])->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        $grade->delete();
+        return $this->response->ok(['Deleted'])->respond();
+
     }
 }
