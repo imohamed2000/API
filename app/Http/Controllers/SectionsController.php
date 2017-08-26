@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use App\Section;
 use Illuminate\Http\Request;
 use App\School;
+use Illuminate\Validation\Rule;
 
 class SectionsController extends Controller
 {
-    private $list = ['name','created_at'];
+    private $list = ['id','name','grade_id'];
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,School $school,$class_id)
+    public function index(Request $request,School $school)
     {
-        $data = $school->classes()->findOrFail($class_id);
-        $data = $data->sections()->select($this->list);
+        $data = $school->sections()->select($this->list)->with('grade');
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -53,25 +53,26 @@ class SectionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,School $school,$class_id)
+    public function store(Request $request,School $school)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
-        ]);
+            'grade_id'         => 'required|exists:grades,id'
+            ]);
 
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
         }
 
+        $school->grades()->findOrFail($request->grade_id);
+
         $attr = [
-            'name'             => $request->name,
+            'name'              => $request->name,
+            'grade_id'          => $request->grade_id,
+            'school_id'         => $school->id
         ];
-
-        $class = $school->classes()->findOrFail($class_id);
-
-
-        $section = $class->sections()->create($attr);
+        $section = Section::create($attr);
 
         return $this->response->created($section)->respond();
     }
@@ -105,10 +106,11 @@ class SectionsController extends Controller
      * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,School $school,$class_id,$section_id)
+    public function update(Request $request,School $school,$id)
     {
         $is_valid = $this->validate($request->all(),[
             'name'             => 'required|max:255',
+            'grade_id'         => 'required|exists:grades,id'
         ]);
 
         if(!$is_valid)
@@ -116,14 +118,14 @@ class SectionsController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
+        $school->grades()->findOrFail($request->grade_id);
+
+        $section = $school->sections()->findOrFail($id);
+
         $attr = [
-            'name'             => $request->name,
+            'name'              => $request->name,
+            'grade_id'          => $request->grade_id,
         ];
-
-        $class = $school->classes()->findOrFail($class_id);
-
-
-        $section = $class->sections()->findOrFail($section_id);
 
         $section->update($attr);
 
@@ -136,21 +138,10 @@ class SectionsController extends Controller
      * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school,$class_id,Section $section)
+    public function destroy(School $school,$id)
     {
-        $class = $school->classes()->findOrFail($class_id);
-
-
-        $section = $class->sections()->findOrFail($section->id);
-
-        if($section->delete())
-        {
-
-            return $this->response->ok(['Deleted'])->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        $section = $school->sections()->findOrFail($id);
+        $section->delete();
+        return $this->response->ok(['Deleted'])->respond();
     }
 }

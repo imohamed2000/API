@@ -10,4 +10,9 @@ class Section extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function grade()
+    {
+        return $this->belongsTo('App\Grade');
+    }
 }
