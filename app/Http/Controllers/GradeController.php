@@ -138,5 +138,6 @@ class GradeController extends Controller
             return $this->response->ok($grade)->respond();
         }
         return $this->response->badRequest(['Error request'])->respond();
+        
     }
 }
