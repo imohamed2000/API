@@ -7,8 +7,18 @@
 					<GradesIndex :grades="grades" v-if="grades" :url="gradesIndexUrl"></GradesIndex>
 				</div>
 				<div class="col-md-4">
-					<SchoolGradeCreate v-if="!editGrade" :url="gradesIndexUrl" :grades="grades"></SchoolGradeCreate>
-					
+
+					<SchoolGradeCreate 
+						v-if="!editGrade" 
+						:url="gradesIndexUrl" 
+						:grades="grades">
+						</SchoolGradeCreate>
+
+					<SchoolGradeEdit v-if="editGrade" 
+						:url="gradesIndexUrl" 
+						:gradeID="activeGradeID" 
+						:gradeName="activeGradeName">
+						</SchoolGradeEdit>		
 				</div>
 			</div>		
 		</portlet>
@@ -55,19 +65,21 @@ let style = new $style();
 import Portlet from './Portlet';
 import GradesIndex from './SchoolGradesIndex';
 import SchoolGradeCreate from './SchoolGradeCreate';
+import SchoolGradeEdit from './SchoolGradeEdit';
 
 export default{
 	components: {
 		portlet: Portlet,
 		GradesIndex,
 		SchoolGradeCreate,
+		SchoolGradeEdit,
 	},
 	data(){
 		return {
 			grades: false,
-			activeGradeID: 1,
-			activeGradeName: "",
-			editGrade: false			
+			activeGradeID: null,
+			activeGradeName: null,
+			editGrade: true			
 		};
 	},
 	computed: {

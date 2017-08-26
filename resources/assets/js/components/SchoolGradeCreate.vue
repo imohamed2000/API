@@ -2,14 +2,14 @@
 	<portlet :props="{title: $t('New Grade'), class:'solid grey-cararra', icon:'icon-plus'}">
 		<form ref="form" slot="body" @submit.prevent="onSubmit" @keydown="errors.clear( $event.target.name )">
 			<div class="form-group" :class="errors.has('name') ? 'has-error' : ''">
-				<input type="text" name="name" id="name" class="form-control" placeholder="Grade Name">
+				<input type="text" name="name" id="name" class="form-control" :placeholder="$t('Grade Name')">
 				<p class="help-block" v-text="errors.get('name')"></p>
 			</div>
 			<div class="row" slot="footer">
 				<div class="col-md-12">
 					<button class="pull-right btn green mt-ladda-btn ladda-button"
 					 data-style="zoom-in" 
-					 type="submit" ref="submit">Submit</button>
+					 type="submit" ref="submit" v-text="$t('Submit')"></button>
 				</div>
 			</div>
 		</form>

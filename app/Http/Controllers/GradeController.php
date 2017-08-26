@@ -63,6 +63,7 @@ class GradeController extends Controller
     		return $this->response->badRequest( $this->errors )->respond();
     	}
 
+        // Calculating order based on the last inserted grade order
     	$last_grade = \App\Grade::where('school_id', $school->id)->orderBy('order', 'desc')->first();
     	$order = $last_grade ? $last_grade->order + 1 : 1;
 
