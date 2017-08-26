@@ -15,7 +15,7 @@ class School extends Model
 
     public function logo()
     {
-        return $this->belongsTo('App\File','logo_id');
+        return $this->belongsTo('App\File', 'logo_id');
     }
 
     public function users()
@@ -23,19 +23,27 @@ class School extends Model
         return $this->belongsToMany('App\User');
 
     }
-    
-    public function grades(){
+
+    public function grades()
+    {
         return $this->hasMany('App\Grade');
     }
 
-    public function getLogoAttribute(){
-        if($this->logo_id)
+    public function getLogoAttribute()
+    {
+        if ($this->logo_id)
             return Storage::disk('public')
-                        ->url( $this->logo()->first()->filename );
+                ->url($this->logo()->first()->filename);
         return null;
     }
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany('App\Role');
+    }
+
+    public function sections()
+    {
+        return $this->hasMany('App\Section');
     }
 }
