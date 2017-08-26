@@ -4,7 +4,12 @@
 			<div class="row" slot="body">
 				<div class="col-md-8">
 					<p v-text="$t('Loading ...')" v-if="!grades"></p>
-					<GradesIndex :grades="grades" v-if="grades" :url="gradesIndexUrl"></GradesIndex>
+					<GradesIndex :grades="grades" 
+								v-if="grades" 
+								:url="gradesIndexUrl"
+								@edit="onGradeEdit"
+								@delete="onGradeDelete">
+								</GradesIndex>
 				</div>
 				<div class="col-md-4">
 
@@ -17,7 +22,8 @@
 					<SchoolGradeEdit v-if="editGrade" 
 						:url="gradesIndexUrl" 
 						:gradeID="activeGradeID" 
-						:gradeName="activeGradeName">
+						:gradeName="activeGradeName"
+						@cancel="editGrade = false">
 						</SchoolGradeEdit>		
 				</div>
 			</div>		
@@ -58,7 +64,7 @@ import { mapActions } from 'vuex';
 import axios from '../helpers/http';
 //import Errors from '../helpers/errors';
 //import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+import toastr from '../helpers/toastr.js';
 import $style from '../helpers/style.js';
 let style = new $style();
 
@@ -79,7 +85,7 @@ export default{
 			grades: false,
 			activeGradeID: null,
 			activeGradeName: null,
-			editGrade: true			
+			editGrade: false			
 		};
 	},
 	computed: {
@@ -114,7 +120,39 @@ export default{
 				.then((response)=>{
 					this.grades = response.data;
 				});
-		}
+		},
+		onGradeEdit: function(grade){
+			this.editGrade = true;
+			this.activeGradeID = grade.id;
+			this.activeGradeName = grade.name;
+		},
+		onGradeDelete: function(grade){
+			// Confirm action
+			let oThis = this;
+			bootbox.confirm({
+				title: oThis.$t('Delete this Grade.'),
+				message: oThis.$t('Are you sure, you want to delete this grade?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Delete'),
+						className: 'btn-danger'
+					}
+				},
+				callback: function(result){
+					
+					if(result){
+						axios.delete(`${oThis.gradesIndexUrl}/${grade.id}`)
+							.then( response =>{
+								oThis.fetchData();
+								toastr.warning(
+									oThis.$t('This Grade is trashed'),
+									oThis.$t('Trashed!')
+									);
+							});
+					}
+				}
+			});
+		},
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{
