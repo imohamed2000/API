@@ -29,6 +29,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('schools/trashed','SchoolsController@trashed');
     Route::post('schools/restore/{id}','SchoolsController@restore');
     Route::resource('school.users', 'UserController');
+    Route::get('school/{School}/users/trashed','UserController@trashed');
+    Route::post('school/{school}/users/{user}/restore','UserController@restore');
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.classes.sections', 'SectionsController');
     Route::resource('school.roles', 'RolesController');
