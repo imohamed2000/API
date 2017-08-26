@@ -25,10 +25,15 @@ export default{
 	data(){
 		return {
 			school: false,
-			links: [
+			links: [],
+			defLinks: [
 				{path: '', text: "About", icon: "icon-home"},
-				{path: 'users', text: "Users", icon: "icon-users"},
-				{path: 'edit', text: 'Edit', icon: 'icon-settings'}
+				{path: 'users', text: "Users", icon: "icon-people", quick: [
+					{path: 'users/trash', text: "Deleted users", icon: 'icon-trash'}
+				]},
+				{path: 'grades', text: 'Grades', icon: 'icon-graduation'},
+				{path: 'roles', text: "Roles", icon: "icon-organization"},
+				{path: 'edit', text: 'Edit', icon: 'icon-note'},
 			]
 		};
 	},
@@ -38,7 +43,6 @@ export default{
 		}),
 	},
 	mounted(){
-		this.fetchData();
 		
 	},
 	destroyed(){
@@ -50,13 +54,18 @@ export default{
 		}),
 		fetchData(){
 			this.isLoading(true);
+			this.school = false;
 			axios.get('schools/' + this.$route.params.slug)
 				.then( (response)=>{
-					this.school = response.data;
 					setTitle(this.$root, response.data.name , response.data.name);
+					this.school = response.data;
+					this.setLinks(this.defLinks);
 				} )
 				.catch(errors=>{});
 			this.isLoading(false);
+		},
+		setLinks(links){
+			this.links = links;
 		},
 	},
 	beforeRouteEnter(to, from, next){

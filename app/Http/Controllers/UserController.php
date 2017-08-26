@@ -9,8 +9,8 @@ use App\Beak\Upload;
 
 class UserController extends Controller
 {
-    private $list = ['title','first_name','last_name','email'];
-
+    private $list = ['users.id','first_name', 'last_name','email'];
+    private $default_avatars = [1,2];
 
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request,School $school)
-    {
-        $data = $school->users()->select($this->list);
+    {   
+        $data = $school->users()->latest()->select($this->list);
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -58,17 +58,17 @@ class UserController extends Controller
     public function store(Request $request,School $school)
     {
         $is_valid = $this->validate($request->all(),[
-            'role'              => 'required|exists:roles,id',
-            'title'             => 'max:4',
+            'role'              => 'required|exists:roles,id', // TODO validate that the role is connected to the current school
+            'title'             => 'max:10',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birthday'          => 'date',
-            'contact_no'        => 'max:42',
+            'birth_date'        => 'date|nullable',
+            'phone'             => 'max:42',
             'address'           => 'max:255',
             'gender'            => 'required|in:male,female',
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required|min:6',
-            'avatar'            => 'image'
+            'avatar'            => 'image|nullable'
         ]);
 
         if(!$is_valid)
@@ -76,9 +76,10 @@ class UserController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
         if($request->hasFile('avatar'))
-        {
-            $upload = new Upload('avatar','userAvatar','add');
-            $avatar = $upload->savedFile->id;
+        {   
+            $avatar = new Upload;
+            $avatar->put( $request->file('avatar'), 'users/avatar' );
+            $avatar = $avatar->getFileData()->id;
         }
         else
         {
@@ -94,19 +95,20 @@ class UserController extends Controller
             'title'             => $request->title,
             'first_name'        => $request->first_name,
             'last_name'         => $request->last_name,
-            'birthday'          => $request->birthday,
-            'contact_no'        => $request->contact_no,
+            'birth_date'        => $request->birth_date,
+            'phone'             => $request->phone,
             'address'           => $request->address,
             'gender'            => $request->gender,
             'email'             => $request->email,
             'password'          => bcrypt($request->password),
             'avatar'            => $avatar
         ];
+
         $user = $school->users()->create($attr);
 
         // save User Role
-        $role = $request->role;
-        $user->roles()->sync($role);
+        $role = \App\Role::find( $request->role );
+        $user->roles()->save( $role );
 
         return $this->response->created($user)->respond();
 
@@ -119,9 +121,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(School $school,$id)
-    {
+    {   
         $data = $school->users()->with('roles')->findOrFail($id);
-
         return $this->response->ok($data)->respond();
     }
 
@@ -145,17 +146,18 @@ class UserController extends Controller
      */
     public function update(Request $request,School $school, $id)
     {
+        $user = $school->users()->findOrFail($id);
         $is_valid = $this->validate($request->all(),[
-            'role'              => 'required|exists:roles,id',
-            'title'             => 'max:4',
+            'role'              => 'required|exists:roles,id', // TODO validate that the role is connected to the current school
+            'title'             => 'max:10',
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'birthday'          => 'date',
-            'contact_no'        => 'max:42',
+            'birth_date'        => 'date|nullable',
+            'phone'             => 'max:42',
             'address'           => 'max:255',
             'gender'            => 'required|in:male,female',
-            'email'             => 'required|email',
-            'avatar'            => 'image'
+            'email'             => 'required|email|unique:users,email,' . $user->id,
+            'avatar'            => 'image|nullable'
         ]);
 
         if(!$is_valid)
@@ -163,35 +165,40 @@ class UserController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $user = $school->users()->findOrFail($id);
-
         $user->title        = $request->title;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
-        $user->birthday     = $request->birthday;
-        $user->contact_no   = $request->contact_no;
+        $user->birth_date   = $request->birth_date;
+        $user->phone        = $request->phone;
         $user->address      = $request->address;
         $user->gender       = $request->gender;
-        $avatar = $user->avatar;
-        if($request->exists('avatar'))
-        {
-            $upload = new Upload('avatar','userAvatar','edit',$user->avatar);
-            $avatar = $upload->savedFile->id;
-        }
-        $user->avatar = $avatar;
-
-        $checkEmail = User::where('email',$request->email)->where('id','!=',$user->id)->first();
-        if($checkEmail)
-        {
-            $errorMsg = ['email'=>'The email is already taken.'];
-            return $this->response->badRequest($errorMsg)->respond();
-        }
-
-
-        // Update User Role
-        $role = $request->role;
-        $user->roles()->sync($role);
-
+       
+       // Updating Password
+       if($request->has('password')){
+            $user->password = bcrypt( $request->input('password') );
+       }
+       // Updating Avatar
+       if($request->hasFile('avatar')){
+            $avatar = new Upload;
+            if( in_array($user->avatar, $this->default_avatars) ){
+                // Upload new avatar
+                $avatar->put( $request->file('avatar'), 'users/avatar' );
+            }else{
+                // Override old avatar
+                $avatar->replace( $user->avatar, $request->file('avatar') );
+            }
+            $user->avatar = $avatar->getFileData()->id;
+       }
+       // Clearing Avatar
+       if($request->has('clear_avatar')){
+            $avatar = $user->gender == 'male' ? $this->default_avatars[0] : $this->default_avatars[1];
+            $user->avatar = $avatar;
+       }
+       // Update User Role
+       if($user->role != $request->input('role')){
+        $user->roles()->sync([$request->input('role')]);
+       }
+        
         $user->save();
         return $this->response->ok($user)->respond();
 
@@ -206,15 +213,7 @@ class UserController extends Controller
     public function destroy(School $school,$id)
     {
         $user = $school->users()->findOrFail($id);
-
-        if($user->delete())
-        {
-
-            return $this->response->ok(['Deleted'])->respond();
-        }
-        else
-        {
-            return $this->response->notFound()->respond();
-        }
+        $user->delete();
+        return $this->response->ok(['Deleted'])->respond();
     }
 }

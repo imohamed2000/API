@@ -13,7 +13,7 @@ class CreateSchoolUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_users',function(Blueprint $table){
+        Schema::create('school_user',function(Blueprint $table){
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -29,6 +29,6 @@ class CreateSchoolUsersTable extends Migration
      */
     public function down()
     {   
-        Schema::drop('school_users');
+        Schema::drop('school_user');
     }
 }

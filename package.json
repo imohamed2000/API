@@ -15,11 +15,14 @@
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^3.2.3",
     "jquery": "^3.1.1",
+    "jquery-contextmenu": "^2.5.0",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
+    "randomstring": "^1.1.5",
     "vue": "^2.1.10",
     "vue-axios": "^2.0.2",
     "vue-router": "^2.5.3",
+    "vuedraggable": "^2.14.1",
     "vuex": "^2.3.1"
   },
   "dependencies": {

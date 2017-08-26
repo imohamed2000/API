@@ -92,6 +92,8 @@
 
 	export default{
 		mounted(){
+            console.log( this.$router.options.routes );
+            console.error(404);
 			style.pushStyle('/pages/css/error.min.css');
 		},
 		destroyed(){

@@ -1,7 +1,7 @@
-export default {
+const options =  {
 		"closeButton": true,
 		"debug": false,
-		"positionClass": "toast-bottom-right",
+		"positionClass": "toast-top-left",
 		"onclick": null,
 		"showDuration": "1000",
 		"hideDuration": "1000",
@@ -9,6 +9,8 @@ export default {
 		"extendedTimeOut": "1000",
 		"showEasing": "swing",
 		"hideEasing": "linear",
-		"showMethod": "fadeIn",
-		"hideMethod": "fadeOut"
+		"showMethod": "slideDown",
+		"hideMethod": "slideUp",
 };
+toastr.options = options;
+export default toastr;

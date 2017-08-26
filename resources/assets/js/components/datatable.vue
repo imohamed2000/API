@@ -70,7 +70,17 @@ export default{
             let component = this;
             jQuery(this.tableSelector).on('click', 'tr', function(event) {
                 let data = table.row( this ).data();
+                // Trigger row click event
                 component.$emit('rowClick', event, data, this);
+                // Trigger delete element event
+                if(jQuery(event.target).is('.delete-element')){
+                    component.$emit('deleteElement', event, data, this);
+                }
+                // dynamiclally created links
+                if(jQuery(event.target).is('.router-link')){
+                    event.preventDefault();
+                    component.$router.push(event.target.getAttribute('href'));
+                }
             });
         },
         refresh: function(){

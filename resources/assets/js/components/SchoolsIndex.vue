@@ -88,15 +88,17 @@ import jQuery from 'jquery';
 import axios from '../helpers/http';
 import Errors from '../helpers/errors';
 import ladda from 'ladda';
+import toastr from '../helpers/toastr.js';
 
 require('bootstrap');
 require('../helpers/bootbox');
 
 // Required Components
 import datatable from './datatable';
-import portlet from './portlet';
+import portlet from './Portlet';
 import modal from './Modal';
 import ImageUpload from './ImageUpload';
+
 
 export default{
 	data(){
@@ -257,7 +259,7 @@ export default{
 			let app = this;
 			bootbox.confirm({
 				title: app.$t('Move this school to trash?'),
-				message: app.$t('Do you watn to move this school to trash?'),
+				message: app.$t('Are you sure you want to move this school to trash?'),
 				buttons:{
 					confirm: {
 						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
@@ -269,17 +271,10 @@ export default{
 						axios.delete('schools/' + data.id)
 						.then( (response)=>{
 							jQuery(row).fadeOut('slow');
-							bootbox.alert({
-								message: app.$t('Moved to trash!'),
-								title: app.$t('Moved to trash!'),
-								size: 'small',
-								buttons: {
-									ok: {
-										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
-										className: 'green'
-									}
-								}
-							});
+							toastr.warning(
+									this.$t('This schools was moved to trash, you can restore data at any time!'),
+									this.$t('Trashed!')
+									);
 						} );
 					}
 				}
@@ -298,17 +293,10 @@ export default{
 						// Reset form
 						this.createFormReset();
 						// Success Alert
-						bootbox.alert({
-								message: app.$t('A new school was added!'),
-								title: app.$t('Success!'),
-								size: 'small',
-								buttons: {
-									ok: {
-										label: '<i class="icon-check"></i> ' + app.$t('Ok'),
-										className: 'green'
-									}
-								}
-						});
+						toastr.info(
+								`${this.$t('School')} ${response.data.name} ${this.$t('is created successfully!')}`,
+								this.$t('Success!')
+								);
 						this.submitAnimation.stop();
 					} )
 						.catch( (err)=>{
