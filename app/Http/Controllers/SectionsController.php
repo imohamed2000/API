@@ -129,7 +129,7 @@ class SectionsController extends Controller
 
         $section->update($attr);
 
-        return $this->response->created($section)->respond();
+        return $this->response->ok($section)->respond();
     }
 
     /**
