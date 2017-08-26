@@ -81,7 +81,7 @@ class GradeController extends Controller
     public function update(Request $request, School $school, $id)
     {
         $is_valid = $this->validate($request->all(),[
-            'name'             => 'required|max:255',
+            'name'  => 'required|max:255',
         ]);
 
         if(!$is_valid)
@@ -90,7 +90,7 @@ class GradeController extends Controller
         }
 
         $attr = [
-            'name'             => $request->name,
+            'name'  => $request->name,
         ];
 
         $grade = $school->grades()->findOrFail($id);
@@ -109,5 +109,34 @@ class GradeController extends Controller
         $grade->delete();
         return $this->response->ok(['Deleted'])->respond();
 
+    }
+
+    /**
+     * Display Trashed
+     * @param \App\School $school
+     * @return \App\Beak\Response
+     */
+    public function trashed(School $school)
+    {
+        $trashed = $school->grades()->onlyTrashed()->get();
+        return $this->response->ok($trashed)->respond();
+    }
+
+
+    /**
+     * Restore  specific trashed
+     * @param  \App\School  $school
+     * @param int $id
+     * @return \App\Beak\Response
+     */
+    public function restore(School $school,$id)
+    {
+        $grade = $school->grades()->findOrFail($id);
+        if($grade->trashed())
+        {
+            $grade->restore();
+            return $this->response->ok($grade)->respond();
+        }
+        return $this->response->badRequest(['Error request'])->respond();
     }
 }

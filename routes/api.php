@@ -36,6 +36,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::resource('school.roles', 'RolesController');
     Route::apiResource('school.grades', 'GradeController');
     Route::post('school/{school}/grades/sort', 'GradeController@sort');
+    Route::get('school/{School}/grades/trashed','GradeController@trashed');
+    Route::post('school/{school}/grades/{grade}/restore','GradeController@restore');
     Route::resource('permissions', 'PermissionsController');
     //Route::resource('roles.permissions','RolesPermissionsController');
 
