@@ -44,6 +44,6 @@ class School extends Model
 
     public function sections()
     {
-        return $this->hasMany('App\Section');
+        return $this->hasMany('App\Section')->select('id','name');
     }
 }
