@@ -16,8 +16,10 @@ class CreateSectionsTable extends Migration
         Schema::create('sections',function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
-            $table->integer('class_id')->unsigned();;
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->integer('grade_id')->unsigned();;
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->integer('school_id')->unsigned();;
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
