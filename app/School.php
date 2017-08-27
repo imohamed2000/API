@@ -46,4 +46,9 @@ class School extends Model
     {
         return $this->hasMany('App\Section')->select('id','name');
     }
+
+    public function years()
+    {
+        return $this->hasMany('App\Year');
+    }
 }
