@@ -46,7 +46,7 @@ export default{
 				class: 'table table-striped table-bordered table-hover dt-responsive',
 				width: '100%',
 				processing: true,
-    			// serverSide: true,
+    			serverSide: true,
         		lengthMenu: [25, 50, 75, 100 ],
 				ajax:{ url: ajaxUrl},
 				headers: [

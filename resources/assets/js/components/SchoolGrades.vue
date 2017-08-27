@@ -31,28 +31,11 @@
 		<portlet :props="{title: $t('Sections')}">
 			<div class="row" slot="body">
 				<div class="col-md-8">
-					<portlet :props="{title: $t('Sections'), class: 'solid grey-cararra'}">
-						<p slot="body">
-							DataTable goes here
-						</p>
-					</portlet>
+					<p v-if="!sections" v-text="$t('Loading ..')"></p>
+					<SchoolSectionsIndex v-if="sections" :url="sectionsIndexUrl" ref="sections"></SchoolSectionsIndex>
 				</div>
 				<div class="col-md-4">
-					<portlet :props="{title: $t('Map or edit'), class:'solid grey-cararra', icon:'icon-plus'}">
-						<form action="" slot="body">
-							<div class="form-group">
-								<input type="text" name id="name" class="form-control" placeholder="Grade Name">
-								<p class="help-block"></p>
-							</div>
-							<div class="row" slot="footer">
-								<div class="col-md-12">
-									<button class="pull-right btn green mt-ladda-btn ladda-button"
-									 data-style="zoom-in" 
-									 type="submit">Submit</button>
-								</div>
-							</div>
-						</form>
-					</portlet>
+					<SchoolSectionsCreate v-if="!editSection" :url="sectionsIndexUrl" @updated="onSectionsUpdate"></SchoolSectionsCreate>
 				</div>
 			</div>
 		</portlet>
@@ -72,6 +55,8 @@ import Portlet from './Portlet';
 import GradesIndex from './SchoolGradesIndex';
 import SchoolGradeCreate from './SchoolGradeCreate';
 import SchoolGradeEdit from './SchoolGradeEdit';
+import SchoolSectionsIndex from './SchoolSectionsIndex';
+import SchoolSectionsCreate from './SchoolSectionsCreate';
 
 export default{
 	components: {
@@ -79,18 +64,25 @@ export default{
 		GradesIndex,
 		SchoolGradeCreate,
 		SchoolGradeEdit,
+		SchoolSectionsIndex,
+		SchoolSectionsCreate,
 	},
 	data(){
 		return {
 			grades: false,
+			sections: [],
 			activeGradeID: null,
 			activeGradeName: null,
-			editGrade: false			
+			editGrade: false,
+			editSection: false,			
 		};
 	},
 	computed: {
 		gradesIndexUrl: function(){
 			return `/school/${this.$parent.school.id}/grades`;
+		},
+		sectionsIndexUrl: function(){
+			return `/school/${this.$parent.school.id}/sections`;
 		},
 		pageTitle: function(){
 			return `${this.$parent.school.name} ${this.$t('Grades')}`;
@@ -153,6 +145,9 @@ export default{
 				}
 			});
 		},
+		onSectionsUpdate: function(){
+			this.$refs.sections.$refs.table.refresh();
+		}
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{

@@ -39,6 +39,16 @@ export default{
         // inset locale stylesheet
 		let locale = this.$i18n.locale() === null ? 'en' : this.$i18n.locale();
 		style.pushStyle('/plugins/datatables/plugins/bootstrap/'+ locale +'.css');
+        // Disable datatables alerts
+        window.alert = (function() {
+            var nativeAlert = window.alert;
+            return function(message) {
+                window.alert = nativeAlert;
+                message.indexOf("DataTables warning") === 0 ?
+                    console.warn(message) :
+                    nativeAlert(message);
+            }
+        })();
 	},
 	destroyed(){
 
