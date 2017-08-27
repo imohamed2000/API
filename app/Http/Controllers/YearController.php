@@ -7,7 +7,7 @@ use App\School;
 
 class YearController extends Controller
 {
-    private $list = ['name'];
+    private $list = ['name','current'];
 
 
     /**
@@ -47,7 +47,8 @@ class YearController extends Controller
     public function store(Request $request, School $school)
     {
         $is_valid = $this->validate($request->all(),[
-            'name'             => 'required|max:255',
+            'name'              => 'required|max:255',
+            'current'           => 'required|boolean',
         ]);
 
         if(!$is_valid)
@@ -56,7 +57,8 @@ class YearController extends Controller
         }
 
         $attr = [
-            'name'             => $request->name,
+            'name'              => $request->name,
+            'current'           => $request->current,
         ];
 
         $year = $school->years()->create($attr);
@@ -88,7 +90,8 @@ class YearController extends Controller
     public function update(Request $request, School $school, $id)
     {
         $is_valid = $this->validate($request->all(),[
-            'name'             => 'required|max:255',
+            'name'              => 'required|max:255',
+            'current'           => 'required|boolean',
         ]);
 
         if(!$is_valid)
@@ -97,7 +100,8 @@ class YearController extends Controller
         }
 
         $attr = [
-            'name'             => $request->name,
+            'name'              => $request->name,
+            'current'           => $request->current,
         ];
 
         $year = $school->years()->findOrFail($id);
