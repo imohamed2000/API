@@ -277,7 +277,7 @@ class SchoolsController extends Controller
         }
         else
         {
-            if($school->years()->where('current',1)->first())
+            if(!$school->years()->where('current',1)->first())
             {
                 return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
             }
