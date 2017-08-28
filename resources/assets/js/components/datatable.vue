@@ -86,6 +86,10 @@ export default{
                 if(jQuery(event.target).is('.delete-element')){
                     component.$emit('deleteElement', event, data, this);
                 }
+                // Trigger Edit element
+                if(jQuery(event.target).is('.edit-element')){
+                    component.$emit('editElement', event, data, this);
+                }
                 // dynamiclally created links
                 if(jQuery(event.target).is('.router-link')){
                     event.preventDefault();

@@ -32,10 +32,25 @@
 			<div class="row" slot="body">
 				<div class="col-md-8">
 					<p v-if="!sections" v-text="$t('Loading ..')"></p>
-					<SchoolSectionsIndex v-if="sections" :url="sectionsIndexUrl" ref="sections"></SchoolSectionsIndex>
+					<SchoolSectionsIndex v-if="sections" 
+							:url="sectionsIndexUrl" 
+							ref="sections"
+							@updated="onSectionsUpdate">
+					</SchoolSectionsIndex>
 				</div>
 				<div class="col-md-4">
-					<SchoolSectionsCreate v-if="!editSection" :url="sectionsIndexUrl" @updated="onSectionsUpdate"></SchoolSectionsCreate>
+					<SchoolSectionsCreate v-if="!editSection" 
+								:url="sectionsIndexUrl" 
+								@updated="onSectionsUpdate">
+					</SchoolSectionsCreate>
+					<SchoolSectionsEdit v-if="editSection"
+								:section="activeSectionID"
+								:sectionName="activeSectionName"
+								:grade="activeSectionGradeID" 
+								:url="sectionsIndexUrl" 
+								@updated="onSectionsUpdate"
+								@cancel="editSection = false">
+					</SchoolSectionsEdit>
 				</div>
 			</div>
 		</portlet>
@@ -57,6 +72,7 @@ import SchoolGradeCreate from './SchoolGradeCreate';
 import SchoolGradeEdit from './SchoolGradeEdit';
 import SchoolSectionsIndex from './SchoolSectionsIndex';
 import SchoolSectionsCreate from './SchoolSectionsCreate';
+import SchoolSectionsEdit from './SchoolSectionsEdit';
 
 export default{
 	components: {
@@ -66,6 +82,7 @@ export default{
 		SchoolGradeEdit,
 		SchoolSectionsIndex,
 		SchoolSectionsCreate,
+		SchoolSectionsEdit,
 	},
 	data(){
 		return {
@@ -73,6 +90,9 @@ export default{
 			sections: [],
 			activeGradeID: null,
 			activeGradeName: null,
+			activeSectionID: null,
+			activeSectionName: null,
+			activeSectionGradeID: null,
 			editGrade: false,
 			editSection: false,			
 		};
