@@ -60,7 +60,17 @@ class YearController extends Controller
             'name'              => $request->name,
             'current'           => $request->current,
         ];
-
+        if($request->current)
+        {
+            $school->years()->update(['current' => 0]);
+        }
+        else
+        {
+            if(!$school->years()->where('current',1)->first())
+            {
+                return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
+            }
+        }
         $year = $school->years()->create($attr);
 
         return $this->response->created($year)->respond();
@@ -103,7 +113,17 @@ class YearController extends Controller
             'name'              => $request->name,
             'current'           => $request->current,
         ];
-
+        if($request->current)
+        {
+            $school->years()->update(['current' => 0]);
+        }
+        else
+        {
+            if(!$school->years()->where('current',1)->first())
+            {
+                return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
+            }
+        }
         $year = $school->years()->findOrFail($id);
 
         $year->update($attr);

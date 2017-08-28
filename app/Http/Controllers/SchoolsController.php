@@ -17,7 +17,7 @@ class SchoolsController extends Controller
 
     public function __construct(Request $request){
         parent::__construct();
-        $this->middleware('jwt_auth');
+        //$this->middleware('jwt_auth');
     }
     /**
      * Display a listing of the resource.
@@ -244,6 +244,50 @@ class SchoolsController extends Controller
         }
 
         return $this->response->badRequest(['Error request'])->respond();
+    }
+
+
+    public function getCurrent($id)
+    {
+        $school = School::findOrFail($id);
+
+        $year = $school->years()->where('current',1)->first();
+
+        return $this->response->ok($year)->respond();
+    }
+
+    public function postCurrent(Request $request, School $school, $id)
+    {
+        $is_valid = $this->validate($request->all(),[
+            'current'           => 'required|boolean',
+        ]);
+
+        if(!$is_valid)
+        {
+            return $this->response->badRequest($this->errors)->respond();
+        }
+
+        $attr = [
+            'current'           => $request->current,
+        ];
+
+        if($request->current)
+        {
+            $school->years()->update(['current' => 0]);
+        }
+        else
+        {
+            if(!$school->years()->where('current',1)->first())
+            {
+                return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
+            }
+        }
+
+        $year = $school->years()->findOrFail($id);
+
+        $year->update($attr);
+
+        return $this->response->ok(['Done'])->respond();
     }
 
 
