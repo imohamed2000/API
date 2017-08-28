@@ -26,7 +26,7 @@ class School extends Model
 
     public function grades()
     {
-        return $this->hasMany('App\Grade');
+        return $this->hasMany('App\Grade')->withTrashed();
     }
 
     public function getLogoAttribute()
