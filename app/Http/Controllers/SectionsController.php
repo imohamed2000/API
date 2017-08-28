@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Section;
 use Illuminate\Http\Request;
 use App\School;
-use Illuminate\Validation\Rule;
 
 class SectionsController extends Controller
 {
@@ -83,9 +82,10 @@ class SectionsController extends Controller
      * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show(School $school, $id)
     {
-
+        $section = $school->sections()->findOrFail($id);
+        return $this->response->ok($section)->respond();
     }
 
     /**
