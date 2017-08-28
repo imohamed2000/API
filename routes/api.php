@@ -28,6 +28,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::resource('schools','SchoolsController');
     Route::get('schools/trashed','SchoolsController@trashed');
     Route::post('schools/restore/{id}','SchoolsController@restore');
+    Route::get('school/current/{id}','SchoolsController@getCurrent');
+    Route::post('school/{school}/current/{id}','SchoolsController@postCurrent');
     Route::resource('school.users', 'UserController');
     Route::get('school/{School}/users/trashed','UserController@trashed');
     Route::post('school/{school}/users/{user}/restore','UserController@restore');
