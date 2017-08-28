@@ -39,6 +39,16 @@ export default{
         // inset locale stylesheet
 		let locale = this.$i18n.locale() === null ? 'en' : this.$i18n.locale();
 		style.pushStyle('/plugins/datatables/plugins/bootstrap/'+ locale +'.css');
+        // Disable datatables alerts
+        window.alert = (function() {
+            var nativeAlert = window.alert;
+            return function(message) {
+                window.alert = nativeAlert;
+                message.indexOf("DataTables warning") === 0 ?
+                    console.warn(message) :
+                    nativeAlert(message);
+            }
+        })();
 	},
 	destroyed(){
 
@@ -75,6 +85,10 @@ export default{
                 // Trigger delete element event
                 if(jQuery(event.target).is('.delete-element')){
                     component.$emit('deleteElement', event, data, this);
+                }
+                // Trigger Edit element
+                if(jQuery(event.target).is('.edit-element')){
+                    component.$emit('editElement', event, data, this);
                 }
                 // dynamiclally created links
                 if(jQuery(event.target).is('.router-link')){
