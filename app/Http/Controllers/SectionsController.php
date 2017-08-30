@@ -84,7 +84,7 @@ class SectionsController extends Controller
      */
     public function show(School $school, $id)
     {
-        $section = $school->sections()->findOrFail($id);
+        $section = $school->sections()->with('grade')->findOrFail($id);
         return $this->response->ok($section)->respond();
     }
 
