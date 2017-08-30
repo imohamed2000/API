@@ -44,7 +44,7 @@ class School extends Model
 
     public function sections()
     {
-        return $this->hasMany('App\Section')->select('id','name');
+        return $this->hasMany('App\Section')->select('id','name','grade_id');
     }
 
     public function years()
