@@ -79,4 +79,13 @@ class School extends Model
         }
     }
 
+    public function getActiveYear()
+    {
+        $active = $this->years()->where('current',1)->first();
+        if($active)
+        {
+            return $active;
+        }
+    }
+
 }
