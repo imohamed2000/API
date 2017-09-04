@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\SectionUserYear;
+use App\Year;
 use Illuminate\Http\Request;
 use App\User;
 use App\School;
@@ -234,7 +236,27 @@ class UserController extends Controller
     }
 
 
-    public function storeSections(Request $request, School $school, $id)
+    // Get Section of specific User
+    public function getSection(School $school,$id)
+    {
+        $checkUser = $school->checkUser($school->id,$id);
+        if(!$checkUser){
+            return $this->response->badRequest(['Sorry!, this user has no permission with this school'])->respond();
+        }
+
+        $activeYear = $school->getActiveYear();
+        if(!$activeYear){
+            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
+        }
+
+        $getSection = SectionUserYear::where('year_id',$activeYear->id)->where('user_id',$checkUser->id)->first()->section()->with('grade')->first();
+        return $this->response->ok($getSection)->respond();
+
+    }
+
+    //TODO get Users of specific section
+
+    public function storeSection(Request $request, School $school, $id)
     {
         $is_valid = $this->validate($request->all(), [
             'section' => 'required|exists:sections,id',
