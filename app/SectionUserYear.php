@@ -11,4 +11,9 @@ class SectionUserYear extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    public function section()
+    {
+        return $this->belongsTo('App\Section','section_id');
+    }
 }
