@@ -33,6 +33,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::resource('school.users', 'UserController');
     Route::get('school/{School}/users/trashed','UserController@trashed');
     Route::post('school/{school}/users/{user}/restore','UserController@restore');
+    // Mapping Section User Year
+    Route::post('/school/{school}/user/{id}/section','UserController@storeSections');
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');
     Route::resource('school.roles', 'RolesController');
