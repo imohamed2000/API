@@ -21,7 +21,6 @@ class School extends Model
     public function users()
     {
         return $this->belongsToMany('App\User');
-
     }
 
     public function grades()
@@ -44,11 +43,49 @@ class School extends Model
 
     public function sections()
     {
-        return $this->hasMany('App\Section')->select('id','name','grade_id');
+        return $this->hasMany('App\Section')->select('id','name','grade_id','school_id');
     }
 
     public function years()
     {
         return $this->hasMany('App\Year');
     }
+
+    public function checkUser($school_id,$user_id)
+    {
+        $check = $this->users()->where('school_id',$school_id)->where('user_id',$user_id)->first();
+        if($check)
+        {
+            return $check;
+        }
+    }
+
+    public function checkSection($school_id,$section_id)
+    {
+        $check = $this->sections()->where('id',$section_id)->where('school_id',$school_id)->first();
+        if($check)
+        {
+            return $check;
+        }
+
+    }
+
+    public function checkYear($school_id,$year_id)
+    {
+        $check = $this->years()->where('id',$year_id)->where('school_id',$school_id)->first();
+        if($check)
+        {
+            return $check;
+        }
+    }
+
+    public function getActiveYear()
+    {
+        $active = $this->years()->where('current',1)->first();
+        if($active)
+        {
+            return $active;
+        }
+    }
+
 }
