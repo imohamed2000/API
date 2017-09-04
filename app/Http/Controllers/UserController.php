@@ -254,7 +254,19 @@ class UserController extends Controller
 
     }
 
-    //TODO get Users of specific section
+    // get Users of specific section
+
+    public function getUsersSection(School $school,$id)
+    {
+        $section = $school->sections()->findOrFail($id);
+        $activeYear = $school->getActiveYear();
+        if(!$activeYear){
+            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
+        }
+        $users = SectionUserYear::where('section_id',$section->id)->where('year_id',$activeYear->id)->with('users')->get();
+
+        return $this->response->ok($users)->respond();
+    }
 
     public function storeSection(Request $request, School $school, $id)
     {
@@ -278,7 +290,7 @@ class UserController extends Controller
             return $this->response->badRequest(['Sorry!, this year has no permission with this school'])->respond();
         }
 
-        \App\SectionUserYear::create(['user_id'=>$id , 'year_id'=>$request->year,'section_id'=>$request->section]);
+        SectionUserYear::create(['user_id'=>$id , 'year_id'=>$request->year,'section_id'=>$request->section]);
 
         return $this->response->created(['saved'])->respond();
     }
