@@ -16,7 +16,7 @@ class SectionsController extends Controller
      */
     public function index(Request $request,School $school)
     {
-        $data = $school->sections()->select($this->list)->with('grade');
+        $data = $school->sections()->select($this->list)->with('gradesWithTrashed');
         if( $request->exists('datatables') )
         {
             return $this->response
@@ -118,7 +118,7 @@ class SectionsController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $school->grades()->findOrFail($request->grade_id);
+        $school->gradesWithTrashed()->findOrFail($request->grade_id);
 
         $section = $school->sections()->findOrFail($id);
 
