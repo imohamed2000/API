@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Year;
 use Illuminate\Http\Request;
 use App\School;
 
@@ -48,7 +49,7 @@ class YearController extends Controller
     {
         $is_valid = $this->validate($request->all(),[
             'name'              => 'required|max:255',
-            'current'           => 'required|boolean',
+            'current'           => 'boolean',
         ]);
 
         if(!$is_valid)
@@ -63,13 +64,6 @@ class YearController extends Controller
         if($request->current)
         {
             $school->years()->update(['current' => 0]);
-        }
-        else
-        {
-            if(!$school->years()->where('current',1)->first())
-            {
-                return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
-            }
         }
         $year = $school->years()->create($attr);
 
@@ -101,7 +95,7 @@ class YearController extends Controller
     {
         $is_valid = $this->validate($request->all(),[
             'name'              => 'required|max:255',
-            'current'           => 'required|boolean',
+            'current'           => 'boolean',
         ]);
 
         if(!$is_valid)
@@ -117,13 +111,7 @@ class YearController extends Controller
         {
             $school->years()->update(['current' => 0]);
         }
-        else
-        {
-            if(!$school->years()->where('current',1)->first())
-            {
-                return $this->response->badRequest(['sorry, at least one year should be active'])->respond();
-            }
-        }
+
         $year = $school->years()->findOrFail($id);
 
         $year->update($attr);
@@ -143,5 +131,16 @@ class YearController extends Controller
         $year = $school->years()->findOrFail($id);
         $year->delete();
         return $this->response->ok(['Deleted'])->respond();
+    }
+
+    public function postCurrent(School $school, Year $year)
+    {
+        $check = $school->years()->findOrFail($year->id);
+
+        $school->years()->update(['current' => 0]);
+
+        $check->update([ 'current' => 1 ]);
+
+        return $this->response->ok(['Done'])->respond();
     }
 }
