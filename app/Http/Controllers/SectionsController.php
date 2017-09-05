@@ -118,8 +118,6 @@ class SectionsController extends Controller
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $school->grade()->findOrFail($request->grade_id);
-
         $section = $school->sections()->findOrFail($id);
 
         $attr = [
