@@ -18,7 +18,7 @@ class Section extends Model
 
     public function gradesWithTrashed()
     {
-        return $this->belongsTo('App\Grade')->withTrashed();
+        return $this->belongsTo('App\Grade','grade_id')->withTrashed();
     }
 
 
