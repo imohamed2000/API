@@ -13,6 +13,13 @@ class Section extends Model
 
     public function grade()
     {
+        return $this->belongsTo('App\Grade');
+    }
+
+    public function gradesWithTrashed()
+    {
         return $this->belongsTo('App\Grade')->withTrashed();
     }
+
+
 }
