@@ -1,10 +1,10 @@
 <template>
 	<portlet :props="{title: $t('New Year'), class:'solid grey-cararra', icon:'icon-plus'}">
-		<form slot="body" @submit.prevent="onSubmit" ref="form">
-			<div class="form-group">
+		<form slot="body" @submit.prevent="onSubmit" ref="form" @keydown=" errors.clear($event.target.name) ">
+			<div class="form-group" :class=" errors.has('name') ? 'has-error' : '' ">
 				<label for="year-name" v-text="$t('Name')"></label>
 				<input type="text" name="name" class="form-control" id="year-name" :placeholder="$t('Name')">
-				<p class="help-block"></p>
+				<p class="help-block" v-text=" errors.get('name') "></p>
 			</div>
 			<div class="row" slot="footer">
 				<div class="col-md-12">
@@ -42,7 +42,7 @@ export default{
 
 	},
 	mounted(){
-		this.isLoading(false);
+		
 	},
 	methods: {
 		...mapActions({
@@ -60,10 +60,11 @@ export default{
 			// sending ajax request
 			axios.post(url, formData)
 				.then((response)=>{
-					console.log(response.data);
+					this.$emit('created');
+					this.$refs.form.reset();
 				})
 					.catch((errors)=>{
-						console.log(errors.response.data)
+						this.errors.record(errors.response.data);
 					})
 						.then(()=>{
 							animation.stop();

@@ -3,12 +3,12 @@
 			<div class="row" slot="body">
 				<div class="col-md-8">
 					<portlet :props="{title: $t('All Academic years'), class:'solid grey-cararra', icon:'ion ion-flag'}">
-						<datatable slot="body" :props="table" @editElement="onEdit" @deleteElement="onDelete"></datatable>
+						<datatable ref="table" slot="body" :props="table" @editElement="onEdit" @deleteElement="onDelete"></datatable>
 					</portlet>
 				</div>
 				<div class="col-md-4">
-					<create v-if="!edit" :school="school"></create>
-					<edit v-if="edit" @cancel="edit=false"></edit>
+					<create v-if="!edit" :school="school" @created="onUpdate"></create>
+					<edit v-if="edit" @cancel="edit=false" @updated="onUpdate"></edit>
 				</div>
 			</div>
 		</portlet>
@@ -111,6 +111,9 @@ export default{
 		onDelete: function(event, data, row){
 			console.log("Edit")
 		},
+		onUpdate: function(){
+			this.$refs.table.refresh();
+		}
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{
