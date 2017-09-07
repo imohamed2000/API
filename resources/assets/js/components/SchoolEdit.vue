@@ -48,6 +48,9 @@
 								<input v-model="school.city" type="text" name="city" id="edit-city" class="form-control" :placeholder="$t('City')">
 								<p class="help-block" v-text="errors.get('city')"></p>
 							</div>
+
+							<activeYear ref="activeYear" :school="school"></activeYear>
+
 						</div>
 						<div class="col-md-6">
 							<div :class="{'form-group': !errors.has('email'), 'form-group has-error': errors.has('email')}">
@@ -79,7 +82,7 @@
 			</form>
 		</portlet>
 		<!-- Academic years portlet -->
-		<years id="academic-years" :school="school"></years>
+		<years id="academic-years" :school="school" @update="$refs.activeYear.fetchData()"></years>
 	</div>
 </template>
 <script>
@@ -88,6 +91,7 @@ import ImageUpload from './ImageUpload';
 import portlet from './Portlet';
 import datatable from './datatable';
 import years from './SchoolYearsIndex';
+import activeYear from './SchoolActiveYearEdit';
 
 import axios from '../helpers/http';
 import Errors from '../helpers/errors';
@@ -108,7 +112,8 @@ export default{
 		'image-upload': ImageUpload,
 		portlet,
 		datatable,
-		years
+		years,
+		activeYear
 	},
 	computed: {
 		imageUpload: function(){
@@ -213,6 +218,9 @@ export default{
 					jQuery(this.$refs.imageUpload.$refs.input).val(()=>{
 						return this.defaultValue;
 					});
+
+					// Update active year
+					this.$refs.activeYear.update();
 				})
 					.catch((err)=>{
 						this.errors.record( err.response.data );

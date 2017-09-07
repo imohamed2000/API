@@ -68380,13 +68380,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__datatable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex__ = __webpack_require__(404);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_http__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_errors__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ladda__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_ladda__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_errors__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ladda__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_ladda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_toastr_js__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -68473,6 +68475,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -68492,14 +68498,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	props: ['school'],
 	data() {
 		return {
-			errors: new __WEBPACK_IMPORTED_MODULE_6__helpers_errors__["a" /* default */]()
+			errors: new __WEBPACK_IMPORTED_MODULE_7__helpers_errors__["a" /* default */]()
 		};
 	},
 	components: {
 		'image-upload': __WEBPACK_IMPORTED_MODULE_1__ImageUpload___default.a,
 		portlet: __WEBPACK_IMPORTED_MODULE_2__Portlet___default.a,
 		datatable: __WEBPACK_IMPORTED_MODULE_3__datatable___default.a,
-		years: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default.a
+		years: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default.a,
+		activeYear: __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit___default.a
 	},
 	computed: {
 		imageUpload: function () {
@@ -68550,7 +68557,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							</ul>
 								</div>
 							`;
-						__WEBPACK_IMPORTED_MODULE_7_jquery___default()(nTd).html(tools);
+						__WEBPACK_IMPORTED_MODULE_8_jquery___default()(nTd).html(tools);
 					} }],
 				columnDefs: [{
 					"searchable": false,
@@ -68587,16 +68594,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.$refs.clearLogo.value = '';
 		},
 		onSubmit: function () {
-			let submitAnimation = __WEBPACK_IMPORTED_MODULE_8_ladda___default.a.create(this.$refs.submitBtn);
+			let submitAnimation = __WEBPACK_IMPORTED_MODULE_9_ladda___default.a.create(this.$refs.submitBtn);
 			submitAnimation.start();
 			let oThis = this;
-			__WEBPACK_IMPORTED_MODULE_5__helpers_http__["a" /* default */].post('/schools/' + this.school.id, new FormData(this.$refs.form)).then(res => {
+			__WEBPACK_IMPORTED_MODULE_6__helpers_http__["a" /* default */].post('/schools/' + this.school.id, new FormData(this.$refs.form)).then(res => {
 				this.$parent.school = res.data;
-				__WEBPACK_IMPORTED_MODULE_9__helpers_toastr_js__["a" /* default */].success(oThis.$t("This school data is successfully updated!"), oThis.$t("Successfully updated"));
+				__WEBPACK_IMPORTED_MODULE_10__helpers_toastr_js__["a" /* default */].success(oThis.$t("This school data is successfully updated!"), oThis.$t("Successfully updated"));
 
-				__WEBPACK_IMPORTED_MODULE_7_jquery___default()(this.$refs.imageUpload.$refs.input).val(() => {
+				__WEBPACK_IMPORTED_MODULE_8_jquery___default()(this.$refs.imageUpload.$refs.input).val(() => {
 					return this.defaultValue;
 				});
+
+				// Update active year
+				this.$refs.activeYear.update();
 			}).catch(err => {
 				this.errors.record(err.response.data);
 			}).then(() => {
@@ -99766,7 +99776,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.errors.get('city'))
     }
-  })])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('activeYear', {
+    ref: "activeYear",
+    attrs: {
+      "school": _vm.school
+    }
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('div', {
     class: {
@@ -99867,6 +99882,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "academic-years",
       "school": _vm.school
+    },
+    on: {
+      "update": function($event) {
+        _vm.$refs.activeYear.fetchData()
+      }
     }
   })], 1)
 },staticRenderFns: []}
@@ -106288,6 +106308,179 @@ return index;
 
 module.exports = __webpack_require__(213);
 
+
+/***/ }),
+/* 458 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_errors__ = __webpack_require__(12);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+//import ladda from 'ladda';
+//import toastr from '../helpers/toastr.js';
+//import $style from '../helpers/style.js';
+//let style = new $style();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['school'],
+	data() {
+		return {
+			years: [],
+			selected: 0
+		};
+	},
+	computed: {
+		url: function () {
+			return `school/${this.school.id}/years`;
+		},
+		activeUrl: function () {
+			return `school/${this.school.id}/year`;
+		}
+	},
+	mounted() {
+		this.fetchData();
+	},
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+		isLoading: 'isLoading'
+	}), {
+		fetchData: function () {
+			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.url).then(response => {
+				this.years = response.data;
+			});
+			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.activeUrl).then(response => {
+				if (response.data.id !== undefined) {
+					this.selected = response.data.id;
+				}
+			});
+		},
+		update: function () {
+			if (this.selected != 0) {
+				let url = `school/${this.school.id}/year/${this.selected}/active`;
+				__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url);
+			}
+		}
+	}),
+	beforeRouteEnter(to, from, next) {
+		next(vm => {
+			// vm.fetchData();
+		});
+	}
+});
+
+/***/ }),
+/* 459 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(458),
+  /* template */
+  __webpack_require__(460),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\SchoolActiveYearEdit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SchoolActiveYearEdit.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9c9cbc7a", Component.options)
+  } else {
+    hotAPI.reload("data-v-9c9cbc7a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 460 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "year"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Active Academic Year'))
+    }
+  }), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selected),
+      expression: "selected"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "year",
+      "id": "year"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selected = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "0",
+      "disabled": "",
+      "selected": ""
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Select Year'))
+    }
+  }), _vm._v(" "), _vm._l((_vm.years), function(year) {
+    return _c('option', {
+      domProps: {
+        "value": year.id,
+        "textContent": _vm._s(year.name)
+      }
+    })
+  })], 2)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9c9cbc7a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
