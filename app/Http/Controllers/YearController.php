@@ -8,7 +8,7 @@ use App\School;
 
 class YearController extends Controller
 {
-    private $list = ['name','current'];
+    private $list = ['id','name','current'];
 
 
     /**
@@ -46,27 +46,25 @@ class YearController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, School $school)
-    {
-        $is_valid = $this->validate($request->all(),[
-            'name'              => 'required|max:255',
-            'current'           => 'boolean',
-        ]);
-
+    {   
+        // Data Validation
+        $is_valid = $this->validate(
+                $request->only('name'),
+                [
+                    'name'  => 'required|max:255'
+                ]
+            );
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-
+        // Creating a new resource
         $attr = [
-            'name'              => $request->name,
-            'current'           => $request->current,
+            'school_id' => $school->id,
+            'name'      => $request->input('name')
         ];
-        if($request->current)
-        {
-            $school->years()->update(['current' => 0]);
-        }
-        $year = $school->years()->create($attr);
-
+        $year = Year::create($attr);
+        // Response 
         return $this->response->created($year)->respond();
     }
 
@@ -92,30 +90,24 @@ class YearController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, School $school, $id)
-    {
-        $is_valid = $this->validate($request->all(),[
-            'name'              => 'required|max:255',
-            'current'           => 'boolean',
-        ]);
-
+    {   
+        // Data Validation
+        $is_valid = $this->validate(
+                $request->only('name'),
+                [
+                    'name'  => 'required|max:255'
+                ]
+            );
         if(!$is_valid)
         {
             return $this->response->badRequest($this->errors)->respond();
         }
-
-        $attr = [
-            'name'              => $request->name,
-            'current'           => $request->current,
-        ];
-        if($request->current)
-        {
-            $school->years()->update(['current' => 0]);
-        }
-
-        $year = $school->years()->findOrFail($id);
-
-        $year->update($attr);
-
+        // Resource update
+        $year = Year::findOrFail( $id );
+        $year->update([
+                'name'  => $request->input('name')
+            ]);
+        // Response 
         return $this->response->ok($year)->respond();
     }
 

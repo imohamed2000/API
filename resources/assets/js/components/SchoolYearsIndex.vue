@@ -3,12 +3,12 @@
 			<div class="row" slot="body">
 				<div class="col-md-8">
 					<portlet :props="{title: $t('All Academic years'), class:'solid grey-cararra', icon:'ion ion-flag'}">
-						<datatable slot="body" :props="table" @editElement="onEdit" @deleteElement="onDelete"></datatable>
+						<datatable ref="table" slot="body" :props="table" @editElement="onEdit" @deleteElement="onDelete"></datatable>
 					</portlet>
 				</div>
 				<div class="col-md-4">
-					<create v-if="!edit" :school="school"></create>
-					<edit v-if="edit" @cancel="edit=false"></edit>
+					<create v-if="!edit" :school="school" @created="onUpdate"></create>
+					<edit v-if="edit" :school="school" :year="year" @cancel="edit=false" @updated="onUpdate"></edit>
 				</div>
 			</div>
 		</portlet>
@@ -16,10 +16,10 @@
 <script>
 
 import { mapActions } from 'vuex';
-//import axios from '../helpers/http';
+import axios from '../helpers/http';
 //import Errors from '../helpers/errors';
 //import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+import toastr from '../helpers/toastr.js';
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
@@ -38,7 +38,8 @@ export default{
 	},
 	data(){
 		return {
-			edit: false
+			edit: false,
+			year: {}
 		};
 	},
 	computed: {
@@ -77,7 +78,7 @@ export default{
 										${window.app.$t('Tools')}
 										<i class="fa fa-angle-down"></i>
 									</button>
-									<ul class="dropdown-menu text-center">
+									<ul class="dropdown-menu">
 							${editBtn} ${deleteBtn}
 							</ul>
 								</div>
@@ -105,12 +106,42 @@ export default{
 			isLoading: 'isLoading'
 		}),
 		onEdit: function(event, data, row){
-			console.log("Edit")
+			this.year = data;
 			this.edit = true;
 		},
 		onDelete: function(event, data, row){
-			console.log("Edit")
+			let oThis = this;
+			let url = `school/${this.school.id}/years/${data.id}`;
+
+			//confirmation and action
+			bootbox.confirm({
+				title: oThis.$t('Move this year to trash!'),
+				message: oThis.$t('Are you sure you want to move this year to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: (result)=>{
+					if(result){
+						axios.delete( url )
+								.then(response => {
+									oThis.onUpdate();
+									toastr.info(
+											oThis.$t('Year moved to trash !'),
+											oThis.$t('Trashed!')
+										);
+								});
+					}
+				}
+			});
+
 		},
+		onUpdate: function(){
+			this.$emit('update');
+			this.$refs.table.refresh();
+		}
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{

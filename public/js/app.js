@@ -68380,13 +68380,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__datatable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex__ = __webpack_require__(404);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_http__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_errors__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ladda__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_ladda__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_errors__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ladda__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_ladda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_toastr_js__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -68473,6 +68475,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -68492,14 +68498,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	props: ['school'],
 	data() {
 		return {
-			errors: new __WEBPACK_IMPORTED_MODULE_6__helpers_errors__["a" /* default */]()
+			errors: new __WEBPACK_IMPORTED_MODULE_7__helpers_errors__["a" /* default */]()
 		};
 	},
 	components: {
 		'image-upload': __WEBPACK_IMPORTED_MODULE_1__ImageUpload___default.a,
 		portlet: __WEBPACK_IMPORTED_MODULE_2__Portlet___default.a,
 		datatable: __WEBPACK_IMPORTED_MODULE_3__datatable___default.a,
-		years: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default.a
+		years: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsIndex___default.a,
+		activeYear: __WEBPACK_IMPORTED_MODULE_5__SchoolActiveYearEdit___default.a
 	},
 	computed: {
 		imageUpload: function () {
@@ -68550,7 +68557,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							</ul>
 								</div>
 							`;
-						__WEBPACK_IMPORTED_MODULE_7_jquery___default()(nTd).html(tools);
+						__WEBPACK_IMPORTED_MODULE_8_jquery___default()(nTd).html(tools);
 					} }],
 				columnDefs: [{
 					"searchable": false,
@@ -68587,14 +68594,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.$refs.clearLogo.value = '';
 		},
 		onSubmit: function () {
-			let submitAnimation = __WEBPACK_IMPORTED_MODULE_8_ladda___default.a.create(this.$refs.submitBtn);
+			let submitAnimation = __WEBPACK_IMPORTED_MODULE_9_ladda___default.a.create(this.$refs.submitBtn);
 			submitAnimation.start();
 			let oThis = this;
-			__WEBPACK_IMPORTED_MODULE_5__helpers_http__["a" /* default */].post('/schools/' + this.school.id, new FormData(this.$refs.form)).then(res => {
+			// Update active year
+			this.$refs.activeYear.update();
+			// Update school data
+			__WEBPACK_IMPORTED_MODULE_6__helpers_http__["a" /* default */].post('/schools/' + this.school.id, new FormData(this.$refs.form)).then(res => {
 				this.$parent.school = res.data;
-				__WEBPACK_IMPORTED_MODULE_9__helpers_toastr_js__["a" /* default */].success(oThis.$t("This school data is successfully updated!"), oThis.$t("Successfully updated"));
+				__WEBPACK_IMPORTED_MODULE_10__helpers_toastr_js__["a" /* default */].success(oThis.$t("This school data is successfully updated!"), oThis.$t("Successfully updated"));
 
-				__WEBPACK_IMPORTED_MODULE_7_jquery___default()(this.$refs.imageUpload.$refs.input).val(() => {
+				__WEBPACK_IMPORTED_MODULE_8_jquery___default()(this.$refs.imageUpload.$refs.input).val(() => {
 					return this.defaultValue;
 				});
 			}).catch(err => {
@@ -70392,9 +70402,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		};
 	},
 	computed: {},
-	mounted() {
-		this.isLoading(false);
-	},
+	mounted() {},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
 		isLoading: 'isLoading'
 	}), {
@@ -70409,9 +70417,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 			// sending ajax request
 			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url, formData).then(response => {
-				console.log(response.data);
+				this.$emit('created');
+				this.$refs.form.reset();
 			}).catch(errors => {
-				console.log(errors.response.data);
+				this.errors.record(errors.response.data);
 			}).then(() => {
 				animation.stop();
 			});
@@ -70431,6 +70440,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_errors__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ladda__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ladda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Portlet__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Portlet__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -70439,25 +70455,79 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
-//import axios from '../helpers/http';
-//import Errors from '../helpers/errors';
-//import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+
+
+
+
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data() {
-		return {};
+	props: ['school', 'year'],
+	components: {
+		portlet: __WEBPACK_IMPORTED_MODULE_5__Portlet___default.a
 	},
-	computed: {},
+	data() {
+		return {
+			errors: new __WEBPACK_IMPORTED_MODULE_2__helpers_errors__["a" /* default */]()
+		};
+	},
+	computed: {
+		name: function () {
+			return this.year.name;
+		},
+		id: function () {
+			return this.year.id;
+		}
+	},
 	mounted() {},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
 		isLoading: 'isLoading'
-	})),
+	}), {
+		onSubmit: function () {
+			// Starting loading animation
+			let animation = __WEBPACK_IMPORTED_MODULE_3_ladda___default.a.create(this.$refs.submit);
+			animation.start();
+
+			// Getting form data
+			let formData = new FormData(this.$refs.form);
+			let url = `school/${this.school.id}/years/${this.id}`;
+
+			// Sending ajax request
+			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url, formData).then(response => {
+				this.$emit('updated');
+				this.$emit('cancel');
+			}).catch(errors => {
+				this.errors.record(errors.response.data);
+			}).then(() => {
+				animation.stop();
+			});
+		}
+
+	}),
 	beforeRouteEnter(to, from, next) {
 		next(vm => {
 			// vm.fetchData();
@@ -70472,14 +70542,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Portlet__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Portlet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__datatable__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__datatable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate__ = __webpack_require__(402);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit__ = __webpack_require__(403);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Portlet__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Portlet__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datatable__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__datatable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit__ = __webpack_require__(403);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -70500,10 +70572,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-//import axios from '../helpers/http';
+
 //import Errors from '../helpers/errors';
 //import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
@@ -70515,14 +70587,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['school'],
 	components: {
-		portlet: __WEBPACK_IMPORTED_MODULE_1__Portlet___default.a,
-		datatable: __WEBPACK_IMPORTED_MODULE_2__datatable___default.a,
-		create: __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate___default.a,
-		edit: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit___default.a
+		portlet: __WEBPACK_IMPORTED_MODULE_3__Portlet___default.a,
+		datatable: __WEBPACK_IMPORTED_MODULE_4__datatable___default.a,
+		create: __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate___default.a,
+		edit: __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit___default.a
 	},
 	data() {
 		return {
-			edit: false
+			edit: false,
+			year: {}
 		};
 	},
 	computed: {
@@ -70561,7 +70634,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 										${window.app.$t('Tools')}
 										<i class="fa fa-angle-down"></i>
 									</button>
-									<ul class="dropdown-menu text-center">
+									<ul class="dropdown-menu">
 							${editBtn} ${deleteBtn}
 							</ul>
 								</div>
@@ -70586,11 +70659,36 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		isLoading: 'isLoading'
 	}), {
 		onEdit: function (event, data, row) {
-			console.log("Edit");
+			this.year = data;
 			this.edit = true;
 		},
 		onDelete: function (event, data, row) {
-			console.log("Edit");
+			let oThis = this;
+			let url = `school/${this.school.id}/years/${data.id}`;
+
+			//confirmation and action
+			bootbox.confirm({
+				title: oThis.$t('Move this year to trash!'),
+				message: oThis.$t('Are you sure you want to move this year to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: result => {
+					if (result) {
+						__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].delete(url).then(response => {
+							oThis.onUpdate();
+							__WEBPACK_IMPORTED_MODULE_2__helpers_toastr_js__["a" /* default */].info(oThis.$t('Year moved to trash !'), oThis.$t('Trashed!'));
+						});
+					}
+				}
+			});
+		},
+		onUpdate: function () {
+			this.$emit('update');
+			this.$refs.table.refresh();
 		}
 	}),
 	beforeRouteEnter(to, from, next) {
@@ -97905,6 +98003,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('datatable', {
+    ref: "table",
     attrs: {
       "props": _vm.table
     },
@@ -97918,12 +98017,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(!_vm.edit) ? _c('create', {
     attrs: {
       "school": _vm.school
+    },
+    on: {
+      "created": _vm.onUpdate
     }
   }) : _vm._e(), _vm._v(" "), (_vm.edit) ? _c('edit', {
+    attrs: {
+      "school": _vm.school,
+      "year": _vm.year
+    },
     on: {
       "cancel": function($event) {
         _vm.edit = false
-      }
+      },
+      "updated": _vm.onUpdate
     }
   }) : _vm._e()], 1)])])
 },staticRenderFns: []}
@@ -99030,7 +99137,100 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_vm._v("\n\tLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n\ttempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n")])
+  return _c('portlet', {
+    attrs: {
+      "props": {
+        title: _vm.$t('New Year'),
+        icon: 'icon-plus'
+      }
+    }
+  }, [_c('form', {
+    ref: "form",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.onSubmit($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
+      }
+    },
+    slot: "body"
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_method",
+      "value": "PUT"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: _vm.errors.has('name') ? 'has-error' : ''
+  }, [_c('label', {
+    attrs: {
+      "for": "year-name"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Name'))
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.name),
+      expression: "name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "name",
+      "id": "year-name",
+      "placeholder": _vm.$t('Name')
+    },
+    domProps: {
+      "value": (_vm.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('name'))
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "row",
+    slot: "footer"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('button', {
+    ref: "submit",
+    staticClass: "pull-right btn green mt-ladda-btn ladda-button",
+    attrs: {
+      "data-style": "zoom-in",
+      "type": "submit"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Submit'))
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "pull-right btn grey mt-ladda-btn ladda-button",
+    attrs: {
+      "data-style": "zoom-in",
+      "type": "button"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Cancel'))
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('cancel')
+      }
+    }
+  })])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -99576,7 +99776,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.errors.get('city'))
     }
-  })])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('activeYear', {
+    ref: "activeYear",
+    attrs: {
+      "school": _vm.school
+    }
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('div', {
     class: {
@@ -99677,6 +99882,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "academic-years",
       "school": _vm.school
+    },
+    on: {
+      "update": function($event) {
+        _vm.$refs.activeYear.fetchData()
+      }
     }
   })], 1)
 },staticRenderFns: []}
@@ -100114,11 +100324,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "submit": function($event) {
         $event.preventDefault();
         _vm.onSubmit($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
       }
     },
     slot: "body"
   }, [_c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: _vm.errors.has('name') ? 'has-error' : ''
   }, [_c('label', {
     attrs: {
       "for": "year-name"
@@ -100135,7 +100349,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": _vm.$t('Name')
     }
   }), _vm._v(" "), _c('p', {
-    staticClass: "help-block"
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('name'))
+    }
   })]), _vm._v(" "), _c('div', {
     staticClass: "row",
     slot: "footer"
@@ -106091,6 +106308,180 @@ return index;
 
 module.exports = __webpack_require__(213);
 
+
+/***/ }),
+/* 458 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_errors__ = __webpack_require__(12);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+//import ladda from 'ladda';
+//import toastr from '../helpers/toastr.js';
+//import $style from '../helpers/style.js';
+//let style = new $style();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['school'],
+	data() {
+		return {
+			years: [],
+			selected: 0
+		};
+	},
+	computed: {
+		url: function () {
+			return `school/${this.school.id}/years`;
+		},
+		activeUrl: function () {
+			return `school/${this.school.id}/year`;
+		}
+	},
+	mounted() {
+		this.fetchData();
+	},
+	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+		isLoading: 'isLoading'
+	}), {
+		fetchData: function () {
+			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.url).then(response => {
+				this.years = response.data;
+			}).then(() => {
+				__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.activeUrl).then(response => {
+					if (response.data.id !== undefined) {
+						this.selected = response.data.id;
+					}
+				});
+			});
+		},
+		update: function () {
+			if (this.selected != 0) {
+				let url = `school/${this.school.id}/year/${this.selected}/active`;
+				__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url);
+			}
+		}
+	}),
+	beforeRouteEnter(to, from, next) {
+		next(vm => {
+			// vm.fetchData();
+		});
+	}
+});
+
+/***/ }),
+/* 459 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(458),
+  /* template */
+  __webpack_require__(460),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\work\\Odigita\\LMS\\API\\resources\\assets\\js\\components\\SchoolActiveYearEdit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SchoolActiveYearEdit.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9c9cbc7a", Component.options)
+  } else {
+    hotAPI.reload("data-v-9c9cbc7a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 460 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "year"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Active Academic Year'))
+    }
+  }), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selected),
+      expression: "selected"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "year",
+      "id": "year"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selected = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "0",
+      "disabled": "",
+      "selected": ""
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Select Year'))
+    }
+  }), _vm._v(" "), _vm._l((_vm.years), function(year) {
+    return _c('option', {
+      domProps: {
+        "value": year.id,
+        "textContent": _vm._s(year.name)
+      }
+    })
+  })], 2)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9c9cbc7a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
