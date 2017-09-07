@@ -32,8 +32,8 @@
 									</span>
 								</li>
 								<li>
-									<span class="sale-info">
-										<i class="fa fa-calendar"></i> 7/9/1990
+									<span class="sale-info" v-if="user.birth_date">
+										<i class="fa fa-calendar"></i> {{user.birth_date}}
 									</span>
 								</li>
                     		</ul>
