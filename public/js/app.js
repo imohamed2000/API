@@ -70532,14 +70532,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Portlet__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Portlet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__datatable__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__datatable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate__ = __webpack_require__(402);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit__ = __webpack_require__(403);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Portlet__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Portlet__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datatable__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__datatable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit__ = __webpack_require__(403);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -70560,10 +70562,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-//import axios from '../helpers/http';
+
 //import Errors from '../helpers/errors';
 //import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
@@ -70575,10 +70577,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['school'],
 	components: {
-		portlet: __WEBPACK_IMPORTED_MODULE_1__Portlet___default.a,
-		datatable: __WEBPACK_IMPORTED_MODULE_2__datatable___default.a,
-		create: __WEBPACK_IMPORTED_MODULE_3__SchoolYearsCreate___default.a,
-		edit: __WEBPACK_IMPORTED_MODULE_4__SchoolYearsEdit___default.a
+		portlet: __WEBPACK_IMPORTED_MODULE_3__Portlet___default.a,
+		datatable: __WEBPACK_IMPORTED_MODULE_4__datatable___default.a,
+		create: __WEBPACK_IMPORTED_MODULE_5__SchoolYearsCreate___default.a,
+		edit: __WEBPACK_IMPORTED_MODULE_6__SchoolYearsEdit___default.a
 	},
 	data() {
 		return {
@@ -70651,9 +70653,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.edit = true;
 		},
 		onDelete: function (event, data, row) {
-			console.log("Edit");
+			let oThis = this;
+			let url = `school/${this.school.id}/years/${data.id}`;
+
+			//confirmation and action
+			bootbox.confirm({
+				title: oThis.$t('Move this year to trash!'),
+				message: oThis.$t('Are you sure you want to move this year to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: result => {
+					if (result) {
+						__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].delete(url).then(response => {
+							oThis.onUpdate();
+							__WEBPACK_IMPORTED_MODULE_2__helpers_toastr_js__["a" /* default */].info(oThis.$t('Year moved to trash !'), oThis.$t('Trashed!'));
+						});
+					}
+				}
+			});
 		},
 		onUpdate: function () {
+			this.$emit('update');
 			this.$refs.table.refresh();
 		}
 	}),

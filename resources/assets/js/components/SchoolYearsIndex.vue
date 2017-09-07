@@ -16,10 +16,10 @@
 <script>
 
 import { mapActions } from 'vuex';
-//import axios from '../helpers/http';
+import axios from '../helpers/http';
 //import Errors from '../helpers/errors';
 //import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+import toastr from '../helpers/toastr.js';
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
@@ -110,9 +110,36 @@ export default{
 			this.edit = true;
 		},
 		onDelete: function(event, data, row){
-			console.log("Edit")
+			let oThis = this;
+			let url = `school/${this.school.id}/years/${data.id}`;
+
+			//confirmation and action
+			bootbox.confirm({
+				title: oThis.$t('Move this year to trash!'),
+				message: oThis.$t('Are you sure you want to move this year to trash?'),
+				buttons: {
+					confirm: {
+						label: '<i class="icon-trash"></i> ' + app.$t('Move to trash'),
+						className: 'btn-danger'
+					}
+				},
+				callback: (result)=>{
+					if(result){
+						axios.delete( url )
+								.then(response => {
+									oThis.onUpdate();
+									toastr.info(
+											oThis.$t('Year moved to trash !'),
+											oThis.$t('Trashed!')
+										);
+								});
+					}
+				}
+			});
+
 		},
 		onUpdate: function(){
+			this.$emit('update');
 			this.$refs.table.refresh();
 		}
 	},
