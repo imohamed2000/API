@@ -128,7 +128,7 @@ class YearController extends Controller
         }
         else
         {
-            return $this->response->ok($year)->respond();
+            return $this->response->badRequest(['year'=>'Can\'t delete active year.'])->respond();
         }
     }
 
