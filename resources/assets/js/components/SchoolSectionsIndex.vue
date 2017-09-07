@@ -44,10 +44,7 @@ export default{
         		],
         		columns: [
         			{"data": "name"},
-        			{"data": null, 'fnCreatedCell': (nTd, sData, oData, iRow, iCol)=>{
-        				let gradeName = oData.grade ? oData.grade.name : '';
-        				jQuery(nTd).html(gradeName);
-        			}},
+        			{"data": "grade.name"},
         			{"data": null, 'fnCreatedCell': (nTd, sData, oData, iRow, iCol)=>{
         				let editBtn = `
 							<li>
