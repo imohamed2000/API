@@ -8,7 +8,7 @@
 				</div>
 				<div class="col-md-4">
 					<create v-if="!edit" :school="school" @created="onUpdate"></create>
-					<edit v-if="edit" @cancel="edit=false" @updated="onUpdate"></edit>
+					<edit v-if="edit" :school="school" :year="year" @cancel="edit=false" @updated="onUpdate"></edit>
 				</div>
 			</div>
 		</portlet>
@@ -38,7 +38,8 @@ export default{
 	},
 	data(){
 		return {
-			edit: false
+			edit: false,
+			year: {}
 		};
 	},
 	computed: {
@@ -77,7 +78,7 @@ export default{
 										${window.app.$t('Tools')}
 										<i class="fa fa-angle-down"></i>
 									</button>
-									<ul class="dropdown-menu text-center">
+									<ul class="dropdown-menu">
 							${editBtn} ${deleteBtn}
 							</ul>
 								</div>
@@ -105,7 +106,7 @@ export default{
 			isLoading: 'isLoading'
 		}),
 		onEdit: function(event, data, row){
-			console.log("Edit")
+			this.year = data;
 			this.edit = true;
 		},
 		onDelete: function(event, data, row){

@@ -70392,9 +70392,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		};
 	},
 	computed: {},
-	mounted() {
-		this.isLoading(false);
-	},
+	mounted() {},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
 		isLoading: 'isLoading'
 	}), {
@@ -70409,9 +70407,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 			// sending ajax request
 			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url, formData).then(response => {
-				console.log(response.data);
+				this.$emit('created');
+				this.$refs.form.reset();
 			}).catch(errors => {
-				console.log(errors.response.data);
+				this.errors.record(errors.response.data);
 			}).then(() => {
 				animation.stop();
 			});
@@ -70431,6 +70430,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_http__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_errors__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ladda__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ladda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ladda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_toastr_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Portlet__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Portlet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Portlet__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -70439,25 +70445,79 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
-//import axios from '../helpers/http';
-//import Errors from '../helpers/errors';
-//import ladda from 'ladda';
-//import toastr from '../helpers/toastr.js';
+
+
+
+
 //import $style from '../helpers/style.js';
 //let style = new $style();
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data() {
-		return {};
+	props: ['school', 'year'],
+	components: {
+		portlet: __WEBPACK_IMPORTED_MODULE_5__Portlet___default.a
 	},
-	computed: {},
+	data() {
+		return {
+			errors: new __WEBPACK_IMPORTED_MODULE_2__helpers_errors__["a" /* default */]()
+		};
+	},
+	computed: {
+		name: function () {
+			return this.year.name;
+		},
+		id: function () {
+			return this.year.id;
+		}
+	},
 	mounted() {},
 	methods: _extends({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
 		isLoading: 'isLoading'
-	})),
+	}), {
+		onSubmit: function () {
+			// Starting loading animation
+			let animation = __WEBPACK_IMPORTED_MODULE_3_ladda___default.a.create(this.$refs.submit);
+			animation.start();
+
+			// Getting form data
+			let formData = new FormData(this.$refs.form);
+			let url = `school/${this.school.id}/years/${this.id}`;
+
+			// Sending ajax request
+			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].post(url, formData).then(response => {
+				this.$emit('updated');
+				this.$emit('cancel');
+			}).catch(errors => {
+				this.errors.record(errors.response.data);
+			}).then(() => {
+				animation.stop();
+			});
+		}
+
+	}),
 	beforeRouteEnter(to, from, next) {
 		next(vm => {
 			// vm.fetchData();
@@ -70522,7 +70582,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	},
 	data() {
 		return {
-			edit: false
+			edit: false,
+			year: {}
 		};
 	},
 	computed: {
@@ -70561,7 +70622,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 										${window.app.$t('Tools')}
 										<i class="fa fa-angle-down"></i>
 									</button>
-									<ul class="dropdown-menu text-center">
+									<ul class="dropdown-menu">
 							${editBtn} ${deleteBtn}
 							</ul>
 								</div>
@@ -70586,11 +70647,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		isLoading: 'isLoading'
 	}), {
 		onEdit: function (event, data, row) {
-			console.log("Edit");
+			this.year = data;
 			this.edit = true;
 		},
 		onDelete: function (event, data, row) {
 			console.log("Edit");
+		},
+		onUpdate: function () {
+			this.$refs.table.refresh();
 		}
 	}),
 	beforeRouteEnter(to, from, next) {
@@ -97905,6 +97969,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('datatable', {
+    ref: "table",
     attrs: {
       "props": _vm.table
     },
@@ -97918,12 +97983,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(!_vm.edit) ? _c('create', {
     attrs: {
       "school": _vm.school
+    },
+    on: {
+      "created": _vm.onUpdate
     }
   }) : _vm._e(), _vm._v(" "), (_vm.edit) ? _c('edit', {
+    attrs: {
+      "school": _vm.school,
+      "year": _vm.year
+    },
     on: {
       "cancel": function($event) {
         _vm.edit = false
-      }
+      },
+      "updated": _vm.onUpdate
     }
   }) : _vm._e()], 1)])])
 },staticRenderFns: []}
@@ -99030,7 +99103,100 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_vm._v("\n\tLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n\ttempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n")])
+  return _c('portlet', {
+    attrs: {
+      "props": {
+        title: _vm.$t('New Year'),
+        icon: 'icon-plus'
+      }
+    }
+  }, [_c('form', {
+    ref: "form",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.onSubmit($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
+      }
+    },
+    slot: "body"
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_method",
+      "value": "PUT"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: _vm.errors.has('name') ? 'has-error' : ''
+  }, [_c('label', {
+    attrs: {
+      "for": "year-name"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Name'))
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.name),
+      expression: "name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "name",
+      "id": "year-name",
+      "placeholder": _vm.$t('Name')
+    },
+    domProps: {
+      "value": (_vm.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('name'))
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "row",
+    slot: "footer"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('button', {
+    ref: "submit",
+    staticClass: "pull-right btn green mt-ladda-btn ladda-button",
+    attrs: {
+      "data-style": "zoom-in",
+      "type": "submit"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Submit'))
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "pull-right btn grey mt-ladda-btn ladda-button",
+    attrs: {
+      "data-style": "zoom-in",
+      "type": "button"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.$t('Cancel'))
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('cancel')
+      }
+    }
+  })])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -100114,11 +100280,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "submit": function($event) {
         $event.preventDefault();
         _vm.onSubmit($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
       }
     },
     slot: "body"
   }, [_c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: _vm.errors.has('name') ? 'has-error' : ''
   }, [_c('label', {
     attrs: {
       "for": "year-name"
@@ -100135,7 +100305,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": _vm.$t('Name')
     }
   }), _vm._v(" "), _c('p', {
-    staticClass: "help-block"
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('name'))
+    }
   })]), _vm._v(" "), _c('div', {
     staticClass: "row",
     slot: "footer"

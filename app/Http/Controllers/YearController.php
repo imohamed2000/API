@@ -8,7 +8,7 @@ use App\School;
 
 class YearController extends Controller
 {
-    private $list = ['name','current'];
+    private $list = ['id','name','current'];
 
 
     /**
