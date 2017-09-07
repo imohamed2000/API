@@ -121,18 +121,27 @@ class YearController extends Controller
     public function destroy( School $school , $id)
     {
         $year = $school->years()->findOrFail($id);
-        $year->delete();
-        return $this->response->ok(['Deleted'])->respond();
+        if($year->current != 1)
+        {
+            $year->delete();
+            return $this->response->ok($year)->respond();
+        }
+        else
+        {
+            return $this->response->badRequest(['year'=>'Can\'t delete active year.'])->respond();
+        }
     }
 
     public function postCurrent(School $school, Year $year)
     {
-        $check = $school->years()->findOrFail($year->id);
+        // Set old current to false
+        $currentYear = $school->years()->where('current',1)->first();
+        $currentYear->update(['current' => 0]);
 
-        $school->years()->update(['current' => 0]);
+        // Set new Current to True
+        $year->update(['current'=>1]);
 
-        $check->update([ 'current' => 1 ]);
-
-        return $this->response->ok(['Done'])->respond();
+        // Response
+        return $this->response->ok($year)->respond();
     }
 }
