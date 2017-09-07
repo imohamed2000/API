@@ -43,15 +43,15 @@ export default{
 		fetchData: function(){
 			axios.get(this.url).then(response => {
 				this.years = response.data;
-			});
-			axios.get(this.activeUrl)
+			}).then(()=>{
+				axios.get(this.activeUrl)
 					.then(response => {
 						if(response.data.id !== undefined)
 						{
 							this.selected = response.data.id;
-						}
-						
+						}					
 					});
+			});
 		},
 		update: function(){
 			if(this.selected != 0){

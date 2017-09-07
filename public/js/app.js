@@ -68597,6 +68597,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			let submitAnimation = __WEBPACK_IMPORTED_MODULE_9_ladda___default.a.create(this.$refs.submitBtn);
 			submitAnimation.start();
 			let oThis = this;
+			// Update active year
+			this.$refs.activeYear.update();
+			// Update school data
 			__WEBPACK_IMPORTED_MODULE_6__helpers_http__["a" /* default */].post('/schools/' + this.school.id, new FormData(this.$refs.form)).then(res => {
 				this.$parent.school = res.data;
 				__WEBPACK_IMPORTED_MODULE_10__helpers_toastr_js__["a" /* default */].success(oThis.$t("This school data is successfully updated!"), oThis.$t("Successfully updated"));
@@ -68604,9 +68607,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				__WEBPACK_IMPORTED_MODULE_8_jquery___default()(this.$refs.imageUpload.$refs.input).val(() => {
 					return this.defaultValue;
 				});
-
-				// Update active year
-				this.$refs.activeYear.update();
 			}).catch(err => {
 				this.errors.record(err.response.data);
 			}).then(() => {
@@ -106364,11 +106364,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		fetchData: function () {
 			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.url).then(response => {
 				this.years = response.data;
-			});
-			__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.activeUrl).then(response => {
-				if (response.data.id !== undefined) {
-					this.selected = response.data.id;
-				}
+			}).then(() => {
+				__WEBPACK_IMPORTED_MODULE_1__helpers_http__["a" /* default */].get(this.activeUrl).then(response => {
+					if (response.data.id !== undefined) {
+						this.selected = response.data.id;
+					}
+				});
 			});
 		},
 		update: function () {

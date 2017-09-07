@@ -207,6 +207,9 @@ export default{
 			let submitAnimation = ladda.create( this.$refs.submitBtn );
 			submitAnimation.start();
 			let oThis = this;
+			// Update active year
+			this.$refs.activeYear.update();
+			// Update school data
 			axios.post('/schools/' + this.school.id, new FormData(this.$refs.form))
 				.then((res)=>{
 					this.$parent.school = res.data;
@@ -218,9 +221,6 @@ export default{
 					jQuery(this.$refs.imageUpload.$refs.input).val(()=>{
 						return this.defaultValue;
 					});
-
-					// Update active year
-					this.$refs.activeYear.update();
 				})
 					.catch((err)=>{
 						this.errors.record( err.response.data );
