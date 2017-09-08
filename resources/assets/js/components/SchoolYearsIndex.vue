@@ -132,6 +132,11 @@ export default{
 											oThis.$t('Year moved to trash !'),
 											oThis.$t('Trashed!')
 										);
+								}).catch( errors => {
+									toastr.error(
+											oThis.$t(errors.response.data.year),
+											oThis.$t('Oops!')
+										);
 								});
 					}
 				}
