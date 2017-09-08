@@ -31,10 +31,10 @@ class SchoolTableSeeder extends Seeder
             $school = \App\School::create( $school );
             $default_roles = ['Student', 'Parent', 'Teacher', 'Moderator'];
             foreach ($default_roles as $role_name) {
-                $role = \App\Role::create(['name'   => $role_name]);
+                $role = \App\Role::create(['name'   => $role_name, 'slug' => str_slug($role_name)]);
                 \DB::table('role_school')->insert([
                         'role_id'   => $role->id,
-                        'school_id' => $school->id
+                        'school_id' => $school->id,
                     ]);
             }
         }
