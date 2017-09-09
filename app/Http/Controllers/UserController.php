@@ -239,7 +239,7 @@ class UserController extends Controller
     // Get Section of specific User
     public function getSection(School $school,User $user)
     {
-        $getSection = SectionUser::where('user_id',$user->id)->first()->section()->with('grade')->first();
+        $getSection = SectionUser::where('user_id',1)->with('section')->get();
         return $this->response->ok($getSection)->respond();
     }
 
@@ -247,8 +247,7 @@ class UserController extends Controller
 
     public function getUsersSection(School $school,$id)
     {
-        $section = $school->sections()->findOrFail($id);
-        $users = SectionUser::where('section_id',$section->id)->with('users')->get();
+        $users = SectionUser::where('section_id',$id)->with('users')->get();
 
         return $this->response->ok($users)->respond();
     }
@@ -287,7 +286,7 @@ class UserController extends Controller
                 SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
             }
         }
-        
+
         // Difference between old values and new values
         $differences = array_diff($getSections,$sections);
 
