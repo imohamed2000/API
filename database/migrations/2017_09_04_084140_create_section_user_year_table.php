@@ -13,14 +13,12 @@ class CreateSectionUserYearTable extends Migration
      */
     public function up()
     {
-        Schema::create('section_user_year',function(Blueprint $table){
+        Schema::create('section_user',function(Blueprint $table){
             $table->increments('id');
             $table->integer('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('year_id')->unsigned();
-            $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
         });
 
     }
@@ -32,14 +30,12 @@ class CreateSectionUserYearTable extends Migration
      */
     public function down()
     {
-        Schema::table('section_user_year', function(Blueprint $table){
-            $table->dropForeign('section_user_year_section_id_foreign');
+        Schema::table('section_user', function(Blueprint $table){
+            $table->dropForeign('section_user_section_id_foreign');
             $table->dropColumn('section_id');
-            $table->dropForeign('section_user_year_user_id_foreign');
+            $table->dropForeign('section_user_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->dropForeign('section_user_year_year_id_foreign');
-            $table->dropColumn('year_id');
-            $table->drop('section_user_year');
+            $table->drop('section_user');
         });
     }
 }

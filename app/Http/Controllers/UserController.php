@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SectionUserYear;
+use App\SectionUser;
 use App\Year;
 use Illuminate\Http\Request;
 use App\User;
@@ -237,61 +237,69 @@ class UserController extends Controller
 
 
     // Get Section of specific User
-    public function getSection(School $school,$id)
+    public function getSection(School $school,User $user)
     {
-        $checkUser = $school->checkUser($school->id,$id);
-        if(!$checkUser){
-            return $this->response->badRequest(['Sorry!, this user has no permission with this school'])->respond();
-        }
-
-        $activeYear = $school->getActiveYear();
-        if(!$activeYear){
-            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
-        }
-
-        $getSection = SectionUserYear::where('year_id',$activeYear->id)->where('user_id',$checkUser->id)->first()->section()->with('grade')->first();
+        $getSection = SectionUser::where('user_id',1)->with('section')->get();
         return $this->response->ok($getSection)->respond();
-
     }
 
     // get Users of specific section
 
     public function getUsersSection(School $school,$id)
     {
-        $section = $school->sections()->findOrFail($id);
-        $activeYear = $school->getActiveYear();
-        if(!$activeYear){
-            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
-        }
-        $users = SectionUserYear::where('section_id',$section->id)->where('year_id',$activeYear->id)->with('users')->get();
+        $users = SectionUser::where('section_id',$id)->with('users')->get();
 
         return $this->response->ok($users)->respond();
     }
 
-    public function storeSection(Request $request, School $school, $id)
+    public function storeSection(Request $request, School $school, User $user)
     {
-        $is_valid = $this->validate($request->all(), [
-            'section' => 'required|exists:sections,id',
-            'year' => 'required|exists:sections,id',
-        ]);
-        if (!$is_valid) {
-            return $this->response->badRequest($this->errors)->respond();
-        }
-        $checkUser = $school->checkUser($school->id,$id);
-        if(!$checkUser){
-            return $this->response->badRequest(['Sorry!, this user has no permission with this school'])->respond();
-        }
-        $checkSection = $school->checkSection($school->id,$request->section);
-        if(!$checkSection){
-            return $this->response->badRequest(['Sorry!, this section has no permission with this school'])->respond();
-        }
-        $checkYear = $school->checkYear($school->id,$request->year);
-        if(!$checkYear){
-            return $this->response->badRequest(['Sorry!, this year has no permission with this school'])->respond();
+        $sections = explode(',',$request->section);
+        $sectionRequest = [];
+        $error = [];
+        foreach($sections as $section) {
+            $sectionRequest['section'] = $section;
+            $is_valid = $this->validate($sectionRequest, [
+                'section' => 'required|integer|exists:sections,id',
+            ]);
+            if(!$is_valid) {
+                $error['section'.$section] = $this->errors;
+            }
         }
 
-        SectionUserYear::create(['user_id'=>$id , 'year_id'=>$request->year,'section_id'=>$request->section]);
+        if(!$is_valid) {
+            return $this->response->badRequest($error)->respond();
+        }
 
-        return $this->response->created(['saved'])->respond();
+        // Get Section of user
+        $getSections = SectionUser::where('user_id',$user->id)->pluck('section_id')->all();
+
+        // intersection values between old values and new values
+        $intersect = array_intersect($getSections,$sections);
+
+        // Values will created
+        $creates = array_diff($sections,$intersect);
+        if(count($creates) > 0)
+        {
+            foreach($creates as $create)
+            {
+                SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
+            }
+        }
+
+        // Difference between old values and new values
+        $differences = array_diff($getSections,$sections);
+
+        if(count($differences) > 0)
+        {
+            foreach($differences as $difference)
+            {
+                SectionUser::where('user_id',$user->id)->where('section_id',$difference)->delete();
+            }
+        }
+
+        return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+
+
     }
 }
