@@ -318,7 +318,13 @@ class UserController extends Controller
         return $this->response->ok($grade)->respond();
     }
 
-
+    /**
+     * Get Users(Students) of
+     * grade in active year
+     * @param School $school
+     * @param Grade $grade
+     * @return \App\Beak\Response
+     */
     public function getUsersGrade(School $school, Grade $grade)
     {
         $year = $school->years()->where('current',1)->firstOrFail();
@@ -327,6 +333,7 @@ class UserController extends Controller
 
         return $this->response->ok($users)->respond();
     }
+
     /**
      * Store User(Student) with
      * grade in active year
