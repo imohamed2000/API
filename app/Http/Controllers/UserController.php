@@ -300,6 +300,25 @@ class UserController extends Controller
     }
 
     /**
+     * Get Grade of specific
+     * User in active year
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
+
+    public function getGrade(School $school, User $user)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $getGrade = GradeUser::where('user_id',$user->id)->where('year_id',$year->id)->firstOrFail();
+
+        $grade = Grade::withTrashed()->find($getGrade->grade_id);
+
+        return $this->response->ok($grade)->respond();
+    }
+
+    /**
      * Store User(Student) with
      * grade in active year
      * @param Request $request
