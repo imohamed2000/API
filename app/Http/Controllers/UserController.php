@@ -318,6 +318,15 @@ class UserController extends Controller
         return $this->response->ok($grade)->respond();
     }
 
+
+    public function getUsersGrade(School $school, Grade $grade)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $users = GradeUser::where('grade_id',$grade->id)->where('year_id',$year->id)->with('users')->get();
+
+        return $this->response->ok($users)->respond();
+    }
     /**
      * Store User(Student) with
      * grade in active year
