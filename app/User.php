@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Beak\QueryFilter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,6 +54,15 @@ class User extends Authenticatable
         }
         return $this->roles()->where('user_id', $this->id)->first();
     }
+
+
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
+
+
 
     public function getNameAttribute(){
         return $this->title . ' ' . $this->first_name . ' ' . $this->last_name;

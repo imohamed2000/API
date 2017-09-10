@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\School;
 use App\Beak\Upload;
+use App\Beak\UserFilters;
 
 class UserController extends Controller
 {
@@ -237,6 +238,22 @@ class UserController extends Controller
         return $this->response->badRequest(['Error request'])->respond();
     }
 
+    /**
+     * Search Users
+     * @param  School $school
+     * @param  \App\Beak\UserFilters $filters
+     * @return \App\Beak\Response
+     */
+    public function search(School $school, UserFilters $filters)
+    {
+        // TODO role
+//        if(request()->has('role'))
+//        {
+//            $filters = new RoleFilter;
+//            return $school->roles()->filter($filters)->paginate(30);
+//        }
+        return $school->users()->filter($filters)->paginate(30);
+    }
 
     // Get Section of specific User
     public function getSection(School $school,User $user)
