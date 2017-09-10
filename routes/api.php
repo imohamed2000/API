@@ -36,8 +36,12 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('school/{school}/user/{id}/section','UserController@getSection');
     Route::post('school/{school}/user/{user}/section','UserController@storeSection');
 
-    // Get Users of specific section
-    Route::get('school/{school}/section/{id}/users','UserController@getUsersSection');
+    // Mapping Grade User
+    Route::get('school/{school}/user/{user}/grade','UserController@getGrade');
+    Route::post('school/{school}/user/{user}/grade','UserController@storeGrade');
+
+    // Get Users of specific Grade
+    Route::get('school/{school}/grade/{grade}/users','UserController@getUsersGrade');
 
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');

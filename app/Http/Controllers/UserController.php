@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
+use App\GradeUser;
 use App\SectionUser;
 use App\Year;
 use Illuminate\Http\Request;
@@ -256,19 +258,19 @@ class UserController extends Controller
     {
         $sections = explode(',',$request->section);
         $sectionRequest = [];
-        $error = [];
+        $errors = [];
         foreach($sections as $section) {
             $sectionRequest['section'] = $section;
             $is_valid = $this->validate($sectionRequest, [
                 'section' => 'required|integer|exists:sections,id',
             ]);
             if(!$is_valid) {
-                $error['section'.$section] = $this->errors;
+                $errors['section'.$section] = $this->errors;
             }
         }
 
         if(!$is_valid) {
-            return $this->response->badRequest($error)->respond();
+            return $this->response->badRequest($errors)->respond();
         }
 
         // Get Section of user
@@ -281,8 +283,7 @@ class UserController extends Controller
         $creates = array_diff($sections,$intersect);
         if(count($creates) > 0)
         {
-            foreach($creates as $create)
-            {
+            foreach($creates as $create){
                 SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
             }
         }
@@ -290,16 +291,79 @@ class UserController extends Controller
         // Difference between old values and new values
         $differences = array_diff($getSections,$sections);
 
-        if(count($differences) > 0)
-        {
-            foreach($differences as $difference)
-            {
+        if(count($differences) > 0){
+            foreach($differences as $difference){
                 SectionUser::where('user_id',$user->id)->where('section_id',$difference)->delete();
             }
         }
-
         return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+    }
 
+    /**
+     * Get Grade of specific
+     * User in active year
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
 
+    public function getGrade(School $school, User $user)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $getGrade = GradeUser::where('user_id',$user->id)->where('year_id',$year->id)->firstOrFail();
+
+        $grade = Grade::withTrashed()->find($getGrade->grade_id);
+
+        return $this->response->ok($grade)->respond();
+    }
+
+    /**
+     * Get Users(Students) of
+     * grade in active year
+     * @param School $school
+     * @param Grade $grade
+     * @return \App\Beak\Response
+     */
+    public function getUsersGrade(School $school, Grade $grade)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $users = GradeUser::where('grade_id',$grade->id)->where('year_id',$year->id)->with('users')->get();
+
+        return $this->response->ok($users)->respond();
+    }
+
+    /**
+     * Store User(Student) with
+     * grade in active year
+     * @param Request $request
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
+    public function storeGrade(Request $request, School $school,User $user)
+    {
+        $is_valid = $this->validate($request->all(), [
+            'grade' => 'required|integer|exists:grades,id',
+        ]);
+
+        if(!$is_valid) {
+            return $this->response->badRequest($this->errors)->respond();
+        }
+
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $attr = [
+            'grade_id'  => $request->grade,
+            'user_id'   => $user->id,
+            'year_id'   => $year->id
+        ];
+
+        GradeUser::where('year_id',$year->id)->where('user_id',$user->id)->where('grade_id',$request->grade)->firstOrCreate($attr);
+
+        $grade = Grade::find($request->grade);
+
+        return $this->response->created($grade)->respond();
     }
 }
