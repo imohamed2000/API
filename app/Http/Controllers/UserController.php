@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
+use App\GradeUser;
 use App\SectionUser;
 use App\Year;
 use Illuminate\Http\Request;
@@ -295,5 +297,38 @@ class UserController extends Controller
             }
         }
         return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+    }
+
+    /**
+     * Store User(Student) with
+     * grade in active year
+     * @param Request $request
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
+    public function storeGrade(Request $request, School $school,User $user)
+    {
+        $is_valid = $this->validate($request->all(), [
+            'grade' => 'required|integer|exists:grades,id',
+        ]);
+
+        if(!$is_valid) {
+            return $this->response->badRequest($this->errors)->respond();
+        }
+
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $attr = [
+            'grade_id'  => $request->grade,
+            'user_id'   => $user->id,
+            'year_id'   => $year->id
+        ];
+
+        GradeUser::where('year_id',$year->id)->where('user_id',$user->id)->where('grade_id',$request->grade)->firstOrCreate($attr);
+
+        $grade = Grade::find($request->grade);
+
+        return $this->response->created($grade)->respond();
     }
 }
