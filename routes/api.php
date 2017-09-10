@@ -40,8 +40,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('school/{school}/user/{user}/grade','UserController@getGrade');
     Route::post('school/{school}/user/{user}/grade','UserController@storeGrade');
 
-    // Get Users of specific section
-    Route::get('school/{school}/section/{id}/users','UserController@getUsersSection');
+    // Get Users of specific Grade
+    Route::get('school/{school}/grade/{grade}/users','UserController@getUsersGrade');
 
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');
