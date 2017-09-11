@@ -31,6 +31,7 @@ class Role extends Model
     		$value = str_random(9);
     	}
     	$this->attributes['slug'] = strtolower($value);
+    }
 
     public function users()
     {
