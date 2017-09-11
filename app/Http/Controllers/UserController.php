@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Grade;
-use App\GradeUser;
-use App\SectionUser;
-use App\Year;
-use Illuminate\Http\Request;
-use App\User;
-use App\School;
+use App\Beak\RoleFilter;
 use App\Beak\Upload;
 use App\Beak\UserFilters;
-use App\Beak\RoleFilter;
+use App\Grade;
+use App\GradeUser;
+use App\School;
+use App\Section;
+use App\SectionUser;
+use App\User;
+use App\Year;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -257,11 +258,18 @@ class UserController extends Controller
         return $school->users()->filter($userFilter)->paginate(30);
     }
 
-    // Get Section of specific User
-    public function getSection(School $school,User $user)
-    {
-        $getSection = SectionUser::where('user_id',$user->id)->with('section')->get();
-        return $this->response->ok($getSection)->respond();
+    // Get Sections of specific User
+    public function getSection(School $school, User $user)
+    {   
+        $sections = Section::where('school_id', $school->id)
+                            ->whereIn('id', function($query) use($user){
+                                $query->select('section_id')
+                                      ->from('section_user')
+                                      ->where('user_id', $user->id)
+                                      ->get();
+                            })
+                            ->get();
+        return $this->response->ok($sections)->respond();
     }
 
     // get Users of specific section
