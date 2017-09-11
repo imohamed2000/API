@@ -21,4 +21,8 @@ class Grade extends Model
     public function sections(){
     	return $this->hasMany('\App\Section');
     }
+
+    public function users(){
+        return $this->belongsToMany('\App\User');
+    }
 }

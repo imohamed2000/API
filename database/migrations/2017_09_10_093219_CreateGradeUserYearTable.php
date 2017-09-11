@@ -32,14 +32,6 @@ class CreateGradeUserYearTable extends Migration
      */
     public function down()
     {
-        Schema::table('grade_user', function(Blueprint $table){
-            $table->dropForeign('grade_user_grade_id_foreign');
-            $table->dropColumn('grade');
-            $table->dropForeign('grade_user_user_id_foreign');
-            $table->dropColumn('user_id');
-            $table->dropForeign('grade_user_year_id_foreign');
-            $table->dropColumn('year_id');
-            $table->drop('grade_user');
-        });
+        Schema::drop('grade_user');
     }
 }

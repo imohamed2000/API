@@ -327,14 +327,15 @@ class UserController extends Controller
      */
 
     public function getGrade(School $school, User $user)
-    {
-        $year = $school->years()->where('current',1)->firstOrFail();
-
-        $getGrade = GradeUser::where('user_id',$user->id)->where('year_id',$year->id)->firstOrFail();
-
-        $grade = Grade::withTrashed()->find($getGrade->grade_id);
-
-        return $this->response->ok($grade)->respond();
+    {   
+        $grades = Grade::where('school_id', $school->id)
+                            ->whereIn('id', function($query) use($user, $school){
+                                $query->select('grade_id')->from('grade_user')
+                                            ->where('user_id', $user->id)
+                                            ->where('year_id', $school->current_year_id)
+                                            ->get();
+                            })->get();
+        return $this->response->ok($grades)->respond();
     }
 
     /**
