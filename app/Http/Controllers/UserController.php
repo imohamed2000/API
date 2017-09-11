@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\SectionUserYear;
+use App\Grade;
+use App\GradeUser;
+use App\SectionUser;
 use App\Year;
 use Illuminate\Http\Request;
 use App\User;
 use App\School;
 use App\Beak\Upload;
+use App\Beak\UserFilters;
+use App\Beak\RoleFilter;
 
 class UserController extends Controller
 {
@@ -235,63 +239,150 @@ class UserController extends Controller
         return $this->response->badRequest(['Error request'])->respond();
     }
 
+    /**
+     * Search Users
+     * @param  School $school
+     * @param  \App\Beak\UserFilters $userFilter
+     * @param  \App\Beak\RoleFilter $roleFilter
+     * @return \App\Beak\Response
+     */
+    public function search(School $school, UserFilters $userFilter, RoleFilter $roleFilter)
+    {
+        if(request()->has('role'))
+        {
+            return $school->roles()->filter($roleFilter)->with(['users' => function ($query) use ($userFilter) {
+                $query->filter($userFilter);
+                }])->paginate(30);
+        }
+        return $school->users()->filter($userFilter)->paginate(30);
+    }
 
     // Get Section of specific User
-    public function getSection(School $school,$id)
+    public function getSection(School $school,User $user)
     {
-        $checkUser = $school->checkUser($school->id,$id);
-        if(!$checkUser){
-            return $this->response->badRequest(['Sorry!, this user has no permission with this school'])->respond();
-        }
-
-        $activeYear = $school->getActiveYear();
-        if(!$activeYear){
-            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
-        }
-
-        $getSection = SectionUserYear::where('year_id',$activeYear->id)->where('user_id',$checkUser->id)->first()->section()->with('grade')->first();
+        $getSection = SectionUser::where('user_id',$user->id)->with('section')->get();
         return $this->response->ok($getSection)->respond();
-
     }
 
     // get Users of specific section
 
     public function getUsersSection(School $school,$id)
     {
-        $section = $school->sections()->findOrFail($id);
-        $activeYear = $school->getActiveYear();
-        if(!$activeYear){
-            return $this->response->badRequest(['Sorry!, can not get active year'])->respond();
-        }
-        $users = SectionUserYear::where('section_id',$section->id)->where('year_id',$activeYear->id)->with('users')->get();
+        $users = SectionUser::where('section_id',$id)->with('users')->get();
 
         return $this->response->ok($users)->respond();
     }
 
-    public function storeSection(Request $request, School $school, $id)
+    public function storeSection(Request $request, School $school, User $user)
+    {
+        $sections = explode(',',$request->section);
+        $sectionRequest = [];
+        $errors = [];
+        foreach($sections as $section) {
+            $sectionRequest['section'] = $section;
+            $is_valid = $this->validate($sectionRequest, [
+                'section' => 'required|integer|exists:sections,id',
+            ]);
+            if(!$is_valid) {
+                $errors['section'.$section] = $this->errors;
+            }
+        }
+
+        if(!$is_valid) {
+            return $this->response->badRequest($errors)->respond();
+        }
+
+        // Get Section of user
+        $getSections = SectionUser::where('user_id',$user->id)->pluck('section_id')->all();
+
+        // intersection values between old values and new values
+        $intersect = array_intersect($getSections,$sections);
+
+        // Values will created
+        $creates = array_diff($sections,$intersect);
+        if(count($creates) > 0)
+        {
+            foreach($creates as $create){
+                SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
+            }
+        }
+
+        // Difference between old values and new values
+        $differences = array_diff($getSections,$sections);
+
+        if(count($differences) > 0){
+            foreach($differences as $difference){
+                SectionUser::where('user_id',$user->id)->where('section_id',$difference)->delete();
+            }
+        }
+        return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+    }
+
+    /**
+     * Get Grade of specific
+     * User in active year
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
+
+    public function getGrade(School $school, User $user)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $getGrade = GradeUser::where('user_id',$user->id)->where('year_id',$year->id)->firstOrFail();
+
+        $grade = Grade::withTrashed()->find($getGrade->grade_id);
+
+        return $this->response->ok($grade)->respond();
+    }
+
+    /**
+     * Get Users(Students) of
+     * grade in active year
+     * @param School $school
+     * @param Grade $grade
+     * @return \App\Beak\Response
+     */
+    public function getUsersGrade(School $school, Grade $grade)
+    {
+        $year = $school->years()->where('current',1)->firstOrFail();
+
+        $users = GradeUser::where('grade_id',$grade->id)->where('year_id',$year->id)->with('users')->get();
+
+        return $this->response->ok($users)->respond();
+    }
+
+    /**
+     * Store User(Student) with
+     * grade in active year
+     * @param Request $request
+     * @param School $school
+     * @param User $user
+     * @return \App\Beak\Response
+     */
+    public function storeGrade(Request $request, School $school,User $user)
     {
         $is_valid = $this->validate($request->all(), [
-            'section' => 'required|exists:sections,id',
-            'year' => 'required|exists:sections,id',
+            'grade' => 'required|integer|exists:grades,id',
         ]);
-        if (!$is_valid) {
+
+        if(!$is_valid) {
             return $this->response->badRequest($this->errors)->respond();
         }
-        $checkUser = $school->checkUser($school->id,$id);
-        if(!$checkUser){
-            return $this->response->badRequest(['Sorry!, this user has no permission with this school'])->respond();
-        }
-        $checkSection = $school->checkSection($school->id,$request->section);
-        if(!$checkSection){
-            return $this->response->badRequest(['Sorry!, this section has no permission with this school'])->respond();
-        }
-        $checkYear = $school->checkYear($school->id,$request->year);
-        if(!$checkYear){
-            return $this->response->badRequest(['Sorry!, this year has no permission with this school'])->respond();
-        }
 
-        SectionUserYear::create(['user_id'=>$id , 'year_id'=>$request->year,'section_id'=>$request->section]);
+        $year = $school->years()->where('current',1)->firstOrFail();
 
-        return $this->response->created(['saved'])->respond();
+        $attr = [
+            'grade_id'  => $request->grade,
+            'user_id'   => $user->id,
+            'year_id'   => $year->id
+        ];
+
+        GradeUser::where('year_id',$year->id)->where('user_id',$user->id)->where('grade_id',$request->grade)->firstOrCreate($attr);
+
+        $grade = Grade::find($request->grade);
+
+        return $this->response->created($grade)->respond();
     }
 }

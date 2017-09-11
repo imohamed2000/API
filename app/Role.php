@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Beak\QueryFilter;
 
 class Role extends Model
 {
@@ -30,5 +31,15 @@ class Role extends Model
     		$value = str_random(9);
     	}
     	$this->attributes['slug'] = strtolower($value);
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'role_user', 'role_id', 'user_id');
+    }
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+
     }
 }
