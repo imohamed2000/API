@@ -11,6 +11,7 @@ use App\User;
 use App\School;
 use App\Beak\Upload;
 use App\Beak\UserFilters;
+use App\Beak\RoleFilter;
 
 class UserController extends Controller
 {
@@ -241,18 +242,19 @@ class UserController extends Controller
     /**
      * Search Users
      * @param  School $school
-     * @param  \App\Beak\UserFilters $filters
+     * @param  \App\Beak\UserFilters $userFilter
+     * @param  \App\Beak\RoleFilter $roleFilter
      * @return \App\Beak\Response
      */
-    public function search(School $school, UserFilters $filters)
+    public function search(School $school, UserFilters $userFilter, RoleFilter $roleFilter)
     {
-        // TODO role
-//        if(request()->has('role'))
-//        {
-//            $filters = new RoleFilter;
-//            return $school->roles()->filter($filters)->paginate(30);
-//        }
-        return $school->users()->filter($filters)->paginate(30);
+        if(request()->has('role'))
+        {
+            return $school->roles()->filter($roleFilter)->with(['users' => function ($query) use ($userFilter) {
+                $query->filter($userFilter);
+                }])->paginate(30);
+        }
+        return $school->users()->filter($userFilter)->paginate(30);
     }
 
     // Get Section of specific User
