@@ -5,6 +5,6 @@ class RoleFilter extends QueryFilter
 {
     public function role($name)
     {
-        return $this->builder->where('name','LIKE','%'.$name.'%');
+        return $this->builder->where('slug','LIKE','%'.$name.'%');
     }
 }
