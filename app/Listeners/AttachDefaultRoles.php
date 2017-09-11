@@ -7,7 +7,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class AttachDefaultRoles
-{
+{   
+    private $default_roles;
+    private $school;
     /**
      * Create the event listener.
      *
@@ -15,7 +17,7 @@ class AttachDefaultRoles
      */
     public function __construct()
     {
-        //
+        $this->default_roles = ['Moderator', 'Student', 'Parent', 'Teacher'];
     }
 
     /**
@@ -25,35 +27,16 @@ class AttachDefaultRoles
      * @return void
      */
     public function handle(SchoolCreated $event)
-    {
-        $moderator = [
-            'name'      => 'Moderator',
-            'school_id' => $event->school->id
-        ];
-
-        $student = [
-            'name'      => 'Student',
-            'school_id' => $event->school->id
-        ];
-
-        $parent = [
-            'name'      => 'Parent',
-            'school_id' => $event->school->id
-        ];
-
-        $teacher = [
-            'name'      => 'Teacher',
-            'school_id' => $event->school->id
-        ];
-
-        $default_roles = [$student, $parent, $moderator, $teacher];
-
-        $roles = [];
-        foreach($default_roles as $role){
-            $role = \App\Role::create($role);
-            $roles[] = [ 'id'   => $role->id, "name" => $role->name];
-        }
-
+    {   
+        foreach($this->default_roles as $role_name){
+            $attr = [
+                'name'  => $role_name,
+                'slug'  => str_slug($role_name)
+            ];
+            $role = \App\Role::create($attr);
+            $role->schools()->attach($event->school->id);
+            $roles[] = $role->toArray();
+        }   
         return $roles;
     }
 }
