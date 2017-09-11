@@ -260,7 +260,7 @@ class UserController extends Controller
     // Get Section of specific User
     public function getSection(School $school,User $user)
     {
-        $getSection = SectionUser::where('user_id',1)->with('section')->get();
+        $getSection = SectionUser::where('user_id',$user->id)->with('section')->get();
         return $this->response->ok($getSection)->respond();
     }
 
