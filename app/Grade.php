@@ -17,4 +17,8 @@ class Grade extends Model
     {
         return $this->belongsTo('App\School');
     }
+
+    public function sections(){
+    	return $this->hasMany('\App\Section');
+    }
 }

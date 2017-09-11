@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
 use App\School;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class GradeController extends Controller
      * @return \App\Beak\Response
      */
     public function index(Request $request, School $school){
-        $data = $school->grades()->orderBy('order', 'asc')->get();
+        $data = Grade::with('sections')->orderBy('order', 'asc')->get();
         return $this->response->ok( $data )->respond();
     }
 
