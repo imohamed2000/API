@@ -17,7 +17,9 @@
 					<label for="section-id" v-text="$t('Section')"></label>
 					<select name="section_id" id="section-id" class="form-control" v-model="section">
 						<option value="0" selected disabled>{{$t('Select Section')}}</option>
-						<option :value="section.id" v-for="section in sections" v-text="section.name"></option>
+						<option :value="section.id" 
+								v-for="section in sections" 
+								v-text="section.name"></option>
 					</select>
 				</div>
 				<div slot="footer">
@@ -82,26 +84,45 @@ export default{
 			isLoading: 'isLoading'
 		}),
 		fetchData: function(){
-			axios.get(this.SchoolGradesUrl).then((response)=>{ // Get School grades
+			axios.get(this.SchoolGradesUrl).then(response => { // Get grades
 				this.grades = response.data;
-			}).then(()=>{ // Get current grade
-				// axios.get(this.GradeUrl).then( (response)=>{
-				// 	console.log(response.data)
-				// } );
-				console.log(this.GradeUrl)
-				this.grade = 1;
-				// set sections.
-			}).then(()=>{ // get current section
-				this.section = 0;
+			}).then(()=>{ // get current grade
+				axios.get(this.GradeUrl).then( response=>{
+					if(response.data.length){
+						this.grade = response.data[0].id;
+						// Get current grade sections
+						let gradeUrl = `${this.SchoolGradesUrl}/${this.grade}`;
+						axios.get(gradeUrl).then(response=>{
+							this.sections = response.data.sections;
+						}).then(()=>{ // Get user current section
+							axios.get(this.SectionUrl).then( response=>{
+								if(response.data.length){
+									this.section = response.data[0].id;
+								}
+							} )
+						});
+					}
+				} );
 			});
 		},
 		onGradeChange: function(e){
-			console.log(e.target.options.selectedIndex)
-			if(e.target.options.selectedIndex != -1){
+			let target = e.target;
+			if(target.options.selectedIndex != -1){
 				let sections = JSON.parse( e.target.options[e.target.selectedIndex].getAttribute('sections') );
 				this.sections = sections;
+				// TODO make current section selected
 			}			
 		},
+		inSections: function(){
+			let present = false;
+			for(let section of this.sections){
+				if(section.id == this.section){
+					present = true;
+					break;
+				}
+			}
+			return present
+		}
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{
