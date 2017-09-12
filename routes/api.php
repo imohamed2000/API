@@ -45,6 +45,9 @@ Route::group(['prefix' => 'v1'], function () {
     // Get Users of specific Grade
     Route::get('school/{school}/grade/{grade}/users','UserController@getUsersGrade');
 
+    // Exam CRUD route
+    Route::apiResource('school.exams', 'ExamController');
+
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');
     Route::resource('school.roles', 'RolesController');
