@@ -47,6 +47,9 @@ Route::group(['prefix' => 'v1'], function () {
 
     // Exam CRUD route
     Route::apiResource('school.exams', 'ExamController');
+    
+    // Subject CRUD route
+    Route::apiResource('school.exams', 'ExamController');
 
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');
