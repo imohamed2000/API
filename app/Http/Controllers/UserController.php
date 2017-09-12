@@ -261,14 +261,9 @@ class UserController extends Controller
     // Get Sections of specific User
     public function getSection(School $school, User $user)
     {   
-        $sections = Section::where('school_id', $school->id)
-                            ->whereIn('id', function($query) use($user){
-                                $query->select('section_id')
-                                      ->from('section_user')
-                                      ->where('user_id', $user->id)
-                                      ->get();
-                            })
-                            ->get();
+        $sections = Section::whereHas('users', function($query) use($user){
+            $query->where('users.id', $user->id);
+        })->get();
         return $this->response->ok($sections)->respond();
     }
 

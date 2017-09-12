@@ -21,5 +21,7 @@ class Section extends Model
         return $this->belongsTo('App\Grade','grade_id')->withTrashed();
     }
 
-
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }
