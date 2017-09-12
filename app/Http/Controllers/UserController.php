@@ -278,48 +278,35 @@ class UserController extends Controller
     }
 
     public function storeSection(Request $request, School $school, User $user)
-    {
-        $sections = explode(',',$request->section);
-        $sectionRequest = [];
-        $errors = [];
-        foreach($sections as $section) {
-            $sectionRequest['section'] = $section;
-            $is_valid = $this->validate($sectionRequest, [
-                'section' => 'required|integer|exists:sections,id',
-            ]);
-            if(!$is_valid) {
-                $errors['section'.$section] = $this->errors;
-            }
-        }
-
-        if(!$is_valid) {
+    {   
+        // Get sections and filter them to remove 0 and empty inputs
+        $sections = array_filter( explode(',', $request->input('section')) );
+        // Data Validation 
+        // TODO Validate that section is related to current school
+        //    
+        // Errors initialization
+        $errors = [
+            'section' => ['The grade field is required.']
+        ];
+        if(!count($sections))
+        { // Validating required field
             return $this->response->badRequest($errors)->respond();
         }
 
-        // Get Section of user
-        $getSections = SectionUser::where('user_id',$user->id)->pluck('section_id')->all();
+        $data = ['section' => $sections];
+        $rules = ['section.*'   => 'required|integer|min:1|exists:sections,id'];
+        $messages = [];
+        $is_valid = $this->validate($data, $rules, $messages);
 
-        // intersection values between old values and new values
-        $intersect = array_intersect($getSections,$sections);
-
-        // Values will created
-        $creates = array_diff($sections,$intersect);
-        if(count($creates) > 0)
-        {
-            foreach($creates as $create){
-                SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
-            }
+        if(!$is_valid){
+            return $this->response->badRequest($this->errors)->respond();
         }
 
-        // Difference between old values and new values
-        $differences = array_diff($getSections,$sections);
+        // Sync user sections
+        $user->sections()->sync( $sections );
 
-        if(count($differences) > 0){
-            foreach($differences as $difference){
-                SectionUser::where('user_id',$user->id)->where('section_id',$difference)->delete();
-            }
-        }
-        return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+        // Response 
+        return $this->response->ok($user->sections)->respond();
     }
 
     /**

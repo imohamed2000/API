@@ -79,4 +79,8 @@ class User extends Authenticatable
     public function grades(){
         return $this->belongsToMany('App\Grade');
     }
+
+    public function sections(){
+        return $this->belongsToMany('App\Section');
+    }
 }
