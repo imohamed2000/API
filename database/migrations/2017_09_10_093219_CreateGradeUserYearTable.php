@@ -14,7 +14,6 @@ class CreateGradeUserYearTable extends Migration
     public function up()
     {
         Schema::create('grade_user',function(Blueprint $table){
-            $table->increments('id');
             $table->integer('grade_id')->unsigned();
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
