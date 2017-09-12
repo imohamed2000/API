@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Grade;
-use App\GradeUser;
-use App\SectionUser;
-use App\Year;
-use Illuminate\Http\Request;
-use App\User;
-use App\School;
+use App\Beak\RoleFilter;
 use App\Beak\Upload;
 use App\Beak\UserFilters;
-use App\Beak\RoleFilter;
+use App\Grade;
+use App\GradeUser;
+use App\School;
+use App\Section;
+use App\SectionUser;
+use App\User;
+use App\Year;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -257,14 +258,17 @@ class UserController extends Controller
         return $school->users()->filter($userFilter)->paginate(30);
     }
 
-    // Get Section of specific User
-    public function getSection(School $school,User $user)
-    {
-        $getSection = SectionUser::where('user_id',$user->id)->with('section')->get();
-        return $this->response->ok($getSection)->respond();
+    // Get Sections of specific User
+    public function getSection(School $school, User $user)
+    {   
+        $sections = Section::whereHas('users', function($pivot) use($user){
+            $pivot->where('user_id', $user->id);
+        })->get();
+        return $this->response->ok($sections)->respond();
     }
 
     // get Users of specific section
+    // ## It's better to move this method to the SectionController ##
 
     public function getUsersSection(School $school,$id)
     {
@@ -274,48 +278,35 @@ class UserController extends Controller
     }
 
     public function storeSection(Request $request, School $school, User $user)
-    {
-        $sections = explode(',',$request->section);
-        $sectionRequest = [];
-        $errors = [];
-        foreach($sections as $section) {
-            $sectionRequest['section'] = $section;
-            $is_valid = $this->validate($sectionRequest, [
-                'section' => 'required|integer|exists:sections,id',
-            ]);
-            if(!$is_valid) {
-                $errors['section'.$section] = $this->errors;
-            }
-        }
-
-        if(!$is_valid) {
+    {   
+        // Get sections and filter them to remove 0 and empty inputs
+        $sections = array_filter( explode(',', $request->input('section')) );
+        // Data Validation 
+        // TODO Validate that section is related to current school
+        //    
+        // Errors initialization
+        $errors = [
+            'section' => ['The grade field is required.']
+        ];
+        if(!count($sections))
+        { // Validating required field
             return $this->response->badRequest($errors)->respond();
         }
 
-        // Get Section of user
-        $getSections = SectionUser::where('user_id',$user->id)->pluck('section_id')->all();
+        $data = ['section' => $sections];
+        $rules = ['section.*'   => 'required|integer|min:1|exists:sections,id'];
+        $messages = [];
+        $is_valid = $this->validate($data, $rules, $messages);
 
-        // intersection values between old values and new values
-        $intersect = array_intersect($getSections,$sections);
-
-        // Values will created
-        $creates = array_diff($sections,$intersect);
-        if(count($creates) > 0)
-        {
-            foreach($creates as $create){
-                SectionUser::create(['user_id'=>$user->id,'section_id'=>$create]);
-            }
+        if(!$is_valid){
+            return $this->response->badRequest($this->errors)->respond();
         }
 
-        // Difference between old values and new values
-        $differences = array_diff($getSections,$sections);
+        // Sync user sections
+        $user->sections()->sync( $sections );
 
-        if(count($differences) > 0){
-            foreach($differences as $difference){
-                SectionUser::where('user_id',$user->id)->where('section_id',$difference)->delete();
-            }
-        }
-        return $this->response->ok(SectionUser::where('user_id',$user->id)->with('section')->get())->respond();
+        // Response 
+        return $this->response->ok($user->sections)->respond();
     }
 
     /**
@@ -327,14 +318,14 @@ class UserController extends Controller
      */
 
     public function getGrade(School $school, User $user)
-    {
-        $year = $school->years()->where('current',1)->firstOrFail();
-
-        $getGrade = GradeUser::where('user_id',$user->id)->where('year_id',$year->id)->firstOrFail();
-
-        $grade = Grade::withTrashed()->find($getGrade->grade_id);
-
-        return $this->response->ok($grade)->respond();
+    {   
+        $grades = Grade::where('school_id', $school->id)
+                        ->whereHas('users', function($pivot) use($school, $user){
+                            $pivot->where('school_id', $school->id)
+                                    ->where('user_id', $user->id);
+                        })
+                        ->get();
+        return $this->response->ok($grades)->respond();
     }
 
     /**
@@ -361,28 +352,41 @@ class UserController extends Controller
      * @param User $user
      * @return \App\Beak\Response
      */
-    public function storeGrade(Request $request, School $school,User $user)
-    {
-        $is_valid = $this->validate($request->all(), [
-            'grade' => 'required|integer|exists:grades,id',
-        ]);
+    public function storeGrade(School $school,User $user, Request $request)
+    {   
+        // Get Grades and filter them to remove 0 and empty inputs
+        $grades = array_filter( explode(',', $request->input('grade')) );
+        // Data Validation 
+        // TODO Validate that grade is related to current school
+        //    
+        // Errors initialization
+        $errors = [
+            'grade' => ['The grade field is required.']
+        ];
+        if(!count($grades))
+        { // Validating required field
+            return $this->response->badRequest($errors)->respond();
+        }
 
-        if(!$is_valid) {
+        $data = ['grade' => $grades];
+        $rules = ['grade.*'   => 'required|integer|min:1|exists:grades,id'];
+        $messages = [];
+        $is_valid = $this->validate($data, $rules, $messages);
+
+        if(!$is_valid){
             return $this->response->badRequest($this->errors)->respond();
         }
 
-        $year = $school->years()->where('current',1)->firstOrFail();
+        // Prepare data for sync method
+        $year_id = $school->current_year_id;
+        $grades = array_map(function($grade) use($year_id){
+            return ['year_id' => $year_id];
+        }, array_flip( $grades ));
 
-        $attr = [
-            'grade_id'  => $request->grade,
-            'user_id'   => $user->id,
-            'year_id'   => $year->id
-        ];
+        // Sync user grades
+        $user->grades()->sync( $grades );
 
-        GradeUser::where('year_id',$year->id)->where('user_id',$user->id)->where('grade_id',$request->grade)->firstOrCreate($attr);
-
-        $grade = Grade::find($request->grade);
-
-        return $this->response->created($grade)->respond();
+        // Response 
+        return $this->response->ok($user->grades)->respond();
     }
 }

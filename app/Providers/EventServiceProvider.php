@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\SchoolCreated' => [
             'App\Listeners\AttachDefaultRoles',
+            'App\Listeners\AttachYear',
         ],
     ];
 

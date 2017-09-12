@@ -125,7 +125,7 @@
 				</div>
 			</form>
 		</portlet>
-		<StudentMap v-if="roleSlug == 'student'"></StudentMap>
+		<StudentMap v-if="roleSlug == 'student'" :school="school" :user="user"></StudentMap>
 	</div>
 
 </template>
@@ -179,13 +179,12 @@ export default{
 		},
 		roleSlug: function(){
 			return this.user.role.name.toLowerCase();
+		},
+		school: function(){
+			return this.$parent.$parent.school;
 		}
 	},
 	mounted(){
-		let oThis = this;
-		setTimeout(function(){
- 			console.log(oThis.user.role.name)
-		}, 3000)
 		this.isLoading(false);
 	},
 	methods: {

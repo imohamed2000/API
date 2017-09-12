@@ -10,6 +10,7 @@ class Section extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+    protected $fillable = ['name', 'grade_id', 'school_id'];
 
     public function grade()
     {
@@ -21,5 +22,7 @@ class Section extends Model
         return $this->belongsTo('App\Grade','grade_id')->withTrashed();
     }
 
-
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }

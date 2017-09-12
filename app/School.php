@@ -11,7 +11,7 @@ class School extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['logo'];
+    protected $appends = ['logo', 'current_year_id'];
 
     public function logo()
     {
@@ -61,6 +61,7 @@ class School extends Model
         return $this->hasMany('App\Year');
     }
 
+
     public function checkUser($school_id,$user_id)
     {
         $check = $this->users()->where('school_id',$school_id)->where('user_id',$user_id)->first();
@@ -96,6 +97,11 @@ class School extends Model
         {
             return $active;
         }
+    }
+
+    public function getCurrentYearIdAttribute(){
+        $year = $this->years()->where('current', 1)->first();
+        return $year ? $year->id : null;
     }
 
 }

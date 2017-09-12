@@ -35,7 +35,7 @@ Route::group(['prefix' => 'v1'], function () {
     // Search users role
     Route::get('school/{school}/user/search','UserController@search');
     // Mapping Section User
-    Route::get('school/{school}/user/{id}/section','UserController@getSection');
+    Route::get('school/{school}/user/{user}/section','UserController@getSection');
     Route::post('school/{school}/user/{user}/section','UserController@storeSection');
 
     // Mapping Grade User

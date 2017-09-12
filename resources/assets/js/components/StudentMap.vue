@@ -1,5 +1,5 @@
 <template>
-	<portlet :props="{title: 'Student Management', icon: 'icon-organization'}">
+	<portlet :props="{title: 'Student Management', icon: 'icon-organization'}" v-if="school">
 		<div slot="body" class="row">
 			<div class="col-md-8">
 				<portlet :props="{title: 'Parents', icon: 'icon-organization', class:'solid grey-cararra'}">
@@ -61,40 +61,7 @@
 					</div>
 				</portlet>
 			</div>
-			<div class="col-md-4">
-				<portlet :props="{title: 'Enrollment', icon: 'icon-organization', class:'solid grey-cararra'}">
-					<form slot="body">
-						<div class="form-group">
-							<label for="grade-id" v-text="$t('Grade')"></label>
-							<select name="grade_id" id="grade-id" class="form-control">
-								<option value="" selected disabled>{{$t('Select Grade')}}</option>
-								<option value="1">Grade #No. ONE</option>
-							</select>
-							<p class="help-block"></p>
-						</div>
-						<div class="form-group">
-							<label for="section-id" v-text="$t('Section')"></label>
-							<select name="section_id" id="section-id" class="form-control">
-								<option value="" selected disabled>{{$t('Select Section')}}</option>
-								<option value="1">Section #No. ONE</option>
-							</select>
-						</div>
-						<div slot="footer">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="text-right">
-										<button type="submit" 
-												data-style="zoom-in" 
-												class="btn green mt-ladda-btn ladda-button"
-												v-text="$t('Save')">
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</portlet>
-			</div>
+			<StudentEnrollEdit :school="school" :user="user"></StudentEnrollEdit>
 		</div>
 	</portlet>
 </template>
@@ -107,14 +74,16 @@ import { mapActions } from 'vuex';
 //import toastr from '../helpers/toastr.js';
 import $style from '../helpers/style.js';
 let style = new $style();
-//
 
+import StudentEnrollEdit from './StudentEnrollEdit';
 import portlet from './Portlet';
 
 
 export default{
+	props: ['school', 'user'],
 	components: {
-		portlet
+		portlet,
+		StudentEnrollEdit
 	},
 	data(){
 		return {
@@ -137,7 +106,7 @@ export default{
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{
-			vm.fetchData();
+			// vm.fetchData();
 		});
 	}
 }

@@ -75,4 +75,12 @@ class User extends Authenticatable
        return  Storage::disk('public')
                            ->url( \App\File::find($this->avatar)->filename );
     }
+
+    public function grades(){
+        return $this->belongsToMany('App\Grade');
+    }
+
+    public function sections(){
+        return $this->belongsToMany('App\Section');
+    }
 }

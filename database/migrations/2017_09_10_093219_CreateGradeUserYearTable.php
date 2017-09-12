@@ -14,7 +14,6 @@ class CreateGradeUserYearTable extends Migration
     public function up()
     {
         Schema::create('grade_user',function(Blueprint $table){
-            $table->increments('id');
             $table->integer('grade_id')->unsigned();
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
@@ -32,14 +31,6 @@ class CreateGradeUserYearTable extends Migration
      */
     public function down()
     {
-        Schema::table('grade_user', function(Blueprint $table){
-            $table->dropForeign('grade_user_grade_id_foreign');
-            $table->dropColumn('grade');
-            $table->dropForeign('grade_user_user_id_foreign');
-            $table->dropColumn('user_id');
-            $table->dropForeign('grade_user_year_id_foreign');
-            $table->dropColumn('year_id');
-            $table->drop('grade_user');
-        });
+        Schema::drop('grade_user');
     }
 }

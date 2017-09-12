@@ -30,12 +30,6 @@ class CreateSectionUserYearTable extends Migration
      */
     public function down()
     {
-        Schema::table('section_user', function(Blueprint $table){
-            $table->dropForeign('section_user_section_id_foreign');
-            $table->dropColumn('section_id');
-            $table->dropForeign('section_user_user_id_foreign');
-            $table->dropColumn('user_id');
-            $table->drop('section_user');
-        });
+       Schema::drop('section_user');
     }
 }
