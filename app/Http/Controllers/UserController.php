@@ -261,8 +261,8 @@ class UserController extends Controller
     // Get Sections of specific User
     public function getSection(School $school, User $user)
     {   
-        $sections = Section::whereHas('users', function($query) use($user){
-            $query->where('users.id', $user->id);
+        $sections = Section::whereHas('users', function($pivot) use($user){
+            $pivot->where('user_id', $user->id);
         })->get();
         return $this->response->ok($sections)->respond();
     }
@@ -332,12 +332,11 @@ class UserController extends Controller
     public function getGrade(School $school, User $user)
     {   
         $grades = Grade::where('school_id', $school->id)
-                            ->whereIn('id', function($query) use($user, $school){
-                                $query->select('grade_id')->from('grade_user')
-                                            ->where('user_id', $user->id)
-                                            ->where('year_id', $school->current_year_id)
-                                            ->get();
-                            })->get();
+                        ->whereHas('users', function($pivot) use($school, $user){
+                            $pivot->where('school_id', $school->id)
+                                    ->where('user_id', $user->id);
+                        })
+                        ->get();
         return $this->response->ok($grades)->respond();
     }
 
