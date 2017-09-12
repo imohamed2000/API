@@ -10,4 +10,6 @@ class Year extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    protected $fillable = ['name', 'current', 'school_id'];
 }
