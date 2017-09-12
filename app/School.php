@@ -33,6 +33,10 @@ class School extends Model
         return $this->hasMany('App\Grade')->withTrashed();
     }
 
+    public function subjects()
+    {
+        return $this->hasMany('App\Subject');
+    }
 
     public function getLogoAttribute()
     {
