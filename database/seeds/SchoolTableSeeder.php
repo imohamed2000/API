@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\Events\SchoolCreated;
 use App\File;
+use Illuminate\Database\Seeder;
 
 class SchoolTableSeeder extends Seeder
 {
@@ -28,16 +29,9 @@ class SchoolTableSeeder extends Seeder
         $schools = [ $first_school, $second_school ];
 
         foreach($schools as $school){
-            $school = \App\School::create( $school );
-            $default_roles = ['Student', 'Parent', 'Teacher', 'Moderator'];
-            foreach ($default_roles as $role_name) {
-                $role = \App\Role::create(['name'   => $role_name, 'slug' => str_slug($role_name)]);
-                \DB::table('role_school')->insert([
-                        'role_id'   => $role->id,
-                        'school_id' => $school->id,
-                    ]);
+                $school = \App\School::create( $school );
+                $event_data = event( new SchoolCreated( $school ) );
+                $school->roles = $event_data[0];
             }
         }
-        
-    }
 }
