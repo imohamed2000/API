@@ -141,4 +141,15 @@ class GradeController extends Controller
         return $this->response->badRequest(['Error request'])->respond();
         
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        $grade = Grade::with('sections')->findOrFail($id);
+        return $this->response->ok( $grade )->respond();
+    }
 }
