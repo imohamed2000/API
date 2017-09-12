@@ -385,6 +385,7 @@ class UserController extends Controller
         $rules = ['grade.*'   => 'required|integer|min:1|exists:grades,id'];
         $messages = [];
         $is_valid = $this->validate($data, $rules, $messages);
+
         if(!$is_valid){
             return $this->response->badRequest($this->errors)->respond();
         }
@@ -397,5 +398,8 @@ class UserController extends Controller
 
         // Sync user grades
         $user->grades()->sync( $grades );
+
+        // Response 
+        return $this->response->ok($user->grades)->respond();
     }
 }
