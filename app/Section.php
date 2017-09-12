@@ -10,6 +10,7 @@ class Section extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+    protected $fillable = ['name', 'grade_id', 'school_id'];
 
     public function grade()
     {
