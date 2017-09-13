@@ -1,8 +1,8 @@
 <template>
 	<div class="col-md-4" v-if="user.role.slug=='student' && school">
 		<portlet :props="{title: 'Enrollment', icon: 'icon-organization', class:'solid grey-cararra'}">
-			<form slot="body">
-				<div class="form-group" :class="gradeErrors.has('grade')">
+			<form slot="body" @submit.prevent="onSubmit" ref="form" >
+				<div class="form-group" :class="gradeErrors.has('grade')? 'has-error' : ''">
 					<label for="grade-id" v-text="$t('Grade')"></label>
 					<select name="grade" id="grade-id" class="form-control" @change="onGradeChange" v-model="grade">
 						<option value="0" selected disabled>{{$t('Select Grade')}}</option>
@@ -11,22 +11,28 @@
 							v-text="grade.name" 
 							:sections="JSON.stringify(grade.sections)"></option>
 					</select>
-					<p class="help-block"></p>
+					<p class="help-block" v-text="gradeErrors.get('grade')"></p>
 				</div>
-				<div class="form-group">
+				<div class="form-group" :class="sectionErrors.has('section') ? 'has-error' : ''">
 					<label for="section-id" v-text="$t('Section')"></label>
-					<select name="section_id" id="section-id" class="form-control" v-model="section">
+					<select name="section" 
+							id="section-id" 
+							class="form-control" 
+							v-model="section" 
+							@change="sectionErrors.clear('section')">
 						<option value="0" selected disabled>{{$t('Select Section')}}</option>
 						<option :value="section.id" 
 								v-for="section in sections" 
 								v-text="section.name"></option>
 					</select>
+					<p class="help-block" v-text="sectionErrors.get('section')"></p>
 				</div>
 				<div slot="footer">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-right">
-								<button type="submit" 
+								<button type="submit"
+										ref="submit" 
 										data-style="zoom-in" 
 										class="btn green mt-ladda-btn ladda-button"
 										v-text="$t('Save')">
@@ -63,6 +69,7 @@ export default{
 			sections: [],
 			grade: 0,
 			section: 0,
+			errors: new Errors()
 		};
 	},
 	computed: {
@@ -106,6 +113,7 @@ export default{
 			});
 		},
 		onGradeChange: function(e){
+			this.gradeErrors.clear('grade');
 			let target = e.target;
 			if(target.options.selectedIndex != -1){
 				let sections = JSON.parse( e.target.options[e.target.selectedIndex].getAttribute('sections') );
@@ -122,7 +130,36 @@ export default{
 				}
 			}
 			return present
-		}
+		},
+		onSubmit: function(){
+			// Starting submit animation
+			let animation = ladda.create(this.$refs.submit );
+			animation.start();
+			// Getting form data
+			let formData = new FormData( this.$refs.form );
+			// Updating grade
+			axios.post(this.GradeUrl, formData).then(response=>{
+				// show Grade success toastr
+				toastr.success(
+						this.$t('Student Grade was updated successfully!'),
+						this.$t('Grade!')
+					);
+				// Updating section
+				axios.post(this.SectionUrl, formData).then(response=>{
+					// show Enrollment toastr
+					toastr.success(
+							this.$t('Student enrollment data was updated successfully!'),
+							this.$t('Enrollment!')
+						);
+				}).catch(errors => {
+					this.sectionErrors.record( errors.response.data );
+				});
+			}).catch(errors=>{
+				this.gradeErrors.record(errors.response.data);
+			}).then(()=>{
+				animation.stop();
+			});
+		},
 	},
 	beforeRouteEnter(to, from, next){
 		next(vm=>{

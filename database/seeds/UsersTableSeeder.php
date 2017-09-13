@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
             "password"      => bcrypt("secret")
         ];
 
-        $users = [$admin, $student, $father, $teacher, $moderator];
+        $users = [$admin, $moderator, $student, $father, $teacher];
         foreach ($users as $user) {
         	$user = \App\User::create( $user );
             if($user->id != 1){
