@@ -51,6 +51,12 @@ Route::group(['prefix' => 'v1'], function () {
     // Subject CRUD route
     Route::apiResource('school.subjects', 'SubjectController');
 
+    // Add parent to Children
+    Route::post('school/{school}/users/{user}/addparent/{id}','UserController@addParent');
+
+    // Add Child to Parent
+    Route::post('school/{school}/users/{user}/addchildren/{id}','UserController@addChildren');
+
     Route::resource('school.classes', 'ClassesController');
     Route::resource('school.sections', 'SectionsController');
     Route::resource('school.roles', 'RolesController');
