@@ -389,4 +389,32 @@ class UserController extends Controller
         // Response 
         return $this->response->ok($user->grades)->respond();
     }
+
+    /**
+     * Store User(Student) to parent
+     * @param School $school
+     * @param User $user
+     * @param int $id
+     * @return \App\Beak\Response
+     */
+    public function addParent(School $school,User $user,$id)
+    {
+        $user->parent()->attach(['parent_id'=>$id]);
+
+        return $this->response->created($user)->respond();
+    }
+
+    /**
+     * Store User(Parent) to student
+     * @param School $school
+     * @param User $user
+     * @param int $id
+     * @return \App\Beak\Response
+     */
+    public function addChildren(School $school,User $user,$id)
+    {
+        $user->children()->attach(['parent_id'=>$id]);
+
+        return $this->response->created($user)->respond();
+    }
 }
