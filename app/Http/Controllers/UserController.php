@@ -400,8 +400,8 @@ class UserController extends Controller
     public function addParent(School $school,User $user,$id)
     {
         $user->parent()->attach(['parent_id'=>$id]);
-
-        return $this->response->created($user)->respond();
+        $parent = $user->parent()->find($id);
+        return $this->response->created($parent)->respond();
     }
 
     /**
@@ -414,7 +414,7 @@ class UserController extends Controller
     public function addChildren(School $school,User $user,$id)
     {
         $user->children()->attach(['parent_id'=>$id]);
-
-        return $this->response->created($user)->respond();
+        $children = $user->children()->find($id);
+        return $this->response->created($children)->respond();
     }
 }
