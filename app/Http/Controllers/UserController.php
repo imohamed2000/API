@@ -413,7 +413,7 @@ class UserController extends Controller
      */
     public function addChildren(School $school,User $user,$id)
     {
-        $user->children()->attach(['parent_id'=>$id]);
+        $user->children()->attach(['student_id'=>$id]);
         $children = $user->children()->find($id);
         return $this->response->created($children)->respond();
     }
