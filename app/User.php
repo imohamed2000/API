@@ -83,4 +83,14 @@ class User extends Authenticatable
     public function sections(){
         return $this->belongsToMany('App\Section');
     }
+
+    public function parent()
+    {
+        return $this->belongsToMany('App\User', 'student_parent', 'student_id', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->belongsToMany('App\User', 'student_parent', 'parent_id', 'student_id');
+    }
 }
